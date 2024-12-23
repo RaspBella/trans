@@ -1,7 +1,7 @@
 def main():
     import json
 
-    file = open("data.json", "r")
+    file = open('data.json', 'r')
 
     trains = json.load(file)
 
@@ -22,7 +22,7 @@ def main():
     if 'y' in input('Does this look right?: '):
         trains |= train
 
-        file = open("data.json", "w")
+        file = open('data.json', 'w')
 
         json.dump(trains, file)
 
