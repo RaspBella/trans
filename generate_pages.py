@@ -48,7 +48,7 @@ def main():
     table += f'''
             </table>'''
 
-    template = open('template.html.txt', 'r')
+    template = open('template.html', 'r')
     index = open('index.html', 'w')
 
     text = template.read()
