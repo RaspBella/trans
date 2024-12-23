@@ -11,18 +11,30 @@ def main():
                     <th>From</th>
                     <th>To</th>
                     <th>Change(s)</th>
-                    <th>RTT</th>
+                    <th>Transportation</th>
                 </tr>'''
 
     for date in data:
+        trans = data[date]['trans']
+        trans_td = ''
+
         change = data[date]['change']
-        rtt = data[date]['rtt']
 
-        if isinstance(change, list):
-            change = ', '.join(change)
+        if isinstance(trans, str):
+            trans_td = f'<a href={trans}>{trans}</a>'
+        else:
+            stations = [data[date]['from']] + data[date]['change'] + [data[date]['to']]
 
-        if isinstance(rtt, list):
-            rtt = '<br>'.join([f'''<a href={link}>{link}</a>''' for link in rtt])
+            trans_td = '<br>'.join(
+                    [
+                        f'{stations[x]}->{stations[x+1]}: {trans[x]}'
+                        if ' ' in trans[x]
+                        else
+                        f'{stations[x]}->{stations[x+1]}: <a href={trans[x]}>{trans[x]}</a>' for x in range(len(stations) - 1)
+                    ]
+            )
+
+            change = '<br>'.join(change)
 
         table += f'''
                 <tr>
@@ -30,7 +42,7 @@ def main():
                     <td>{data[date]['from']}</td>
                     <td>{data[date]['to']}</td>
                     <td>{change}</td>
-                    <td>{rtt}</td>
+                    <td>{trans_td}</td>
                 </tr>'''
 
     table += f'''
