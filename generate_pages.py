@@ -5,7 +5,7 @@ def main():
     data = json.load(datafile)
     datafile.close()
 
-    table = f'''<table>
+    table = f'''        <table>
                 <tr>
                     <th>Date</th>
                     <th>From</th>
