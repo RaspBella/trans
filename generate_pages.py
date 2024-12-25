@@ -1,11 +1,12 @@
 def main():
     import json
+    import os
 
     datafile = open('data.json', 'r')
     data = json.load(datafile)
     datafile.close()
 
-    table = f'''        <table>
+    table = f'''            <table>
                 <tr>
                     <th>Date</th>
                     <th>From</th>
