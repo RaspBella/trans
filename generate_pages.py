@@ -16,22 +16,88 @@ def main():
                 </tr>'''
 
     for date in data:
-        trans = data[date]['trans']
-        trans_td = ''
-
+        # handy
+        from_ = data[date]['from']
+        to = data[date]['to']
         change = data[date]['change']
+        trans = data[date]['trans']
+
+
+
+        # each page
+        os.makedirs(date, exist_ok=True)
+
+        template = open('template.html', 'r')
+        index = open(date + "/index.html", "w")
+
+        html = f'''            <h1>{date} - {from_} to {to}</h1>
+            <table>
+                <tr>
+                    <th>From</th>
+                    <th>To</th>
+                    <th>Transportation</th>
+                </tr>'''
+
+        if isinstance(trans, str):
+            if 'http' in trans:
+                html += f'''            <tr>
+                    <td>{from_}</td>
+                    <td>{to}</td>
+                    <td><a href={trans}>{trans}</a></td>
+                </tr>
+            </table>'''
+
+            else:
+                html += f'''            <tr>
+                    <td>{from_}</td>
+                    <td>{to}</td>
+                    <td>{trans}</td>
+                </tr>
+            </table>'''
+
+        else:
+            stations = [from_] + change + [to]
+            for x in range(len(stations) - 1):
+                if 'http' in trans[x]:
+                    html += f'''            <tr>
+                    <td>{stations[x]}</td>
+                    <td>{stations[x+1]}</td>
+                    <td><a href={trans[x]}>{trans[x]}</a></td>'''
+
+                else:
+                    html += f'''            <tr>
+                    <td>{stations[x]}</td>
+                    <td>{stations[x+2]}</td>
+                    <td>{trans[x]}</a></td>'''
+
+            html += f'''
+            </table>'''
+
+        text = template.read()
+        text = text.replace('<!--REPLACE-->', html)
+
+        index.write(text)
+
+        template.close()
+        index.close()
+
+
+
+        #main page
+        trans_td = ''
 
         if isinstance(trans, str):
             trans_td = f'<a href={trans}>{trans}</a>'
         else:
-            stations = [data[date]['from']] + data[date]['change'] + [data[date]['to']]
+            stations = [from_] + change + [to]
 
             trans_td = '<br>'.join(
                     [
-                        f'{stations[x]}->{stations[x+1]}: {trans[x]}'
-                        if ' ' in trans[x]
+                        f'{stations[x]}->{stations[x+1]}: <a href={trans[x]}>{trans[x]}</a>'
+                        if 'http' in trans[x]
                         else
-                        f'{stations[x]}->{stations[x+1]}: <a href={trans[x]}>{trans[x]}</a>' for x in range(len(stations) - 1)
+                        f'{stations[x]}->{stations[x+1]}: {trans[x]}'
+                        for x in range(len(stations) - 1)
                     ]
             )
 
@@ -39,9 +105,9 @@ def main():
 
         table += f'''
                 <tr>
-                    <td>{date}</td>
-                    <td>{data[date]['from']}</td>
-                    <td>{data[date]['to']}</td>
+                    <td><a href={date}>{date}</a></td>
+                    <td>{from_}</td>
+                    <td>{to}</td>
                     <td>{change}</td>
                     <td>{trans_td}</td>
                 </tr>'''
