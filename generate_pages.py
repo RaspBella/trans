@@ -67,7 +67,7 @@ def main():
                 else:
                     html += f'''            <tr>
                     <td>{stations[x]}</td>
-                    <td>{stations[x+2]}</td>
+                    <td>{stations[x+1]}</td>
                     <td>{trans[x]}</a></td>'''
 
             html += f'''
