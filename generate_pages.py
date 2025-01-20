@@ -6,7 +6,8 @@ def main():
     data = json.load(datafile)
     datafile.close()
 
-    table = f'''            <table>
+    table = f'''        <div>
+            <table>
                 <tr>
                     <th>Date</th>
                     <th>From</th>
@@ -31,6 +32,7 @@ def main():
         index = open(date + "/index.html", "w")
 
         html = f'''            <h1>{date} - {from_} to {to}</h1>
+        <div>
             <table>
                 <tr>
                     <th>From</th>
@@ -45,7 +47,8 @@ def main():
                     <td>{to}</td>
                     <td><a href={trans}>{trans}</a></td>
                 </tr>
-            </table>'''
+            </table>
+        </div>'''
 
             else:
                 html += f'''            <tr>
@@ -53,7 +56,8 @@ def main():
                     <td>{to}</td>
                     <td>{trans}</td>
                 </tr>
-            </table>'''
+            </table>
+        </div>'''
 
         else:
             stations = [from_] + change + [to]
@@ -71,7 +75,8 @@ def main():
                     <td>{trans[x]}</a></td>'''
 
             html += f'''
-            </table>'''
+            </table>
+        </div>'''
 
         text = template.read()
         text = text.replace('<!--REPLACE-->', html)
@@ -113,7 +118,9 @@ def main():
                 </tr>'''
 
     table += f'''
-            </table>'''
+            </table>
+        </div>
+        <script type="text/javascript" src="time.js"></script>'''
 
     template = open('template.html', 'r')
     index = open('index.html', 'w')
