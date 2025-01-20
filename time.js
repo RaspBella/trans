@@ -17,9 +17,13 @@ for (let i = 1; i < table.rows.length; i++) {
 	    new_cell.colSpan = "5";
 	    new_cell.style.fontWeight = "bolder";
 
-	    let new_text = document.createTextNode("Past Journeys:");
+	    let new_a = document.createElement("a");
+	    let new_text = document.createTextNode("Past journeys:");
 
-	    new_cell.appendChild(new_text);
+	    new_a.setAttribute("href", "past");
+	    new_a.appendChild(new_text);
+
+	    new_cell.appendChild(new_a);
 
 	    has_past = true;
 	}
@@ -32,9 +36,13 @@ for (let i = 1; i < table.rows.length; i++) {
 	    new_cell.colSpan = "5";
 	    new_cell.style.fontWeight = "bolder";
 
-	    let new_text = document.createTextNode("Todays Journey:");
+	    let new_a = document.createElement("a");
+	    let new_text = document.createTextNode("Todays journey");
 
-	    new_cell.appendChild(new_text);
+	    new_a.setAttribute("href", "today");
+	    new_a.appendChild(new_text);
+
+	    new_cell.appendChild(new_a);
 
 	    has_present = true;
 	}
@@ -47,9 +55,13 @@ for (let i = 1; i < table.rows.length; i++) {
 	    new_cell.colSpan = "5";
 	    new_cell.style.fontWeight = "bolder";
 
-	    let new_text = document.createTextNode("Future Journeys:");
+	    let new_a = document.createElement("a");
+	    let new_text = document.createTextNode("Future journeys:");
 
-	    new_cell.appendChild(new_text);
+	    new_a.setAttribute("href", "future");
+	    new_a.appendChild(new_text);
+
+	    new_cell.appendChild(new_a);
 
 	    has_future = true;
 
