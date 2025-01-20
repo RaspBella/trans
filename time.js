@@ -2,22 +2,22 @@ const table = document.getElementsByTagName("table")[0];
 
 const today = new Date().toISOString().substring(0, 10);
 
-var has_past = false;
-var has_present = false;
-var has_future = false;
+let has_past = false;
+let has_present = false;
+let has_future = false;
 
 for (let i = 1; i < table.rows.length; i++) {
     const date = table.rows[i].cells[0].innerText;
     
     if (date < today) {
 	if (!has_past) {
-	    var new_row = table.insertRow(1);
+	    let new_row = table.insertRow(1);
 
-	    var new_cell = new_row.insertCell(0);
+	    let new_cell = new_row.insertCell(0);
 	    new_cell.colSpan = "5";
 	    new_cell.style.fontWeight = "bolder";
 
-	    var new_text = document.createTextNode("Past Journeys:");
+	    let new_text = document.createTextNode("Past Journeys:");
 
 	    new_cell.appendChild(new_text);
 
@@ -26,13 +26,13 @@ for (let i = 1; i < table.rows.length; i++) {
     }
     else if (date === today) {
 	if (!has_present) {
-	    var new_row = table.insertRow(i);
+	    let new_row = table.insertRow(i);
 
-	    var new_cell = new_row.insertCell(0);
+	    let new_cell = new_row.insertCell(0);
 	    new_cell.colSpan = "5";
 	    new_cell.style.fontWeight = "bolder";
 
-	    var new_text = document.createTextNode("Todays Journey:");
+	    let new_text = document.createTextNode("Todays Journey:");
 
 	    new_cell.appendChild(new_text);
 
@@ -41,13 +41,13 @@ for (let i = 1; i < table.rows.length; i++) {
     }
     else if (date > today) {
 	if (!has_future) {
-	    var new_row = table.insertRow(i);
+	    let new_row = table.insertRow(i);
 
-	    var new_cell = new_row.insertCell(0);
+	    let new_cell = new_row.insertCell(0);
 	    new_cell.colSpan = "5";
 	    new_cell.style.fontWeight = "bolder";
 
-	    var new_text = document.createTextNode("Future Journeys:");
+	    let new_text = document.createTextNode("Future Journeys:");
 
 	    new_cell.appendChild(new_text);
 
