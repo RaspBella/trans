@@ -22,6 +22,8 @@ def main():
     if 'y' in input('Does this look right?: '):
         trains |= train
 
+        trains = dict(sorted(trains.items()))
+
         file = open('data.json', 'w')
 
         json.dump(trains, file)
