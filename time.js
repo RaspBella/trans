@@ -20,7 +20,7 @@ for (let i = 1; i < table.rows.length; i++) {
 	    let new_a = document.createElement("a");
 	    let new_text = document.createTextNode("Past journeys:");
 
-	    new_a.setAttribute("href", "past");
+	    new_a.href = "past";
 	    new_a.appendChild(new_text);
 
 	    new_cell.appendChild(new_a);
@@ -39,7 +39,7 @@ for (let i = 1; i < table.rows.length; i++) {
 	    let new_a = document.createElement("a");
 	    let new_text = document.createTextNode("Todays journey");
 
-	    new_a.setAttribute("href", "today");
+	    new_a.href = "today";
 	    new_a.appendChild(new_text);
 
 	    new_cell.appendChild(new_a);
@@ -58,7 +58,7 @@ for (let i = 1; i < table.rows.length; i++) {
 	    let new_a = document.createElement("a");
 	    let new_text = document.createTextNode("Future journeys:");
 
-	    new_a.setAttribute("href", "future");
+	    new_a.href = "future";
 	    new_a.appendChild(new_text);
 
 	    new_cell.appendChild(new_a);
