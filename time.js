@@ -52,6 +52,8 @@ for (let i = 1; i < table.rows.length; i++) {
 	    new_cell.appendChild(new_text);
 
 	    has_future = true;
+
+	    break; // now we are done labling 
 	}
     }
 }
