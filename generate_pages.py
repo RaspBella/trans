@@ -31,8 +31,8 @@ def main():
         template = open('template.html', 'r')
         index = open(date + "/index.html", "w")
 
-        html = f'''            <h1>{date} - {from_} to {to}</h1>
-        <div>
+        html = f'''        <div>
+            <h1>{date} - {from_} to {to}</h1>
             <table>
                 <tr>
                     <th>From</th>
