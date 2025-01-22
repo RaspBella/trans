@@ -20,7 +20,18 @@ def main():
     print(train)
 
     if 'y' in input('Does this look right?: '):
-        trains |= train
+        for date in train:
+            if date in trains:
+                if isinstance(trains[date], dict):
+                    trains[date] = [
+                        trains[date], train[date]
+                    ]
+
+                elif isinstance(trains[date], list):
+                    trains[date].append(train[date])
+
+            else:
+                trains[date] = train[date]
 
         trains = dict(sorted(trains.items()))
 
