@@ -18,7 +18,7 @@ for (let i = 1; i < table.rows.length; i++) {
 	    new_cell.style.fontWeight = "bolder";
 
 	    let new_a = document.createElement("a");
-	    let new_text = document.createTextNode("Past journeys:");
+	    let new_text = document.createTextNode("Past journey(s):");
 
 	    new_a.href = "past";
 	    new_a.appendChild(new_text);
@@ -37,7 +37,7 @@ for (let i = 1; i < table.rows.length; i++) {
 	    new_cell.style.fontWeight = "bolder";
 
 	    let new_a = document.createElement("a");
-	    let new_text = document.createTextNode("Todays journey");
+	    let new_text = document.createTextNode("Todays journey(s):");
 
 	    new_a.href = "today";
 	    new_a.appendChild(new_text);
@@ -56,7 +56,7 @@ for (let i = 1; i < table.rows.length; i++) {
 	    new_cell.style.fontWeight = "bolder";
 
 	    let new_a = document.createElement("a");
-	    let new_text = document.createTextNode("Future journeys:");
+	    let new_text = document.createTextNode("Future journey(s):");
 
 	    new_a.href = "future";
 	    new_a.appendChild(new_text);
