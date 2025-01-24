@@ -154,7 +154,10 @@ def main():
             trans = data[date]["trans"]
 
             if isinstance(trans, str):
-                trans_td = f'<a href={trans}>{trans}</a>'
+                if "http" in trans:
+                    trans_td = f'<a href={trans}>{trans}</a>'
+                else:
+                    trans_td = trans
             else:
                 stations = [from_] + change + [to]
 
@@ -186,7 +189,10 @@ def main():
                 trans = x["trans"]
 
                 if isinstance(trans, str):
-                    trans_td = f'<a href={trans}>{trans}</a>'
+                    if "http" in trans:
+                        trans_td = f'<a href={trans}>{trans}</a>'
+                    else:
+                        trans_td = trans
                 else:
                     stations = [from_] + change + [to]
 
