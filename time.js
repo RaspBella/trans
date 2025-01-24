@@ -69,3 +69,18 @@ for (let i = 1; i < table.rows.length; i++) {
 	}
     }
 }
+
+// de duping dates
+
+for (let i = 1; i < table.rows.length; i++) {
+    const date = table.rows[i].cells[0];
+
+    for (let j = i + 1; j < table.rows.length; j++) {
+	const next_date = table.rows[j].cells[0];
+
+	if (date.innerText === next_date.innerText) {
+	    date.rowSpan += 1;
+	    next_date.remove();
+	}
+    }
+}
