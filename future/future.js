@@ -277,7 +277,7 @@ if (data[date][journey]["change"] === "direct") {
 	    }
 	}
 
-	else break;
+	else continue;
     }
 })
 .catch((error) => console.error("Error loading JSON file", error));
