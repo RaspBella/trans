@@ -11,61 +11,61 @@ for (let i = 1; i < table.rows.length; i++) {
     
     if (date < today) {
 	if (!has_past) {
-	    let new_row = table.insertRow(1);
+	    let row = table.insertRow(1);
+	    let cell = row.insertCell(0);
+	    let a = document.createElement("a");
+	    let text = document.createTextNode("Past journey(s):");
 
-	    let new_cell = new_row.insertCell(0);
-	    new_cell.colSpan = "5";
-	    new_cell.style.fontWeight = "bolder";
+	    cell.colSpan = 5;
+	    cell.style.fontWeight = "bolder";
+	    cell.style.backgroundColor = "#af33ff";
 
-	    let new_a = document.createElement("a");
-	    let new_text = document.createTextNode("Past journey(s):");
+	    a.href = "past";
+	    a.appendChild(text);
 
-	    new_a.href = "past";
-	    new_a.appendChild(new_text);
-
-	    new_cell.appendChild(new_a);
+	    cell.appendChild(a);
 
 	    has_past = true;
 	}
     }
+
     else if (date === today) {
 	if (!has_present) {
-	    let new_row = table.insertRow(i);
+	    let row = table.insertRow(i);
+	    let cell = row.insertCell(0);
+	    let a = document.createElement("a");
+	    let text = document.createTextNode("Todays journey(s):");
 
-	    let new_cell = new_row.insertCell(0);
-	    new_cell.colSpan = "5";
-	    new_cell.style.fontWeight = "bolder";
+	    cell.colSpan = 5;
+	    cell.style.fontWeight = "bolder";
+	    cell.style.backgroundColor = "#af33ff";
 
-	    let new_a = document.createElement("a");
-	    let new_text = document.createTextNode("Todays journey(s):");
+	    a.href = "today";
+	    a.appendChild(text);
 
-	    new_a.href = "today";
-	    new_a.appendChild(new_text);
-
-	    new_cell.appendChild(new_a);
+	    cell.appendChild(a);
 
 	    has_present = true;
 	}
     }
+
     else if (date > today) {
 	if (!has_future) {
-	    let new_row = table.insertRow(i);
+	    let row = table.insertRow(i);
+	    let cell = row.insertCell(0);
+	    let a = document.createElement("a");
+	    let text = document.createTextNode("Future journey(s):");
 
-	    let new_cell = new_row.insertCell(0);
-	    new_cell.colSpan = "5";
-	    new_cell.style.fontWeight = "bolder";
+	    cell.colSpan = 5;
+	    cell.style.fontWeight = "bolder";
+	    cell.style.backgroundColor = "#af33ff";
 
-	    let new_a = document.createElement("a");
-	    let new_text = document.createTextNode("Future journey(s):");
+	    a.href = "future";
+	    a.appendChild(text);
 
-	    new_a.href = "future";
-	    new_a.appendChild(new_text);
-
-	    new_cell.appendChild(new_a);
+	    cell.appendChild(a);
 
 	    has_future = true;
-
-	    break; // now we are done labling 
 	}
     }
 }
