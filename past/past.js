@@ -53,7 +53,7 @@ fetch("../data.json")
 			}
 
 			else if (type === "[object String]") {
-if (data[date][journey]["change"] === "direct") {
+			    if (data[date][journey]["change"] === "direct") {
 				change.appendChild(document.createTextNode(data[date][journey]["change"]));
 			    }
 
