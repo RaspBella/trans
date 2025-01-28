@@ -193,10 +193,8 @@ fetch("../data.json")
 			    }
 			}
 
-			else {
-			    if (data[date]["change"] != "direct") {
-				stations[1] = data[date]["change"];
-			    }
+			else if (data[date]["change"] != "direct") {
+			    stations[1] = data[date]["change"];
 			}
 
 			stations[stations.length - 1] = data[date]["to"];
