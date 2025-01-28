@@ -53,13 +53,7 @@ fetch("../data.json")
 			}
 
 			else if (type === "[object String]") {
-			    if (data[date][journey]["change"] === "direct") {
-				change.appendChild(document.createTextNode(data[date][journey]["change"]));
-			    }
-
-			    else {
-				change.appendChild(document.createTextNode(data[date][journey]["change"]));
-			    }
+			    change.appendChild(document.createTextNode(data[date][journey]["change"]));
 			}
 		    }
 
@@ -181,13 +175,7 @@ fetch("../data.json")
 		    }
 
 		    else if (type === "[object String]") {
-			if (data[date]["change"] === "direct") {
-			    change.appendChild(document.createTextNode(data[date]["change"]));
-			}
-
-			else {
-			    change.appendChild(document.createTextNode(data[date]["change"]));
-			}
+			change.appendChild(document.createTextNode(data[date]["change"]));
 		    }
 		}
 
