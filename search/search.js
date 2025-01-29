@@ -78,8 +78,12 @@ form.addEventListener("submit", (event) => {
 		    }
 		    
 		    data[date] = data[date].filter(n => n);
+		    
+		    if (data[date].length == 0) {
+			delete(data[date]);
+		    }
 
-		    if (data[date].length == 1) {
+		    else if (data[date].length == 1) {
 			data[date] = data[date][0];
 		    }
 		}
