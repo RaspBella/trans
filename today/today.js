@@ -1,17 +1,45 @@
-const head = document.getElementsByTagName("head")[0];
 const body = document.getElementsByTagName("body")[0];
 
 const today = new Date().toISOString().substring(0, 10);
 
-body.appendChild(
-    document.createElement("h1").appendChild(
-	document.createTextNode("Today is " + today)
-    )
-);
+function countdown(s, redir) {
+    let header = document.createElement("h1");
+    body.appendChild(header);
 
-let new_meta = document.createElement("meta");
+    const interval = setInterval(() => {
+	header.textContent = "redirecting to " + redir + " in " + s + " seconds";
 
-new_meta.httpEquiv = "Refresh";
-new_meta.content = "0; url=/trans/" + today;
+	if (s > 0) {
+	    s--;
+	}
 
-head.appendChild(new_meta);
+	else {
+	    location.assign(redir);
+	}
+    }, 1000);
+}
+
+fetch("../data.json")
+.then((response) => response.json())
+.then((data) => {
+    if (Object.hasOwn(data, today)) {
+	body.appendChild(
+	    document.createElement("h1").appendChild(
+		document.createTextNode("Journey today(" + today + ")")
+	    )
+	);
+
+	countdown(5, "/trans/" + today);
+    }
+
+    else {
+	body.appendChild(
+	    document.createElement("h1").appendChild(
+		document.createTextNode("No journey today")
+	    )
+	);
+
+	countdown(5, "/trans");
+    }
+})
+.catch((error) => console.error("Error loading JSON file", error));
