@@ -23,21 +23,19 @@ fetch("../data.json")
 .then((response) => response.json())
 .then((data) => {
     if (Object.hasOwn(data, today)) {
-	body.appendChild(
-	    document.createElement("h1").appendChild(
-		document.createTextNode("Journey today(" + today + ")")
-	    )
-	);
+	let header = document.createElement("h1");
+	header.textContent = "Journey today(" + today + ")";
+	
+	body.appendChild(header);
 
 	countdown(5, "/trans/" + today);
     }
 
     else {
-	body.appendChild(
-	    document.createElement("h1").appendChild(
-		document.createTextNode("No journey today")
-	    )
-	);
+	let header = document.createElement("h1");
+	header.textContent = "No journey today";
+
+	body.appendChild(header);
 
 	countdown(5, "/trans");
     }
