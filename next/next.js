@@ -33,7 +33,7 @@ fetch("../data.json")
     if (next.length > 0) {
         if (next[0] === today) {
 	    let header = document.createElement("h1");
-	    header.textContent = "Journey today(" + today + ")";
+	    header.textContent = "Today is " + today;
 	    
 	    body.appendChild(header);
     
