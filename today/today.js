@@ -1,10 +1,8 @@
-const body = document.getElementsByTagName("body")[0];
-
 const today = new Date().toISOString().substring(0, 10);
 
 function countdown(s, redir) {
     let header = document.createElement("h1");
-    body.appendChild(header);
+    document.body.appendChild(header);
 
     const interval = setInterval(() => {
 	header.textContent = "redirecting to " + redir + " in " + s + " seconds";
@@ -26,7 +24,7 @@ fetch("../data.json")
 	let header = document.createElement("h1");
 	header.textContent = "Journey today(" + today + ")";
 	
-	body.appendChild(header);
+	document.body.appendChild(header);
 
 	countdown(5, "/trans/" + today);
     }
@@ -35,7 +33,7 @@ fetch("../data.json")
 	let header = document.createElement("h1");
 	header.textContent = "No journey today";
 
-	body.appendChild(header);
+	document.body.appendChild(header);
 
 	countdown(5, "/trans");
     }
