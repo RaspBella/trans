@@ -231,5 +231,26 @@ def main():
     template.close()
     index.close()
 
+
+
+    # next maxing
+    n = len(data)
+
+    dirname = "next/" * n
+    
+    os.makedirs(dirname, exist_ok=True)
+
+    for x in range(1, n):
+        try:
+            os.symlink("../index.html", "next/" * (x+1) + "index.html")
+        except FileExistsError:
+            pass
+        try:
+            os.symlink("../next.js", "next/" * (x+1) + "next.js")
+        except FileExistsError:
+            pass
+
+
+
 if __name__ == '__main__':
     main()
