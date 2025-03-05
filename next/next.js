@@ -17,28 +17,28 @@ function countdown(s, redir) {
     }, 1000);
 }
 
-function isNext(s) {
-    return s === "next";
-}
-
 fetch("/trans/data.json")
 .then((response) => response.json())
 .then((data) => {
-    var next = location.pathname.split("/").filter(isNext).length;
+    var next = 1;
     var stack = [];
 
-    if (location.hash === "#next") next++;
+    if (location.hash != "") {
+	var n = +location.hash.slice(1);
+	if (n === n) {
+	    if (n !== 0 ) {
+		next = n;
+	    }
+	}
+    }
     
-    console.log(stack);
-    console.log(next);
-
     for (const date in data) {
 	if (date >= today) {
 	    stack.push(date);
 	}
     }
 
-    if (stack.length >= next) {
+    if (stack.length > next) {
 	countdown(5, "/trans/" + stack[next - 1]);
     }
 
