@@ -38,7 +38,7 @@ fetch("/trans/data.json")
 	}
     }
 
-    if (stack.length > next) {
+    if (stack.length >= next) {
 	countdown(5, "/trans/" + stack[next - 1]);
     }
 
