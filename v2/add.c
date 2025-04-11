@@ -2,16 +2,14 @@
 #include <stdio.h>
 #include <string.h>
 #include <assert.h>
-#include <editline.h>
+
+#include "bestline.h"
 
 #include "trans.h"
 #include "parser.h"
 #include "usage.h"
 
 const char *data_file = "data.json";
-const char *hist_file = ".trans_history";
-
-const char *prompt = "> ";
 
 FILE *fp = NULL;
 char *buffer = NULL;
@@ -32,7 +30,6 @@ const char *sub_commands[COUNT_SUB_COMMANDS] = {
 };
 
 void clean_up(void) {
-  write_history(hist_file);
   write_out_table(data_file);
 
   if (fp) fclose(fp);
@@ -41,22 +38,19 @@ void clean_up(void) {
 }
 
 int main(int argc, char **argv) {
-  read_history(hist_file);
   read_in_table(data_file);
-
+  
   atexit(clean_up);
 
   if (argc == 1) {
-    char *line = readline(prompt);
+    char *line;
 
-    while (line) {
+    while ((line = bestlineWithHistory("> ", "trans"))) {
       if (!parser(*argv, "<stdin>", line)) {
         fprintf(stderr, "Failed to parse: %s\n", line);
       }
 
       free(line);
-
-      line = readline(prompt);
     }
   }
 
@@ -101,8 +95,6 @@ int main(int argc, char **argv) {
           }
 
           else {
-            long offset = 0;
-
             buffer = calloc(file_size + 1, sizeof(char));
 
             if (!buffer) {
@@ -140,6 +132,9 @@ int main(int argc, char **argv) {
 
           exit(EXIT_SUCCESS);
 
+          break;
+
+        default:
           break;
       }
     }
