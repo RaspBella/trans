@@ -46,7 +46,7 @@ int main(int argc, char **argv) {
     char *line;
 
     while ((line = bestlineWithHistory("> ", "trans"))) {
-      if (!parser(*argv, "<stdin>", line)) {
+      if (!trans_parser(*argv, "<stdin>", line)) {
         fprintf(stderr, "Failed to parse: %s\n", line);
       }
 
@@ -110,7 +110,7 @@ int main(int argc, char **argv) {
               exit(EXIT_FAILURE);
             }
 
-            if (!parser(*argv, argv[2], buffer)) {
+            if (!trans_parser(*argv, argv[2], buffer)) {
               fprintf(stderr, "Failed to parse: %s\n", buffer);
 
               exit(EXIT_FAILURE);
@@ -120,7 +120,7 @@ int main(int argc, char **argv) {
           break;
 
         case SUB_COMMAND_CODE:
-          if (!parser(*argv, "<args>", argv[2])) {
+          if (!trans_parser(*argv, "<args>", argv[2])) {
             fprintf(stderr, "Failed to parse: %s\n", argv[2]);
 
             exit(EXIT_FAILURE);

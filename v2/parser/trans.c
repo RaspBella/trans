@@ -33,7 +33,7 @@ const char *puncts[COUNT_PUNCTS] = {
 
 
 
-bool parser(char *program_name, const char *filename, char *str) {
+bool trans_parser(char *program_name, const char *filename, char *str) {
   Alexer lexer = alexer_create(filename, str, strlen(str));
 
   lexer.puncts = puncts;
