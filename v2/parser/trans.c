@@ -5,9 +5,9 @@
 #define ALEXER_IMPLEMENTATION
 #include "alexer.h"
 
+#include "../trans.h"
+#include "../builtins.h"
 #include "trans.h"
-#include "builtins.h"
-#include "parser.h"
 
 
 

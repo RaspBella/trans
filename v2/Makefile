@@ -1,7 +1,7 @@
 CFLAGS=-Og -ggdb3 -std=c23
 CFLAGS_WARNINGS=-Werror -Wall $(CFLAGS)
 LDLIBS=-leditline
-SRCS=$(wildcard *.c)
+SRCS=$(wildcard *.c parser/*.c)
 OBJS=$(SRCS:.c=.o)
 BIN=add
 

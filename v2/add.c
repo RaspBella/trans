@@ -6,7 +6,7 @@
 #include "bestline.h"
 
 #include "trans.h"
-#include "parser.h"
+#include "parser/trans.h"
 #include "usage.h"
 
 const char *data_file = "data.json";
