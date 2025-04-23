@@ -74,18 +74,18 @@ void free_json(Json *json) {
   }
 }
 
-void print_json_recursive(Json *json, int depth) {
-  printf("{");
+void fprint_json_recursive(Json *json, FILE *fp, int depth) {
+  fprintf(fp, "{");
 
   if (json) {
     switch (json->type) {
       case JsonNull:
-        if (depth) printf("null");
+        if (depth) fprintf(fp, "null");
 
         break;
 
       case JsonBool:
-        printf(json->data ? "true" : "false");
+        fprintf(fp, json->data ? "true" : "false");
 
         break;
 
@@ -94,12 +94,12 @@ void print_json_recursive(Json *json, int depth) {
 
         onion.pointy = json->data;
 
-        printf("%f", onion.floaty);
+        fprintf(fp, "%f", onion.floaty);
 
         break;
 
       case JsonString:
-        printf("\"%s\"", (char*) json->data);
+        fprintf(fp, "\"%s\"", (char*) json->data);
 
         break;
 
@@ -111,9 +111,13 @@ void print_json_recursive(Json *json, int depth) {
     }
   }
 
-  printf("}");
+  fprintf(fp, "}");
+}
+
+void fprint_json(Json *json, FILE *fp) {
+  fprint_json_recursive(json, fp, 0);
 }
 
 void print_json(Json *json) {
-  print_json_recursive(json, 0);
+  fprint_json(json, stdout);
 }
