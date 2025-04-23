@@ -15,8 +15,8 @@ typedef enum {
   PUNCT_RIGHT_ARROW,
   PUNCT_ADDON,
   PUNCT_HYPHEN,
-  PUNCT_OPEN_BRACKET,
-  PUNCT_CLOSE_BRACKET,
+  PUNCT_LEFT_BRACKET,
+  PUNCT_RIGHT_BRACKET,
   PUNCT_COMMA,
   COUNT_PUNCTS
 } Punct_Index;
@@ -26,8 +26,8 @@ const char *puncts[COUNT_PUNCTS] = {
   [PUNCT_RIGHT_ARROW] = "->",
   [PUNCT_ADDON] =  "+=",
   [PUNCT_HYPHEN] = "-",
-  [PUNCT_OPEN_BRACKET] = "[",
-  [PUNCT_CLOSE_BRACKET] = "]",
+  [PUNCT_LEFT_BRACKET] = "[",
+  [PUNCT_RIGHT_BRACKET] = "]",
   [PUNCT_COMMA] = ","
 };
 
