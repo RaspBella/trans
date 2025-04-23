@@ -8,6 +8,8 @@
 #include "parser/json.h"
 #include "map.h"
 
+#define TRANS_VERSION 2
+
 static_assert(COUNT_TRANS == 6, "Amount of forms of transport has changed");
 const char *transport_strings[COUNT_TRANS] = {
   [TRANS_WALK] = "walk",
@@ -83,4 +85,40 @@ void read_in_table(const char *filename) {
 }
 
 void write_out_table(const char *filename) {
+  FILE *fp = fopen(filename, "w");
+
+  if (fp == NULL) {
+    fprintf(stderr, "Couldn't write to file: %s\n", filename);
+
+    exit(EXIT_FAILURE);
+  }
+
+  Json *json = new_json(JsonObject, new_map(0, NULL, NULL));
+  map_set(json->data, strdup("version"), new_json(JsonNumber, (void*) TRANS_VERSION));
+
+  for (int i = 0; i < DIGIT; i++) {
+    for (int j = 0; j < DIGIT; j++) {
+      for (int k = 0; k < DIGIT; k++) {
+        for (int l = 0; l < DIGIT; l++) {
+          for (int m = 0; m < DIGIT; m++) {
+            for (int n = 0; n < DIGIT; n++) {
+              for (int o = 0; o < DIGIT; o++) {
+                for (int p = 0; p < DIGIT; p++) {
+                  if (table[i][j][k][l][m][n][o][p]) {
+                    // TODO: json the table entry
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  fprint_json(json, fp);
+
+  free_json(json);
+
+  fclose(fp);
 }
