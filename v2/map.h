@@ -17,4 +17,6 @@ void *map_get(Map*, void *key);
 
 void map_extend(Map*);
 
-void print_map(Map*, void (*print_key)(void*), void (*print_value)(void*));
+void print_map(Map*);
+
+bool iter_map(Map*, struct Pair*);

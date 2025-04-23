@@ -88,17 +88,21 @@ void map_set(Map *map, void *key, void *value) {
   int index = hash % map->capacity;
 
   if (map->keys[index] == key || map->keys[index] == NULL) {
+    if (map->keys[index] == NULL) map->count++;
+
     map->keys[index] = key;
     map->values[index] = value;
 
     return;
   }
 
-  if (map->size < map->capacity) {
+  if (map->count < map->capacity) {
     do {
       index++;
       index %= map->capacity;
     } while (map->keys[index] != key && map->keys[index] != NULL);
+
+    if (map->keys[index] == NULL) map->count++;
 
     map->keys[index] = key;
     map->values[index] = value;
@@ -143,16 +147,33 @@ void map_extend(Map *map) {
   map->values = realloc(map->values, map->capacity * MAP_MULT_FACTOR);
 }
 
-void print_map(Map *map, void (*print_key)(void*), void (*print_value)(void*)) {
+void print_map(Map *map) {
   for (int i = 0; i < map->capacity; i++) {
     if (map->keys[i]) {
-      if (print_key) print_key(map->keys[i]);
-      else printf("[%p]", map->keys[i]);
-
-      if (print_value) print_value(map->values[i]);
-      else printf("=%p", map->values[i]);
-
-      printf("\n");
+      printf("[%p]=%p\n", map->keys[i], map->values[i]);
     }
   }
+}
+
+bool iter_map(Map *map, struct Pair *pair) {
+  static int i = 0;
+
+  if (map->count) {
+    while (i < map->capacity) {
+      if (map->keys[i] != NULL) {
+        pair->first = map->keys[i];
+        pair->second = map->values[i];
+
+        i++;
+
+        return true;
+      }
+      
+      i++;
+    }
+
+    i = 0;
+  }
+
+  return false;
 }
