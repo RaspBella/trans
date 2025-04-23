@@ -99,14 +99,7 @@ bool trans_parser(char *program_name, const char *filename, char *str) {
               return false;
             }
 
-            char *buffer = calloc(next.end - next.begin + 1, sizeof(char));
-            memcpy(buffer, next.begin, next.end - next.begin);
-
-            int arg = atoi(buffer);
-
-            free(buffer);
-
-            built_in_functions[built_in]((void*)(intptr_t)arg);
+            built_in_functions[built_in]((void*)next.int_value);
           }
           
           else {
