@@ -92,7 +92,7 @@ typedef enum {
 } Alexer_Kind;
 
 static_assert(ALEXER_COUNT_KINDS == 7, "Amount of kinds have changed");
-const char *alexer_kind_names[ALEXER_COUNT_KINDS] = {
+static const char *alexer_kind_names[ALEXER_COUNT_KINDS] = {
     [ALEXER_INVALID] = "INVALID",
     [ALEXER_END]     = "END",
     [ALEXER_INT]     = "INT",

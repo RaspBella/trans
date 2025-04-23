@@ -3,9 +3,7 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-#define ALEXER_IMPLEMENTATION
 #include "alexer.h"
-
 #include "../trans.h"
 #include "../builtins.h"
 #include "trans.h"
@@ -23,7 +21,7 @@ typedef enum {
 } Punct_Index;
 
 static_assert(COUNT_PUNCTS == 6, "Amount of puncts has changed");
-const char *puncts[COUNT_PUNCTS] = {
+static const char *puncts[COUNT_PUNCTS] = {
   [PUNCT_RIGHT_ARROW] = "->",
   [PUNCT_ADDON] =  "+=",
   [PUNCT_HYPHEN] = "-",
