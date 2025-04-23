@@ -1,10 +1,12 @@
 #include <assert.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 #include "trans.h"
 #include "json.h"
 #include "parser/json.h"
+#include "map.h"
 
 static_assert(COUNT_TRANS == 6, "Amount of forms of transport has changed");
 const char *transport_strings[COUNT_TRANS] = {

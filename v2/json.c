@@ -1,12 +1,10 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdint.h>
+
 #include "map.h"
 #include "json.h"
-
-struct Json {
-  JsonType type;
-  void *data;
-};
+#include "utils.h"
 
 struct JsonArray {
   Json **items;

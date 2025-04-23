@@ -1,7 +1,7 @@
-#include "usage.h"
-
 #include <stdlib.h>
 #include <stdio.h>
+
+#include "usage.h"
 
 void usage(FILE* fp, char *program_name) {
   fprintf(

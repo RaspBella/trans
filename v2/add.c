@@ -4,7 +4,6 @@
 #include <assert.h>
 
 #include "bestline.h"
-
 #include "trans.h"
 #include "parser/trans.h"
 #include "usage.h"

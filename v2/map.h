@@ -2,6 +2,8 @@
 
 #include <stddef.h>
 
+#include "utils.h"
+
 #define MAP_DEFAULT_CAPACITY 256
 #define MAP_MULT_FACTOR 2
 

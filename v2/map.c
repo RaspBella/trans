@@ -1,11 +1,13 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+
 #include "map.h"
+#include "utils.h"
 
 struct Map {
   size_t capacity;
-  size_t size;
+  size_t count;
   unsigned long (*hash)(void*);
   int (*key_cmp)(void*,void*);
   void **keys;
