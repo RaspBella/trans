@@ -11,3 +11,8 @@
                                                                                  \
     (xs)->items[(xs)->count++] = (x);                                            \
   } while (0)
+
+struct Pair {
+  void *first;
+  void *second;
+};
