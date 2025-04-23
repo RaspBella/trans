@@ -11,7 +11,10 @@ typedef enum {
   JsonObject,
 } JsonType;
 
-typedef struct Json Json;
+typedef struct Json {
+  JsonType type;
+  void *data;
+} Json;
 
 Json *new_json(JsonType, void*);
 void free_json(Json*);
