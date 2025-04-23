@@ -86,11 +86,7 @@ void fprint_json_recursive(Json *json, FILE *fp, int depth) {
         break;
 
       case JsonNumber:
-        union { float floaty; void *pointy; } onion;
-
-        onion.pointy = json->data;
-
-        fprintf(fp, "%f", onion.floaty);
+        fprintf(fp, "%zu", (uintptr_t) json->data);
 
         break;
 
