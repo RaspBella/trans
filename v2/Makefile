@@ -17,7 +17,7 @@ bestline.o: bestline.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 parser/alexer.o: parser/alexer.h
-	$(CC) -x c -DALEXER_IMPLEMENTATION $(CFLAGS) -c $< -o $@
+	$(CC) -x c -DALEXER_IMPLEMENTATION $(CFLAGS_WARNINGS) -c $< -o $@
 
 clean:
 	$(RM) $(BIN) $(OBJS)
