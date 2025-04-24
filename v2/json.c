@@ -110,6 +110,7 @@ void fprint_json_recursive(Json *json, FILE *fp, int depth) {
         fprintf(fp, "{");
 
         struct Pair pair = { .first = NULL, .second = NULL };
+        reset_iter_map(); // Just to be safe
 
         if (iter_map(json->data, &pair)) {
           fprintf(fp, "\"%s\": ", (char*) pair.first);
