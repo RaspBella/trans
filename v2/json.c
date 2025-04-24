@@ -6,12 +6,6 @@
 #include "json.h"
 #include "utils.h"
 
-struct JsonArray {
-  Json **items;
-  size_t capacity;
-  size_t count;
-};
-
 Json *new_json(JsonType type, void *data) {
   Json *new = malloc(sizeof(Json));
 

@@ -16,6 +16,12 @@ typedef struct Json {
   void *data;
 } Json;
 
+struct JsonArray {
+  Json **items;
+  size_t capacity;
+  size_t count;
+};
+
 Json *new_json(JsonType, void*);
 void free_json(Json*);
 
