@@ -41,6 +41,22 @@ void print_trans(const Transport *trans) {
   }
 }
 
+void free_trans(Transport *trans) {
+  if (trans->next) {
+    free_trans(trans->next);
+  }
+
+  if (trans->child) {
+    free_trans(trans->child);
+  }
+
+  if (trans->info) {
+    free(trans->info);
+  }
+
+  free(trans);
+}
+
 void read_in_table(const char *filename) {
   FILE *fp = fopen(filename, "r");
 
@@ -84,6 +100,53 @@ void read_in_table(const char *filename) {
   free(str);
 }
 
+// forward declaration
+Json *trans_to_json(Transport*);
+
+Json *trans_to_json_object(Transport *trans) {
+  Json *new = new_json(JsonObject, new_map(0, NULL, NULL));
+  
+  map_set(new->data, strdup("type"), new_json(JsonString, strdup(transport_strings[trans->type])));
+
+  map_set(new->data, strdup("from"), new_json(JsonString, strdup(trans->from)));
+
+  map_set(new->data, strdup("to"), new_json(JsonString, strdup(trans->to)));
+
+  if (trans->info) {
+    map_set(new->data, strdup("info"), new_json(JsonString, strdup(trans->info)));
+  }
+
+  else {
+    map_set(new->data, strdup("info"), new_json(JsonNull, NULL));
+  }
+
+  if (trans->child) {
+    map_set(new->data, strdup("child"), trans_to_json(trans->child));
+  }
+
+  return new;
+}
+
+Json *trans_to_json(Transport *trans) {
+  Json *new;
+
+  if (trans->next) {
+    new = new_json(JsonArray, calloc(1, sizeof(struct JsonArray)));
+
+    while (trans->next) {
+      da_append((struct JsonArray*) new->data, trans_to_json_object(trans));
+
+      trans = trans->next;
+    }
+  }
+
+  else {
+    new = trans_to_json_object(trans);
+  }
+
+  return new;
+}
+
 void write_out_table(const char *filename) {
   FILE *fp = fopen(filename, "w");
 
@@ -105,7 +168,27 @@ void write_out_table(const char *filename) {
               for (int o = 0; o < DIGIT; o++) {
                 for (int p = 0; p < DIGIT; p++) {
                   if (table[i][j][k][l][m][n][o][p]) {
-                    // TODO: json the table entry
+                    char *isodate = calloc(sizeof("yyyy-mm-dd") + 1, sizeof(char));
+
+                    // init isodate
+                    isodate[0] = '0' + i;
+                    isodate[1] = '0' + j;
+                    isodate[2] = '0' + k;
+                    isodate[3] = '0' + l;
+
+                    isodate[4] = '-';
+
+                    isodate[5] = '0' + m;
+                    isodate[6] = '0' + n;
+
+                    isodate[7] = '-';
+
+                    isodate[8] = '0' + o;
+                    isodate[9] = '0' + p;
+
+                    map_set(json->data, isodate, trans_to_json(table[i][j][k][l][m][n][o][p]));
+
+                    free_trans(table[i][j][k][l][m][n][o][p]);
                   }
                 }
               }
