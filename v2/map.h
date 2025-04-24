@@ -15,8 +15,9 @@ void free_map(Map*, void (*pre_free_key)(void*), void (*pre_free_value)(void*));
 void map_set(Map*, void *key, void *value);
 void *map_get(Map*, void *key);
 
-void map_extend(Map*);
+Map *map_extend(Map*);
 
 void print_map(Map*);
 
 bool iter_map(Map*, struct Pair*);
+void reset_iter_map(void);
