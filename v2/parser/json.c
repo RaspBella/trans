@@ -98,6 +98,10 @@ Json *json_parser(const char *filename, char *str) {
 
   get_tokens(&tokens, filename, str);
 
+  if (tokens.count == 0) {
+    return NULL;
+  }
+
   for (int i = 0; i < tokens.count; i++) {
     if (ALEXER_KIND(tokens.items[i].id) == ALEXER_STRING) {
       printf("token#%d: \"%.*s\"\n", i, (int) (tokens.items[i].end - tokens.items[i].begin), tokens.items[i].begin);
