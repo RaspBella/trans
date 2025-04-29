@@ -4,6 +4,7 @@
 #include "json.h"
 #include "../json.h"
 #include "../utils.h"
+#include "../map.h"
 
 typedef enum {
   PUNCT_LEFT_BRACE,
@@ -42,7 +43,7 @@ struct Tokens {
   size_t capacity;
 };
 
-void get_tokens(struct Tokens *tokens, const char *filename, char *str) {
+bool get_tokens(struct Tokens *tokens, const char *filename, char *str) {
   Alexer lexer = alexer_create(filename, str, strlen(str));
 
   lexer.puncts = puncts;
@@ -63,7 +64,7 @@ void get_tokens(struct Tokens *tokens, const char *filename, char *str) {
       char *end = strchr(token.begin + 1, '"');
 
       if (end == NULL) {
-        return;
+        return false;
       }
 
       struct Token string = {
@@ -91,28 +92,39 @@ void get_tokens(struct Tokens *tokens, const char *filename, char *str) {
       da_append(tokens, new);
     }
   }
+
+  return true;
 }
 
 Json *json_parser(const char *filename, char *str) {
   struct Tokens tokens = { 0 };
 
-  get_tokens(&tokens, filename, str);
+  if (!get_tokens(&tokens, filename, str)) {
+    return NULL;
+  }
 
   if (tokens.count <= 2) {
     return NULL;
   }
 
-  for (int i = 0; i < tokens.count; i++) {
-    if (ALEXER_KIND(tokens.items[i].id) == ALEXER_STRING) {
-      printf("token#%d: \"%.*s\"\n", i, (int) (tokens.items[i].end - tokens.items[i].begin), tokens.items[i].begin);
+  Json *new = new_json(JsonObject, new_map(0, NULL, NULL));
+  size_t index = 0;
+  size_t len = tokens.count;
+
+  while (len != 0) {
+    if (ALEXER_KIND(tokens.items[index].id) == ALEXER_STRING) {
+      printf("token#%zu: \"%.*s\"\n", index, (int) (tokens.items[index].end - tokens.items[index].begin), tokens.items[index].begin);
     }
 
     else {
-      printf("token#%d: %.*s\n", i, (int) (tokens.items[i].end - tokens.items[i].begin), tokens.items[i].begin);
+      printf("token#%zu: %.*s\n", index, (int) (tokens.items[index].end - tokens.items[index].begin), tokens.items[index].begin);
     }
+
+    index++;
+    len--;
   }
 
   free(tokens.items);
 
-  return NULL;
+  return new;
 }
