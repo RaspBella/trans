@@ -98,7 +98,7 @@ Json *json_parser(const char *filename, char *str) {
 
   get_tokens(&tokens, filename, str);
 
-  if (tokens.count == 0) {
+  if (tokens.count <= 2) {
     return NULL;
   }
 
