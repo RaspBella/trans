@@ -69,14 +69,16 @@ Map *new_map(size_t init_capacity, unsigned long (*hash_func)(void*), int (*key_
 }
 
 void free_map(Map *map, void (*pre_free_key)(void*), void (*pre_free_value)(void*)) {
-  for (int i = 0; i < map->capacity; i++) {
-    if (map->entries[i].is_used) {
-      if (pre_free_key) {
-        pre_free_key(map->entries[i].key);
-      }
+  if (map->count > 0) {
+    for (int i = 0; i < map->capacity; i++) {
+      if (map->entries[i].is_used) {
+        if (pre_free_key) {
+          pre_free_key(map->entries[i].key);
+        }
 
-      if (pre_free_value) {
-        pre_free_value(map->entries[i].value);
+        if (pre_free_value) {
+          pre_free_value(map->entries[i].value);
+        }
       }
     }
   }
