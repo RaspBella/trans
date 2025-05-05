@@ -117,28 +117,37 @@ Json *json_parser(const char *filename, char *str) {
     return NULL;
   }
 
-  if (tokens.count <= 2) {
+  // Check and see tokens are real
+  for (size_t i = 0; i < tokens.count; i++) {
+    printf("token#%zu: %.*s\n", i, (int) (tokens.items[i].end - tokens.items[i].begin), tokens.items[i].begin);
+  }
+
+  Json *new = NULL;
+
+  void *orig = tokens.items;
+
+  // Asume top level is Object `{` ... `}`
+  if (tokens.count < 2) {
+    if (tokens.items) free(tokens.items);
+    return NULL; // Need atleast 2 tokens
+  }
+
+  if (!(ALEXER_KIND(tokens.items->id) == ALEXER_PUNCT && ALEXER_INDEX(tokens.items->id) == PUNCT_LEFT_BRACE && ALEXER_KIND(tokens.items[tokens.count - 1].id) == ALEXER_PUNCT && ALEXER_INDEX(tokens.items[tokens.count - 1].id))) {
     return NULL;
   }
 
-  Json *new = new_json(JsonObject, new_map(0, NULL, NULL));
-  size_t index = 0;
-  size_t len = tokens.count;
+  new = new_json(JsonObject, new_map(0, NULL, NULL));
 
-  while (len != 0) {
-    if (ALEXER_KIND(tokens.items[index].id) == ALEXER_STRING) {
-      printf("token#%zu: \"%.*s\"\n", index, (int) (tokens.items[index].end - tokens.items[index].begin), tokens.items[index].begin);
-    }
+  tokens.items += 1;
+  tokens.count -= 2;
 
-    else {
-      printf("token#%zu: %.*s\n", index, (int) (tokens.items[index].end - tokens.items[index].begin), tokens.items[index].begin);
-    }
+  printf("Tokens within braces:\n");
 
-    index++;
-    len--;
+  for (size_t i = 0; i < tokens.count; i++) {
+    printf("token#%zu: %.*s\n", i, (int) (tokens.items[i].end - tokens.items[i].begin), tokens.items[i].begin);
   }
 
-  free(tokens.items);
+  free(orig);
 
   return new;
 }
