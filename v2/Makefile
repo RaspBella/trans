@@ -1,5 +1,6 @@
-CFLAGS=-Og -ggdb3 -std=c23
-CFLAGS_WARNINGS=-Werror -Wall $(CFLAGS)
+EXTRA_CFLAGS=-Og -ggdb3
+CFLAGS=$(EXTRA_CFLAGS) -std=c23
+CFLAGS_WARNINGS=$(CFLAGS) -Werror -Wall
 SRCS=$(wildcard *.c parser/*.c)
 OBJS=$(SRCS:.c=.o) parser/alexer.o
 BIN=add
@@ -17,6 +18,9 @@ bestline.o: bestline.c
 
 parser/alexer.o: parser/alexer.h
 	$(CC) -x c -DALEXER_IMPLEMENTATION $(CFLAGS_WARNINGS) -c $< -o $@
+
+release:
+	make EXTRA_CFLAGS=-O3
 
 clean:
 	$(RM) $(BIN) $(OBJS)
