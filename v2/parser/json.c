@@ -28,6 +28,20 @@ static const char *puncts[COUNT_PUNCTS] = {
   [PUNCT_QUOTE] = "\""
 };
 
+typedef enum {
+  KEYWORD_NULL,
+  KEYWORD_TRUE,
+  KEYWORD_FALSE,
+  COUNT_KEYWORDS
+} Keyword_Index;
+
+static_assert(COUNT_KEYWORDS == 3, "Amount of keywords has changed");
+static const char *keywords[COUNT_KEYWORDS] = {
+  [KEYWORD_NULL] = "null",
+  [KEYWORD_TRUE] = "true",
+  [KEYWORD_FALSE] = "false"
+};
+
 
 
 struct Token {
@@ -48,8 +62,8 @@ bool get_tokens(struct Tokens *tokens, const char *filename, char *str) {
 
   lexer.puncts = puncts;
   lexer.puncts_count = ALEXER_ARRAY_LEN(puncts);
-  lexer.keywords = NULL;
-  lexer.keywords_count = 0;
+  lexer.keywords = keywords;
+  lexer.keywords_count = ALEXER_ARRAY_LEN(keywords);
   lexer.sl_comments = NULL;
   lexer.sl_comments_count = 0;
   lexer.ml_comments = NULL;
