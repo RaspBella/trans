@@ -32,7 +32,7 @@ static const char *puncts[COUNT_PUNCTS] = {
 
 
 
-bool trans_parser(char *program_name, const char *filename, char *str) {
+bool parse_trans(char *program_name, const char *filename, char *str) {
   Alexer lexer = alexer_create(filename, str, strlen(str));
 
   lexer.puncts = puncts;
@@ -65,7 +65,7 @@ bool trans_parser(char *program_name, const char *filename, char *str) {
 
     if (ALEXER_KIND(token.id) == ALEXER_SYMBOL) {
       for (int i = 0; i < COUNT_BUILT_INS; i++) {
-        if (!strncmp(token.begin, built_in_strings[i], token.end -token.begin)) {
+        if (!strncmp(token.begin, built_in_strings[i], token.end - token.begin)) {
           built_in = i;
           break;
         }

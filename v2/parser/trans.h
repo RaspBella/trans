@@ -2,4 +2,4 @@
 
 #include <stdbool.h>
 
-bool trans_parser(char *program_name, const char *filename, char *str);
+bool parse_trans(char *program_name, const char *filename, char *str);
