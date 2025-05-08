@@ -4,14 +4,17 @@
 #include <assert.h>
 
 #include "bestline.h"
+#include "map.h"
+#include "json.h"
 #include "trans.h"
+#include "parser/json.h"
 #include "parser/trans.h"
 #include "usage.h"
 
-const char *data_file = "data.json";
+const char data_file[] = "data.json";
 
-FILE *fp = NULL;
 char *buffer = NULL;
+Json *json = NULL;
 
 typedef enum {
   SUB_COMMAND_INVALID = -1,
@@ -29,23 +32,69 @@ const char *sub_commands[COUNT_SUB_COMMANDS] = {
 };
 
 void clean_up(void) {
-  write_out_table(data_file);
+  FILE *fp = fopen(data_file, "w");
 
-  if (fp) fclose(fp);
+  if (fp) {
+    fprint_json(json, fp);
+
+    fclose(fp);
+  }
+
+  else {
+    fprintf(stderr, "Couldn't write to file: %s\n", data_file);
+  }
 
   if (buffer) free(buffer);
+
+  if (json) free_json(json);
 }
 
 int main(int argc, char **argv) {
-  read_in_table(data_file);
-  
+  FILE *fp = fopen(data_file, "r");
+
+  if (fp) {
+    fseek(fp, 0, SEEK_END);
+
+    long file_size = ftell(fp);
+
+    if (file_size) {
+      char *str = calloc(file_size + 1, sizeof(char));
+
+      rewind(fp);
+
+      if (fread(str, sizeof(char), file_size, fp) != file_size) {
+        fprintf(stderr, "Failed to read %zu bytes from file: %s\n", file_size, data_file);
+
+        fclose(fp);
+        free(str);
+
+        exit(EXIT_FAILURE);
+      }
+
+      json = parse_json(data_file, str);
+
+      free(str);
+    }
+
+    fclose(fp);
+  }
+
+  if (!json) {
+    json = new_json(JsonObject, new_map(0, NULL, NULL));
+
+    map_set(json->data, strdup("version"), new_json(JsonNumber, (void*) TRANS_VERSION));
+  }
+
+  print_json(json);
+  printf("\n");
+
   atexit(clean_up);
 
   if (argc == 1) {
     char *line;
 
     while ((line = bestlineWithHistory("> ", "trans"))) {
-      if (!trans_parser(*argv, "<stdin>", line)) {
+      if (!parse_trans(*argv, "<stdin>", line)) {
         fprintf(stderr, "Failed to parse: %s\n", line);
       }
 
@@ -109,7 +158,7 @@ int main(int argc, char **argv) {
               exit(EXIT_FAILURE);
             }
 
-            if (!trans_parser(*argv, argv[2], buffer)) {
+            if (!parse_trans(*argv, argv[2], buffer)) {
               fprintf(stderr, "Failed to parse: %s\n", buffer);
 
               exit(EXIT_FAILURE);
@@ -119,7 +168,7 @@ int main(int argc, char **argv) {
           break;
 
         case SUB_COMMAND_CODE:
-          if (!trans_parser(*argv, "<args>", argv[2])) {
+          if (!parse_trans(*argv, "<args>", argv[2])) {
             fprintf(stderr, "Failed to parse: %s\n", argv[2]);
 
             exit(EXIT_FAILURE);
