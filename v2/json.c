@@ -51,7 +51,7 @@ void free_json(Json *json) {
         free_json(((struct JsonArray*) json->data)->items[i]);
       }
 
-      free(((struct JsonArray*) json->data)->items);
+      if (((struct JsonArray*) json->data)->capacity) free(((struct JsonArray*) json->data)->items);
 
       free(json->data);
       free(json);
@@ -66,11 +66,15 @@ void free_json(Json *json) {
   }
 }
 
-void fprint_json_recursive(Json *json, FILE *fp, int depth) {
+void fprint_value(void *json, FILE *fp) {
+  fprint_json(json, fp);
+}
+
+void fprint_json(Json *json, FILE *fp) {
   if (json) {
     switch (json->type) {
       case JsonNull:
-        if (depth) fprintf(fp, "null");
+        fprintf(fp, "null");
 
         break;
 
@@ -109,20 +113,7 @@ void fprint_json_recursive(Json *json, FILE *fp, int depth) {
       case JsonObject:
         fprintf(fp, "{");
 
-        struct Pair pair = { .first = NULL, .second = NULL };
-        reset_iter_map(); // Just to be safe
-
-        if (iter_map(json->data, &pair)) {
-          fprintf(fp, "\"%s\": ", (char*) pair.first);
-
-          fprint_json(pair.second, fp);
-
-          while (iter_map(json->data, &pair)) {
-            fprintf(fp, ", \"%s\": ", (char*) pair.first);
-
-            fprint_json(pair.second, fp);
-          }
-        }
+        fprint_map(json->data, NULL, fprint_value, fp);
 
         fprintf(fp, "}");
 
@@ -130,11 +121,9 @@ void fprint_json_recursive(Json *json, FILE *fp, int depth) {
     }
   }
 
-  else fprintf(fp, "{}");
-}
-
-void fprint_json(Json *json, FILE *fp) {
-  fprint_json_recursive(json, fp, 0);
+  else {
+    fprintf(fp, "{}");
+  }
 }
 
 void print_json(Json *json) {
