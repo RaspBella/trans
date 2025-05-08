@@ -110,44 +110,238 @@ bool get_tokens(struct Tokens *tokens, const char *filename, char *str) {
   return true;
 }
 
-Json *json_parser(const char *filename, char *str) {
+struct Token *current_token(struct Tokens *tokens, size_t index) {
+  return (index < tokens->count) ? tokens->items + index : NULL;
+}
+
+Json *parse_value(struct Tokens *tokens, size_t *index); // forward decl
+
+Json *parse_keyword(struct Tokens *tokens, size_t *index) {
+  struct Token *token = current_token(tokens, *index);
+
+  if (!token || ALEXER_KIND(token->id) != ALEXER_KEYWORD) return NULL;
+
+  switch (ALEXER_INDEX(token->id)) {
+    case KEYWORD_NULL:
+      return new_json(JsonNull, NULL);
+
+    case KEYWORD_TRUE:
+      return new_json(JsonBool, (void*) true);
+
+    case KEYWORD_FALSE:
+      return new_json(JsonBool, (void*) false);
+  }
+
+  return NULL;
+}
+
+Json *parse_number(struct Tokens *tokens, size_t *index) {
+  struct Token *token = current_token(tokens, *index);
+
+  if (!token || ALEXER_KIND(token->id) != ALEXER_INT) return NULL;
+
+  (*index)++;
+
+  return new_json(JsonNumber, (void*) token->int_value);
+}
+
+Json *parse_string(struct Tokens *tokens, size_t *index) {
+  struct Token *token = current_token(tokens, *index);
+
+  if (!token || ALEXER_KIND(token->id) != ALEXER_STRING) return NULL;
+
+  size_t len = token->end - token->begin;
+
+  char *str = calloc(len + 1, sizeof(char));
+
+  assert(str);
+
+  memcpy(str, token->begin, len);
+
+  (*index)++;
+
+  return new_json(JsonString, str);
+}
+
+Json *parse_array(struct Tokens *tokens, size_t *index) {
+  struct Token *token = current_token(tokens, *index);
+
+  if (!token || token->id != ALEXER_ID(ALEXER_PUNCT, PUNCT_LEFT_BRACKET)) return NULL;
+
+  (*index)++;
+
+  Json *array = new_json(JsonArray, calloc(1, sizeof(struct JsonArray)));
+
+  while (true) {
+    token = current_token(tokens, *index);
+
+    if (!token) break;
+
+    if (token->id == ALEXER_ID(ALEXER_PUNCT, PUNCT_RIGHT_BRACKET)) {
+      (*index)++;
+
+      break;
+    }
+
+    Json *value = parse_value(tokens, index);
+
+    if (!value) {
+      free_json(array);
+
+      return NULL;
+    }
+
+    da_append((struct JsonArray*) array->data, value);
+
+    token = current_token(tokens, *index);
+
+    if (token && token->id == ALEXER_ID(ALEXER_PUNCT, PUNCT_COMMA)) {
+      (*index)++;
+
+      continue;
+    }
+
+    else if (token && token->id == ALEXER_ID(ALEXER_PUNCT, PUNCT_RIGHT_BRACKET)) {
+      (*index)++;
+
+      break;
+    }
+
+    else {
+      free_json(array);
+
+      return NULL;
+    }
+  }
+
+  return array;
+}
+
+Json *parse_object(struct Tokens *tokens, size_t *index) {
+  struct Token *token = current_token(tokens, *index);
+
+  if (!token || token->id != ALEXER_ID(ALEXER_PUNCT, PUNCT_LEFT_BRACE)) return NULL;
+
+  (*index)++;
+
+  Json *obj = new_json(JsonObject, new_map(0, NULL, NULL));
+
+  while (true) {
+    token = current_token(tokens, *index);
+
+    if (!token) break;
+
+    if (token->id == ALEXER_ID(ALEXER_PUNCT, PUNCT_RIGHT_BRACE)) {
+      (*index)++;
+      break;
+    }
+
+
+    // raw string in map is easier and better i recon
+    char *str = NULL;
+    Json *json_string = parse_string(tokens, index);
+
+    if (json_string) {
+      str = json_string->data;
+
+      free(json_string);
+    }
+
+    else {
+      free_json(obj);
+
+      return NULL;
+    }
+
+
+    token = current_token(tokens, *index);
+
+    if (!token || token->id != ALEXER_ID(ALEXER_PUNCT, PUNCT_COLON)) {
+      free(str);
+      free_json(obj);
+
+      return NULL;
+    }
+
+    (*index)++;
+
+
+    Json *value = parse_value(tokens, index);
+
+    if (!value) {
+      free(str);
+      free_json(obj);
+
+      return NULL;
+    }
+
+
+    map_set(obj->data, str, value);
+
+
+    token = current_token(tokens, *index);
+
+    if (token && token->id == ALEXER_ID(ALEXER_PUNCT, PUNCT_COMMA)) {
+      (*index)++;
+
+      continue;
+    }
+
+    else if (token && token->id == ALEXER_ID(ALEXER_PUNCT, PUNCT_RIGHT_BRACE)) {
+      (*index)++;
+
+      break;
+    }
+
+    else {
+      free_json(obj);
+
+      return NULL;
+    }
+  }
+
+  return obj;
+}
+
+Json *parse_value(struct Tokens *tokens, size_t *index) {
+  struct Token *token = current_token(tokens, *index);
+
+  if (!token) return NULL;
+
+  if (ALEXER_KIND(token->id) == ALEXER_KEYWORD) {
+    return parse_keyword(tokens, index);
+  }
+
+  else if (ALEXER_KIND(token->id) == ALEXER_INT) {
+    return parse_number(tokens, index);
+  }
+
+  else if (ALEXER_KIND(token->id) == ALEXER_STRING) {
+    return parse_string(tokens, index);
+  }
+
+  else if (token->id == ALEXER_ID(ALEXER_PUNCT, PUNCT_LEFT_BRACKET)) {
+    return parse_array(tokens, index);
+  }
+
+  else if (token->id == ALEXER_ID(ALEXER_PUNCT, PUNCT_LEFT_BRACE)) {
+    return parse_object(tokens, index);
+  }
+
+  return NULL;
+}
+
+Json *parse_json(const char *filename, char *str) {
   struct Tokens tokens = { 0 };
 
   if (!get_tokens(&tokens, filename, str)) {
     return NULL;
   }
+  
+  size_t index = 0;
+  Json *new = parse_value(&tokens, &index);
 
-  // Check and see tokens are real
-  for (size_t i = 0; i < tokens.count; i++) {
-    printf("token#%zu: %.*s\n", i, (int) (tokens.items[i].end - tokens.items[i].begin), tokens.items[i].begin);
-  }
-
-  Json *new = NULL;
-
-  void *orig = tokens.items;
-
-  // Asume top level is Object `{` ... `}`
-  if (tokens.count < 2) {
-    if (tokens.items) free(tokens.items);
-    return NULL; // Need atleast 2 tokens
-  }
-
-  if (!(ALEXER_KIND(tokens.items->id) == ALEXER_PUNCT && ALEXER_INDEX(tokens.items->id) == PUNCT_LEFT_BRACE && ALEXER_KIND(tokens.items[tokens.count - 1].id) == ALEXER_PUNCT && ALEXER_INDEX(tokens.items[tokens.count - 1].id))) {
-    return NULL;
-  }
-
-  new = new_json(JsonObject, new_map(0, NULL, NULL));
-
-  tokens.items += 1;
-  tokens.count -= 2;
-
-  printf("Tokens within braces:\n");
-
-  for (size_t i = 0; i < tokens.count; i++) {
-    printf("token#%zu: %.*s\n", i, (int) (tokens.items[i].end - tokens.items[i].begin), tokens.items[i].begin);
-  }
-
-  free(orig);
+  if (tokens.capacity) free(tokens.items);
 
   return new;
 }
