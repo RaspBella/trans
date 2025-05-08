@@ -3,7 +3,6 @@
 #include <assert.h>
 #include <stdint.h>
 
-#include "usage.h"
 #include "builtins.h"
 
 void built_in_exit(void *arg) {
