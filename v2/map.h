@@ -1,5 +1,6 @@
 #pragma once
 
+#include <stdio.h>
 #include <stddef.h>
 
 #include "utils.h"
@@ -17,7 +18,4 @@ void *map_get(Map*, void *key);
 
 Map *map_extend(Map*);
 
-void print_map(Map*);
-
-bool iter_map(Map*, struct Pair*);
-void reset_iter_map(void);
+void fprint_map(Map*, void (*print_key)(void *key, FILE *fp), void (*print_value)(void *value, FILE *fp), FILE *fp);
