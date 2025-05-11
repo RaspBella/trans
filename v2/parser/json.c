@@ -1,6 +1,5 @@
 #include <assert.h>
 #include <stdlib.h>
-#include <stdio.h>
 
 #include "alexer.h"
 #include "utils.h"
@@ -281,10 +280,6 @@ Json *parse_json(const char *filename, char *str) {
     return NULL;
   }
 
-  for (size_t i = 0; i < tokens.count; i++) {
-    printf("%zu: \"%.*s\"\n", i, (int) (tokens.items[i].end - tokens.items[i].begin), tokens.items[i].begin);
-  }
-  
   size_t index = 0;
   Json *new = parse_value(&tokens, &index);
 
