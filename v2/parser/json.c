@@ -1,9 +1,9 @@
 #include <assert.h>
 
 #include "alexer.h"
+#include "utils.h"
 #include "json.h"
 #include "../json.h"
-#include "../utils.h"
 #include "../map.h"
 
 typedef enum {
@@ -43,76 +43,6 @@ static const char *keywords[COUNT_KEYWORDS] = {
 };
 
 
-
-struct Token {
-  uint64_t id;
-  const char *begin;
-  const char *end;
-  long int_value;
-};
-
-struct Tokens {
-  struct Token *items;
-  size_t count;
-  size_t capacity;
-};
-
-bool get_tokens(struct Tokens *tokens, const char *filename, char *str) {
-  Alexer lexer = alexer_create(filename, str, strlen(str));
-
-  lexer.puncts = puncts;
-  lexer.puncts_count = ALEXER_ARRAY_LEN(puncts);
-  lexer.keywords = keywords;
-  lexer.keywords_count = ALEXER_ARRAY_LEN(keywords);
-  lexer.sl_comments = NULL;
-  lexer.sl_comments_count = 0;
-  lexer.ml_comments = NULL;
-  lexer.ml_comments_count = 0;
-
-  Alexer_Token token = { 0 };
-
-  while (alexer_get_token(&lexer, &token)) {
-    // Check for string without supporting escapes
-
-    if (ALEXER_KIND(token.id) == ALEXER_PUNCT && ALEXER_INDEX(token.id) == PUNCT_QUOTE) {
-      char *end = strchr(token.begin + 1, '"');
-
-      if (end == NULL) {
-        return false;
-      }
-
-      struct Token string = {
-        .id = ALEXER_ID(ALEXER_STRING, 0),
-        .begin = token.begin + 1,
-        .end = end,
-        .int_value = 0
-      };
-
-      da_append(tokens, string);
-
-      while (token.begin != end) {
-        alexer_get_token(&lexer, &token);
-      }
-    }
-
-    else {
-      struct Token new = {
-        .id = token.id,
-        .begin = token.begin,
-        .end = token.end,
-        .int_value = token.int_value
-      };
-
-      da_append(tokens, new);
-    }
-  }
-
-  return true;
-}
-
-struct Token *current_token(struct Tokens *tokens, size_t index) {
-  return (index < tokens->count) ? tokens->items + index : NULL;
-}
 
 Json *parse_value(struct Tokens *tokens, size_t *index); // forward decl
 
@@ -332,10 +262,25 @@ Json *parse_value(struct Tokens *tokens, size_t *index) {
 }
 
 Json *parse_json(const char *filename, char *str) {
+  Alexer lexer = alexer_create(filename, str, strlen(str));
+
+  lexer.puncts = puncts;
+  lexer.puncts_count = ALEXER_ARRAY_LEN(puncts);
+  lexer.keywords = keywords;
+  lexer.keywords_count = ALEXER_ARRAY_LEN(keywords);
+  lexer.sl_comments = NULL;
+  lexer.sl_comments_count = 0;
+  lexer.ml_comments = NULL;
+  lexer.ml_comments_count = 0;
+
   struct Tokens tokens = { 0 };
 
-  if (!get_tokens(&tokens, filename, str)) {
+  if (!get_tokens(&lexer, &tokens, filename, str, ALEXER_ID(PUNCT_QUOTE, 0))) {
     return NULL;
+  }
+
+  for (size_t i = 0; i < tokens.count; i++) {
+    printf("%zu: \"%.*s\"\n", i, (int) (tokens.items[i].end - tokens.items[i].begin), tokens.items[i].begin);
   }
   
   size_t index = 0;
