@@ -6,13 +6,13 @@
 #include "../utils.h"
 #include "utils.h"
 
-bool get_tokens(Alexer *lexer, struct Tokens *tokens, const char *filename, char *str, uint64_t quote_id) {
+bool get_tokens(Alexer *lexer, struct Tokens *tokens, const char *filename, char *str, uint64_t quote) {
   Alexer_Token token = { 0 };
 
   while (alexer_get_token(lexer, &token)) {
     // Check for string without supporting escapes
 
-    if (token.id == quote_id) {
+    if (ALEXER_ID(ALEXER_PUNCT, quote)) {
       char *end = strchr(token.begin + 1, '"');
 
       if (end == NULL) {

@@ -1,4 +1,6 @@
 #include <assert.h>
+#include <stdlib.h>
+#include <stdio.h>
 
 #include "alexer.h"
 #include "utils.h"
@@ -275,7 +277,7 @@ Json *parse_json(const char *filename, char *str) {
 
   struct Tokens tokens = { 0 };
 
-  if (!get_tokens(&lexer, &tokens, filename, str, ALEXER_ID(PUNCT_QUOTE, 0))) {
+  if (!get_tokens(&lexer, &tokens, filename, str, PUNCT_QUOTE)) {
     return NULL;
   }
 

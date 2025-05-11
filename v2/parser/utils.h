@@ -20,6 +20,6 @@ struct Tokens {
   size_t capacity;
 };
 
-bool get_tokens(Alexer *lexer, struct Tokens *tokens, const char *filename, char *str, uint64_t quote_id);
+bool get_tokens(Alexer *lexer, struct Tokens *tokens, const char *filename, char *str, uint64_t quote);
 
 struct Token *current_token(struct Tokens *tokens, size_t index);
