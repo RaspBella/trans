@@ -10,13 +10,14 @@
 #include "trans.h"
 #include "../trans.h"
 #include "../json.h"
-#include "../builtins.h"
 
 
 
 typedef enum {
   PUNCT_RIGHT_ARROW,
   PUNCT_ADDON,
+  PUNCT_LEFT_PAREN,
+  PUNCT_RIGHT_PAREN,
   PUNCT_LEFT_BRACKET,
   PUNCT_RIGHT_BRACKET,
   PUNCT_COMMA,
@@ -24,14 +25,32 @@ typedef enum {
   COUNT_PUNCTS
 } Punct_Index;
 
-static_assert(COUNT_PUNCTS == 6, "Amount of puncts has changed");
+static_assert(COUNT_PUNCTS == 8, "Amount of puncts has changed");
 static const char *puncts[COUNT_PUNCTS] = {
   [PUNCT_RIGHT_ARROW] = "->",
   [PUNCT_ADDON] =  "+=",
+  [PUNCT_LEFT_PAREN] = "(",
+  [PUNCT_RIGHT_PAREN] = ")",
   [PUNCT_LEFT_BRACKET] = "[",
   [PUNCT_RIGHT_BRACKET] = "]",
   [PUNCT_COMMA] = ",",
   [PUNCT_QUOTE] = "\""
+};
+
+typedef enum {
+  KEYWORD_EXIT,
+  KEYWORD_PRINT,
+  KEYWORD_HELP,
+  KEYWORD_DATA,
+  COUNT_KEYWORDS
+} Keyword_Index;
+
+static_assert(COUNT_KEYWORDS == 4, "Amount of keywords has changed");
+static const char *keywords[COUNT_KEYWORDS] = {
+  [KEYWORD_EXIT] = "exit",
+  [KEYWORD_PRINT] = "print",
+  [KEYWORD_HELP] = "help",
+  [KEYWORD_DATA] = "data"
 };
 
 
@@ -41,8 +60,8 @@ bool parse_trans(Json *json, const char *filename, char *str) {
 
   lexer.puncts = puncts;
   lexer.puncts_count = ALEXER_ARRAY_LEN(puncts);
-  lexer.keywords = built_in_strings;
-  lexer.keywords_count = ALEXER_ARRAY_LEN(built_in_strings);
+  lexer.keywords = keywords;
+  lexer.keywords_count = ALEXER_ARRAY_LEN(keywords);
   lexer.sl_comments = NULL;
   lexer.sl_comments_count = 0;
   lexer.ml_comments = NULL;
