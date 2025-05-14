@@ -66,5 +66,5 @@ bool parse_trans(Json *json, char *program_name, const char *filename, char *str
 
   if (tokens.capacity > 0) free(tokens.items);
 
-  return true;
+  return false;
 }
