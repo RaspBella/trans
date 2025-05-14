@@ -12,7 +12,7 @@ bool get_tokens(Alexer *lexer, struct Tokens *tokens, const char *filename, char
   while (alexer_get_token(lexer, &token)) {
     // Check for string without supporting escapes
 
-    if (ALEXER_ID(ALEXER_PUNCT, quote)) {
+    if (ALEXER_INDEX(token.id) == quote) {
       char *end = strchr(token.begin + 1, '"');
 
       if (end == NULL) {
