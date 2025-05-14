@@ -55,8 +55,16 @@ bool parse_trans(Json *json, char *program_name, const char *filename, char *str
   }
 
   for (size_t i = 0; i < tokens.count; i++) {
-    printf("%zu: \"%.*s\"\n", i, (int) (tokens.items[i].end - tokens.items[i].begin), tokens.items[i].begin);
+    if (ALEXER_KIND(tokens.items[i].id) == ALEXER_STRING) {
+      printf("%zu: \"%.*s\"\n", i, (int) (tokens.items[i].end - tokens.items[i].begin), tokens.items[i].begin);
+    }
+
+    else {
+      printf("%zu: %.*s\n", i, (int) (tokens.items[i].end - tokens.items[i].begin), tokens.items[i].begin);
+    }
   }
+
+  if (tokens.capacity > 0) free(tokens.items);
 
   return true;
 }
