@@ -85,6 +85,7 @@ int main(int argc, char **argv) {
     map_set(json->data, strdup("version"), new_json(JsonNumber, (void*) TRANS_VERSION));
   }
 
+  // TODO remove when redundant
   print_json(json);
   printf("\n");
 
@@ -160,6 +161,8 @@ int main(int argc, char **argv) {
 
             if (!parse_trans(json, *argv, argv[2], buffer)) {
               fprintf(stderr, "Failed to parse: %s\n", buffer);
+
+              fclose(fp);
 
               exit(EXIT_FAILURE);
             }
