@@ -36,7 +36,7 @@ static const char *puncts[COUNT_PUNCTS] = {
 
 
 
-bool parse_trans(Json *json, char *program_name, const char *filename, char *str) {
+bool parse_trans(Json *json, const char *filename, char *str) {
   Alexer lexer = alexer_create(filename, str, strlen(str));
 
   lexer.puncts = puncts;
