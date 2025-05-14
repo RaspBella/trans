@@ -57,7 +57,7 @@ int main(int argc, char **argv) {
 
     long file_size = ftell(fp);
 
-    if (file_size) {
+    if (file_size > 0) {
       char *str = calloc(file_size + 1, sizeof(char));
 
       rewind(fp);
