@@ -53,24 +53,32 @@ static const char *keywords[COUNT_KEYWORDS] = {
   [KEYWORD_DATA] = "data"
 };
 
+const char *sl_comments[] = {
+  "//"
+};
+
+Alexer_ML_Comments ml_comments[] = {
+  { "/*", "*/" }
+};
 
 
-bool parse_trans(Json *json, const char *filename, char *str) {
+
+void parse_trans(Json *json, const char *filename, char *str) {
   Alexer lexer = alexer_create(filename, str, strlen(str));
 
   lexer.puncts = puncts;
   lexer.puncts_count = ALEXER_ARRAY_LEN(puncts);
   lexer.keywords = keywords;
   lexer.keywords_count = ALEXER_ARRAY_LEN(keywords);
-  lexer.sl_comments = NULL;
-  lexer.sl_comments_count = 0;
-  lexer.ml_comments = NULL;
-  lexer.ml_comments_count = 0;
+  lexer.sl_comments = sl_comments;
+  lexer.sl_comments_count = ALEXER_ARRAY_LEN(sl_comments);
+  lexer.ml_comments = ml_comments;;
+  lexer.ml_comments_count = ALEXER_ARRAY_LEN(ml_comments);
 
   struct Tokens tokens = { 0 };
 
   if (!get_tokens(&lexer, &tokens, filename, str, PUNCT_QUOTE)) {
-    return false;
+    return;
   }
 
   for (size_t i = 0; i < tokens.count; i++) {
@@ -84,6 +92,4 @@ bool parse_trans(Json *json, const char *filename, char *str) {
   }
 
   if (tokens.capacity > 0) free(tokens.items);
-
-  return false;
 }

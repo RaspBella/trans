@@ -95,9 +95,7 @@ int main(int argc, char **argv) {
     char *line;
 
     while ((line = bestlineWithHistory("> ", "trans"))) {
-      if (!parse_trans(json, "<stdin>", line)) {
-        fprintf(stderr, "Failed to parse: %s\n", line);
-      }
+      parse_trans(json, "<stdin>", line);
 
       free(line);
     }
@@ -159,23 +157,16 @@ int main(int argc, char **argv) {
               exit(EXIT_FAILURE);
             }
 
-            if (!parse_trans(json, argv[2], buffer)) {
-              fprintf(stderr, "Failed to parse: %s\n", buffer);
-
-              fclose(fp);
-
-              exit(EXIT_FAILURE);
-            }
+            parse_trans(json, argv[2], buffer);
           }
+
+          fclose(fp);
 
           break;
 
         case SUB_COMMAND_CODE:
-          if (!parse_trans(json, "<args>", argv[2])) {
-            fprintf(stderr, "Failed to parse: %s\n", argv[2]);
+          parse_trans(json, "<args>", argv[2]);
 
-            exit(EXIT_FAILURE);
-          }
           break;
 
         case SUB_COMMAND_HELP:
