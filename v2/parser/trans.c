@@ -10,29 +10,37 @@
 #include "trans.h"
 #include "../trans.h"
 #include "../json.h"
+#include "../map.h"
+#include "../usage.h"
+
+
+
+Map *vars = NULL;
 
 
 
 typedef enum {
   PUNCT_RIGHT_ARROW,
-  PUNCT_ADDON,
   PUNCT_LEFT_PAREN,
   PUNCT_RIGHT_PAREN,
   PUNCT_LEFT_BRACKET,
   PUNCT_RIGHT_BRACKET,
+  PUNCT_ASSIGN,
+  PUNCT_COLON,
   PUNCT_COMMA,
   PUNCT_QUOTE,
   COUNT_PUNCTS
 } Punct_Index;
 
-static_assert(COUNT_PUNCTS == 8, "Amount of puncts has changed");
+static_assert(COUNT_PUNCTS == 9, "Amount of puncts has changed");
 static const char *puncts[COUNT_PUNCTS] = {
   [PUNCT_RIGHT_ARROW] = "->",
-  [PUNCT_ADDON] =  "+=",
   [PUNCT_LEFT_PAREN] = "(",
   [PUNCT_RIGHT_PAREN] = ")",
   [PUNCT_LEFT_BRACKET] = "[",
   [PUNCT_RIGHT_BRACKET] = "]",
+  [PUNCT_ASSIGN] = "=",
+  [PUNCT_COLON] = ":",
   [PUNCT_COMMA] = ",",
   [PUNCT_QUOTE] = "\""
 };
@@ -41,7 +49,7 @@ typedef enum {
   KEYWORD_EXIT,
   KEYWORD_PRINT,
   KEYWORD_HELP,
-  KEYWORD_DATA,
+  KEYWORD_ADD,
   COUNT_KEYWORDS
 } Keyword_Index;
 
@@ -50,7 +58,7 @@ static const char *keywords[COUNT_KEYWORDS] = {
   [KEYWORD_EXIT] = "exit",
   [KEYWORD_PRINT] = "print",
   [KEYWORD_HELP] = "help",
-  [KEYWORD_DATA] = "data"
+  [KEYWORD_ADD] = "add"
 };
 
 const char *sl_comments[] = {
@@ -404,15 +412,15 @@ void parse_trans(Json *json, const char *filename, char *str) {
     return;
   }
 
-  for (size_t i = 0; i < tokens.count; i++) {
-    if (ALEXER_KIND(tokens.items[i].id) == ALEXER_STRING) {
-      printf("%zu: \"%.*s\"\n", i, (int) (tokens.items[i].end - tokens.items[i].begin), tokens.items[i].begin);
-    }
+  if (!vars) {
+    vars = new_map(0, NULL, NULL);
 
-    else {
-      printf("%zu: %.*s\n", i, (int) (tokens.items[i].end - tokens.items[i].begin), tokens.items[i].begin);
-    }
+    atexit(free_vars);
   }
+
+  size_t index = 0;
+
+  while (parse_statement(json, &tokens, &index));
 
   if (tokens.capacity > 0) free(tokens.items);
 }
