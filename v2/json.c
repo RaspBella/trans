@@ -10,31 +10,40 @@ Json *new_json(JsonType type, void *data) {
   Json *new = malloc(sizeof(Json));
 
   new->type = type;
-  new->data = data;
+
+  switch (type) {
+    case JsonNull:
+      new->data = NULL;
+      break;
+
+    case JsonBool:
+    case JsonNumber:
+    case JsonString:
+      new->data = data;
+      break;
+
+    case JsonArray:
+      if (data) new->data = data;
+      else new->data = calloc(1, sizeof(struct JsonArray));
+      break;
+
+    case JsonObject:
+      if (data) new->data = data;
+      else new->data = new_map(0, NULL, NULL);
+      break;
+  }
 
   return new;
 }
 
-void free_json_key(void *str) {
-  free(str);
-}
-
-void free_json_value(void *json) {
+static void free_json_value(void *json) {
   free_json(json);
 }
 
 void free_json(Json *json) {
   switch (json->type) {
     case JsonNull:
-      free(json);
-
-      break;
-
     case JsonBool:
-      free(json);
-
-      break;
-
     case JsonNumber:
       free(json);
 
@@ -59,7 +68,7 @@ void free_json(Json *json) {
       break;
 
     case JsonObject:
-      free_map(json->data, free_json_key, free_json_value);
+      free_map(json->data, free, free_json_value);
       free(json);
 
       break;
