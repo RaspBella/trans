@@ -80,27 +80,22 @@ int main(int argc, char **argv) {
     }
 
     fclose(fp);
+    fp = NULL;
   }
 
   if (!json) {
-    json = new_json(JsonObject, new_map(0, NULL, NULL));
+    json = new_json(JsonObject, NULL);
 
     map_set(json->data, strdup("version"), new_json(JsonNumber, (void*) TRANS_VERSION));
   }
 
-  // TODO remove when redundant
-  print_json(json);
-  printf("\n");
-
   atexit(clean_up);
 
   if (argc == 1) {
-    char *line;
+    while ((buffer = bestlineWithHistory("> ", "trans"))) {
+      parse_trans(json, "<stdin>", buffer);
 
-    while ((line = bestlineWithHistory("> ", "trans"))) {
-      parse_trans(json, "<stdin>", line);
-
-      free(line);
+      free(buffer);
     }
   }
 
