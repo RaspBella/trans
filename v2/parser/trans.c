@@ -63,6 +63,329 @@ Alexer_ML_Comments ml_comments[] = {
 
 
 
+static char *parse_string(struct Tokens *tokens, size_t *index) {
+  struct Token *token = current_token(tokens, *index);
+
+  if (token && ALEXER_KIND(token->id) == ALEXER_STRING) {
+    (*index)++;
+    return strndup(token->begin, token->end - token->begin);
+  }
+
+  return NULL;
+}
+
+Json *parse_from_to(struct Tokens *tokens, size_t *index) {
+  char *from = parse_string(tokens, index);
+
+  if (from) {
+    struct Token *token = current_token(tokens, *index);
+
+    if (token && ALEXER_ID(ALEXER_PUNCT, PUNCT_RIGHT_ARROW) == token->id) {
+      (*index)++;
+
+      char *to = parse_string(tokens, index);
+
+      if (to) {
+        Json *json = new_json(JsonObject, NULL);
+
+        map_set(json->data, strdup("from"), new_json(JsonString, from));
+        map_set(json->data, strdup("to"), new_json(JsonString, to));
+
+        return json;
+      }
+    }
+  }
+
+  return NULL;
+}
+
+Json *parse_base(struct Tokens *tokens, size_t *index) {
+  Json *json = parse_from_to(tokens, index);
+
+  if (json) {
+    struct Token *token = current_token(tokens, *index);
+
+    if (token && ALEXER_ID(ALEXER_PUNCT, PUNCT_COLON) == token->id) {
+      (*index)++;
+
+      char *info = parse_string(tokens, index);
+
+      if (info) {
+        map_set(json->data, strdup("info"), new_json(JsonString, info));
+      }
+    }
+
+    return json;
+  }
+
+  return NULL;
+}
+
+Json *parse_journey(struct Tokens *tokens, size_t *index) {
+  Json *base = parse_base(tokens, index);
+
+  if (base) {
+    struct Token *token = current_token(tokens, *index);
+
+    if (token && ALEXER_ID(ALEXER_PUNCT, PUNCT_LEFT_BRACKET) == token->id) {
+      (*index)++;
+
+      Json *sub = parse_journey(tokens, index);
+
+      if (sub) {
+sub_comma:
+        token = current_token(tokens, *index);
+
+        if (token && ALEXER_ID(ALEXER_PUNCT, PUNCT_COMMA) == token->id) {
+          (*index)++;
+
+          sub = parse_journey(tokens, index);
+
+          if (sub) {
+            goto sub_comma;
+          }
+        }
+
+        else if (token && ALEXER_ID(ALEXER_PUNCT, PUNCT_RIGHT_BRACKET) == token->id) {
+          (*index)++;
+        }
+
+        map_set(base->data, strdup("sub"), sub);
+      }
+    }
+
+    Json *array = NULL;
+
+comma:
+    token = current_token(tokens, *index);
+
+    if (token && ALEXER_ID(ALEXER_PUNCT, PUNCT_COMMA) == token->id) {
+      (*index)++;
+
+      Json *more = parse_journey(tokens, index);
+
+      if (more) {
+        if (!array) {
+          array = new_json(JsonArray, NULL);
+
+          da_append((struct JsonArray*) array->data, base);
+        }
+
+        da_append((struct JsonArray*) array->data, more);
+
+        goto comma;
+      }
+    }
+
+
+
+    if (array) return array;
+    else return base;
+  }
+
+  return NULL;
+}
+
+static void free_json_value(void *json) {
+  free_json(json);
+}
+
+void free_vars(void) {
+  if (vars) {
+    free_map(vars, free, free_json_value);
+  }
+}
+
+bool parse_exit(struct Tokens *tokens, size_t *index) {
+  struct Token *token = current_token(tokens, *index);
+
+  if (token && ALEXER_ID(ALEXER_KEYWORD, KEYWORD_EXIT) == token->id) {
+    (*index)++;
+    token = current_token(tokens, *index);
+
+    if (token && ALEXER_ID(ALEXER_PUNCT, PUNCT_LEFT_PAREN) == token->id) {
+      (*index)++;
+      token = current_token(tokens, *index);
+
+      if (token && ALEXER_KIND(token->id) == ALEXER_INT) {
+        int value = token->int_value;
+
+(*index)++;
+        token = current_token(tokens, *index);
+
+        if (token && ALEXER_ID(ALEXER_PUNCT, PUNCT_RIGHT_PAREN) == token->id) {
+          free(tokens->items);
+
+          exit(value);
+        }
+      }
+    }
+  }
+
+  return false;
+}
+
+bool parse_print(Json *json, struct Tokens *tokens, size_t *index) {
+  struct Token *token = current_token(tokens, *index);
+
+  if (token && ALEXER_ID(ALEXER_KEYWORD, KEYWORD_PRINT) == token->id) {
+    (*index)++;
+    token = current_token(tokens, *index);
+
+    if (token && ALEXER_ID(ALEXER_PUNCT, PUNCT_LEFT_PAREN) == token->id) {
+      (*index)++;
+      token = current_token(tokens, *index);
+
+      if (token && ALEXER_ID(ALEXER_PUNCT, PUNCT_RIGHT_PAREN) == token->id) {
+        print_json(json);
+        printf("\n");
+
+        (*index)++;
+        return true;
+      }
+
+      else if (token && ALEXER_KIND(token->id) == ALEXER_SYMBOL) {
+        char *var = strndup(token->begin, token->end - token->begin);
+
+        (*index)++;
+        token = current_token(tokens, *index);
+
+        if (token && ALEXER_ID(ALEXER_PUNCT, PUNCT_RIGHT_PAREN) == token->id) {
+          Json *value = map_get(vars, var);
+
+          if (value) {
+            print_json(value);
+            printf("\n");
+
+            free(var);
+
+            (*index)++;
+            return true;
+          }
+
+          else {
+            fprintf(stderr, "undefined variable: %s\n", var);
+
+            free(var);
+
+            return false;
+          }
+        }
+      }
+
+      else {
+        Json *value = parse_journey(tokens, index);
+
+        token = current_token(tokens, *index);
+
+        if (token && ALEXER_ID(ALEXER_PUNCT, PUNCT_RIGHT_PAREN) == token->id) {
+          if (value) {
+            print_json(value);
+            printf("\n");
+
+            free_json(value);
+
+            (*index)++;
+            return true;
+          }
+        }
+      }
+    }
+  }
+
+  return false;
+}
+
+bool parse_help(struct Tokens *tokens, size_t *index) {
+  struct Token *token = current_token(tokens, *index);
+
+  if (token && ALEXER_ID(ALEXER_KEYWORD, KEYWORD_HELP) == token->id) {
+    (*index)++;
+    token = current_token(tokens, *index);
+
+    if (token && ALEXER_ID(ALEXER_PUNCT, PUNCT_LEFT_PAREN) == token->id) {
+      (*index)++;
+      token = current_token(tokens, *index);
+
+      if (token && ALEXER_ID(ALEXER_PUNCT, PUNCT_RIGHT_PAREN) == token->id) {
+        usage(stdout, NULL);
+
+        (*index)++;
+        return true;
+      }
+    }
+  }
+
+  return false;
+}
+
+bool parse_add(Json *json, struct Tokens *tokens, size_t *index) {
+  // TODO
+  return false;
+}
+
+bool parse_assignment(struct Tokens *tokens, size_t *index) {
+  struct Token *token = current_token(tokens, *index);
+
+  if (token && ALEXER_KIND(token->id) == ALEXER_SYMBOL) {
+    char *var = strndup(token->begin, token->end - token->begin);
+
+    (*index)++;
+    token = current_token(tokens, *index);
+
+    if (token && ALEXER_ID(ALEXER_PUNCT, PUNCT_ASSIGN) == token->id) {
+      (*index)++;
+      token = current_token(tokens, *index);
+
+      if (token && ALEXER_KIND(token->id) == ALEXER_STRING) {
+        Json *new_journey = parse_journey(tokens, index);
+
+        if (new_journey) {
+          Json *old_journey = map_get(vars, var);
+
+          if (old_journey) {
+            free_json(old_journey);
+          }
+
+          map_set(vars, var, new_journey);
+
+          return true;
+        }
+      }
+    }
+  }
+
+  return false;
+}
+
+bool parse_statement(Json *json, struct Tokens *tokens, size_t *index) {
+  struct Token *token = current_token(tokens, *index);
+
+  if (token && ALEXER_KIND(token->id) == ALEXER_KEYWORD) {
+    if (ALEXER_INDEX(token->id) == KEYWORD_EXIT) {
+      return parse_exit(tokens, index);
+    }
+
+    else if (ALEXER_INDEX(token->id) == KEYWORD_PRINT) {
+      return parse_print(json, tokens, index);
+    }
+
+    else if (ALEXER_INDEX(token->id) == KEYWORD_HELP) {
+      return parse_help(tokens, index);
+    }
+
+    else if (ALEXER_INDEX(token->id) == KEYWORD_ADD) {
+      return parse_add(json, tokens, index);
+    }
+  }
+
+  else if (token && ALEXER_KIND(token->id) == ALEXER_SYMBOL) {
+    return parse_assignment(tokens, index);
+  }
+
+  return false;
+}
+
 void parse_trans(Json *json, const char *filename, char *str) {
   Alexer lexer = alexer_create(filename, str, strlen(str));
 

@@ -76,7 +76,7 @@ Json *parse_number(struct Tokens *tokens, size_t *index) {
   return new_json(JsonNumber, (void*) token->int_value);
 }
 
-Json *parse_string(struct Tokens *tokens, size_t *index) {
+static Json *parse_string(struct Tokens *tokens, size_t *index) {
   struct Token *token = current_token(tokens, *index);
 
   if (!token || ALEXER_KIND(token->id) != ALEXER_STRING) return NULL;
