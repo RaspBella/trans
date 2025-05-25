@@ -15,6 +15,7 @@ const char data_file[] = "data.json";
 
 char *buffer = NULL;
 Json *json = NULL;
+FILE *fp = NULL;
 
 typedef enum {
   SUB_COMMAND_INVALID = -1,
@@ -32,7 +33,9 @@ const char *sub_commands[COUNT_SUB_COMMANDS] = {
 };
 
 void clean_up(void) {
-  FILE *fp = fopen(data_file, "w");
+  if (fp) fclose(fp);
+
+  fp = fopen(data_file, "w");
 
   if (fp) {
     fprint_json(json, fp);
@@ -50,7 +53,7 @@ void clean_up(void) {
 }
 
 int main(int argc, char **argv) {
-  FILE *fp = fopen(data_file, "r");
+  fp = fopen(data_file, "r");
 
   if (fp) {
     fseek(fp, 0, SEEK_END);
@@ -161,6 +164,7 @@ int main(int argc, char **argv) {
           }
 
           fclose(fp);
+          fp = NULL;
 
           break;
 
