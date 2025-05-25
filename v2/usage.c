@@ -4,18 +4,28 @@
 #include "usage.h"
 
 void usage(FILE* fp, char *program_name) {
+  if (program_name) {
+    fprintf(fp, "Usage: %s [OPTION]\n", program_name);
+  }
+
+  else {
+    fprintf(fp, "Usage [OPTION]\n");
+  }
+
   fprintf(
     fp,
-    "Usage: %s [OPTION]\n"
     "  Options:\n"
-    "    -c STRING         exec STRING\n"
-    "    -f FILE           exec FILE\n"
-    "    -h                prints help\n"
-    "  String:\n"
-    "    Built ins:\n"
-    "      exit [Integer]  exits with an optional exit code (default is %d)\n"
-    "      help            prints help\n",
-    program_name,
-    EXIT_SUCCESS
+    "    -c STRING -> exec STRING\n"
+    "    -f FILE -> exec FILE\n"
+    "    -h -> prints help\n"
+    "  Code:\n"
+    "    Functions:\n"
+    "      exit(n) -> exits with integer status provided\n"
+    "      help() -> prints help\n"
+    "      print() -> prints the data\n"
+    "      print(j) -> prints a journey provided\n"
+    "      add(key, j) -> adds a key and journey to the data table\n"
+    "    Variable Assignment:\n"
+    "      london = \"EDB\"->\"KGX\":\"lumo my beloved\" -> assigns a value to a variable for convenience\n"
   );
 }
