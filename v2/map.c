@@ -96,7 +96,7 @@ void map_set(Map *map, void *key, void *value) {
 
   if (!map->lookup[index] || map->key_cmp(map->lookup[index]->key, key) == 0) {
     if (!map->lookup[index]) map->count++;
-
+      
     map->entries[map->count - 1].key = key;
     map->entries[map->count - 1].value = value;
 
@@ -129,6 +129,8 @@ void map_set(Map *map, void *key, void *value) {
 }
 
 void *map_get(Map *map, void *key) {
+  if (!map->count) return NULL;
+
   int hash = map->hash(key);
   int index = hash % map->capacity;
 
