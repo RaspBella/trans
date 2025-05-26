@@ -328,7 +328,71 @@ bool parse_help(struct Tokens *tokens, size_t *index) {
 }
 
 bool parse_add(Json *json, struct Tokens *tokens, size_t *index) {
-  // TODO
+  struct Token *token = current_token(tokens, *index);
+
+  if (token && ALEXER_ID(ALEXER_KEYWORD, KEYWORD_ADD) == token->id) {
+    (*index)++;
+    token = current_token(tokens, *index);
+
+    if (token && ALEXER_ID(ALEXER_PUNCT, PUNCT_LEFT_PAREN) == token->id) {
+      (*index)++;
+
+      char *key = parse_string(tokens, index);
+
+      if (key) {
+        token = current_token(tokens, *index);
+
+        if (token && ALEXER_ID(ALEXER_PUNCT, PUNCT_COMMA) == token->id) {
+          (*index)++;
+          token = current_token(tokens, *index);
+
+          if (token && ALEXER_KIND(token->id) == ALEXER_SYMBOL) {
+            char *var = strndup(token->begin, token->end - token->begin);
+
+            (*index)++;
+            token = current_token(tokens, *index);
+
+            if (token && ALEXER_ID(ALEXER_PUNCT, PUNCT_RIGHT_PAREN) == token->id) {
+              Json *value = map_get(vars, var);
+
+              if (value) {
+                // TODO
+
+                free(var);
+
+                (*index)++;
+                return true;
+              }
+
+              else {
+                fprintf(stderr, "undefined variable: %s\n", var);
+
+                free(var);
+
+                return false;
+              }
+            }
+          }
+
+          else {
+            Json *value = parse_journey(tokens, index);
+
+            token = current_token(tokens, *index);
+
+            if (token && ALEXER_ID(ALEXER_PUNCT, PUNCT_RIGHT_PAREN) == token->id) {
+              if (value) {
+                // TODO
+
+                (*index)++;
+                return true;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
   return false;
 }
 
