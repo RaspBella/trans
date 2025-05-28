@@ -345,6 +345,8 @@ void add(Json *json, char *key, Json *new_val) {
 
       map_set(json->data, key, array);
     }
+
+    free(key);
   }
 
   else {
@@ -381,10 +383,9 @@ bool parse_add(Json *json, struct Tokens *tokens, size_t *index) {
               Json *value = map_get(vars, var);
 
               if (value) {
-                add(json, strdup(key), json_dup(value));
+                add(json, key, json_dup(value));
 
                 free(var);
-                free(key);
 
                 (*index)++;
                 return true;
@@ -394,7 +395,6 @@ bool parse_add(Json *json, struct Tokens *tokens, size_t *index) {
                 fprintf(stderr, "undefined variable: %s\n", var);
 
                 free(var);
-                free(key);
 
                 return false;
               }
@@ -408,9 +408,8 @@ bool parse_add(Json *json, struct Tokens *tokens, size_t *index) {
 
             if (token && ALEXER_ID(ALEXER_PUNCT, PUNCT_RIGHT_PAREN) == token->id) {
               if (value) {
-                add(json, strdup(key), json_dup(value));
+                add(json, key, json_dup(value));
 
-                free(key);
                 free_json(value);
 
                 (*index)++;
