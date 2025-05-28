@@ -327,6 +327,31 @@ bool parse_help(struct Tokens *tokens, size_t *index) {
   return false;
 }
 
+void add(Json *json, char *key, Json *new_val) {
+  Json *old_val = map_get(json->data, key);
+
+  if (old_val) {
+    if (old_val->type == JsonArray) {
+      da_append((struct JsonArray*) old_val->data, new_val);
+    }
+
+    else {
+      assert(old_val->type == JsonObject);
+
+      Json *array = new_json(JsonArray, NULL);
+
+      da_append((struct JsonArray*) array->data, old_val);
+      da_append((struct JsonArray*) array->data, new_val);
+
+      map_set(json->data, key, array);
+    }
+  }
+
+  else {
+    map_set(json->data, key, new_val);
+  }
+}
+
 bool parse_add(Json *json, struct Tokens *tokens, size_t *index) {
   struct Token *token = current_token(tokens, *index);
 
@@ -356,9 +381,10 @@ bool parse_add(Json *json, struct Tokens *tokens, size_t *index) {
               Json *value = map_get(vars, var);
 
               if (value) {
-                // TODO
+                add(json, strdup(key), json_dup(value));
 
                 free(var);
+                free(key);
 
                 (*index)++;
                 return true;
@@ -368,6 +394,7 @@ bool parse_add(Json *json, struct Tokens *tokens, size_t *index) {
                 fprintf(stderr, "undefined variable: %s\n", var);
 
                 free(var);
+                free(key);
 
                 return false;
               }
@@ -381,7 +408,10 @@ bool parse_add(Json *json, struct Tokens *tokens, size_t *index) {
 
             if (token && ALEXER_ID(ALEXER_PUNCT, PUNCT_RIGHT_PAREN) == token->id) {
               if (value) {
-                // TODO
+                add(json, strdup(key), json_dup(value));
+
+                free(key);
+                free_json(value);
 
                 (*index)++;
                 return true;
@@ -389,6 +419,8 @@ bool parse_add(Json *json, struct Tokens *tokens, size_t *index) {
             }
           }
         }
+
+        free(key);
       }
     }
   }
