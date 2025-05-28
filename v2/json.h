@@ -25,5 +25,7 @@ struct JsonArray {
 Json *new_json(JsonType, void*);
 void free_json(Json*);
 
+Json *json_dup(Json*);
+
 void fprint_json(Json*, FILE*);
 void print_json(Json*);

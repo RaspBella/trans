@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdint.h>
+#include <string.h>
 
 #include "map.h"
 #include "json.h"
@@ -73,6 +74,51 @@ void free_json(Json *json) {
 
       break;
   }
+}
+
+Json *json_dup(Json *json) {
+  Json *new = NULL;
+
+  switch (json->type) {
+    case JsonNull:
+      new = new_json(JsonNull, NULL);
+      return new;
+
+    case JsonBool:
+      new = new_json(JsonBool, json->data);
+      return new;
+
+    case JsonNumber:
+      new = new_json(JsonNumber, json->data);
+      return new;
+
+    case JsonString:
+      new = new_json(JsonString, strdup(json->data));
+      return new;
+
+    case JsonArray:
+      new = new_json(JsonArray, NULL);
+
+      for (size_t i = 0; i < ((struct JsonArray*) json->data)->count; i++) {
+        da_append((struct JsonArray*) new->data, json_dup(((struct JsonArray*) json->data)->items[i]));
+      }
+
+      return new;
+
+    case JsonObject:
+      size_t count;
+      struct MapEntry *array = get_keys_and_values(json->data, &count);
+
+      new = new_json(JsonObject, new_map(count * MAP_MULT_FACTOR, NULL, NULL));
+
+      for (size_t i = 0; i < count; i++) {
+        map_set(new->data, strdup(array[i].key), json_dup(array[i].value));
+      }
+
+      return new;
+  }
+
+  return new;
 }
 
 void fprint_value(void *json, FILE *fp) {
