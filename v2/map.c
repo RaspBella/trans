@@ -6,11 +6,6 @@
 #include "map.h"
 #include "utils.h"
 
-struct MapEntry {
-  void *key;
-  void *value;
-};
-
 struct Map {
   size_t capacity;
   size_t count;
@@ -91,40 +86,62 @@ void free_map(Map *map, void (*pre_free_key)(void*), void (*pre_free_value)(void
 }
 
 void map_set(Map *map, void *key, void *value) {
-  int hash = map->hash(key);
-  int index = hash % map->capacity;
+  int index = map->hash(key) % map->capacity;
 
-  if (!map->lookup[index] || map->key_cmp(map->lookup[index]->key, key) == 0) {
-    if (!map->lookup[index]) map->count++;
-      
-    map->entries[map->count - 1].key = key;
-    map->entries[map->count - 1].value = value;
+  if (map->lookup[index]) {
+    if (map->key_cmp(map->lookup[index]->key, key) == 0) {
+      map->lookup[index]->value = value;
 
-    map->lookup[index] = map->entries + map->count - 1;
+      return;
+    }
 
-    return;
-  }
+    else {
+      int start = index;
 
-  if (map->count < map->capacity) {
-    do {
       index++;
       index %= map->capacity;
-    } while (map->lookup[index] && map->key_cmp(map->lookup[index]->key, key));
 
-    if (!map->lookup[index]) map->count++;
+      while (index != start) {
+        if (map->lookup[index]) {
+          if (map->key_cmp(map->lookup[index]->key, key) == 0) {
+            map->lookup[index]->value = value;
 
-    map->entries[map->count - 1].key = key;
-    map->entries[map->count - 1].value = value;
+            return;
+          }
+        }
 
-    map->lookup[index] = map->entries + map->count - 1;
+        else {
+          map->entries[map->count].key = key;
+          map->entries[map->count].value = value;
 
-    return;
+          map->lookup[index] = map->entries + map->count;
+
+          map->count++;
+
+          return;
+        }
+
+        index++;
+        index %= map->capacity;
+      }
+
+      if (map->count == map->capacity) {
+        map = map_extend(map);
+
+        map_set(map, key, value);
+      }
+    }
   }
 
   else {
-    map = map_extend(map);
+    map->entries[map->count].key = key;
+    map->entries[map->count].value = value;
 
-    map_set(map, key, value);
+    map->lookup[index] = map->entries + map->count;
+
+    map->count++;
+
+    return;
   }
 }
 
@@ -134,22 +151,31 @@ void *map_get(Map *map, void *key) {
   int hash = map->hash(key);
   int index = hash % map->capacity;
 
+  if (!map->lookup[index]) {
+    return NULL;
+  }
+
   if (map->key_cmp(map->lookup[index]->key, key) == 0) {
     return map->lookup[index]->value;
   }
 
-  int start_index = index;
+  int start = index;
 
-  do {
+  index++;
+  index %= map->capacity;
+
+  while (index != start) {
+    if (map->lookup[index]) {
+      if (map->key_cmp(map->lookup[index]->key, key) == 0) {
+        return map->lookup[index]->value;
+      }
+    }
+
     index++;
     index %= map->capacity;
-  } while (map->key_cmp(map->lookup[index]->key, key) && index != start_index);
-
-  if (map->key_cmp(map->lookup[index]->key, key) == 0) {
-    return map->lookup[index]->value;
   }
 
-  else return NULL;
+  return NULL;
 }
 
 Map *map_extend(Map *map) {
@@ -193,4 +219,10 @@ void fprint_map(Map *map, void (*print_key)(void *key, FILE *fp), void (*print_v
       print_value(map->entries[i].value, fp);
     }
   }
+}
+
+struct MapEntry *get_keys_and_values(Map *map, size_t *count) {
+  (*count) = map->count;
+
+  return map->entries;
 }
