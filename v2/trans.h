@@ -1,3 +1,3 @@
 #pragma once
 
-#define TRANS_VERSION 2
+#define TRANS_VERSION 2.0

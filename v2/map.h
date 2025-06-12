@@ -1,9 +1,7 @@
 #pragma once
 
 #include <stdio.h>
-#include <stddef.h>
-
-#include "utils.h"
+#include <stdlib.h>
 
 #define MAP_DEFAULT_CAPACITY 256
 #define MAP_MULT_FACTOR 2

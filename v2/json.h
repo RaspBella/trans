@@ -1,6 +1,8 @@
 #pragma once
 
 #include <stdio.h>
+#include <stdbool.h>
+#include "map.h"
 
 typedef enum {
   JsonNull,
@@ -11,16 +13,26 @@ typedef enum {
   JsonObject,
 } JsonType;
 
-typedef struct Json {
-  JsonType type;
-  void *data;
-} Json;
+struct Json;
 
 struct JsonArray {
-  Json **items;
+  struct Json **items;
   size_t capacity;
   size_t count;
 };
+
+typedef struct Json {
+  JsonType type;
+  union {
+    bool boolean;
+    double *number;
+    char *string;
+    struct JsonArray *array;
+    Map *object;
+  } data;
+} Json;
+
+double *new_number(double);
 
 Json *new_json(JsonType, void*);
 void free_json(Json*);

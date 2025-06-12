@@ -4,7 +4,6 @@
 #include <stdbool.h>
 
 #include "map.h"
-#include "utils.h"
 
 struct Map {
   size_t capacity;
@@ -66,7 +65,7 @@ Map *new_map(size_t init_capacity, unsigned long (*hash_func)(void*), int (*key_
 
 void free_map(Map *map, void (*pre_free_key)(void*), void (*pre_free_value)(void*)) {
   if (map->count > 0) {
-    for (int i = 0; i < map->count; i++) {
+    for (size_t i = 0; i < map->count; i++) {
       if (pre_free_key) {
         pre_free_key(map->entries[i].key);
       }
