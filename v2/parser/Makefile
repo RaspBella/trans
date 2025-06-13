@@ -1,5 +1,5 @@
 EXTRA_CFLAGS=-Og -ggdb3
-CFLAGS=$(EXTRA_CFLAGS) -std=c23
+CFLAGS=$(EXTRA_CFLAGS) -std=c23 -pedantic
 CFLAGS_WARNINGS=$(CFLAGS) -Wextra -Wall
 
 SRCS=$(wildcard *.c)
