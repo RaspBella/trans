@@ -459,6 +459,7 @@ static void init(void) {
   STATION("Cambuslang", "CBL");
   STATION("Camden Road", "CMD");
   STATION("Camelon", "CMO");
+  STATION("Cameron Bridge", "CBX");
   STATION("Canada Water", "ZCW");
   STATION("Canley", "CNL");
   STATION("Cannock", "CAO");
