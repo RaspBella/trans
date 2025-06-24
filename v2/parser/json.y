@@ -1,21 +1,21 @@
 %{
 #include <stdio.h>
-#include "../../json.h"
-#include "../helper.h"
-
-int yylex(void);
-void yyerror(const char*);
-
-extern FILE *yyin;
-Json *root = NULL;
+#include "json_extra.h"
 %}
 
-%defines
-
 %code requires {
-  #include "../../json.h"
-  #include "../helper.h"
+  #include "json_extra.h"
+  typedef void* yyscan_t;
+  typedef union YYSTYPE YYSTYPE;
+  int yylex(YYSTYPE *yylval, yyscan_t scanner);
+  void yyerror(yyscan_t scanner, Json **result, const char *msg);
 }
+
+%define api.pure full
+
+%parse-param {void * scanner}
+%parse-param {Json **result}
+%lex-param {yyscan_t scanner}
 
 %union {
   Json *Json;
@@ -41,7 +41,7 @@ Json *root = NULL;
 
 %%
 
-Json: JsonValue { root = $1; };
+Json: JsonValue { *result = $1; };
 
 JsonValue: JsonObject
          | JsonArray
@@ -85,18 +85,6 @@ JsonNull: TOK_NULL             { $$ = new_json(JsonNull, NULL); }
 
 %%
 
-#define yylex json_lex
-
-int yylex_destroy(void);
-
-void parse_json(FILE *fp) {
-  yyin = fp;
-
-  yyparse();
-
-  yylex_destroy();
-}
-
-void yyerror(const char *msg) {
-  fprintf(stderr, "Syntax error: %s\n", msg);
+void yyerror(yyscan_t scanner, Json **result, const char *msg) {
+  fprintf(stderr, "Parse error: %s\n", msg);
 }
