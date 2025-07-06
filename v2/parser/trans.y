@@ -70,6 +70,7 @@ Help: TOK_HELP '(' ')' { usage(stdout, NULL); }
 
 Print: TOK_PRINT '(' Journey ')' { print_json($3); }
      | TOK_PRINT '(' TOK_ID ')'  { print_var($3); }
+     | TOK_PRINT '(' ')'         { print_json(data); }
      ;
 
 Add: TOK_ADD '(' TOK_STRING ',' Journey ')' { add_journey(data, $3, $5); }
