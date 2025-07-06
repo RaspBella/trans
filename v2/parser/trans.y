@@ -98,7 +98,6 @@ MaybeInfo: ':' TOK_STRING { $$ = new_json(JsonString, $2); }
          ;
 
 MaybeSub: '[' items ']'   { $$ = new_json(JsonArray, $2); }
-        | '[' Journey ']' { $$ = new_json(JsonObject, $2); }
         | %empty          { $$ = NULL; }
         ;
 
