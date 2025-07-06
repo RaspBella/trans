@@ -27,6 +27,6 @@ void usage(FILE* fp, char *program_name) {
     "      print() -> prints the data\n"
     "      add(key, j) -> adds a key and journey to the data table\n"
     "    Variable Assignment (of journey type only):\n"
-    "      london = \"EDB\"->\"KGX\":\"lumo my beloved\" -> assigns a value to a variable for convenience\n"
+    "      london = {EDB}->{KGX}:\"lumo my beloved\" -> assigns a value to a variable for convenience\n"
   );
 }
