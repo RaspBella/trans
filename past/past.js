@@ -3,265 +3,265 @@ const table = document.getElementsByTagName("table")[0];
 const today = new Date().toISOString().substring(0, 10);
 
 fetch("../data.json")
-.then((response) => response.json())
-.then((data) => {
+  .then((response) => response.json())
+  .then((data) => {
     for (const date in data) {
-	if (date < today) {
-	    const type = Object.prototype.toString.call(data[date])
+      if (date < today) {
+        const type = Object.prototype.toString.call(data[date])
 
-	    if (type === "[object Array]") {
-		let date_cell = false;
+        if (type === "[object Array]") {
+          let date_cell = false;
 
-		for (const journey in data[date]) {
+          for (const journey in data[date]) {
 
-		    let row = table.insertRow();
+            let row = table.insertRow();
 
-		    if (!date_cell) {
-			let cell = row.insertCell();
+            if (!date_cell) {
+              let cell = row.insertCell();
 
-			cell.rowSpan = data[date].length;
+              cell.rowSpan = data[date].length;
 
-			let a = document.createElement("a");
-			let text = document.createTextNode(date);
+              let a = document.createElement("a");
+              let text = document.createTextNode(date);
 
-			a.href = "/trans/" + date;
-			a.appendChild(text);
+              a.href = "/trans/" + date;
+              a.appendChild(text);
 
-			cell.appendChild(a);
-			
-			date_cell = true;
-		    }
+              cell.appendChild(a);
 
-		    let from = row.insertCell();
-		    let to = row.insertCell();
-		    let change = row.insertCell();
-		    let trans = row.insertCell();
+              date_cell = true;
+            }
 
-		    from.appendChild(document.createTextNode(data[date][journey]["from"]));
-		    to.appendChild(document.createTextNode(data[date][journey]["to"]));
+            let from = row.insertCell();
+            let to = row.insertCell();
+            let change = row.insertCell();
+            let trans = row.insertCell();
 
-		    { // change
-			const type = Object.prototype.toString.call(data[date][journey]["change"]);
+            from.appendChild(document.createTextNode(data[date][journey]["from"]));
+            to.appendChild(document.createTextNode(data[date][journey]["to"]));
 
-			if (type === "[object Array]") {
-			    change.appendChild(document.createTextNode(data[date][journey]["change"][0]));
+            { // change
+              const type = Object.prototype.toString.call(data[date][journey]["change"]);
 
-			    for (let i = 1; i < data[date][journey]["change"].length; i++) {
-				change.appendChild(document.createElement("br"));
-				change.appendChild(document.createTextNode(data[date][journey]["change"][i]));
-			    }
-			}
+              if (type === "[object Array]") {
+                change.appendChild(document.createTextNode(data[date][journey]["change"][0]));
 
-			else if (type === "[object String]") {
-			    change.appendChild(document.createTextNode(data[date][journey]["change"]));
-			}
-		    }
+                for (let i = 1; i < data[date][journey]["change"].length; i++) {
+                  change.appendChild(document.createElement("br"));
+                  change.appendChild(document.createTextNode(data[date][journey]["change"][i]));
+                }
+              }
 
-		    { // trans
-			const type = Object.prototype.toString.call(data[date][journey]["trans"]);
+              else if (type === "[object String]") {
+                change.appendChild(document.createTextNode(data[date][journey]["change"]));
+              }
+            }
 
-			if (type === "[object Array]") {
-			    const stations = new Array(data[date][journey]["trans"].length + 1);
+            { // trans
+              const type = Object.prototype.toString.call(data[date][journey]["trans"]);
 
-			    stations[0] = data[date][journey]["from"]; 
+              if (type === "[object Array]") {
+                const stations = new Array(data[date][journey]["trans"].length + 1);
 
-			    const type = Object.prototype.toString.call(data[date][journey]["change"]);
+                stations[0] = data[date][journey]["from"]; 
 
-			    if (type === "[object Array]") {
-				for (let i = 1; i < stations.length - 1; i++) {
-				    stations[i] = data[date][journey]["change"][i - 1];
-				}
-			    }
+                const type = Object.prototype.toString.call(data[date][journey]["change"]);
 
-			    else if (data[date][journey]["change"] != "direct") {
-				stations[1] = data[date][journey]["change"];
-			    }
+                if (type === "[object Array]") {
+                  for (let i = 1; i < stations.length - 1; i++) {
+                    stations[i] = data[date][journey]["change"][i - 1];
+                  }
+                }
 
-			    stations[stations.length - 1] = data[date][journey]["to"];
+                else if (data[date][journey]["change"] != "direct") {
+                  stations[1] = data[date][journey]["change"];
+                }
 
-			    if (data[date][journey]["trans"][0].includes("http")) {
-				let text = document.createTextNode(stations[0] + "->" + stations[1] + ": ");
-				let a = document.createElement("a");
-				let a_text = document.createTextNode(data[date][journey]["trans"][0]);
+                stations[stations.length - 1] = data[date][journey]["to"];
 
-				a.href = data[date][journey]["trans"][0];
-				a.appendChild(a_text);
+                if (data[date][journey]["trans"][0].includes("http")) {
+                  let text = document.createTextNode(stations[0] + "->" + stations[1] + ": ");
+                  let a = document.createElement("a");
+                  let a_text = document.createTextNode(data[date][journey]["trans"][0]);
 
-				trans.appendChild(text);
-				
-				trans.appendChild(a);
-			    }
+                  a.href = data[date][journey]["trans"][0];
+                  a.appendChild(a_text);
 
-			    else {
-				trans.appendChild(document.createTextNode(stations[0] + "->" + stations[1] + ": " + data[date][journey]["trans"][0]));
-			    }
+                  trans.appendChild(text);
 
-			    for (let i = 1; i < stations.length - 1; i++) {
-				let br = document.createElement("br");
+                  trans.appendChild(a);
+                }
 
-				trans.appendChild(br);
+                else {
+                  trans.appendChild(document.createTextNode(stations[0] + "->" + stations[1] + ": " + data[date][journey]["trans"][0]));
+                }
 
-				if (data[date][journey]["trans"][i].includes("http")) {
-				    let text = document.createTextNode(stations[i] + "->" + stations[i + 1] + ": ");
-				    let a = document.createElement("a");
-				    let a_text = document.createTextNode(data[date][journey]["trans"][i]);
+                for (let i = 1; i < stations.length - 1; i++) {
+                  let br = document.createElement("br");
 
-				    a.href = data[date][journey]["trans"][i];
-				    a.appendChild(a_text);
+                  trans.appendChild(br);
 
-				    trans.appendChild(text);
+                  if (data[date][journey]["trans"][i].includes("http")) {
+                    let text = document.createTextNode(stations[i] + "->" + stations[i + 1] + ": ");
+                    let a = document.createElement("a");
+                    let a_text = document.createTextNode(data[date][journey]["trans"][i]);
 
-				    trans.appendChild(a);
-				}
+                    a.href = data[date][journey]["trans"][i];
+                    a.appendChild(a_text);
 
-				else {
-				    trans.appendChild(document.createTextNode(stations[i] + "->" + stations[i + 1] + ": " + data[date][journey]["trans"][i]));
-				}
-			    }
-			}
+                    trans.appendChild(text);
 
-			else if (type === "[object String]") {
-			    if (data[date][journey]["trans"].includes("http")) {
-				let a = document.createElement("a");
-				let text = document.createTextNode(data[date][journey]["trans"]);
+                    trans.appendChild(a);
+                  }
 
-				a.href = data[date][journey]["trans"];
-				a.appendChild(text);
+                  else {
+                    trans.appendChild(document.createTextNode(stations[i] + "->" + stations[i + 1] + ": " + data[date][journey]["trans"][i]));
+                  }
+                }
+              }
 
-				trans.appendChild(a);
-			    }
+              else if (type === "[object String]") {
+                if (data[date][journey]["trans"].includes("http")) {
+                  let a = document.createElement("a");
+                  let text = document.createTextNode(data[date][journey]["trans"]);
 
-			    else {
-				let text = document.createTextNode(data[date][journey]["trans"]);
+                  a.href = data[date][journey]["trans"];
+                  a.appendChild(text);
 
-				trans.appendChild(text);
-			    }
-			}
-		    }
-		}
-	    }
+                  trans.appendChild(a);
+                }
 
-	    else if (type === "[object Object]") {
-		let row = table.insertRow();
-		let cell = row.insertCell();
-		let a = document.createElement("a");
-		let text = document.createTextNode(date);
+                else {
+                  let text = document.createTextNode(data[date][journey]["trans"]);
 
-		a.href = "/trans/" + date;
-		a.appendChild(text);
+                  trans.appendChild(text);
+                }
+              }
+            }
+          }
+        }
 
-		cell.appendChild(a);
+        else if (type === "[object Object]") {
+          let row = table.insertRow();
+          let cell = row.insertCell();
+          let a = document.createElement("a");
+          let text = document.createTextNode(date);
 
-		let from = row.insertCell();
-		let to = row.insertCell();
-		let change = row.insertCell();
-		let trans = row.insertCell();
+          a.href = "/trans/" + date;
+          a.appendChild(text);
 
-		from.appendChild(document.createTextNode(data[date]["from"]));
-		to.appendChild(document.createTextNode(data[date]["to"]));
+          cell.appendChild(a);
 
-		{ // change
-		    const type = Object.prototype.toString.call(data[date]["change"]);
+          let from = row.insertCell();
+          let to = row.insertCell();
+          let change = row.insertCell();
+          let trans = row.insertCell();
 
-		    if (type === "[object Array]") {
-			change.appendChild(document.createTextNode(data[date]["change"][0]));
+          from.appendChild(document.createTextNode(data[date]["from"]));
+          to.appendChild(document.createTextNode(data[date]["to"]));
 
-			for (let i = 1; i < data[date]["change"].length; i++) {
-			    change.appendChild(document.createElement("br"));
-			    change.appendChild(document.createTextNode(data[date]["change"][i]));
-			}
-		    }
+          { // change
+            const type = Object.prototype.toString.call(data[date]["change"]);
 
-		    else if (type === "[object String]") {
-			change.appendChild(document.createTextNode(data[date]["change"]));
-		    }
-		}
+            if (type === "[object Array]") {
+              change.appendChild(document.createTextNode(data[date]["change"][0]));
 
-		{ // trans
-		    const type = Object.prototype.toString.call(data[date]["trans"]);
+              for (let i = 1; i < data[date]["change"].length; i++) {
+                change.appendChild(document.createElement("br"));
+                change.appendChild(document.createTextNode(data[date]["change"][i]));
+              }
+            }
 
-		    if (type === "[object Array]") {
-			const stations = new Array(data[date]["trans"].length + 1);
+            else if (type === "[object String]") {
+              change.appendChild(document.createTextNode(data[date]["change"]));
+            }
+          }
 
-			stations[0] = data[date]["from"]; 
+          { // trans
+            const type = Object.prototype.toString.call(data[date]["trans"]);
 
-			const type = Object.prototype.toString.call(data[date]["change"]);
+            if (type === "[object Array]") {
+              const stations = new Array(data[date]["trans"].length + 1);
 
-			if (type === "[object Array]") {
-			    for (let i = 1; i < stations.length - 1; i++) {
-				stations[i] = data[date]["change"][i - 1];
-			    }
-			}
+              stations[0] = data[date]["from"]; 
 
-			else if (data[date]["change"] != "direct") {
-			    stations[1] = data[date]["change"];
-			}
+              const type = Object.prototype.toString.call(data[date]["change"]);
 
-			stations[stations.length - 1] = data[date]["to"];
+              if (type === "[object Array]") {
+                for (let i = 1; i < stations.length - 1; i++) {
+                  stations[i] = data[date]["change"][i - 1];
+                }
+              }
 
-			if (data[date]["trans"][0].includes("http")) {
-			    let text = document.createTextNode(stations[0] + "->" + stations[1] + ": ");
-			    let a = document.createElement("a");
-			    let a_text = document.createTextNode(data[date]["trans"][0]);
+              else if (data[date]["change"] != "direct") {
+                stations[1] = data[date]["change"];
+              }
 
-			    a.href = data[date]["trans"][0];
-			    a.appendChild(a_text);
+              stations[stations.length - 1] = data[date]["to"];
 
-			    trans.appendChild(text);
-				
-			    trans.appendChild(a);
-			}
+              if (data[date]["trans"][0].includes("http")) {
+                let text = document.createTextNode(stations[0] + "->" + stations[1] + ": ");
+                let a = document.createElement("a");
+                let a_text = document.createTextNode(data[date]["trans"][0]);
 
-			else {
-			    trans.appendChild(document.createTextNode(stations[0] + "->" + stations[1] + ": " + data[date]["trans"][0]));
-			}
+                a.href = data[date]["trans"][0];
+                a.appendChild(a_text);
 
-			for (let i = 1; i < stations.length - 1; i++) {
-			    let br = document.createElement("br");
+                trans.appendChild(text);
 
-			    trans.appendChild(br);
+                trans.appendChild(a);
+              }
 
-			    if (data[date]["trans"][i].includes("http")) {
-				let text = document.createTextNode(stations[i] + "->" + stations[i + 1] + ": ");
-				let a = document.createElement("a");
-				let a_text = document.createTextNode(data[date]["trans"][i]);
+              else {
+                trans.appendChild(document.createTextNode(stations[0] + "->" + stations[1] + ": " + data[date]["trans"][0]));
+              }
 
-				a.href = data[date]["trans"][i];
-				a.appendChild(a_text);
+              for (let i = 1; i < stations.length - 1; i++) {
+                let br = document.createElement("br");
 
-				trans.appendChild(text);
+                trans.appendChild(br);
 
-				trans.appendChild(a);
-			    }
+                if (data[date]["trans"][i].includes("http")) {
+                  let text = document.createTextNode(stations[i] + "->" + stations[i + 1] + ": ");
+                  let a = document.createElement("a");
+                  let a_text = document.createTextNode(data[date]["trans"][i]);
 
-			    else {
-				trans.appendChild(document.createTextNode(stations[i] + "->" + stations[i + 1] + ": " + data[date]["trans"][i]));
-			    }
-			}
-		    }
+                  a.href = data[date]["trans"][i];
+                  a.appendChild(a_text);
 
-		    else if (type === "[object String]") {
-			if (data[date]["trans"].includes("http")) {
-			    let a = document.createElement("a");
-			    let text = document.createTextNode(data[date]["trans"]);
+                  trans.appendChild(text);
 
-			    a.href = data[date]["trans"];
-			    a.appendChild(text);
+                  trans.appendChild(a);
+                }
 
-			    trans.appendChild(a);
-			}
+                else {
+                  trans.appendChild(document.createTextNode(stations[i] + "->" + stations[i + 1] + ": " + data[date]["trans"][i]));
+                }
+              }
+            }
 
-			else {
-			    let text = document.createTextNode(data[date]["trans"]);
+            else if (type === "[object String]") {
+              if (data[date]["trans"].includes("http")) {
+                let a = document.createElement("a");
+                let text = document.createTextNode(data[date]["trans"]);
 
-			    trans.appendChild(text);
-			}
-		    }
-		}
-	    }
-	}
+                a.href = data[date]["trans"];
+                a.appendChild(text);
 
-	else break;
+                trans.appendChild(a);
+              }
+
+              else {
+                let text = document.createTextNode(data[date]["trans"]);
+
+                trans.appendChild(text);
+              }
+            }
+          }
+        }
+      }
+
+      else break;
     }
-})
-.catch((error) => console.error("Error loading JSON file", error));
+  })
+  .catch((error) => console.error("Error loading JSON file", error));
