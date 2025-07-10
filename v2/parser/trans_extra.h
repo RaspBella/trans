@@ -1,8 +1,9 @@
 #pragma once
 
 #include "../json.h"
+#include "../map.h"
 
-extern Json *vars;
+extern Map *vars;
 
 void print_var(char*);
 void add_journey(Json*, char*, Json*);

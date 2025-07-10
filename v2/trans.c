@@ -8,8 +8,6 @@
 #include "bestline.h"
 #include "usage.h"
 
-
-
 int jsonparse(void *scanner, Json **result);
 int jsonlex_init(void **scanner);
 int jsonlex_destroy(void *scanner);
@@ -19,12 +17,10 @@ int translex_init(void **scanner);
 int translex_destroy(void *scanner);
 void transset_in(FILE *fp, void *scanner);
 
-
-
 const char data_filename[] = "data.json";
 
 Json *data = NULL;
-Json *vars = NULL;
+Map *vars = NULL;
 
 char *buffer = NULL;
 
@@ -35,10 +31,8 @@ void clean_up(void) {
 
   fclose(fp);
 
-
-
   free_json(data);
-  free_json(vars);
+  free_map(vars, free, (void (*)(void*))free_json);
 
   if (buffer) free(buffer);
 }
@@ -67,8 +61,8 @@ void init(void) {
     map_set(data->data.object, strdup("version"), new_json(JsonNumber, new_number(TRANS_VERSION)));
   }
 
-  vars = new_json(JsonObject, NULL);
-    
+  vars = new_map(0, NULL, NULL);
+
   atexit(clean_up);
 }
 
@@ -83,9 +77,7 @@ int main(int argc, char **argv) {
       translex_init(&scanner);
       transset_in(fp, scanner);
 
-      if (transparse(scanner, data)) {
-        fprintf(stderr, "Syntax error\n");
-      }
+      transparse(scanner, data);
 
       translex_destroy(scanner);
 
@@ -115,9 +107,7 @@ int main(int argc, char **argv) {
         translex_init(&scanner);
         transset_in(fp, scanner);
 
-        if (transparse(scanner, data)) {
-          fprintf(stderr, "Syntax error\n");
-        }
+        transparse(scanner, data);
 
         translex_destroy(scanner);
 

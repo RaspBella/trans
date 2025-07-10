@@ -35,6 +35,5 @@ ID          [_a-zA-Z][_a-zA-Z0-9]*
 {ID}        { yylval->string = strdup(yytext); return TOK_ID; }
 
 [ \t\r\n]+  ;
-.           { return yytext[0]; }
 
 %%

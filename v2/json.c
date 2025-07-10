@@ -60,10 +60,6 @@ Json *new_json(JsonType type, void *data) {
   return new;
 }
 
-static void free_json_value(void *json) {
-  free_json(json);
-}
-
 void free_json(Json *json) {
   switch (json->type) {
     case JsonNull:
@@ -95,7 +91,7 @@ void free_json(Json *json) {
       break;
 
     case JsonObject:
-      free_map(json->data.object, free, free_json_value);
+      free_map(json->data.object, free, (void (*)(void*)) free_json);
       free(json);
 
       break;

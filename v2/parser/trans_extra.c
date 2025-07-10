@@ -7,9 +7,9 @@
 #include "../crs.h"
 
 void print_var(char *id) {
-  assert(vars->type == JsonObject);
+  assert(vars && id);
 
-  Json *var = map_get(vars->data.object, id);
+  Json *var = map_get(vars, id);
 
   if (var) {
     print_json(var);
@@ -21,6 +21,7 @@ void print_var(char *id) {
 }
 
 void add_journey(Json *data, char *key, Json *journey) {
+  assert(data && key && journey);
   assert(data->type == JsonObject);
 
   Json *json = map_get(data->data.object, key);
@@ -48,10 +49,10 @@ void add_journey(Json *data, char *key, Json *journey) {
 }
 
 void add_var(Json *data, char *key, char *id) {
-  assert(vars->type == JsonObject);
+  assert(vars && data && key && id);
   assert(data->type == JsonObject);
 
-  Json *var = map_get(vars->data.object, id);
+  Json *var = map_get(vars, id);
 
   if (var) {
     Json *json = map_get(data->data.object, key);
@@ -84,30 +85,32 @@ void add_var(Json *data, char *key, char *id) {
 }
 
 void assign_journey(char *id, Json *journey) {
-  assert(vars->type == JsonObject);
+  assert(vars && id && journey);
 
-  Json *var = map_get(vars->data.object, id);
+  Json *var = map_get(vars, id);
 
   if (var) {
     free_json(var);
   }
 
-  map_set(vars->data.object, id, journey);
+  map_set(vars, id, journey);
 }
 
 void assign_var(char *new_id, char *old_id) {
+  assert(vars && new_id && old_id);
+
   if (strcmp(new_id, old_id) == 0) return; // if x = x do nothing
 
-  Json *new_var = map_get(vars->data.object, new_id);
+  Json *new_var = map_get(vars, new_id);
 
   if (new_var) {
     free_json(new_var);
   }
 
-  Json *old_var = map_get(vars->data.object, old_id);
+  Json *old_var = map_get(vars, old_id);
 
   if (old_var) {
-    map_set(vars->data.object, new_id, json_dup(old_var));
+    map_set(vars, new_id, json_dup(old_var));
   }
 
   else {
@@ -116,6 +119,8 @@ void assign_var(char *new_id, char *old_id) {
 }
 
 Json *new_station(char *code) {
+  assert(code);
+
   char *name = crs(code);
 
   if (name) {
