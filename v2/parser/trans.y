@@ -1,6 +1,7 @@
 %{
 #include <stdlib.h>
 #include <stdio.h>
+#include "../trans.h"
 #include "trans_extra.h"
 #include "json_extra.h"
 #include "../usage.h"
@@ -9,6 +10,7 @@
 %code requires {
   #include <stdlib.h>
   #include <stdio.h>
+  #include "../trans.h"
   #include "trans_extra.h"
   #include "json_extra.h"
   #include "../usage.h"
@@ -61,8 +63,8 @@ Action: Exit
       | Assign
       ;
 
-Exit: TOK_EXIT '(' TOK_INT ')' { exit($3); }
-    | TOK_EXIT '(' ')'         { exit(0); }
+Exit: TOK_EXIT '(' TOK_INT ')' { main_exit($3); }
+    | TOK_EXIT '(' ')'         { main_exit(0); }
     ;
 
 Help: TOK_HELP '(' ')' { usage(stdout, NULL); }

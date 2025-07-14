@@ -24,6 +24,9 @@ Map *vars = NULL;
 
 char *buffer = NULL;
 
+FILE *parse_buffer = NULL;
+void *scanner = NULL;
+
 void clean_up(void) {
   FILE *fp = fopen(data_filename, "w");
 
@@ -66,22 +69,29 @@ void init(void) {
   atexit(clean_up);
 }
 
+void main_exit(int code) {
+  translex_destroy(scanner);
+
+  fclose(parse_buffer);
+
+  exit(code);
+}
+
 int main(int argc, char **argv) {
   if (argc == 1) {
     init();
 
     while ((buffer = bestlineWithHistory("> ", "trans"))) {
-      FILE *fp = fmemopen(buffer, strlen(buffer) + 1, "r");
-      void *scanner;
+      parse_buffer = fmemopen(buffer, strlen(buffer) + 1, "r");
 
       translex_init(&scanner);
-      transset_in(fp, scanner);
+      transset_in(parse_buffer, scanner);
 
       transparse(scanner, data);
 
       translex_destroy(scanner);
 
-      fclose(fp);
+      fclose(parse_buffer);
 
       free(buffer);
     }
@@ -100,18 +110,16 @@ int main(int argc, char **argv) {
       else if (argv[1][1] == 'c' && argv[1][2] == 0) {
         init();
 
-        FILE *fp = fmemopen(argv[2], strlen(argv[2]) + 1, "r");
-
-        void *scanner;
+        parse_buffer = fmemopen(argv[2], strlen(argv[2]) + 1, "r");
 
         translex_init(&scanner);
-        transset_in(fp, scanner);
+        transset_in(parse_buffer, scanner);
 
         transparse(scanner, data);
 
         translex_destroy(scanner);
 
-        fclose(fp);
+        fclose(parse_buffer);
 
         exit(EXIT_SUCCESS);
       }
@@ -119,20 +127,16 @@ int main(int argc, char **argv) {
       else if (argv[1][1] == 'f' && argv[1][2] == 0) {
         init();
 
-        FILE *fp = fopen(argv[2], "r");
-
-        void *scanner;
+        parse_buffer = fopen(argv[2], "r");
 
         translex_init(&scanner);
-        transset_in(fp, scanner);
+        transset_in(parse_buffer, scanner);
 
-        if (transparse(scanner, data)) {
-          fprintf(stderr, "Syntax error\n");
-        }
+        transparse(scanner, data);
 
         translex_destroy(scanner);
 
-        fclose(fp);
+        fclose(parse_buffer);
         
         exit(EXIT_SUCCESS);
       }
