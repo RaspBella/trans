@@ -70,7 +70,7 @@ Exit: TOK_EXIT '(' TOK_INT ')' { main_exit($3); }
 Help: TOK_HELP '(' ')' { usage(stdout, NULL); }
     ;
 
-Print: TOK_PRINT '(' Journey ')' { print_json($3); }
+Print: TOK_PRINT '(' Journey ')' { print_temp_json($3); }
      | TOK_PRINT '(' TOK_ID ')'  { print_var($3); }
      | TOK_PRINT '(' ')'         { print_json(data); }
      ;

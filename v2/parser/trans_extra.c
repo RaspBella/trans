@@ -6,6 +6,11 @@
 #include "../utils.h"
 #include "../crs.h"
 
+void print_temp_json(Json *json) {
+  print_json(json);
+  free_json(json);
+}
+
 void print_var(char *id) {
   assert(vars && id);
 

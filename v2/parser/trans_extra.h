@@ -5,6 +5,7 @@
 
 extern Map *vars;
 
+void print_temp_json(Json*);
 void print_var(char*);
 void add_journey(Json*, char*, Json*);
 void add_var(Json*, char*, char*);
