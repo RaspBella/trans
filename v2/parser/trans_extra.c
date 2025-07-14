@@ -18,6 +18,8 @@ void print_var(char *id) {
   else {
     fprintf(stderr, "Undefined var: %s\n", id);
   }
+
+  free(id);
 }
 
 void add_journey(Json *data, char *key, Json *journey) {
