@@ -81,6 +81,9 @@ void add_var(Json *data, char *key, char *id) {
 
   else {
     fprintf(stderr, "Undefined var: %s\n", id);
+
+    free(key);
+    free(id);
   }
 }
 
