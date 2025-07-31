@@ -23,7 +23,6 @@ Json *data = NULL;
 Map *vars = NULL;
 
 char *buffer = NULL;
-
 FILE *parse_buffer = NULL;
 void *scanner = NULL;
 
@@ -34,10 +33,24 @@ void clean_up(void) {
 
   fclose(fp);
 
+
+
   free_json(data);
   free_map(vars, free, (void (*)(void*))free_json);
 
-  if (buffer) free(buffer);
+
+
+  if (buffer) {
+    free(buffer);
+  }
+
+  if (parse_buffer) {
+    fclose(parse_buffer);
+  }
+
+  if (scanner) {
+    translex_destroy(scanner);
+  }
 }
 
 void init(void) {
@@ -69,14 +82,6 @@ void init(void) {
   atexit(clean_up);
 }
 
-void main_exit(int code) {
-  translex_destroy(scanner);
-
-  fclose(parse_buffer);
-
-  exit(code);
-}
-
 int main(int argc, char **argv) {
   if (argc == 1) {
     init();
@@ -92,6 +97,8 @@ int main(int argc, char **argv) {
       translex_destroy(scanner);
 
       fclose(parse_buffer);
+
+      parse_buffer = NULL;
 
       free(buffer);
     }
@@ -121,6 +128,8 @@ int main(int argc, char **argv) {
 
         fclose(parse_buffer);
 
+        parse_buffer = NULL;
+
         exit(EXIT_SUCCESS);
       }
 
@@ -137,6 +146,8 @@ int main(int argc, char **argv) {
         translex_destroy(scanner);
 
         fclose(parse_buffer);
+
+        parse_buffer = NULL;
         
         exit(EXIT_SUCCESS);
       }

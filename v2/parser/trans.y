@@ -63,8 +63,8 @@ Action: Exit
       | Assign
       ;
 
-Exit: TOK_EXIT '(' TOK_INT ')' { main_exit($3); }
-    | TOK_EXIT '(' ')'         { main_exit(0); }
+Exit: TOK_EXIT '(' TOK_INT ')' { exit($3); }
+    | TOK_EXIT '(' ')'         { exit(0); }
     ;
 
 Help: TOK_HELP '(' ')' { usage(stdout, NULL); }
