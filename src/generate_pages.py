@@ -2,7 +2,9 @@ def main():
     import json
     import os
 
-    datafile = open('data.json', 'r')
+    outputdir = '../docs/'
+
+    datafile = open(outputdir + 'data.json', 'r')
     data = json.load(datafile)
     datafile.close()
 
@@ -128,10 +130,10 @@ def main():
             </table>
         </div>'''
         
-        os.makedirs(date, exist_ok=True)
+        os.makedirs(outputdir + date, exist_ok=True)
 
         template = open('template.html', 'r')
-        index = open(date + "/index.html", "w")
+        index = open(outputdir + date + "/index.html", "w")
 
         text = template.read()
         text = text.replace('<!--REPLACE-->', html)
@@ -221,7 +223,7 @@ def main():
         <script type="text/javascript" src="time.js"></script>'''
 
     template = open('template.html', 'r')
-    index = open('index.html', 'w')
+    index = open(outputdir + 'index.html', 'w')
 
     text = template.read()
     text = text.replace('<!--REPLACE-->', table)
