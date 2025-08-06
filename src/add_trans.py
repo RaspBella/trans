@@ -1,7 +1,9 @@
 def main():
     import json
 
-    file = open('data.json', 'r')
+    filename = '../docs/data.json'
+
+    file = open(filename, 'r')
 
     trains = json.load(file)
 
@@ -35,7 +37,7 @@ def main():
 
         trains = dict(sorted(trains.items()))
 
-        file = open('data.json', 'w')
+        file = open(filename, 'w')
 
         json.dump(trains, file)
 
