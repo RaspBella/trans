@@ -27,7 +27,12 @@ def question():
     "to": update(input("to: "))
   }
 
-  data["trans"] = input("{}->{}: ".format(
+  data["text"] = input("{}->{}: ".format(
+    print_name(data["from"]),
+    print_name(data["to"])
+  ))
+
+  data["link"] = input("{}->{}::link?: ".format(
     print_name(data["from"]),
     print_name(data["to"])
   ))
@@ -45,7 +50,11 @@ def question():
     data["sub"].append({
       "from": data["from"],
       "to": changes[0],
-      "trans": input("{}->{}: ".format(
+      "text": input("{}->{}: ".format(
+        print_name(data["from"]),
+        print_name(changes[0])
+      )),
+      "link": input("{}->{}::link? ".format(
         print_name(data["from"]),
         print_name(changes[0])
       ))
@@ -55,7 +64,11 @@ def question():
       data["sub"].append({
         "from": x,
         "to": y,
-        "trans": input("{}->{}: ".format(
+        "text": input("{}->{}: ".format(
+          print_name(x),
+          print_name(y)
+        )),
+        "link": input("{}->{}::link?: ".format(
           print_name(x),
           print_name(y)
         ))
@@ -64,7 +77,11 @@ def question():
     data["sub"].append({
       "from": changes[len(changes) - 1],
       "to": data["to"],
-      "trans": input("{}->{}: ".format(
+      "text": input("{}->{}: ".format(
+        print_name(changes[len(changes) - 1]),
+        print_name(data["to"])
+      )),
+      "link": input("{}->{}::link?: ".format(
         print_name(changes[len(changes) - 1]),
         print_name(data["to"])
       ))
