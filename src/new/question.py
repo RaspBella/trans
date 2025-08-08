@@ -35,7 +35,7 @@ def question():
   data["link"] = input("{}->{}::link?: ".format(
     print_name(data["from"]),
     print_name(data["to"])
-  ))
+  )) or None
 
   raw = input("changes? (comma seperated): ")
 
@@ -57,7 +57,7 @@ def question():
       "link": input("{}->{}::link? ".format(
         print_name(data["from"]),
         print_name(changes[0])
-      ))
+      )) or None
     })
 
     for x, y in zip(changes, changes[1:]):
@@ -71,7 +71,7 @@ def question():
         "link": input("{}->{}::link?: ".format(
           print_name(x),
           print_name(y)
-        ))
+        )) or None
       })
 
     data["sub"].append({
@@ -84,7 +84,7 @@ def question():
       "link": input("{}->{}::link?: ".format(
         print_name(changes[len(changes) - 1]),
         print_name(data["to"])
-      ))
+      )) or None
     })
 
   return date, data
