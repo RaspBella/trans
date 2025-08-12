@@ -15,7 +15,7 @@ def main():
   import json
   from question import question
 
-  filename = "data.json"
+  filename = "../docs/data.json"
 
   with open(filename, "r") as f:
     data = json.load(f)
