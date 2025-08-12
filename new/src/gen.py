@@ -1,8 +1,8 @@
 from crs import crs
 
-data_filename = "data.json"
+data_filename = "../docs/data.json"
 template_filename = "template.html"
-outdir = "html/"
+outdir = "../docs/"
 
 def date_page(date, datum):
   html = f"""    <div>
