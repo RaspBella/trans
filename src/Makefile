@@ -22,4 +22,4 @@ libcrs.so: crs.c
 	cc -shared $< -o $@
 
 clean:
-	rm -rf libcrs.so __pycache__
+	rm -rf libcrs.so __pycache__ ../docs/crs.mjs ../docs/crs.wasm
