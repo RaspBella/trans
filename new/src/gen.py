@@ -22,8 +22,6 @@ def print_sub_rows(data):
   return "".join([print_sub_row(x) for x in data])
 
 def print_sub(datum):
-  #return datum["sub"] if datum["sub"] else "N/A"
-
   if datum["sub"]:
     return f"""
               <table>
@@ -72,7 +70,7 @@ def print_rows_and_date(data, date):
 
 def print_date_page(date, datum):
   if isinstance(datum, dict):
-    html = f"""<div>
+    return f"""<div>
       <h1>{date}: {print_dom(datum)}</h1>
       <table>
         <thead>
@@ -88,10 +86,8 @@ def print_date_page(date, datum):
       </table>
     </div>"""
 
-    return html
-
   else:
-    html = f"""<div>
+    return f"""<div>
       <h1>{date}: {print_doms(datum)}</h1>
       <table>
         <thead>
@@ -106,8 +102,6 @@ def print_date_page(date, datum):
         </tbody>
       </table>
     </div>"""
-
-    return html
 
 def date_pages(data, template):
   for date in data:
