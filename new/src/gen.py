@@ -1,3 +1,4 @@
+import os
 from question import print_name
 
 data_filename = "../docs/data.json"
@@ -103,14 +104,44 @@ def print_date_page(datum, date):
       </table>
     </div>"""
 
+def link(filename, link):
+  with open(filename, "w") as f:
+    f.write('<meta http-equiv="Refresh" content="0; {}" />'.format(link))
+
+def links(data, date):
+  d = f'{outdir}/{date}'
+
+  if isinstance(data, dict):
+    if data["link"]:
+      os.makedirs(f'{d}/{data["from"]}->{data["to"]}', exist_ok=True)
+      link(f'{d}/{data["from"]}->{data["to"]}/index.html', data["link"])
+
+    if data["sub"]:
+      for x in data["sub"]:
+        if x["link"]:
+          os.makedirs(f'{d}/{x["from"]}->{x["to"]}', exist_ok=True)
+          link(f'{d}/{x["from"]}->{x["to"]}/index.html', x["link"])
+
+  else:
+    for x in data:
+      if x["link"]:
+        os.makedirs(f'{d}/{x["from"]}->{x["to"]}', exist_ok=True)
+        link(f'{d}/{x["from"]}->{x["to"]}/index.html', x["link"])
+
+    if x["sub"]:
+      for y in x["sub"]:
+        if y["link"]:
+          os.makedirs(f'{d}/{y["from"]}->{y["to"]}', exist_ok=True)
+          link(f'{d}/{y["from"]}->{y["to"]}/index.html', y["link"])
+
 def date_pages(data, template):
   for date in data:
-    import os
-
     os.makedirs("{}/{}".format(outdir, date), exist_ok=True)
 
     with open("{}/{}/index.html".format(outdir, date), "w") as f:
       f.write(template.replace("<!--REPLACE-->", print_date_page(data[date], date)))
+
+    links(data[date], date)
 
 def print_root_page(data):
   html = f"""<div>
