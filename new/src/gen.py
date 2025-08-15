@@ -68,7 +68,7 @@ def print_rows(data):
 def print_rows_and_date(data, date):
   return print_row_and_date(data[0], date, span=len(data)) + print_rows(data[1:])
 
-def print_date_page(date, datum):
+def print_date_page(datum, date):
   if isinstance(datum, dict):
     return f"""<div>
       <h1>{date}: {print_dom(datum)}</h1>
@@ -110,7 +110,7 @@ def date_pages(data, template):
     os.makedirs(outdir + date, exist_ok=True)
 
     with open(outdir + date + "/index.html", "w") as f:
-      f.write(template.replace("<!--REPLACE-->", print_date_page(date, data[date])))
+      f.write(template.replace("<!--REPLACE-->", print_date_page(data[date], date)))
 
 def print_root_page(data):
   html = f"""<div>
