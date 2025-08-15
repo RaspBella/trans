@@ -42,7 +42,7 @@ def print_sub(datum, date):
     return "N/A"
 
 def print_info(datum, date):
-  return '<a href="{}">{}</a>'.format(datum["link"], datum["text"]) if datum["link"] else datum["text"]
+  return f'<a href="/trans/{date}/{datum["from"]}->{datum["to"]}">{datum["text"]}' if datum["link"] else datum["text"]
 
 def print_row(datum, date):
   return f"""
