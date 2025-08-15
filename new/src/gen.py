@@ -2,7 +2,7 @@ from question import print_name
 
 data_filename = "../docs/data.json"
 template_filename = "template.html"
-outdir = "../docs/"
+outdir = "../docs"
 
 def print_dom(datum):
   return "{}->{}".format(print_name(datum["from"]), print_name(datum["to"]))
@@ -107,9 +107,9 @@ def date_pages(data, template):
   for date in data:
     import os
 
-    os.makedirs(outdir + date, exist_ok=True)
+    os.makedirs("{}/{}".format(outdir, date), exist_ok=True)
 
-    with open(outdir + date + "/index.html", "w") as f:
+    with open("{}/{}/index.html".format(outdir, date), "w") as f:
       f.write(template.replace("<!--REPLACE-->", print_date_page(data[date], date)))
 
 def print_root_page(data):
@@ -151,7 +151,7 @@ def main():
 
   date_pages(data, template)
 
-  with open(outdir + "index.html", "w") as root:
+  with open("{}/index.html".format(outdir), "w") as root:
     root.write(template.replace("<!--REPLACE-->", print_root_page(data)))
 
 if __name__ == "__main__":
