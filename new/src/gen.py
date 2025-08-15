@@ -11,18 +11,18 @@ def print_dom(datum):
 def print_doms(data):
   return ", ".join([print_dom(x) for x in data])
 
-def print_sub_row(datum):
+def print_sub_row(datum, date):
   return f"""
                   <tr>
                     <td>{print_name(datum["from"])}</td>
                     <td>{print_name(datum["to"])}</td>
-                    <td>{print_info(datum)}</td>
+                    <td>{print_info(datum, date)}</td>
                   </tr>"""
 
-def print_sub_rows(data):
-  return "".join([print_sub_row(x) for x in data])
+def print_sub_rows(data, date):
+  return "".join([print_sub_row(x, date) for x in data])
 
-def print_sub(datum):
+def print_sub(datum, date):
   if datum["sub"]:
     return f"""
               <table>
@@ -33,7 +33,7 @@ def print_sub(datum):
                     <td>Info</td>
                   </tr>
                 </thead>
-                <tbody>""" + print_sub_rows(datum["sub"]) + f"""
+                <tbody>""" + print_sub_rows(datum["sub"], date) + f"""
                 </tbody>
               </table>
 """
@@ -41,16 +41,16 @@ def print_sub(datum):
   else:
     return "N/A"
 
-def print_info(datum):
+def print_info(datum, date):
   return '<a href="{}">{}</a>'.format(datum["link"], datum["text"]) if datum["link"] else datum["text"]
 
-def print_row(datum):
+def print_row(datum, date):
   return f"""
           <tr>
             <td>{print_name(datum["from"])}</td>
             <td>{print_name(datum["to"])}</td>
-            <td>{print_sub(datum)}</td>
-            <td>{print_info(datum)}</td>
+            <td>{print_sub(datum, date)}</td>
+            <td>{print_info(datum, date)}</td>
           </tr>"""
 
 def print_row_and_date(datum, date, span=0):
@@ -59,15 +59,15 @@ def print_row_and_date(datum, date, span=0):
             <td{' rowspan="{}"'.format(span) if span != 0 else ""}><a href="{date}">{date}</a></td>
             <td>{print_name(datum["from"])}</td>
             <td>{print_name(datum["to"])}</td>
-            <td>{print_sub(datum)}</td>
-            <td>{print_info(datum)}</td>
+            <td>{print_sub(datum, date)}</td>
+            <td>{print_info(datum, date)}</td>
           </tr>"""
 
-def print_rows(data):
-  return "".join([print_row(x) for x in data])
+def print_rows(data, date):
+  return "".join([print_row(x, date) for x in data])
 
 def print_rows_and_date(data, date):
-  return print_row_and_date(data[0], date, span=len(data)) + print_rows(data[1:])
+  return print_row_and_date(data[0], date, span=len(data)) + print_rows(data[1:], date)
 
 def print_date_page(datum, date):
   if isinstance(datum, dict):
@@ -82,7 +82,7 @@ def print_date_page(datum, date):
             <th>Info</th>
           </tr>
         </thead>
-        <tbody>""" + print_row(datum) + f"""
+        <tbody>""" + print_row(datum, date) + f"""
         </tbody>
       </table>
     </div>"""
@@ -99,7 +99,7 @@ def print_date_page(datum, date):
             <th>Info</th>
           </tr>
         </thead>
-        <tbody>""" + print_rows(datum) + f"""
+        <tbody>""" + print_rows(datum, date) + f"""
         </tbody>
       </table>
     </div>"""
