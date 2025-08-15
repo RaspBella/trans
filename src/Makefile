@@ -1,3 +1,5 @@
+all: ../docs/crs.mjs gen
+
 gen: crs.py libcrs.so
 	python gen.py
 
@@ -6,8 +8,6 @@ add: question.py crs.py libcrs.so
 
 transform: transform.py libcrs.so
 	python transform.py
-
-../docs/test-crs.html: ../docs/crs.mjs
 
 ../docs/crs.mjs: crs.c
 	emcc $< -o $@ \
