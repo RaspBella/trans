@@ -171,7 +171,8 @@ def print_root_page(data):
   html += f"""
         </tbody>
       </table>
-    </div>"""
+    </div>
+    <script src="trans.js"></script>"""
 
   return html
 
