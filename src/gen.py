@@ -36,7 +36,7 @@ def print_sub(datum, date):
                 <tbody>""" + print_sub_rows(datum["sub"], date) + f"""
                 </tbody>
               </table>
-"""
+            """
 
   else:
     return "N/A"
@@ -145,6 +145,10 @@ def date_pages(data, template):
 
 def print_root_page(data):
   html = f"""<div>
+      <ul class="nav">
+        <li id="today"><a href="today">today?</a></li>
+        <li><a href="crs">crs</a></li>
+      </ul>
       <table>
         <thead>
           <tr>
