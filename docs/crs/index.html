@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>temp test tool</title>
+    <link rel="stylesheet" href="crs.css">
+  </head>
+  <body>
+    <script type="module" src="crs.js"></script>
+    <script>
+      function submit_code() {
+        const code = document.getElementById("code").value;
+
+        if (code.length === 3) {
+          const name = crs(code);
+
+          if (name) {
+            document.getElementById("name").innerText = name;
+          }
+        }
+      }
+    </script>
+    <div class="container">
+      <input type="text" id="code" minlength="3" maxlength="3" required/>
+      <button onclick="submit_code();">Submit</button>
+      <h1 id="name"></h1>
+    </div>
+  </body>
+</html>

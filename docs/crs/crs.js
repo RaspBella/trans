@@ -1,4 +1,4 @@
-import createModule from './crs.mjs';
+import createModule from '../crs.mjs';
 
 (async () => {
   const Module = await createModule();
