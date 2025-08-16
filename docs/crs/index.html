@@ -21,12 +21,12 @@
       });
 
       function submit_code() {
-        if (code.value.length === 3) {
-          code.value = code.value.toUpperCase();
-
-          const name = crs(code.value);
+        if (/^[a-zA-Z]{3}$/.test(code.value)) {
+          const name = crs(code.value.toUpperCase());
 
           if (name) {
+            code.value = code.value.toUpperCase();
+
             document.getElementById("name").innerText = name;
 
             return;
