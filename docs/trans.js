@@ -6,7 +6,7 @@ fetch("data.json")
     const today = document.getElementById("today");
 
     if (Object.hasOwn(data, date)) {
-      today.a.innerText = "today!";
+      document.getElementById("today-link").text = "today!";
     }
 
     else {
