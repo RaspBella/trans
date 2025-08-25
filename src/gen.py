@@ -23,7 +23,7 @@ def print_sub_rows(data, date):
   return "".join([print_sub_row(x, date) for x in data])
 
 def print_sub(datum, date):
-  if datum["sub"]:
+  if "sub" in datum.keys():
     return f"""
               <table>
                 <thead>
@@ -116,7 +116,7 @@ def links(data, date):
       os.makedirs(f'{d}/{data["from"]}->{data["to"]}', exist_ok=True)
       link(f'{d}/{data["from"]}->{data["to"]}/index.html', data["link"])
 
-    if data["sub"]:
+    if "sub" in data.keys():
       for x in data["sub"]:
         if x["link"]:
           os.makedirs(f'{d}/{x["from"]}->{x["to"]}', exist_ok=True)
@@ -128,7 +128,7 @@ def links(data, date):
         os.makedirs(f'{d}/{x["from"]}->{x["to"]}', exist_ok=True)
         link(f'{d}/{x["from"]}->{x["to"]}/index.html', x["link"])
 
-    if x["sub"]:
+    if "sub" in x.keys():
       for y in x["sub"]:
         if y["link"]:
           os.makedirs(f'{d}/{y["from"]}->{y["to"]}', exist_ok=True)
