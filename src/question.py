@@ -32,10 +32,13 @@ def question():
     print_name(data["to"])
   ))
 
-  data["link"] = input("{}->{}::link?: ".format(
+  link = input("{}->{}::link?: ".format(
     print_name(data["from"]),
     print_name(data["to"])
-  )) or None
+  ))
+
+  if link:
+    data["link"] = link
 
   raw = input("changes? (comma seperated): ")
 

@@ -42,7 +42,7 @@ def print_sub(datum, date):
     return "N/A"
 
 def print_info(datum, date):
-  return f'<a href="/trans/{date}/{datum["from"]}->{datum["to"]}">{datum["text"]}' if datum["link"] else datum["text"]
+  return f'<a href="/trans/{date}/{datum["from"]}->{datum["to"]}">{datum["text"]}' if "link" in datum.keys() else datum["text"]
 
 def print_row(datum, date):
   return f"""
@@ -112,27 +112,27 @@ def links(data, date):
   d = f'{outdir}/{date}'
 
   if isinstance(data, dict):
-    if data["link"]:
+    if "link" in data.keys():
       os.makedirs(f'{d}/{data["from"]}->{data["to"]}', exist_ok=True)
-      link(f'{d}/{data["from"]}->{data["to"]}/index.html', data["link"])
+      link(f'{d}/{data["from"]}->{data["to"]}/index.html', "link" in data.keys())
 
     if "sub" in data.keys():
       for x in data["sub"]:
-        if x["link"]:
+        if "link" in x.keys():
           os.makedirs(f'{d}/{x["from"]}->{x["to"]}', exist_ok=True)
-          link(f'{d}/{x["from"]}->{x["to"]}/index.html', x["link"])
+          link(f'{d}/{x["from"]}->{x["to"]}/index.html', "link" in x.keys())
 
   else:
     for x in data:
-      if x["link"]:
+      if "link" in x.keys():
         os.makedirs(f'{d}/{x["from"]}->{x["to"]}', exist_ok=True)
-        link(f'{d}/{x["from"]}->{x["to"]}/index.html', x["link"])
+        link(f'{d}/{x["from"]}->{x["to"]}/index.html', "link" in x.keys())
 
     if "sub" in x.keys():
       for y in x["sub"]:
-        if y["link"]:
+        if "link" in y.keys():
           os.makedirs(f'{d}/{y["from"]}->{y["to"]}', exist_ok=True)
-          link(f'{d}/{y["from"]}->{y["to"]}/index.html', y["link"])
+          link(f'{d}/{y["from"]}->{y["to"]}/index.html', "link" in y.keys())
 
 def date_pages(data, template):
   for date in data:
