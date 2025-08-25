@@ -114,25 +114,25 @@ def links(data, date):
   if isinstance(data, dict):
     if "link" in data.keys():
       os.makedirs(f'{d}/{data["from"]}->{data["to"]}', exist_ok=True)
-      link(f'{d}/{data["from"]}->{data["to"]}/index.html', "link" in data.keys())
+      link(f'{d}/{data["from"]}->{data["to"]}/index.html', data["link"])
 
     if "sub" in data.keys():
       for x in data["sub"]:
         if "link" in x.keys():
           os.makedirs(f'{d}/{x["from"]}->{x["to"]}', exist_ok=True)
-          link(f'{d}/{x["from"]}->{x["to"]}/index.html', "link" in x.keys())
+          link(f'{d}/{x["from"]}->{x["to"]}/index.html', x["link"])
 
   else:
     for x in data:
       if "link" in x.keys():
         os.makedirs(f'{d}/{x["from"]}->{x["to"]}', exist_ok=True)
-        link(f'{d}/{x["from"]}->{x["to"]}/index.html', "link" in x.keys())
+        link(f'{d}/{x["from"]}->{x["to"]}/index.html', x["link"])
 
     if "sub" in x.keys():
       for y in x["sub"]:
         if "link" in y.keys():
           os.makedirs(f'{d}/{y["from"]}->{y["to"]}', exist_ok=True)
-          link(f'{d}/{y["from"]}->{y["to"]}/index.html', "link" in y.keys())
+          link(f'{d}/{y["from"]}->{y["to"]}/index.html', y["link"])
 
 def date_pages(data, template):
   for date in data:
