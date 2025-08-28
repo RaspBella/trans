@@ -2594,7 +2594,7 @@ __attribute__((constructor)) static void init(void) {
   STATION("Ystrad Rhondda", "YSR");
 }
 
-const char *crs(char *code) {
+const char *crs(const char code[4]) {
   assert(code && strlen(code) >= 3 && CODE_IS_UPPER(code));
 
   return INDEX_DB(code);

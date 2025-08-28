@@ -2,7 +2,7 @@ from cffi import FFI
 
 ffi = FFI()
 
-ffi.cdef("const char *crs(char*);");
+ffi.cdef("const char *crs(const char[4]);")
 
 clib = ffi.dlopen("./libcrs.so")
 
