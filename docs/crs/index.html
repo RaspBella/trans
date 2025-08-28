@@ -33,7 +33,7 @@
       function submit_name() {
         const result = src(name.value);
 
-        if (result) {
+        if (result && result != "") {
           code.value = result;
 
           return;
