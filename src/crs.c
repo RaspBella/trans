@@ -1,5 +1,6 @@
 #include <assert.h>
 #include <string.h>
+#include <stdint.h>
 
 #define CTOI(c) c - 'A'
 #define INDEX_DB(code) db[CTOI(code[0])][CTOI(code[1])][CTOI(code[2])]
@@ -2594,8 +2595,28 @@ __attribute__((constructor)) static void init(void) {
   STATION("Ystrad Rhondda", "YSR");
 }
 
-const char *crs(const char code[4]) {
+const char *crs(const char *code) {
   assert(code && strlen(code) >= 3 && CODE_IS_UPPER(code));
 
   return INDEX_DB(code);
+}
+
+const char *src(const char *name) {
+  static char code[4];
+
+  for (int i = 0; i < 26; i++) {
+    for (int j = 0; j < 26; j++) {
+      for (int k = 0; k < 26; k++) {
+        if (db[i][j][k]) {
+          if (!strcmp(name, db[i][j][k])) {
+            code[0] = i + 'A';
+            code[1] = j + 'A';
+            code[2] = k + 'A';
+          }
+        }
+      }
+    }
+  }
+
+  return code;
 }
