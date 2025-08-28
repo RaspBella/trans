@@ -14,7 +14,7 @@ transform: transform.py libcrs.so
 		-s WASM=1 \
 		-s MODULARIZE=1 \
 		-s EXPORT_ES6=1 \
-		-s EXPORTED_FUNCTIONS='["_malloc", "_free", "_crs"]' \
+		-s EXPORTED_FUNCTIONS='["_malloc", "_free", "_crs", "_src"]' \
 		-s EXPORTED_RUNTIME_METHODS='["lengthBytesUTF8", "stringToUTF8", "UTF8ToString"]' \
 		-O3
 

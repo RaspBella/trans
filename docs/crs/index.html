@@ -6,37 +6,56 @@
   </head>
   <body>
     <div class="container">
-      <input type="text" id="code" minlength="3" maxlength="3" required/>
-      <button onclick="submit_code();">Submit</button>
-      <h1 id="name"></h1>
+      <input type="text" id="code" minlength="3" maxlength="3"/>
+      <input type="text" id="name"/>
     </div>
     <script type="module" src="crs.js"></script>
     <script>
       const code = document.getElementById("code");
+      const name = document.getElementById("name");
+
+      function submit_code() {
+        if (/^[a-zA-Z]{3}$/.test(code.value)) {
+          const result = crs(code.value.toUpperCase());
+
+          if (result) {
+            code.value = code.value.toUpperCase();
+
+            name.value = result;
+
+            return;
+          }
+        }
+
+        name.value = "";
+      }
+
+      function submit_name() {
+        const result = src(name.value);
+
+        if (result) {
+          code.value = result;
+
+          return;
+        }
+
+        code.value = "";
+      }
+
+      code.addEventListener("change", submit_code);
+      name.addEventListener("change", submit_name);
 
       code.addEventListener("keydown", function (e) {
         if (e.code === "Enter") {
           submit_code();
         }
       });
-
-      function submit_code() {
-        if (/^[a-zA-Z]{3}$/.test(code.value)) {
-          const name = crs(code.value.toUpperCase());
-
-          if (name) {
-            code.value = code.value.toUpperCase();
-
-            document.getElementById("name").innerText = name;
-
-            return;
-          }
+ 
+      name.addEventListener("keydown", function (e) {
+        if (e.code === "Enter") {
+          submit_name();
         }
-
-        document.getElementById("name").innerText = "";
-
-        return;
-      }
+      });
     </script>
   </body>
 </html>

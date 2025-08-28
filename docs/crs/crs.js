@@ -19,5 +19,22 @@ import createModule from '../crs.mjs';
     return result;
   }
 
+  function src(name) {
+    const bytes = Module.lengthBytesUTF8(name) + 1;
+
+    const input = Module._malloc(bytes);
+
+    Module.stringToUTF8(name, input, bytes);
+
+    const output = Module._src(input);
+
+    const result = Module.UTF8ToString(output);
+
+    Module._free(input);
+
+    return result;
+  }
+
   window.crs = crs;
+  window.src = src;
 })();
