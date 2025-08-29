@@ -2610,7 +2610,7 @@ const char *src(const char *name) {
     for (int j = 0; j < 26; j++) {
       for (int k = 0; k < 26; k++) {
         if (db[i][j][k]) {
-          if (!strcasecmp(name, db[i][j][k])) {
+          if (!strcasecmp(db[i][j][k], name)) {
             code[0] = i + 'A';
             code[1] = j + 'A';
             code[2] = k + 'A';
