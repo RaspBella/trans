@@ -2602,13 +2602,15 @@ const char *crs(const char *code) {
 }
 
 const char *src(const char *name) {
+  assert(name);
+
   static char code[4];
 
   for (int i = 0; i < 26; i++) {
     for (int j = 0; j < 26; j++) {
       for (int k = 0; k < 26; k++) {
         if (db[i][j][k]) {
-          if (!strcmp(name, db[i][j][k])) {
+          if (!strcasecmp(name, db[i][j][k])) {
             code[0] = i + 'A';
             code[1] = j + 'A';
             code[2] = k + 'A';
