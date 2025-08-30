@@ -1389,6 +1389,7 @@ __attribute__((constructor)) static void init(void) {
   STATION("Leominster", "LEO");
   STATION("Letchworth Garden City", "LET");
   STATION("Leuchars (for St. Andrews)", "LEU");
+  STATION("Leven", "LEV");
   STATION("Levenshulme", "LVM");
   STATION("Lewes", "LWS");
   STATION("Lewisham", "LEW");
