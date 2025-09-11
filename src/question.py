@@ -98,7 +98,7 @@ def question():
       )),
     }
 
-    link = "link": input("{}->{}::link?: ".format(
+    link = input("{}->{}::link?: ".format(
       print_name(changes[len(changes) - 1]),
       print_name(data["to"])
     ))
