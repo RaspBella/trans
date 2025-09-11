@@ -50,44 +50,62 @@ def question():
     for x in range(len(changes)):
       changes[x] = update(changes[x])
 
-    data["sub"].append({
+    datum = {
       "from": data["from"],
       "to": changes[0],
       "text": input("{}->{}: ".format(
         print_name(data["from"]),
         print_name(changes[0])
-      )),
-      "link": input("{}->{}::link? ".format(
-        print_name(data["from"]),
-        print_name(changes[0])
-      )) or None
-    })
+      ))
+    }
+
+    link = input("{}->{}::link? ".format(
+      print_name(data["from"]),
+      print_name(changes[0])
+    ))
+
+    if link:
+      datum["link"] = link
+    
+    data["sub"].append(datum)
 
     for x, y in zip(changes, changes[1:]):
-      data["sub"].append({
+      datum = {
         "from": x,
         "to": y,
         "text": input("{}->{}: ".format(
           print_name(x),
           print_name(y)
-        )),
-        "link": input("{}->{}::link?: ".format(
-          print_name(x),
-          print_name(y)
-        )) or None
-      })
+        ))
+      }
 
-    data["sub"].append({
+      link = input("{}->{}::link?: ".format(
+        print_name(x),
+        print_name(y)
+      ))
+
+      if link:
+        datum["link"] = link
+
+      data["sub"].append(datum)
+
+    datum = {
       "from": changes[len(changes) - 1],
       "to": data["to"],
       "text": input("{}->{}: ".format(
         print_name(changes[len(changes) - 1]),
         print_name(data["to"])
       )),
-      "link": input("{}->{}::link?: ".format(
-        print_name(changes[len(changes) - 1]),
-        print_name(data["to"])
-      )) or None
-    })
+    }
+
+    link = "link": input("{}->{}::link?: ".format(
+      print_name(changes[len(changes) - 1]),
+      print_name(data["to"])
+    ))
+
+    if link:
+      datum["link"] = link
+
+    data["sub"].append(datum)
 
   return date, data
