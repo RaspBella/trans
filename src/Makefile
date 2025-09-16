@@ -6,9 +6,6 @@ gen: crs.py libcrs.so
 add: question.py crs.py libcrs.so
 	python add.py
 
-transform: transform.py libcrs.so
-	python transform.py
-
 ../docs/crs.mjs: crs.c
 	emcc $< -o $@ \
 		-s WASM=1 \
