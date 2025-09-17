@@ -7,7 +7,7 @@ import("../countdown.js").then(({ countdown }) => {
       if (Object.hasOwn(data, date)) {
         let header = document.createElement("h1");
 
-        header.textContext = `journey today: ${date}`;
+        header.textContext = `journey on: ${date}`;
 
         document.body.appendChild(header);
 
@@ -17,7 +17,7 @@ import("../countdown.js").then(({ countdown }) => {
       else {
         let header = document.createElement("h1");
 
-        header.textContent = `no journey today: ${date}`;
+        header.textContent = `no journey on: ${date}`;
 
         document.body.appendChild(header);
 
