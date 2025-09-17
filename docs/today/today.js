@@ -22,8 +22,6 @@ Promise.all([
 
   date = date.toISOString().substring(0, 10);
 
-  console.log(date);
-
   fetch("../data.json")
     .then((response) => response.json())
     .then((data) => {
