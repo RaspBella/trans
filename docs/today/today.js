@@ -1,5 +1,28 @@
-import("../countdown.js").then(({ countdown }) => {
-  const date = new Date().toISOString().substring(0, 10);
+Promise.all([
+  import("./parser.js"),
+  import("../countdown.js")
+]).then(([parserModule, countdownModule]) => {
+  const { Parser, Lexer } = parserModule;
+  const { countdown } = countdownModule;
+
+  let date = new Date();
+
+  try {
+    date = new Parser(
+      new Lexer(
+        location.hash.substr(1)
+      ),
+      date
+    ).parse();
+  }
+
+  catch(error) {
+    console.log(error);
+  }
+
+  date = date.toISOString().substring(0, 10);
+
+  console.log(date);
 
   fetch("../data.json")
     .then((response) => response.json())
