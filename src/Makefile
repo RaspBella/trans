@@ -1,5 +1,11 @@
 all: ../docs/crs.mjs gen
 
+c=$(wildcard *.c)
+o=$(c:.c=.o)
+
+test: $(o)
+	cc -o $@ $^
+
 gen: crs.py libcrs.so
 	python gen.py
 
@@ -19,4 +25,4 @@ libcrs.so: crs.c
 	cc -shared $< -o $@
 
 clean:
-	rm -rf libcrs.so __pycache__ ../docs/crs.mjs ../docs/crs.wasm ../docs/index.html ../docs/????-??-??
+	rm -rf libcrs.so __pycache__ ../docs/crs.mjs ../docs/crs.wasm ../docs/index.html ../docs/????-??-?? $(o) test
