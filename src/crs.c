@@ -6,7 +6,7 @@
 #define STATION(name, code) INDEX_DB(code) = name
 
 #define C_IS_UPPER(c) c >= 'A' && c <= 'Z'
-#define CODE_IS_UPPER(code) C_IS_UPPER(code[0]) && C_IS_UPPER(code[1]) && C_IS_UPPER(code[2])
+#define VALID_CRS(code) C_IS_UPPER(code[0]) && C_IS_UPPER(code[1]) && C_IS_UPPER(code[2])
 
 static const char *db[26][26][26];
 
@@ -2596,7 +2596,7 @@ __attribute__((constructor)) static void init(void) {
 }
 
 const char *crs(const char *code) {
-  assert(code && strlen(code) >= 3 && CODE_IS_UPPER(code));
+  assert(code && strlen(code) >= 3 && VALID_CRS(code));
 
   return INDEX_DB(code);
 }
