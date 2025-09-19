@@ -5,9 +5,6 @@
 #define INDEX_DB(code) db[CTOI(code[0])][CTOI(code[1])][CTOI(code[2])]
 #define STATION(name, code) INDEX_DB(code) = name
 
-#define C_IS_UPPER(c) c >= 'A' && c <= 'Z'
-#define VALID_CRS(code) C_IS_UPPER(code[0]) && C_IS_UPPER(code[1]) && C_IS_UPPER(code[2])
-
 static const char *db[26][26][26];
 
 __attribute__((constructor)) static void init(void) {
