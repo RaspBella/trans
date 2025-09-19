@@ -3,8 +3,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-const char *string = "+3d";
-
 int main(int argc, char **argv) {
   if (argc == 1) {
     printf(
