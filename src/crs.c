@@ -1,6 +1,5 @@
 #include <assert.h>
 #include <string.h>
-#include <stdint.h>
 
 #define CTOI(c) c - 'A'
 #define INDEX_DB(code) db[CTOI(code[0])][CTOI(code[1])][CTOI(code[2])]
