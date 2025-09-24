@@ -41,6 +41,8 @@ static Token __lex(void) {
       case '7': case '8': case '9':
         return num();
 
+      case '(':
+      case ')':
       case '[':
       case ']':
       case '-':
