@@ -28,7 +28,7 @@ def main():
     data = combine_data(data, date, new)
 
     with open(filename, "w") as f:
-      json.dump(data, f)
+      json.dump(data, f, indent=2)
 
 if __name__ == "__main__":
   main()
