@@ -1,7 +1,10 @@
 #include "parse.h"
 
+#include "bestline.h"
+
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdbool.h>
 
 #define pop(argc, argv) *argv++; argc--;
 
@@ -10,11 +13,15 @@ int main(int argc, char **argv) {
 
   printf("program name: %s\n", program);
 
-  for (int i = 0; i < argc; i++) {
-    char *string = argv[i];
+  char *line = NULL;
 
-    if (!parse(string)) {
-      fprintf(stderr, "Couldn't parse: `%s`\n", string);
+  while ((line = bestlineWithHistory("trans >>> ", "trans"))) {
+    bool ret = parse(line);
+
+    free(line);
+
+    if (!ret) {
+      fprintf(stderr, "Couldn't parse: `%s`\n", line);
 
       exit(EXIT_FAILURE);
     }
