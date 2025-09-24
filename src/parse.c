@@ -1,6 +1,7 @@
 #include "parse.h"
 #include "lex.h"
 #include "token.h"
+#include "keyword.h"
 
 #include <stdbool.h>
 #include <stdio.h>
@@ -18,77 +19,25 @@ static bool eat(TokenType type) {
 }
 
 static bool exec() {
-  Token op = this.token;
-
-  if (!eat(Token_Op)) {
-    fprintf(stderr, "Expected Op\n");
-
-    return false;
+  if (this.token.type < 256) {
+    printf("Character: %c\n", this.token.type);
   }
 
-  Token num = this.token;
+  else {
+    switch (this.token.type) {
+      case Token_Keyword:
+        printf("Token_Keyword: %s\n", keywords[this.token.value.num]);
 
-  if (!eat(Token_Num)) {
-    fprintf(stderr, "Expected Num\n");
+        break;
 
-    return false;
+      case Token_Num:
+        printf("Token_Num: %d\n", this.token.value.num);
+
+        break;
+    }
   }
 
-  Token unit = this.token;
-
-  if (!eat(Token_Unit)) {
-    fprintf(stderr, "Expected Unit\n");
-
-    return false;
-  }
-
-  switch (op.value.c) {
-    case '+':
-      printf("Add");
-
-      break;
-
-    case '-':
-      printf("Sub");
-
-      break;
-
-    default:
-      fprintf(stderr, "Unreachable\n");
-
-      return false;
-  }
-
-  printf("(%d ", num.value.num);
-
-  switch (unit.value.c) {
-    case 'y':
-      printf("Year");
-
-      break;
-
-    case 'm':
-      printf("Month");
-
-      break;
-
-    case 'w':
-      printf("Week");
-
-      break;
-
-    case 'd':
-      printf("Day");
-
-      break;
-
-    default:
-      fprintf(stderr, "Unreachable\n");
-
-      return false;
-  }
-
-  printf("%s)\n", num.value.num != 1 ? "s" : "");
+  this.token = lex();
 
   return true;
 }

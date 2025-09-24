@@ -1,8 +1,10 @@
 #include "lex.h"
 #include "token.h"
+#include "keyword.h"
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include <ctype.h>
 
 static Lexer this;
@@ -26,65 +28,46 @@ static Token num(void) {
   };
 }
 
-static bool is_unit(char c) {
-  switch (c) {
-    case 'y':
-    case 'Y':
-    case 'm':
-    case 'M':
-    case 'w':
-    case 'W':
-    case 'd':
-    case 'D':
-      return true;
-
-    default:
-      return false;
-  }
-}
-
 static Token __lex(void) {
   while (this.input[this.pos]) {
     if (isspace(this.input[this.pos])) {
       skip_whitespace();
     }
 
-    if (isdigit(this.input[this.pos])) {
-      return num();
+    switch (this.input[this.pos]) {
+                case '0':
+      case '1': case '2': case '3':
+      case '4': case '5': case '6':
+      case '7': case '8': case '9':
+        return num();
+
+      case '[':
+      case ']':
+      case '-':
+      case '+':
+      case '=':
+        return (Token){
+          .type = this.input[this.pos++]
+        };
+
+      default:
+        for (int i = 0; i < KEYWORD_COUNT; i++) {
+          size_t len = strlen(keywords[i]);
+
+          if (!strncmp(this.input + this.pos, keywords[i], len)) {
+            this.pos += len;
+
+            return (Token){
+              .type = Token_Keyword,
+              .value.num = i
+            };
+          }
+        }
+
+        fprintf(stderr, "Lex: Unknown character: %c\n", this.input[this.pos++]);
+
+        return (Token){ .type = Token_Unknown };
     }
-
-    if (this.input[this.pos] == '+') {
-      this.pos++;
-
-      return (Token){
-        .type = Token_Op,
-        .value.c = '+'
-      };
-    }
-
-    if (this.input[this.pos] == '-') {
-      this.pos++;
-
-      return (Token){
-        .type = Token_Op,
-        .value.c = '-'
-      };
-    }
-
-    if (is_unit(this.input[this.pos])) {
-      this.pos++;
-
-      return (Token){
-        .type = Token_Unit,
-        .value.c = tolower(this.input[this.pos - 1])
-      };
-    }
-
-    fprintf(stderr, "Lex: Unknown character: %c\n", this.input[this.pos]);
-
-    this.pos++;
-
-    return (Token){ .type = Token_Unknown };
   }
 
   return (Token){ .type = Token_EOF };

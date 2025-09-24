@@ -3,7 +3,7 @@ all: ../docs/crs.mjs gen
 c=$(wildcard *.c)
 o=$(c:.c=.o)
 
-test: $(o)
+trans: $(o)
 	cc -o $@ $^
 
 gen: crs.py libcrs.so
