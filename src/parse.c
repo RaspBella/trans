@@ -17,7 +17,7 @@ static bool eat(TokenType type) {
   return false;
 }
 
-static bool up_date() {
+static bool exec() {
   Token op = this.token;
 
   if (!eat(Token_Op)) {
@@ -95,7 +95,7 @@ static bool up_date() {
 
 static bool __parse(void) {
   while (this.token.type != Token_EOF && this.token.type != Token_Unknown) {
-    if (!up_date()) {
+    if (!exec()) {
       return false;
     }
   }
