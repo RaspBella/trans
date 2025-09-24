@@ -1,8 +1,8 @@
 #pragma once
 
 enum {
+  Keyword_Exit,
   Keyword_Print,
-  Keyword_Date,
   KEYWORD_COUNT
 };
 
