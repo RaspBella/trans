@@ -1,10 +1,17 @@
-all: ../docs/crs.mjs gen
-
 c=$(wildcard *.c)
 o=$(c:.c=.o)
+d=$(c:.c=.d)
+BIN=trans
 
-trans: $(o)
+all: ../docs/crs.mjs $(BIN) gen
+
+$(BIN): $(o)
 	cc -o $@ $^
+
+%.o: %.c
+	cc -MMD -c -o $@ $<
+
+-include $(d)
 
 gen: crs.py libcrs.so
 	python gen.py
@@ -25,4 +32,4 @@ libcrs.so: crs.c
 	cc -shared $< -o $@
 
 clean:
-	rm -rf libcrs.so __pycache__ ../docs/crs.mjs ../docs/crs.wasm ../docs/index.html ../docs/????-??-?? $(o) test
+	rm -rf libcrs.so __pycache__ ../docs/crs.mjs ../docs/crs.wasm ../docs/index.html ../docs/????-??-?? $(o) $(d) $(BIN)
