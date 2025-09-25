@@ -18,33 +18,93 @@ static bool eat(TokenType type) {
   return false;
 }
 
-static bool exec() {
-  if (this.token.type < 256) {
-    printf("Character: %c\n", this.token.type);
+static bool statement_exit(void) {
+  Token keyword = this.token;
+
+  if (!eat(Token_Keyword)) {
+    return false;
   }
 
-  else {
-    switch (this.token.type) {
-      case Token_Keyword:
-        printf("Token_Keyword: %s\n", keywords[this.token.value.num]);
+  if (keyword.value.num != Keyword_Exit) {
+    return false;
+  }
 
-        break;
+  Token open = this.token;
 
-      case Token_Num:
-        printf("Token_Num: %d\n", this.token.value.num);
+  if (!eat('(')) {
+    return false;
+  }
 
-        break;
+  if (this.token.type == ')') {
+    this.token = lex();
+
+    printf("Call exit: exit()\n");
+
+    return true;
+  }
+
+  else if (this.token.type == Token_Num) {
+    Token num = this.token;
+
+    this.token = lex();
+
+    if (!eat(')')) {
+      return false;
     }
+
+    printf("call exit with n=%d: exit(n)\n", num.value.num);
+
+    return true;
   }
 
-  this.token = lex();
+  return false;
+}
 
-  return true;
+static bool statement_select(char *date) {
+}
+
+static bool statement_print(void) {
+}
+
+static bool statement_op(void) {
+}
+
+static bool statement_obj(void) {
+}
+
+static bool statement(void) {
+  switch (this.token.type) {
+    case Token_Keyword:
+      switch (this.token.value.num) {
+        case Keyword_Exit:
+          return statement_exit();
+
+        case Keyword_Print:
+          return statement_print();
+      }
+
+    case '[':
+      char date[11] = { 0 };
+
+      if (!statement_select(date)) {
+        return false;
+      }
+
+      if (!statement_op()) {
+        return false;
+      }
+
+      if (!statement_obj()) {
+        return false;
+      }
+  }
+
+  return false;
 }
 
 static bool __parse(void) {
   while (this.token.type != Token_EOF && this.token.type != Token_Unknown) {
-    if (!exec()) {
+    if (!statement()) {
       return false;
     }
   }
