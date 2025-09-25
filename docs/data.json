@@ -14,7 +14,7 @@
   "2025-01-17": {
     "from": "EDB",
     "to": "CCH",
-    "text": "Go Chichester January 2025",
+    "text": "Chichester January 2025",
     "sub": [
       {
         "from": "EDB",
@@ -102,7 +102,7 @@
   "2025-02-21": {
     "from": "EDB",
     "to": "SOA",
-    "text": "Go Hampshire Winter 2025",
+    "text": "Hampshire Winter 2025",
     "sub": [
       {
         "from": "EDB",
@@ -150,7 +150,7 @@
   "2025-03-14": {
     "from": "EDB",
     "to": "LDS",
-    "text": "Go Leeds Spring 2025",
+    "text": "Leeds Spring 2025",
     "sub": [
       {
         "from": "EDB",
@@ -206,7 +206,7 @@
   "2025-04-12": {
     "from": "CRE",
     "to": "UNI",
-    "text": "Go Birmingham Spring 2025",
+    "text": "Birmingham Spring 2025",
     "sub": [
       {
         "from": "CRE",
@@ -283,7 +283,7 @@
   "2025-05-02": {
     "from": "EDB",
     "to": "CNM",
-    "text": "Go FMC Cheltenham Spring 2025",
+    "text": "FMC Cheltenham Spring 2025",
     "sub": [
       {
         "from": "EDB",
