@@ -6,6 +6,8 @@
 #include <stdbool.h>
 #include <stdio.h>
 
+#define DATE_SIZE 11
+
 static Parser this;
 
 static bool eat(TokenType type) {
@@ -38,7 +40,7 @@ static bool statement_exit(void) {
   if (this.token.type == ')') {
     this.token = lex();
 
-    printf("Call exit: exit()\n");
+    printf("call: exit()\n");
 
     return true;
   }
@@ -52,7 +54,7 @@ static bool statement_exit(void) {
       return false;
     }
 
-    printf("call exit with n=%d: exit(n)\n", num.value.num);
+    printf("call: exit(%d)\n", num.value.num);
 
     return true;
   }
@@ -61,15 +63,91 @@ static bool statement_exit(void) {
 }
 
 static bool statement_select(char *date) {
+  if (!eat('[')) {
+    return false;
+  }
+
+  Token year = this.token;
+
+  if (!eat(Token_Num)) {
+    return false;
+  }
+
+  if (!eat('-')) {
+    return false;
+  }
+
+  Token month = this.token;
+
+  if (!eat(Token_Num)) {
+    return false;
+  }
+
+  if (!eat('-')) {
+    return false;
+  }
+
+  Token day = this.token;
+
+  if (!eat(Token_Num)) {
+    return false;
+  }
+
+  if (!eat(']')) {
+    return false;
+  }
+
+  snprintf(date, DATE_SIZE, "%04d-%02d-%02d", year.value.num, month.value.num, day.value.num);
+
+  return true;
 }
 
 static bool statement_print(void) {
-}
+  Token keyword = this.token;
 
-static bool statement_op(void) {
+  if (!eat(Token_Keyword)) {
+    return false;
+  }
+
+  if (keyword.value.num != Keyword_Print) {
+    return false;
+  }
+
+  Token open = this.token;
+
+  if (!eat('(')) {
+    return false;
+  }
+
+  if (this.token.type == ')') {
+    this.token = lex();
+
+    printf("call: print()\n");
+
+    return true;
+  }
+
+  else if (this.token.type == '[') {
+    char date[DATE_SIZE] = { 0 };
+
+    if (!statement_select(date)) {
+      return false;
+    }
+
+    if (!eat(')')) {
+      return false;
+    }
+
+    printf("call: print(%s)\n", date);
+
+    return true;
+  }
+
+  return false;
 }
 
 static bool statement_obj(void) {
+  return false;
 }
 
 static bool statement(void) {
@@ -84,19 +162,31 @@ static bool statement(void) {
       }
 
     case '[':
-      char date[11] = { 0 };
+      char date[DATE_SIZE] = { 0 };
 
       if (!statement_select(date)) {
         return false;
       }
 
-      if (!statement_op()) {
-        return false;
+      Token token = this.token;
+
+      if (token.type == '+') {
+        this.token = lex();
+
+        if (!eat('=')) {
+          return false;
+        }
+      }
+
+      else if (token.type == '=') {
+        this.token = lex();
       }
 
       if (!statement_obj()) {
         return false;
       }
+
+      return true;
   }
 
   return false;
