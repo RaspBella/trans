@@ -22,8 +22,6 @@ int main(int argc, char **argv) {
 
     if (!ret) {
       fprintf(stderr, "Couldn't parse: `%s`\n", line);
-
-      exit(EXIT_FAILURE);
     }
   }
 }
