@@ -138,7 +138,7 @@ static bool statement_print(void) {
       return false;
     }
 
-    printf("call: print(%s)\n", date);
+    printf("call: print([%s])\n", date);
 
     return true;
   }
