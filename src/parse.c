@@ -99,6 +99,8 @@ static bool statement_select(char *date) {
 
   snprintf(date, DATE_SIZE, "%04d-%02d-%02d", year.value.num, month.value.num, day.value.num);
 
+  printf("date: %s\n", date);
+
   return true;
 }
 
@@ -147,7 +149,39 @@ static bool statement_print(void) {
 }
 
 static bool statement_obj(void) {
-  return false;
+  Token open = this.token;
+
+  if (!eat('{')) {
+    return false;
+  }
+
+  Token from = this.token;
+
+  if (!eat(Token_CRS)) {
+    return false;
+  }
+
+  Token arrow = this.token;
+
+  if (!eat(Token_Arrow)) {
+    return false;
+  }
+
+  Token to = this.token;
+
+  if (!eat(Token_CRS)) {
+    return false;
+  }
+
+  Token close = this.token;
+
+  if (!eat('}')) {
+    return false;
+  }
+
+  printf("from: %3s, to: %3s\n", from.value.crs, to.value.crs);
+
+  return true;
 }
 
 static bool statement(void) {
@@ -172,10 +206,14 @@ static bool statement(void) {
 
       if (token.type == Token_Append) {
         this.token = lex();
+
+        printf("Append\n");
       }
 
       else if (token.type == '=') {
         this.token = lex();
+
+        printf("Set\n");
       }
 
       if (!statement_obj()) {
