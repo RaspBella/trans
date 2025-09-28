@@ -92,14 +92,14 @@ static Token __lex(void) {
       case '"':
         char *close = strchr(this.input + this.pos + 1, '"');
 
-        size_t len = close - (this.input + this.pos) - 2;
+        size_t len = close - (this.input + this.pos) - 1;
 
         if (close) {
-          this.pos = close - this.input + 1;
+          this.pos += len + 2;
 
           return (Token){
             .type = Token_Str,
-            .value.str = strndup(this.input + this.pos + 1, len + 1)
+            .value.str = strndup(this.input + this.pos - len - 1, len)
           };
         }
 
