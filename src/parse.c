@@ -3,6 +3,7 @@
 #include "token.h"
 #include "keyword.h"
 #include "journey.h"
+#include "utils.h"
 
 #include <stdbool.h>
 #include <stdio.h>
@@ -201,7 +202,7 @@ get_next:
       Journey *new = statement_obj(false);
 
       if (new) {
-        sub.count++;
+        da_append(&sub, new);
 
         if (eat(',')) {
           goto get_next;
