@@ -49,18 +49,24 @@ static Token __lex(void) {
       case '{':
       case '}':
       case '=':
+        this.pos++;
+
         return (Token){
-          .type = this.input[this.pos]
+          .type = this.input[this.pos - 1]
         };
       
       case '-':
         switch (this.input[this.pos + 1]) {
           case '>':
+            this.pos += 2;
+
             return (Token){
               .type = Token_Arrow
             };
 
           default:
+            this.pos++;
+
             return (Token){
               .type = '-'
             };
@@ -69,11 +75,15 @@ static Token __lex(void) {
       case '+':
         switch (this.input[this.pos + 1]) {
           case '=':
+            this.pos += 2;
+
             return (Token){
               .type = Token_Append
             };
 
           default:
+            this.pos++;
+
             return (Token){
               .type = Token_Unknown
             };
@@ -82,10 +92,14 @@ static Token __lex(void) {
       case '"':
         char *close = strchr(this.input + this.pos + 1, '"');
 
+        size_t len = close - (this.input + this.pos) - 2;
+
         if (close) {
+          this.pos = close - this.input + 1;
+
           return (Token){
             .type = Token_Str,
-            .value.str = strndup(this.input + this.pos + 1, close - this.input + this.pos - 1)
+            .value.str = strndup(this.input + this.pos + 1, len + 1)
           };
         }
 
@@ -99,12 +113,14 @@ static Token __lex(void) {
 
       default:
         if (VALID_CRS((this.input + this.pos))) {
+          this.pos += 3;
+
           return (Token){
             .type = Token_CRS,
             .value.crs = {
-              [0] = this.input[this.pos],
-              [1] = this.input[this.pos + 1],
-              [2] = this.input[this.pos + 2],
+              [0] = this.input[this.pos - 3],
+              [1] = this.input[this.pos + 1 - 3],
+              [2] = this.input[this.pos + 2 - 3],
               [3] = 0
             }
           };
@@ -123,7 +139,7 @@ static Token __lex(void) {
           }
         }
 
-        fprintf(stderr, "Lex: Unknown character: %c\n", this.input[this.pos++]);
+        fprintf(stderr, "Lex: Unknown character: %c\n", this.input[this.pos]);
 
         return (Token){ .type = Token_Unknown };
     }
