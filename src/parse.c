@@ -170,12 +170,8 @@ static bool statement(void) {
 
       Token token = this.token;
 
-      if (token.type == '+') {
+      if (token.type == Token_Append) {
         this.token = lex();
-
-        if (!eat('=')) {
-          return false;
-        }
       }
 
       else if (token.type == '=') {
@@ -187,6 +183,9 @@ static bool statement(void) {
       }
 
       return true;
+
+    default:
+      return false;
   }
 
   return false;
