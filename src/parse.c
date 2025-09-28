@@ -266,6 +266,8 @@ static bool statement(void) {
         printf(" to %s\n", date);
       }
 
+      free_journey(new);
+
       return true;
 
     default:
