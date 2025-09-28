@@ -15,10 +15,12 @@ typedef enum {
   Token_Num,
   Token_Arrow,
   Token_Append,
+  Token_CRS
 } TokenType;
 
 typedef union {
   int num;
+  char crs[4];
 } TokenValue;
 
 typedef struct {

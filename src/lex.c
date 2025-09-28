@@ -1,6 +1,7 @@
 #include "lex.h"
 #include "token.h"
 #include "keyword.h"
+#include "crs.h"
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -79,6 +80,18 @@ static Token __lex(void) {
         }
 
       default:
+        if (VALID_CRS((this.input + this.pos))) {
+          return (Token){
+            .type = Token_CRS,
+            .value.crs = {
+              [0] = this.input[this.pos],
+              [1] = this.input[this.pos + 1],
+              [2] = this.input[this.pos + 2],
+              [3] = 0
+            }
+          };
+        }
+
         for (int i = 0; i < KEYWORD_COUNT; i++) {
           size_t len = strlen(keywords[i]);
 
