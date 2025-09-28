@@ -13,6 +13,7 @@ typedef enum {
   Token_Unknown,
   Token_Keyword,
   Token_Num,
+  Token_Str,
   Token_Arrow,
   Token_Append,
   Token_CRS
@@ -21,6 +22,7 @@ typedef enum {
 typedef union {
   int num;
   char crs[4];
+  char *str;
 } TokenValue;
 
 typedef struct {

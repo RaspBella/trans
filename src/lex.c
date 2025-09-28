@@ -79,6 +79,24 @@ static Token __lex(void) {
             };
         }
 
+      case '"':
+        char *close = strchr(this.input + this.pos + 1, '"');
+
+        if (close) {
+          return (Token){
+            .type = Token_Str,
+            .value.str = strndup(this.input + this.pos + 1, close - this.input + this.pos - 1)
+          };
+        }
+
+        else {
+          fprintf(stderr, "No matching `\"` found\n");
+
+          return (Token){
+            .type = Token_Unknown
+          };
+        }
+
       default:
         if (VALID_CRS((this.input + this.pos))) {
           return (Token){
