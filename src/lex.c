@@ -45,12 +45,38 @@ static Token __lex(void) {
       case ')':
       case '[':
       case ']':
-      case '-':
-      case '+':
+      case '{':
+      case '}':
       case '=':
         return (Token){
-          .type = this.input[this.pos++]
+          .type = this.input[this.pos]
         };
+      
+      case '-':
+        switch (this.input[this.pos + 1]) {
+          case '>':
+            return (Token){
+              .type = Token_Arrow
+            };
+
+          default:
+            return (Token){
+              .type = '-'
+            };
+        }
+
+      case '+':
+        switch (this.input[this.pos + 1]) {
+          case '=':
+            return (Token){
+              .type = Token_Append
+            };
+
+          default:
+            return (Token){
+              .type = Token_Unknown
+            };
+        }
 
       default:
         for (int i = 0; i < KEYWORD_COUNT; i++) {
