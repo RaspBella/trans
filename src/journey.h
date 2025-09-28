@@ -10,3 +10,5 @@ typedef struct {
 } JourneyArray;
 
 Journey *new_journey(char from[4], char to[4], char *text, char *link, JourneyArray sub);
+void free_journey(Journey*);
+void print_journey(Journey*);
