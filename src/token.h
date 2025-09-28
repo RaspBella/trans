@@ -9,6 +9,7 @@ typedef enum {
   Token_Close_Brace = '}',
   Token_Hyphen = '-',
   Token_Equal = '=',
+  Token_Comma = ',',
   Token_EOF = 256,
   Token_Unknown,
   Token_Keyword,

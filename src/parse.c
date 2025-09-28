@@ -2,6 +2,7 @@
 #include "lex.h"
 #include "token.h"
 #include "keyword.h"
+#include "journey.h"
 
 #include <stdbool.h>
 #include <stdio.h>
@@ -148,40 +149,89 @@ static bool statement_print(void) {
   return false;
 }
 
-static bool statement_obj(void) {
+static Journey *statement_obj(bool can_have_sub) {
   Token open = this.token;
 
   if (!eat('{')) {
-    return false;
+    return NULL;
   }
 
   Token from = this.token;
 
   if (!eat(Token_CRS)) {
-    return false;
+    return NULL;
   }
 
   Token arrow = this.token;
 
   if (!eat(Token_Arrow)) {
-    return false;
+    return NULL;
   }
 
   Token to = this.token;
 
   if (!eat(Token_CRS)) {
-    return false;
+    return NULL;
   }
 
+  Token text = this.token;
+
+  if (!eat(Token_Str)) {
+    return NULL;
+  }
+
+  Token link = {
+    .type = Token_Unknown,
+    .value.str = NULL
+  };
+
+  if (eat('-')) {
+    link = this.token;
+
+    if (!eat(Token_Str)) {
+      return NULL;
+    }
+  }
+
+  JourneyArray sub = { 0 };
+
+  if (can_have_sub) {
+    if (eat('[')) {
+get_next:
+      Journey *new = statement_obj(false);
+
+      if (new) {
+        sub.count++;
+
+        if (eat(',')) {
+          goto get_next;
+        }
+
+        if (!eat(']')) {
+          return NULL;
+        }
+      }
+    }
+  }
+ 
   Token close = this.token;
 
   if (!eat('}')) {
-    return false;
+    return NULL;
   }
 
   printf("from: %3s, to: %3s\n", from.value.crs, to.value.crs);
+  printf("text: \"%s\"\n", text.value.str);
 
-  return true;
+  if (link.type == Token_Str) {
+    printf("link: \"%s\"\n", link.value.str);
+  }
+
+  if (sub.count) {
+    printf("%zu sub journeys\n", sub.count);
+  }
+
+  return new_journey(from.value.crs, to.value.crs, text.value.str, link.value.str, sub);
 }
 
 static bool statement(void) {
@@ -216,7 +266,9 @@ static bool statement(void) {
         printf("Set\n");
       }
 
-      if (!statement_obj()) {
+      Journey *new = statement_obj(true);
+
+      if (!new) {
         return false;
       }
 

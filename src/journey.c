@@ -1,15 +1,26 @@
 #include "journey.h"
 
-#include <stddef.h>
+#include <stdlib.h>
+#include <string.h>
 
 struct Journey {
   char from[4];
   char to[4];
   char *text;
   char *link;
-  struct JourneyArray {
-    size_t count;
-    size_t capacity;
-    struct Journey *items;
-  } sub;
+  JourneyArray sub;
 };
+
+Journey *new_journey(char from[4], char to[4], char *text, char *link, JourneyArray sub) {
+  Journey *new = calloc(1, sizeof(Journey));
+
+  memcpy(new->from, from, 3);
+  memcpy(new->to, to, 3);
+
+  new->text = text;
+  new->link = link;
+
+  new->sub = sub;
+
+  return new;
+}
