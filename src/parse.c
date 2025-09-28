@@ -101,8 +101,6 @@ static bool statement_select(char *date) {
 
   snprintf(date, DATE_SIZE, "%04d-%02d-%02d", year.value.num, month.value.num, day.value.num);
 
-  printf("date: %s\n", date);
-
   return true;
 }
 
@@ -221,17 +219,6 @@ get_next:
     return NULL;
   }
 
-  printf("from: %3s, to: %3s\n", from.value.crs, to.value.crs);
-  printf("text: \"%s\"\n", text.value.str);
-
-  if (link.type == Token_Str) {
-    printf("link: \"%s\"\n", link.value.str);
-  }
-
-  if (sub.count) {
-    printf("%zu sub journeys\n", sub.count);
-  }
-
   return new_journey(from.value.crs, to.value.crs, text.value.str, link.value.str, sub);
 }
 
@@ -253,24 +240,30 @@ static bool statement(void) {
         return false;
       }
 
-      Token token = this.token;
+      Token op = this.token;
 
-      if (token.type == Token_Append) {
-        this.token = lex();
-
-        printf("Append\n");
+      if (op.type != Token_Append && op.type != '=') {
+        return false;
       }
-
-      else if (token.type == '=') {
-        this.token = lex();
-
-        printf("Set\n");
-      }
+      
+      this.token = lex();
 
       Journey *new = statement_obj(true);
 
       if (!new) {
         return false;
+      }
+
+      if (op.type == '=') {
+        printf("set %s to ", date);
+        print_journey(new);
+        printf("\n");
+      }
+
+      else if (op.type == Token_Append) {
+        printf("append ");
+        print_journey(new);
+        printf(" to %s\n", date);
       }
 
       return true;
