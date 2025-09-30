@@ -46,8 +46,6 @@ static Token __lex(void) {
       case ')':
       case '[':
       case ']':
-      case '{':
-      case '}':
       case '=':
       case ',':
         this.pos++;

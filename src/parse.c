@@ -149,12 +149,6 @@ static bool statement_print(void) {
 }
 
 static Journey *statement_obj(bool can_have_sub) {
-  Token open = this.token;
-
-  if (!eat('{')) {
-    return NULL;
-  }
-
   Token from = this.token;
 
   if (!eat(Token_CRS)) {
@@ -213,12 +207,6 @@ get_next:
     }
   }
  
-  Token close = this.token;
-
-  if (!eat('}')) {
-    return NULL;
-  }
-
   return new_journey(from.value.crs, to.value.crs, text.value.str, link.value.str, sub);
 }
 

@@ -5,8 +5,6 @@ typedef enum {
   Token_Close_Paren = ')',
   Token_Open_Bracket = '[',
   Token_Close_Bracket = ']',
-  Token_Open_Brace = '{',
-  Token_Close_Brace = '}',
   Token_Hyphen = '-',
   Token_Equal = '=',
   Token_Comma = ',',
