@@ -10,3 +10,5 @@
     }                                                                          \
     (xs)->items[(xs)->count++] = (x);                                          \
   } while (0)
+
+void usage(const char *program);
