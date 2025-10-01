@@ -213,6 +213,9 @@ static bool statement(void) {
 
         case Keyword_Print:
           return statement_print();
+
+        default:
+          return false;
       }
 
     case '[':
