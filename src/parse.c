@@ -33,8 +33,6 @@ static bool statement_exit(void) {
     return false;
   }
 
-  Token open = this.token;
-
   if (!eat('(')) {
     return false;
   }
@@ -115,8 +113,6 @@ static bool statement_print(void) {
     return false;
   }
 
-  Token open = this.token;
-
   if (!eat('(')) {
     return false;
   }
@@ -154,8 +150,6 @@ static Journey *statement_obj(bool can_have_sub) {
   if (!eat(Token_CRS)) {
     return NULL;
   }
-
-  Token arrow = this.token;
 
   if (!eat(Token_Arrow)) {
     return NULL;
