@@ -18,11 +18,11 @@ int main(int argc, char **argv) {
   while ((line = bestlineWithHistory("trans >>> ", "trans"))) {
     bool ret = parse(line);
 
-    free(line);
-
     if (!ret) {
       fprintf(stderr, "Couldn't parse: `%s`\n", line);
     }
+
+    free(line);
   }
 
   fprintf(stderr, "call: exit()\n");
