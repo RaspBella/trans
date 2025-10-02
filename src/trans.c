@@ -43,7 +43,7 @@ int main(int argc, char **argv) {
 
   fprintf(stderr, "call: exit()\n");
 
-  if (!dump(file)) {
+  if (!dump(file, 2)) {
     fprintf(stderr, "Error writing file: `%s`\n", file);
 
     exit(EXIT_FAILURE);
