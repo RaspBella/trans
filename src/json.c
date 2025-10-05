@@ -292,6 +292,60 @@ static struct Json *parse_value(struct lexer *l) {
   }
 }
 
+static void fprintj_r(FILE *fp, struct Json *j, int indent, int depth) {
+  switch (j->type) {
+    case Json_Null:
+      fprintf(fp, "null");
+
+      break;
+
+    case Json_String:
+      fprintf(fp, "\"%s\"", j->string);
+
+      break;
+
+    case Json_Array:
+      fprintf(fp, "[");
+
+      if (j->array.count) {
+        fprintj_r(fp, j->array.items[0], indent, depth + 1);
+
+        for (size_t i = 1; i < j->array.count; i++) {
+          fprintf(fp, ", ");
+
+          fprintj_r(fp, j->array.items[i], indent, depth + 1);
+        }
+      }
+
+      fprintf(fp, "]");
+
+      break;
+
+    case Json_Object:
+      fprintf(fp, "{");
+
+      if (j->object.count) {
+        fprintf(fp, "\"%s\": ", j->object.items[0].key);
+
+        fprintj_r(fp, j->object.items[0].value, indent, depth + 1);
+
+        for (size_t i = 1; i < j->object.count; i++) {
+          fprintf(fp, ", \"%s\": ", j->object.items[i].key);
+
+          fprintj_r(fp, j->object.items[i].value, indent, depth + 1);
+        }
+      }
+
+      fprintf(fp, "}");
+
+      break;
+  }
+}
+
+static void fprintj(FILE *fp, struct Json *j, int indent) {
+  fprintj_r(fp, j, indent, 0);
+}
+
 bool load(const char *file) {
   FILE *fp = fopen(file, "r");
   struct stat st;
@@ -337,6 +391,12 @@ bool load(const char *file) {
 
 bool dump(const char *file, int indent) {
   fprintf(stderr, "dump: file=%s indent=%d\n", file, indent);
+
+  FILE *fp = fopen("test.json", "w");
+
+  fprintj(fp, root, 0);
+
+  fclose(fp);
 
   free_json(root);
 
