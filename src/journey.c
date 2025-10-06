@@ -75,14 +75,14 @@ Json *journey_to_json(Journey *journey) {
 
   Json *o = new_json(Json_Object, NULL);
 
-  object_set(o, "from", new_json(Json_String, strdup(journey->from)));
+  object_set(o, "from", new_json(Json_String, strdup(journey->from)), true);
 
-  object_set(o, "to", new_json(Json_String, strdup(journey->to)));
+  object_set(o, "to", new_json(Json_String, strdup(journey->to)), true);
 
-  object_set(o, "text", new_json(Json_String, strdup(journey->text)));
+  object_set(o, "text", new_json(Json_String, strdup(journey->text)), true);
 
   if (journey->link) {
-    object_set(o, "link", new_json(Json_String, strdup(journey->link)));
+    object_set(o, "link", new_json(Json_String, strdup(journey->link)), true);
   }
 
   if (journey->sub.count) {
@@ -94,7 +94,7 @@ Json *journey_to_json(Journey *journey) {
       array_append(a, v);
     }
 
-    object_set(o, "sub", a);
+    object_set(o, "sub", a, true);
   }
 
   return o;

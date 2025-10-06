@@ -8,6 +8,19 @@
 #include <ctype.h>
 #include <stdbool.h>
 
+const char *json_type_strings[JSON_TYPE_COUNT] = {
+  [Json_Null] = "Json::null",
+[Json_String] = "Json::String",
+  [Json_Array] = "Json::Array",
+  [Json_Object] = "Json::Object"
+};
+
+const char *json_type_string(enum JsonType type) {
+  if (type < 0 || type >= JSON_TYPE_COUNT) return "Json::Invalid";
+
+  return json_type_strings[type];
+}
+
 struct Key_Value {
   char *key;
   Json *value;
@@ -57,6 +70,10 @@ struct lexer {
 
 Json *root;
 
+enum JsonType json_type(Json *j) {
+  return j->type;
+}
+
 Json *new_json(enum JsonType type, char *init) {
   Json *j = calloc(1, sizeof(Json));
 
@@ -69,11 +86,8 @@ Json *new_json(enum JsonType type, char *init) {
   return j;
 }
 
-static void free_json(Json *j) {
+void free_json(Json *j) {
   switch (j->type) {
-    case Json_Null:
-      break;
-
     case Json_String:
       free(j->string);
 
@@ -104,6 +118,9 @@ static void free_json(Json *j) {
         free(j->object.items);
       }
 
+      break;
+
+    default:
       break;
   }
 
@@ -376,6 +393,9 @@ static void fprintj_r(FILE *fp, Json *j, int indent, int depth) {
       fprintf(fp, "}");
 
       break;
+
+    default:
+      break;
   }
 }
 
@@ -406,7 +426,7 @@ Json *object_get(Json *o, const char *k) {
   return NULL;
 }
 
-void object_set(Json *o, const char *k, Json *v) {
+void object_set(Json *o, const char *k, Json *v, bool free_prev) {
   if (o->type != Json_Object) return;
 
   if (!o->object.count) {
@@ -423,7 +443,9 @@ void object_set(Json *o, const char *k, Json *v) {
   for (size_t i = 0; i < o->object.count; i++) {
     if (strlen(k) == strlen(o->object.items[i].key)) {
       if (!strncmp(k, o->object.items[i].key, strlen(k))) {
-        free_json(o->object.items[i].value);
+        if (free_prev) {
+          free_json(o->object.items[i].value);
+        }
 
         o->object.items[i].value = v;
 

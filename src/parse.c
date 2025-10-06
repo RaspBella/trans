@@ -255,9 +255,7 @@ static bool statement(void) {
         print_journey(new);
         putchar('\n');
 
-        Json *json = journey_to_json(new);
-
-        object_set(root, date, json);
+        object_set(root, date, journey_to_json(new), true);
 
         object_sort(root);
       }
@@ -266,6 +264,52 @@ static bool statement(void) {
         printf("append ");
         print_journey(new);
         printf(" to %s\n", date);
+
+        Json *json = object_get(root, date);
+
+        if (json) {
+          enum JsonType type = json_type(json);
+
+          switch (type) {
+            case Json_Array:
+              array_append(json, journey_to_json(new));
+
+              break;
+
+            case Json_Object:
+              Json *a = new_json(Json_Array, NULL);
+
+              array_append(a, json);
+
+              array_append(a, journey_to_json(new));
+
+              object_set(root, date, a, false);
+
+              break;
+
+            default:
+              fprintf(
+                stderr,
+                "Unexpected Json type\n"
+                "Expected: %s or %s, got: %s\n",
+                json_type_string(Json_Array),
+                json_type_string(Json_Object),
+                json_type_string(type)
+              );
+
+              free_json(json);
+
+              free_journey(new);
+
+              return false;
+          }
+        }
+
+        else{
+          object_set(root, date, journey_to_json(new), true);
+
+          object_sort(root);
+        }
       }
 
       free_journey(new);
