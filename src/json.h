@@ -20,6 +20,9 @@ void fprintj(FILE *fp, Json *j, int indent);
 
 Json *object_get(Json *o, const char *k);
 void object_set(Json *o, const char *k, Json *v);
+void object_sort(Json *o);
+
+void array_append(Json *a, Json *v);
 
 bool load(const char *file);
 bool dump(const char *file, int indent);

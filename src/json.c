@@ -438,8 +438,20 @@ void object_set(Json *o, const char *k, Json *v) {
   };
 
   da_append(&o->object, kvp);
+}
 
-  qsort(o->object.items, o->object.count, sizeof(struct Key_Value), comp_kvp);
+void object_sort(Json *o) {
+  if (o->type == Json_Object) {
+    if (o->object.count) {
+      qsort(o->object.items, o->object.count, sizeof(struct Key_Value), comp_kvp);
+    }
+  }
+}
+
+void array_append(Json *a, Json *v) {
+  if (a->type == Json_Array) {
+    da_append(&a->array, v);
+  }
 }
 
 bool load(const char *file) {
