@@ -13,13 +13,6 @@ struct Key_Value {
   Json *value;
 };
 
-enum JsonType{
-  Json_Null,
-  Json_String,
-  Json_Array,
-  Json_Object,
-};
-
 struct Json {
   enum JsonType type;
   union {
@@ -64,10 +57,14 @@ struct lexer {
 
 Json *root;
 
-static Json *new_json(enum JsonType type) {
+Json *new_json(enum JsonType type, char *init) {
   Json *j = calloc(1, sizeof(Json));
 
   j->type = type;
+
+  if (type == Json_String && init) {
+    j->string = init;
+  }
 
   return j;
 }
@@ -193,7 +190,7 @@ static Json *parse_array(struct lexer *l) {
     return NULL;
   }
 
-  Json *array = new_json(Json_Array);
+  Json *array = new_json(Json_Array, NULL);
 
   if (eat(l, ']')) {
     return array;
@@ -226,7 +223,7 @@ static Json *parse_object(struct lexer *l) {
     return NULL;
   }
 
-  Json *object = new_json(Json_Object);
+  Json *object = new_json(Json_Object, NULL);
 
   if (eat(l, '}')) {
     return object;
@@ -279,9 +276,7 @@ static Json *parse_value(struct lexer *l) {
       return parse_array(l);
 
     case Token_String:
-      Json *string = new_json(Json_String);
-
-      string->string = l->cur_tok.string;
+      Json *string = new_json(Json_String, l->cur_tok.string);
 
       l->cur_tok = lex(l);
 
@@ -388,7 +383,14 @@ void fprintj(FILE *fp, Json *j, int indent) {
   fprintj_r(fp, j, indent, 0);
 }
 
-Json *object_get(Json *o, char *k) {
+static int comp_kvp(const void *left, const void *right) {
+  return strcmp(
+    ((struct Key_Value*)left)->key,
+    ((struct Key_Value*)right)->key
+  );
+}
+
+Json *object_get(Json *o, const char *k) {
   if (o->type != Json_Object) return NULL;
 
   if (!o->object.count) return NULL;
@@ -402,6 +404,42 @@ Json *object_get(Json *o, char *k) {
   }
 
   return NULL;
+}
+
+void object_set(Json *o, const char *k, Json *v) {
+  if (o->type != Json_Object) return;
+
+  if (!o->object.count) {
+    struct Key_Value kvp = {
+      .key = strdup(k),
+      .value = v
+    };
+
+    da_append(&o->object, kvp);
+
+    return;
+  }
+
+  for (size_t i = 0; i < o->object.count; i++) {
+    if (strlen(k) == strlen(o->object.items[i].key)) {
+      if (!strncmp(k, o->object.items[i].key, strlen(k))) {
+        free_json(o->object.items[i].value);
+
+        o->object.items[i].value = v;
+
+        return;
+      }
+    }
+  }
+
+  struct Key_Value kvp = {
+    .key = strdup(k),
+    .value = v
+  };
+
+  da_append(&o->object, kvp);
+
+  qsort(o->object.items, o->object.count, sizeof(struct Key_Value), comp_kvp);
 }
 
 bool load(const char *file) {

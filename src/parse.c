@@ -254,6 +254,10 @@ static bool statement(void) {
         printf("set %s to ", date);
         print_journey(new);
         putchar('\n');
+
+        Json *json = journey_to_json(new);
+
+        object_set(root, date, json);
       }
 
       else if (op.type == Token_Append) {
