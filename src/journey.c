@@ -1,5 +1,6 @@
 #include "journey.h"
 #include "crs.h"
+#include "json.h"
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -65,4 +66,22 @@ void print_journey(Journey *j) {
 
     printf(" ]");
   }
+}
+
+Json *journey_to_json(Journey *journey) {
+  if (!journey) return NULL;
+
+  if (!journey->text) return NULL;
+
+  Json *o = new_json(Json_Object, NULL);
+
+  object_set(o, "from", new_json(Json_String, strdup(journey->from)));
+  object_set(o, "to", new_json(Json_String, strdup(journey->to)));
+  object_set(o, "text", new_json(Json_String, strdup(journey->text)));
+
+  if (journey->link) {
+    object_set(o, "link", new_json(Json_String, strdup(journey->link)));
+  }
+
+  return o;
 }
