@@ -258,6 +258,8 @@ static bool statement(void) {
         Json *json = journey_to_json(new);
 
         object_set(root, date, json);
+
+        object_sort(root);
       }
 
       else if (op.type == Token_Append) {
