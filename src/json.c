@@ -292,6 +292,12 @@ static struct Json *parse_value(struct lexer *l) {
   }
 }
 
+static void fprinti(FILE *fp, int indent) {
+  for (int i = 0; i < indent; i++) {
+    fputc(' ', fp);
+  }
+}
+
 static void fprintj_r(FILE *fp, struct Json *j, int indent, int depth) {
   switch (j->type) {
     case Json_Null:
@@ -308,13 +314,30 @@ static void fprintj_r(FILE *fp, struct Json *j, int indent, int depth) {
       fprintf(fp, "[");
 
       if (j->array.count) {
+        if (indent) {
+          fputc('\n', fp);
+          fprinti(fp, indent * (depth + 1));
+        }
+
         fprintj_r(fp, j->array.items[0], indent, depth + 1);
 
         for (size_t i = 1; i < j->array.count; i++) {
-          fprintf(fp, ", ");
+          if (indent) {
+            fprintf(fp, ",\n");
+            fprinti(fp, indent * (depth + 1));
+          }
+
+          else {
+            fprintf(fp, ", ");
+          }
 
           fprintj_r(fp, j->array.items[i], indent, depth + 1);
         }
+      }
+
+      if (indent) {
+        fputc('\n', fp);
+        fprinti(fp, indent * depth);
       }
 
       fprintf(fp, "]");
@@ -325,15 +348,34 @@ static void fprintj_r(FILE *fp, struct Json *j, int indent, int depth) {
       fprintf(fp, "{");
 
       if (j->object.count) {
+        if (indent) {
+          fputc('\n', fp);
+          fprinti(fp, indent * (depth + 1));
+        }
+
         fprintf(fp, "\"%s\": ", j->object.items[0].key);
 
         fprintj_r(fp, j->object.items[0].value, indent, depth + 1);
 
         for (size_t i = 1; i < j->object.count; i++) {
-          fprintf(fp, ", \"%s\": ", j->object.items[i].key);
+          if (indent) {
+            fprintf(fp, ",\n");
+            fprinti(fp, indent * (depth + 1));
+          }
+
+          else {
+            fprintf(fp, ", ");
+          }
+
+          fprintf(fp, "\"%s\": ", j->object.items[i].key);
 
           fprintj_r(fp, j->object.items[i].value, indent, depth + 1);
         }
+      }
+
+      if (indent) {
+        fputc('\n', fp);
+        fprinti(fp, indent * depth);
       }
 
       fprintf(fp, "}");
@@ -390,11 +432,9 @@ bool load(const char *file) {
 }
 
 bool dump(const char *file, int indent) {
-  fprintf(stderr, "dump: file=%s indent=%d\n", file, indent);
+  FILE *fp = fopen(file, "w");
 
-  FILE *fp = fopen("test.json", "w");
-
-  fprintj(fp, root, 0);
+  fprintj(fp, root, indent);
 
   fclose(fp);
 
