@@ -8,6 +8,7 @@
 typedef struct {
   Lexer *lexer;
   Token token;
+  int indent;
 } Parser;
 
 bool __parse_opt(Parser);

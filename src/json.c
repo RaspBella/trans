@@ -10,7 +10,7 @@
 
 struct Key_Value {
   char *key;
-  struct Json *value;
+  Json *value;
 };
 
 enum JsonType{
@@ -27,7 +27,7 @@ struct Json {
     struct {
       size_t count;
       size_t capacity;
-      struct Json **items;
+      Json **items;
     } array;
     struct {
       size_t count;
@@ -62,17 +62,17 @@ struct lexer {
   struct Token cur_tok;
 };
 
-struct Json *root;
+Json *root;
 
-static struct Json *new_json(enum JsonType type) {
-  struct Json *j = calloc(1, sizeof(struct Json));
+static Json *new_json(enum JsonType type) {
+  Json *j = calloc(1, sizeof(Json));
 
   j->type = type;
 
   return j;
 }
 
-static void free_json(struct Json *j) {
+static void free_json(Json *j) {
   switch (j->type) {
     case Json_Null:
       break;
@@ -186,21 +186,21 @@ static bool eat(struct lexer *l, enum TokenType type) {
   return false;
 }
 
-static struct Json *parse_value(struct lexer *l);
+static Json *parse_value(struct lexer *l);
 
-static struct Json *parse_array(struct lexer *l) {
+static Json *parse_array(struct lexer *l) {
   if (!eat(l, '[')) {
     return NULL;
   }
 
-  struct Json *array = new_json(Json_Array);
+  Json *array = new_json(Json_Array);
 
   if (eat(l, ']')) {
     return array;
   }
 
 get_value:
-  struct Json *elem = parse_value(l);
+  Json *elem = parse_value(l);
 
   if (elem) {
     if (eat(l, ',')) {
@@ -221,12 +221,12 @@ get_value:
   return NULL;
 }
 
-static struct Json *parse_object(struct lexer *l) {
+static Json *parse_object(struct lexer *l) {
   if (!eat(l, '{')) {
     return NULL;
   }
 
-  struct Json *object = new_json(Json_Object);
+  Json *object = new_json(Json_Object);
 
   if (eat(l, '}')) {
     return object;
@@ -237,7 +237,7 @@ get_pair:
 
   if (eat(l, Token_String)) {
     if (eat(l, ':')) {
-      struct Json *value = parse_value(l);
+      Json *value = parse_value(l);
 
       if (value) {
         if (eat(l, ',')) {
@@ -270,7 +270,7 @@ get_pair:
   return NULL;
 }
 
-static struct Json *parse_value(struct lexer *l) {
+static Json *parse_value(struct lexer *l) {
   switch (l->cur_tok.type) {
     case '{':
       return parse_object(l);
@@ -279,7 +279,7 @@ static struct Json *parse_value(struct lexer *l) {
       return parse_array(l);
 
     case Token_String:
-      struct Json *string = new_json(Json_String);
+      Json *string = new_json(Json_String);
 
       string->string = l->cur_tok.string;
 
@@ -298,7 +298,7 @@ static void fprinti(FILE *fp, int indent) {
   }
 }
 
-static void fprintj_r(FILE *fp, struct Json *j, int indent, int depth) {
+static void fprintj_r(FILE *fp, Json *j, int indent, int depth) {
   switch (j->type) {
     case Json_Null:
       fprintf(fp, "null");
@@ -384,8 +384,24 @@ static void fprintj_r(FILE *fp, struct Json *j, int indent, int depth) {
   }
 }
 
-static void fprintj(FILE *fp, struct Json *j, int indent) {
+void fprintj(FILE *fp, Json *j, int indent) {
   fprintj_r(fp, j, indent, 0);
+}
+
+Json *object_get(Json *o, char *k) {
+  if (o->type != Json_Object) return NULL;
+
+  if (!o->object.count) return NULL;
+
+  for (size_t i = 0; i < o->object.count; i++) {
+    if (strlen(k) == strlen(o->object.items[i].key)) {
+      if (!strncmp(k, o->object.items[i].key, strlen(k))) {
+        return o->object.items[i].value;
+      }
+    }
+  }
+
+  return NULL;
 }
 
 bool load(const char *file) {

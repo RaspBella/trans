@@ -12,10 +12,11 @@
 
 char *file;
 char *line;
+int indent;
 
 void cleanup(void) {
   if (file) {
-    if (!dump(file, 2)) {
+    if (!dump(file, indent)) {
       fprintf(stderr, "Error writing file: `%s`\n", file);
 
       exit(EXIT_FAILURE);
@@ -26,6 +27,8 @@ void cleanup(void) {
 }
 
 int main(int argc, char **argv) {
+  indent = 2;
+
   char *program = pop(argc, argv);
 
   printf("program name: %s\n", program);
@@ -51,7 +54,7 @@ int main(int argc, char **argv) {
   }
 
   while ((line = bestlineWithHistory("trans >>> ", "trans"))) {
-    bool ret = parse(line);
+    bool ret = parse(line, .indent = indent);
 
     if (!ret) {
       fprintf(stderr, "Couldn't parse: `%s`\n", line);

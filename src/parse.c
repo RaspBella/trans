@@ -4,6 +4,7 @@
 #include "keyword.h"
 #include "journey.h"
 #include "utils.h"
+#include "json.h"
 
 #include <stdbool.h>
 #include <stdio.h>
@@ -116,7 +117,9 @@ static bool statement_print(void) {
   if (this.token.type == ')') {
     this.token = lex();
 
-    printf("call: print()\n");
+    fprintj(stdout, root, this.indent);
+
+    putchar('\n');
 
     return true;
   }
@@ -132,7 +135,19 @@ static bool statement_print(void) {
       return false;
     }
 
-    printf("call: print([%s])\n", date);
+    printf("[%s] = ", date);
+
+    Json *value = object_get(root, date);
+
+    if (value) {
+      fprintj(stdout, value, this.indent);
+
+      putchar('\n');
+    }
+
+    else {
+      printf("null\n");
+    }
 
     return true;
   }
@@ -238,7 +253,7 @@ static bool statement(void) {
       if (op.type == '=') {
         printf("set %s to ", date);
         print_journey(new);
-        printf("\n");
+        putchar('\n');
       }
 
       else if (op.type == Token_Append) {
@@ -274,6 +289,8 @@ bool __parse_opt(Parser opt) {
 
     this.token = lex(.input = this.lexer->input);
   }
+
+  this.indent = opt.indent;
 
   return __parse();
 }
