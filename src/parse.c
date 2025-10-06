@@ -42,6 +42,8 @@ static bool statement_exit(void) {
 
     printf("call: exit()\n");
 
+    exit(EXIT_SUCCESS);
+
     return true;
   }
 
@@ -55,6 +57,8 @@ static bool statement_exit(void) {
     }
 
     printf("call: exit(%d)\n", num.value.num);
+
+    exit(num.value.num);
 
     return true;
   }
