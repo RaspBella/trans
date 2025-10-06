@@ -60,7 +60,7 @@ int main(int argc, char **argv) {
     free(line);
   }
 
-  fprintf(stderr, "call: exit()\n");
+  printf("exit()\n");
 
   exit(EXIT_SUCCESS);
 }

@@ -40,8 +40,6 @@ static bool statement_exit(void) {
   if (this.token.type == ')') {
     this.token = lex();
 
-    printf("call: exit()\n");
-
     exit(EXIT_SUCCESS);
 
     return true;
@@ -55,8 +53,6 @@ static bool statement_exit(void) {
     if (!eat(')')) {
       return false;
     }
-
-    printf("call: exit(%d)\n", num.value.num);
 
     exit(num.value.num);
 
