@@ -41,8 +41,6 @@ static bool statement_exit(void) {
     this.token = lex();
 
     exit(EXIT_SUCCESS);
-
-    return true;
   }
 
   else if (this.token.type == Token_Num) {
@@ -55,8 +53,6 @@ static bool statement_exit(void) {
     }
 
     exit(num.value.num);
-
-    return true;
   }
 
   return false;
