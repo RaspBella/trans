@@ -142,7 +142,7 @@
       {
         "from": "KGX",
         "to": "EDB",
-        "text": "LUMO",
+        "text": "Lumo",
         "link": "https://www.realtimetrains.co.uk/service/gb-nr:G26180/2025-02-24/detailed"
       }
     ]
@@ -552,7 +552,7 @@
   "2025-10-13": {
     "from": "SVG",
     "to": "EDB",
-    "text": "LUMO",
+    "text": "Lumo",
     "link": "https://www.realtimetrains.co.uk/service/gb-nr:W28171/2025-10-13/detailed"
   },
   "2025-10-17": {
@@ -637,13 +637,13 @@
   "2025-11-07": {
     "from": "EDB",
     "to": "SVG",
-    "text": "LUMO",
+    "text": "Lumo",
     "link": "https://www.realtimetrains.co.uk/service/gb-nr:W28161/2025-11-07/detailed"
   },
   "2025-11-10": {
     "from": "SVG",
     "to": "EDB",
-    "text": "LUMO",
+    "text": "Lumo",
     "link": "https://www.realtimetrains.co.uk/service/gb-nr:W28171/2025-11-10/detailed"
   }
 }
