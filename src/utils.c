@@ -5,8 +5,11 @@
 void usage(const char *program) {
   fprintf(
     stderr,
-    "usage: %s `filename`\n"
-    "commands:\n"
+    "usage: %s `mode` `filename`\n"
+    "modes: `add`, `gen`\n"
+    "`gen`: generates output pages from data file\n"
+    "`add`: data entry mode described below\n"
+    "`add` mode commands:\n"
     "  exit(`n`)                                          Default arg(integer) is 0\n"
     "  print(`date`)                                      No arg will print all in-use dates`\n"
     "  [`date`] = `journey`                               Set a journey to a date\n"
