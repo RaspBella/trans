@@ -11,4 +11,12 @@
     (xs)->items[(xs)->count++] = (x);                                          \
   } while (0)
 
-void usage(const char *program);
+enum mode {
+  NO_MODE,
+  ADD_CMD,
+  GEN_CMD,
+  ADD_MODE,
+  GEN_MODE
+};
+
+void usage(const char *program, enum mode mode);

@@ -1,15 +1,12 @@
 #include "utils.h"
 
 #include <stdio.h>
+#include <libgen.h>
 
-void usage(const char *program) {
+void add_usage(void) {
   fprintf(
     stderr,
-    "usage: %s `mode` `filename`\n"
-    "modes: `add`, `gen`\n"
-    "`gen`: generates output pages from data file\n"
-    "`add`: data entry mode described below\n"
-    "`add` mode commands:\n"
+    "add mode commands:\n"
     "  exit(`n`)                                          Default arg(integer) is 0\n"
     "  print(`date`)                                      No arg will print all in-use dates`\n"
     "  [`date`] = `journey`                               Set a journey to a date\n"
@@ -27,7 +24,47 @@ void usage(const char *program) {
     "    - `string`\n"
     "\n"
     "  `journey-list`:\n"
-    "    [ `journeys` ]                                   `journeys` is a comma seperated sequence of `journey`\n",
-    program
+    "    [ `journeys` ]                                   `journeys` is a comma seperated sequence of `journey`\n"
   );
+}
+
+void usage(const char *program, enum mode mode) {
+  switch (mode) {
+    case ADD_CMD:
+      fprintf(stderr, "usage: %s `file`\n", program);
+
+      add_usage();
+
+      break;
+
+    case GEN_CMD:
+      fprintf(stderr, "usage: %s `input file` `output_file`\n", program);
+
+      break;
+
+    case ADD_MODE:
+      fprintf(stderr, "usage: %s add `file`\n", program);
+
+      add_usage();
+
+      break;
+
+    case GEN_MODE:
+      fprintf(stderr, "usage: %s gen `input file` `output dir`\n", program);
+
+      break;
+
+    case NO_MODE:
+      fprintf(
+        stderr,
+        "usage: %s add `file`\n"
+        "usage: %s gen `input file` `output dir`\n",
+        program,
+        program
+      );
+
+      add_usage();
+
+      break;
+  }
 }

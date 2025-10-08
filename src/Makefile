@@ -3,9 +3,14 @@ CFLAGS=-Wall -Wextra -Werror -ggdb
 c=$(wildcard *.c)
 o=$(c:.c=.o)
 d=$(c:.c=.d)
-BIN=trans
 
-all: ../docs/crs.mjs $(BIN) gen
+BIN=trans
+LINKS=$(BIN)-add $(BIN)-gen
+
+all: ../docs/crs.mjs $(LINKS) gen
+
+$(BIN)-%: $(BIN)
+	ln -s $< $@
 
 $(BIN): $(o)
 	cc ${CFLAGS} -o $@ $^
@@ -37,4 +42,4 @@ libcrs.so: crs.c
 	cc ${CFLAGS} -shared $< -o $@
 
 clean:
-	rm -rf libcrs.so __pycache__ ../docs/crs.mjs ../docs/crs.wasm ../docs/index.html ../docs/????-??-?? $(o) $(d) $(BIN)
+	rm -rf libcrs.so __pycache__ ../docs/crs.mjs ../docs/crs.wasm ../docs/index.html ../docs/????-??-?? $(o) $(d) $(BIN) $(LINKS)

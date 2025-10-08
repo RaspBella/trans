@@ -8,10 +8,13 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
+#include <libgen.h>
 
 #define pop(argc, argv) *argv++; argc--;
 
 #define INDENT 2
+
+char *program;
 
 char *input;
 char *output;
@@ -38,16 +41,14 @@ void cleanup(void) {
   if (line) free(line);
 }
 
-void add(int argc, char **argv) {
+void add(int argc, char **argv, enum mode mode) {
   if (!argc) {
-    usage("add");
+    usage(program, mode);
 
     exit(EXIT_FAILURE);
   }
 
   input = pop(argc, argv);
-
-  fprintf(stderr, "add mode\n");
 
   if (!load(input)) {
     fprintf(stderr, "Error reading file: `%s`\n", input);
@@ -70,9 +71,9 @@ void add(int argc, char **argv) {
   exit(EXIT_SUCCESS);
 }
 
-void gen(int argc, char **argv) {
+void gen(int argc, char **argv, enum mode mode) {
   if (argc < 2) {
-    usage("gen");
+    usage(program, mode);
 
     exit(EXIT_FAILURE);
   }
@@ -100,20 +101,18 @@ int main(int argc, char **argv) {
 
   indent = INDENT;
 
-  char *program = pop(argc, argv);
+  program = pop(argc, argv);
 
-  printf("program name: %s\n", program);
-
-  if (!strcmp(program, "add")) {
-    add(argc, argv);
+  if (!strcmp(basename(program), "trana-add")) {
+    add(argc, argv, ADD_CMD);
   }
 
-  else if (!strcmp(program, "gen")) {
-    gen(argc, argv);
+  else if (!strcmp(basename(program), "trans-gen")) {
+    gen(argc, argv, GEN_CMD);
   }
 
   if (!argc) {
-    usage(program);
+    usage(program, NO_MODE);
 
     exit(EXIT_FAILURE);
   }
@@ -121,14 +120,14 @@ int main(int argc, char **argv) {
   char *mode = pop(argc, argv);
 
   if (!strcmp(mode, "add")) {
-    add(argc, argv);
+    add(argc, argv, ADD_MODE);
   }
 
   else if (!strcmp(mode, "gen")) {
-    gen(argc, argv);
+    gen(argc, argv, GEN_MODE);
   }
 
-  usage(program);
+  usage(program, NO_MODE);
 
   exit(EXIT_FAILURE);
 }
