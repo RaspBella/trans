@@ -1,6 +1,12 @@
-*.so
 __pycache__
-src/trans
-src/trans-*
+*.so
 *.o
 *.d
+
+src/trans
+src/trans-*
+
+docs/crs.mjs
+docs/crs.wasm
+docs/index.html
+docs/????-??-??
