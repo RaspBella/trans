@@ -38,7 +38,7 @@ void usage(const char *program, enum mode mode) {
       break;
 
     case GEN_CMD:
-      fprintf(stderr, "usage: %s `input file` `output_file`\n", program);
+      fprintf(stderr, "usage: %s `input file` `output dir`\n", program);
 
       break;
 
