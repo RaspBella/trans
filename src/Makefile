@@ -10,7 +10,7 @@ LINKS=$(BIN)-add $(BIN)-gen
 all: ../docs/crs.mjs $(LINKS) gen
 
 $(BIN)-%: $(BIN)
-	ln -s $< $@
+	ln -sf $< $@
 
 $(BIN): $(o)
 	cc ${CFLAGS} -o $@ $^
