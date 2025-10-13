@@ -72,6 +72,48 @@ void add(int argc, char **argv, enum mode mode) {
   exit(EXIT_SUCCESS);
 }
 
+void gen_head(FILE *fp) {
+  fprintf(
+    fp,
+    "<!DOCTYPE html>\n"
+    "<html lang=\"en\">\n"
+    "  <head>\n"
+    "    <title>transportation - RaspBella</title>\n"
+    "    <link rel=\"stylesheet\" href=\"/main.css\">\n"
+    "    <meta charset=\"UTF-8\">\n"
+    "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
+    "\n"
+    "    <link rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"/favicon/apple-touch-icon.png\">\n"
+    "    <link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"/favicon/favicon-32x32.png\">\n"
+    "    <link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/favicon/favicon-16x16.png\">\n"
+    "    <link rel=\"manifest\" href=\"/favicon/site.webmanifest\">\n"
+    "  </head>\n"
+    "  <body>\n"
+    "    <ul class=\"nav\">\n"
+    "      <li><a href=\"/\">home</a></li>\n"
+    "      <li><a href=\"/RaspBella\">about</a></li>\n"
+    "      <li><a href=\"/cubing\">cubing</a></li>\n"
+    "      <li><a href=\"/linux\">linux</a></li>\n"
+    "      <li><a href=\"/media\">media</a></li>\n"
+    "      <li><a class=\"active\" href=\"/trans\">transportation</a></li>\n"
+    "    </ul>\n"
+  );
+}
+
+void gen_tail(FILE *fp) {
+  fprintf(
+    fp,
+    "  </body>\n"
+    "</html>"
+  );
+}
+
+void gen_root(FILE *fp) {
+  gen_head(fp);
+
+  gen_tail(fp);
+}
+
 void gen(int argc, char **argv, enum mode mode) {
   if (argc < 2) {
     usage(program, mode);
@@ -102,7 +144,18 @@ void gen(int argc, char **argv, enum mode mode) {
     }
   }
 
-  fprintf(stderr, "%s is a dir\n", output);
+  size_t len = strlen(output) + strlen("/yyyy-mm-dd/abc->xyz/index.html");
+  char *file = calloc(len + 1, sizeof(char));
+
+  memcpy(file, output, strlen(output));
+  memcpy(file + strlen(output), "/index.html", strlen("/index.html"));
+
+  FILE *fp = fopen(file, "w");
+
+  gen_root(fp);
+
+  fclose(fp);
+  free(file);
 
   exit(EXIT_SUCCESS);
 }
