@@ -476,6 +476,54 @@ void array_append(Json *a, Json *v) {
   }
 }
 
+bool iterable(struct Iterable *it, Json *j) {
+  switch (j->type) {
+    case Json_Array:
+    case Json_Object:
+      it->type = j->type;
+      it->json = j;
+      it->i = 0;
+
+      return true;
+
+    default:
+      return false;
+  }
+}
+
+Json *json_iterate(struct Iterable *it) {
+  switch (it->type) {
+    case Json_Array:
+      if (it->i <= it->json->array.count) {
+        return it->json->array.items[it->i++];
+      }
+
+      break;
+
+    case Json_Object:
+      if (it->i <= it->json->object.count) {
+        return it->json->object.items[it->i++].value;
+      }
+
+      break;
+
+    default:
+      break;
+  }
+
+  return NULL;
+}
+
+char *key_iterate(struct Iterable *it) {
+  if (it->type == Json_Object) {
+    if (it->i <= it->json->object.count) {
+      return it->json->object.items[it->i++].key;
+    }
+  }
+
+  return NULL;
+}
+
 bool load(const char *file) {
   FILE *fp = fopen(file, "r");
   struct stat st;

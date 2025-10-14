@@ -1,5 +1,6 @@
 #pragma once
 
+#include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
 
@@ -15,6 +16,12 @@ const char *json_type_string(enum JsonType type);
 
 typedef struct Json Json;
 
+struct Iterable {
+  enum JsonType type;
+  Json *json;
+  size_t i;
+};
+
 extern Json *root;
 
 enum JsonType json_type(Json *j);
@@ -29,6 +36,10 @@ void object_set(Json *o, const char *k, Json *v, bool free_prev);
 void object_sort(Json *o);
 
 void array_append(Json *a, Json *v);
+
+bool iterable(struct Iterable *it, Json *j);
+Json *json_iterate(struct Iterable *it);
+char *key_iterate(struct Iterable *it);
 
 bool load(const char *file);
 bool dump(const char *file, int indent);
