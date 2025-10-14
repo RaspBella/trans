@@ -111,6 +111,45 @@ void gen_tail(FILE *fp) {
 void gen_root(FILE *fp) {
   gen_head(fp);
 
+  fprintf(
+    fp,
+    "    <table>\n"
+    "      <thead>\n"
+    "        <tr>\n"
+    "          <th>Date</th>\n"
+    "          <th>From</th>\n"
+    "          <th>To</th>\n"
+    "          <th>Sub</th>\n"
+    "          <th>Info</th>\n"
+    "        </tr>\n"
+    "      </thead>\n"
+    "      <tbody>\n"
+  );
+
+  struct Iterable date_it;
+  struct Iterable data_it;
+
+  if (!iterable(&date_it, root)) return;
+  if (!iterable(&data_it, root)) return;
+
+  char *date = key_iterate(&date_it);
+  Json *data = json_iterate(&data_it);
+
+  do {
+    fprintf(stderr, "date: \"%s\"\ndata: ", date);
+    fprintj(stderr, data, indent);
+    fprintf(stderr, "\n");
+
+    date = key_iterate(&date_it);
+    data = json_iterate(&data_it);
+  } while (date && data);
+
+  fprintf(
+    fp,
+    "      </tbody>\n"
+    "    </table>\n"
+  );
+
   gen_tail(fp);
 }
 
