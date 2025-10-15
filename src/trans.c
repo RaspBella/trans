@@ -101,14 +101,6 @@ void gen_head(FILE *fp) {
   );
 }
 
-void gen_tail(FILE *fp) {
-  fprintf(
-    fp,
-    "  </body>\n"
-    "</html>"
-  );
-}
-
 void gen_root_head(FILE *fp) {
   gen_head(fp);
 
@@ -139,10 +131,10 @@ void gen_root_tail(FILE *fp) {
     "      </tbody>\n"
     "    </table>\n"
     "  </div>\n"
+    "  </body>\n"
     "  <script src=\"trans.js\"></script>\n"
+    "</html>"
   );
-
-  gen_tail(fp);
 }
 
 char *property2string(Json *json, char *property) {
