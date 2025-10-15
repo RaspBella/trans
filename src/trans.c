@@ -686,7 +686,6 @@ void gen_root(FILE *fp) {
 void gen_yyyy_mm_dd_head(FILE *fp) {
   fprintf(
     fp,
-    "</h2>\n"
     "      <table>\n"
     "        <thead>\n"
     "          <tr>\n"
@@ -711,6 +710,197 @@ void gen_yyyy_mm_dd_tail(FILE *fp) {
   );
 }
 
+void gen_yyyy_mm_dd_row(FILE *fp, char *date, Json *object) {
+  char *from = property2string(object, "from");
+  char *to = property2string(object, "to");
+
+  if (!from || !to) {
+    fclose(fp);
+
+    exit(EXIT_FAILURE);
+  }
+
+  fprintf(
+    fp,
+    "          <tr>\n"
+    "            <td>"
+  );
+
+  fprint_place(fp, from);
+
+  fprintf(
+    fp,
+    "</td>\n"
+    "            <td>"
+  );
+
+  fprint_place(fp, to);
+
+  fprintf(
+    fp,
+    "</td>\n"
+  );
+
+  Json *sub = object_get(object, "sub");
+
+  if (sub) {
+    fprintf(
+      fp,
+      "            <td>\n"
+      "              <table>\n"
+      "                <thead>\n"
+      "                  <tr>\n"
+      "                    <td>From</td>\n"
+      "                    <td>To</td>\n"
+      "                    <td>Info</td>\n"
+      "                  </tr>\n"
+      "                </thead>\n"
+      "                <tbody>\n"
+    );
+
+    struct Iterable it;
+
+    if (!iterable(&it, sub)) {
+      fprintf(stderr, "%s: failed to init iterator\n", __func__);
+
+      fclose(fp);
+
+      exit(EXIT_FAILURE);
+    }
+
+    for (Json *elem = json_iterate(&it); elem; elem = json_iterate(&it)) {
+      fprintf(
+        fp,
+        "                  <tr>\n"
+        "                    <td>"
+      );
+
+      char *from = property2string(elem, "from");
+
+      if (!from) {
+        fclose(fp);
+
+        exit(EXIT_FAILURE);
+      }
+
+      fprint_place(fp, from);
+
+      fprintf(
+        fp,
+        "</td>\n"
+        "                    <td>"
+      );
+
+      char *to = property2string(elem, "to");
+
+      if (!to) {
+        fclose(fp);
+
+        exit(EXIT_FAILURE);
+      }
+
+      fprint_place(fp, to);
+
+      fprintf(
+        fp,
+        "</td>\n"
+      );
+
+      char *text = property2string(elem, "text");
+
+      if (!text) {
+        fclose(fp);
+
+        exit(EXIT_FAILURE);
+      }
+
+      Json *link = object_get(elem, "link");
+
+      if (link) {
+        char *link = property2string(elem, "link");
+
+        if (!link) {
+          fclose(fp);
+
+          exit(EXIT_FAILURE);
+        }
+
+        fprintf(
+          fp,
+          "                    <td><a href=\"%s/%s->%s\">%s</td>\n",
+          date, from, to, text
+        );
+      }
+
+      else {
+        fprintf(
+          fp,
+          "                    <td>%s</td>\n",
+          text
+        );
+      }
+
+      fprintf(
+        fp,
+        "                  </tr>\n"
+      );
+    }
+
+    fprintf(
+      fp,
+      "                </tbody>\n"
+      "              </table>\n"
+      "            </td>\n"
+    );
+  }
+
+  else {
+    fprintf(
+      fp,
+      "            <td>N/A</td>\n"
+    );
+  }
+
+  char *text = property2string(object, "text");
+
+  if (!text) {
+    fclose(fp);
+
+    exit(EXIT_FAILURE);
+  }
+
+  Json *link = object_get(object, "link");
+
+  if (link) {
+    char *link = property2string(object, "link");
+
+    if (!link) {
+      fclose(fp);
+
+      exit(EXIT_FAILURE);
+    }
+
+    fprintf(
+      fp,
+      "            <td><a href=\"%s/%s->%s\">%s</td>\n",
+      date, from, to, text
+    );
+  }
+
+  else {
+    fprintf(
+      fp,
+      "            <td>%s</td>\n",
+      text
+    );
+  }
+
+  fprintf(
+    fp,
+    "          </tr>\n"
+  );
+}
+
 void gen_yyyy_mm_dd(FILE *fp, char *date, Json *data) {
   const char *iso = "yyyy-mm-dd";
   const char *template = "yyyy-mm-dd - transportation";
@@ -730,219 +920,29 @@ void gen_yyyy_mm_dd(FILE *fp, char *date, Json *data) {
     "      <h1>%s</h1>\n",
     date
   );
+  
+  gen_yyyy_mm_dd_head(fp);
 
   switch (json_type(data)) {
     case Json_Array:
+      struct Iterable it;
+
+      if (!iterable(&it, data)) {
+        fprintf(stderr, "%s: Failed to init iterable\n", __func__);
+
+        fclose(fp);
+
+        exit(EXIT_FAILURE);
+      }
+
+      for (Json *elem = json_iterate(&it); elem; elem = json_iterate(&it)) {
+        gen_yyyy_mm_dd_row(fp, date, elem);
+      }
+
       break;
 
     case Json_Object:
-      fprintf(fp, "      <h2>");
-
-      char *from = property2string(data, "from");
-
-      if (!from) {
-        fclose(fp);
-
-        exit(EXIT_FAILURE);
-      }
-
-      fprint_place(fp, from);
-
-      fprintf(fp, "->");
-
-      char *to = property2string(data, "to");
-
-      if (!to) {
-        fclose(fp);
-
-        exit(EXIT_FAILURE);
-      }
-
-      fprint_place(fp, to);
-
-      gen_yyyy_mm_dd_head(fp);
-        
-      fprintf(
-        fp,
-        "          <tr>\n"
-        "            <td>"
-      );
-
-      fprint_place(fp, from);
-
-      fprintf(
-        fp,
-        "</td>\n"
-        "            <td>"
-      );
-
-      fprint_place(fp, to);
-
-      fprintf(
-        fp,
-        "</td>\n"
-      );
-
-      Json *sub = object_get(data, "sub");
-
-      if (sub) {
-        fprintf(
-          fp,
-          "            <td>\n"
-          "              <table>\n"
-          "                <thead>\n"
-          "                  <tr>\n"
-          "                    <td>From</td>\n"
-          "                    <td>To</td>\n"
-          "                    <td>Info</td>\n"
-          "                  </tr>\n"
-          "                </thead>\n"
-          "                <tbody>\n"
-        );
-
-        struct Iterable it;
-
-        if (!iterable(&it, sub)) {
-          fprintf(stderr, "%s: failed to init iterator\n", __func__);
-
-          fclose(fp);
-
-          exit(EXIT_FAILURE);
-        }
-
-        for (Json *elem = json_iterate(&it); elem; elem = json_iterate(&it)) {
-          fprintf(
-            fp,
-            "                  <tr>\n"
-            "                    <td>"
-          );
-
-          char *from = property2string(elem, "from");
-
-          if (!from) {
-            fclose(fp);
-
-            exit(EXIT_FAILURE);
-          }
-
-          fprint_place(fp, from);
-
-          fprintf(
-            fp,
-            "</td>\n"
-            "                    <td>"
-          );
-
-          char *to = property2string(elem, "to");
-
-          if (!to) {
-            fclose(fp);
-
-            exit(EXIT_FAILURE);
-          }
-
-          fprint_place(fp, to);
-
-          fprintf(
-            fp,
-            "</td>\n"
-          );
-
-          char *text = property2string(elem, "text");
-
-          if (!text) {
-            fclose(fp);
-
-            exit(EXIT_FAILURE);
-          }
-
-          Json *link = object_get(elem, "link");
-
-          if (link) {
-            char *link = property2string(elem, "link");
-
-            if (!link) {
-              fclose(fp);
-
-              exit(EXIT_FAILURE);
-            }
-
-            fprintf(
-              fp,
-              "                    <td><a href=\"%s/%s->%s\">%s</td>\n",
-              date, from, to, text
-            );
-          }
-
-          else {
-            fprintf(
-              fp,
-              "                    <td>%s</td>\n",
-              text
-            );
-          }
-
-          fprintf(
-            fp,
-            "                  </tr>\n"
-          );
-        }
-
-        fprintf(
-          fp,
-          "                </tbody>\n"
-          "              </table>\n"
-          "            </td>\n"
-        );
-      }
-
-      else {
-        fprintf(
-          fp,
-          "            <td>N/A</td>\n"
-        );
-      }
-
-      char *text = property2string(data, "text");
-
-      if (!text) {
-        fclose(fp);
-
-        exit(EXIT_FAILURE);
-      }
-
-      Json *link = object_get(data, "link");
-
-      if (link) {
-        char *link = property2string(data, "link");
-
-        if (!link) {
-          fclose(fp);
-
-          exit(EXIT_FAILURE);
-        }
-
-        fprintf(
-          fp,
-          "            <td><a href=\"%s/%s->%s\">%s</td>\n",
-          date, from, to, text
-        );
-      }
-
-      else {
-        fprintf(
-          fp,
-          "            <td>%s</td>\n",
-          text
-        );
-      }
-
-      fprintf(
-        fp,
-        "          </tr>\n"
-      );
-
-      gen_yyyy_mm_dd_tail(fp);
+      gen_yyyy_mm_dd_row(fp, date, data);
 
       break;
 
@@ -960,6 +960,8 @@ void gen_yyyy_mm_dd(FILE *fp, char *date, Json *data) {
 
       exit(EXIT_FAILURE);
   }
+
+  gen_yyyy_mm_dd_tail(fp);
 }
 
 void gen(int argc, char **argv, enum mode mode) {
