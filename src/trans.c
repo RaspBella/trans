@@ -114,6 +114,10 @@ void gen_root_head(FILE *fp) {
 
   fprintf(
     fp,
+    "    <ul class=\"nav\">\n"
+    "      <li id=\"today\"><a id=\"today-link\" href=\"today\">today?</a></li>\n"
+    "      <li><a href=\"crs\">crs</a></li>\n"
+    "    </ul>\n"
     "    <table>\n"
     "      <thead>\n"
     "        <tr>\n"
