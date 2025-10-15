@@ -145,35 +145,51 @@ void gen_root_tail(FILE *fp) {
   gen_tail(fp);
 }
 
-void fprint_place(FILE *fp, Json *json) {
-  if (json) {
-    if (json_type(json) == Json_String) {
-      char *place = json_string2string(json);
+char *property2string(Json *json, char *property) {
+  Json *value = object_get(json, property);
 
-      if (VALID_CRS(place)) {
-        fprintf(fp, "%s [%s]", crs(place), place);
-      }
+  if (!value) {
+    fprintf(
+      stderr,
+      "%s: couldn't access `%s` property\n",
+      __func__,
+      property
+    );
 
-      else {
-        fprintf(fp, "%s", place);
-      }
-
-      return;
-    }
+    return NULL;
   }
 
-  fprintf(stderr, "fprint_place: error\n");
+  if (json_type(value) != Json_String) {
+    fprintf(
+      stderr,
+      "%s: expected %s got %s\n",
+      __func__,
+      json_type_string(Json_String),
+      json_type_string(json_type(value))
+    );
 
-  fclose(fp);
+    return NULL;
+  }
 
-  exit(EXIT_FAILURE);
+  return json_string2string(value);
 }
 
-void gen_root_row_array_elem(FILE *fp, Json *elem) {
+void fprint_place(FILE *fp, char *place) {
+  if (strlen(place) == 3 && VALID_CRS(place)) {
+    fprintf(fp, "%s [%s]", crs(place), place);
+  }
+
+  else {
+    fprintf(fp, "%s", place);
+  }
+}
+
+void gen_root_row_array_elem(FILE *fp, char *date, Json *elem) {
   if (json_type(elem) != Json_Object) {
     fprintf(
       stderr,
-      "gen_root_row_array_elem: expected %s got %s\n",
+      "%s: expected %s got %s\n",
+      __func__,
       json_type_string(Json_Object),
       json_type_string(json_type(elem))
     );
@@ -188,7 +204,15 @@ void gen_root_row_array_elem(FILE *fp, Json *elem) {
     "            <td>"
   );
 
-  fprint_place(fp, object_get(elem, "from"));
+  char *from = property2string(elem, "from");
+
+  if (!from) {
+    fclose(fp);
+
+    exit(EXIT_FAILURE);
+  }
+
+  fprint_place(fp, from);
 
   fprintf(
     fp,
@@ -196,12 +220,174 @@ void gen_root_row_array_elem(FILE *fp, Json *elem) {
     "            <td>"
   );
 
-  fprint_place(fp, object_get(elem, "to"));
+  char *to = property2string(elem, "to");
+
+  if (!to) {
+    fclose(fp);
+
+    exit(EXIT_FAILURE);
+  }
+
+  fprint_place(fp, to);
 
   fprintf(
     fp,
     "</td>\n"
   );
+
+  Json *sub = object_get(elem, "sub");
+
+  if (sub) {
+    fprintf(
+      fp,
+      "            <td>\n"
+      "              <table>\n"
+      "                <thead>\n"
+      "                  <tr>\n"
+      "                    <td>From</td>\n"
+      "                    <td>To</td>\n"
+      "                    <td>Info</td>\n"
+      "                  </tr>\n"
+      "                </thead>\n"
+      "                <tbody>\n"
+    );
+
+    struct Iterable it;
+
+    if (!iterable(&it, sub)) {
+      fprintf(stderr, "%s: failed to init iterator\n", __func__);
+
+      fclose(fp);
+
+      exit(EXIT_FAILURE);
+    }
+
+    for (Json *elem = json_iterate(&it); elem; elem = json_iterate(&it)) {
+      fprintf(
+        fp,
+        "                  <tr>\n"
+        "                    <td>"
+      );
+
+      char *from = property2string(elem, "from");
+    
+      if (!from) {
+        fclose(fp);
+    
+        exit(EXIT_FAILURE);
+      }
+    
+      fprint_place(fp, from);
+    
+      fprintf(
+        fp,
+        "</td>\n"
+        "                    <td>"
+      );
+    
+      char *to = property2string(elem, "to");
+    
+      if (!to) {
+        fclose(fp);
+    
+        exit(EXIT_FAILURE);
+      }
+    
+      fprint_place(fp, to);
+    
+      fprintf(
+        fp,
+        "</td>\n"
+      );
+
+      char *text = property2string(elem, "text");
+    
+      if (!text) {
+        fclose(fp);
+    
+        exit(EXIT_FAILURE);
+      }
+    
+      Json *link = object_get(elem, "link");
+    
+      if (link) {
+        char *link = property2string(elem, "link");
+    
+        if (!link) {
+          fclose(fp);
+    
+          exit(EXIT_FAILURE);
+        }
+    
+        fprintf(
+          fp,
+          "                    <td><a href=\"%s/%s->%s\">%s</td>\n",
+          date, from, to, text
+        );
+      }
+    
+      else {
+        fprintf(
+          fp,
+          "                    <td>%s</td>\n",
+          text
+        );
+      }
+      
+      fprintf(
+        fp,
+        "                  </tr>\n"
+      );
+    }
+
+    fprintf(
+      fp,
+      "                </tbody>\n"
+      "              </table>\n"
+      "            </td>\n"
+    );
+  }
+
+  else {
+    fprintf(
+      fp,
+      "            <td>N/A</td>\n"
+    );
+  }
+
+  char *text = property2string(elem, "text");
+
+  if (!text) {
+    fclose(fp);
+
+    exit(EXIT_FAILURE);
+  }
+
+  Json *link = object_get(elem, "link");
+
+  if (link) {
+    char *link = property2string(elem, "link");
+
+    if (!link) {
+      fclose(fp);
+
+      exit(EXIT_FAILURE);
+    }
+
+    fprintf(
+      fp,
+      "            <td><a href=\"%s/%s->%s\">%s</td>\n",
+      date, from, to, text
+    );
+  }
+
+  else {
+    fprintf(
+      fp,
+      "            <td>%s</td>\n",
+      text
+    );
+  }
 }
 
 void gen_root_row_array(FILE *fp, char *date, Json *array) {
@@ -215,7 +401,7 @@ void gen_root_row_array(FILE *fp, char *date, Json *array) {
   struct Iterable it;
 
   if (!iterable(&it, array)) {
-    fprintf(stderr, "gen_root_row_array: failed to init iterator\n");
+    fprintf(stderr, "%s: failed to init iterator\n", __func__);
 
     fclose(fp);
 
@@ -224,7 +410,7 @@ void gen_root_row_array(FILE *fp, char *date, Json *array) {
 
   Json *elem = json_iterate(&it);
 
-  gen_root_row_array_elem(fp, elem);
+  gen_root_row_array_elem(fp, date, elem);
 
   fprintf(
     fp,
@@ -237,7 +423,7 @@ void gen_root_row_array(FILE *fp, char *date, Json *array) {
       "          <tr>\n"
     );
 
-    gen_root_row_array_elem(fp, elem);
+    gen_root_row_array_elem(fp, date, elem);
 
     fprintf(
       fp,
@@ -259,7 +445,8 @@ void gen_root_row(FILE *fp, char *date, Json *data) {
     default:
       fprintf(
         stderr,
-        "gen_root_row: expected %s or %s got %s\n",
+        "%s: expected %s or %s got %s\n",
+        __func__,
         json_type_string(Json_Array),
         json_type_string(Json_Object),
         json_type_string(json_type(data))
@@ -275,7 +462,7 @@ void gen_root_rows(FILE *fp) {
   struct Iterable its[2];
 
   if (!iterable(&its[0], root) || !iterable(&its[1], root)) {
-    fprintf(stderr, "gen_root_rows: Failed to init iterable(s)\n");
+    fprintf(stderr, "%s: Failed to init iterable(s)\n", __func__);
 
     fclose(fp);
 
