@@ -114,21 +114,22 @@ void gen_root_head(FILE *fp) {
 
   fprintf(
     fp,
-    "    <ul class=\"nav\">\n"
-    "      <li id=\"today\"><a id=\"today-link\" href=\"today\">today?</a></li>\n"
-    "      <li><a href=\"crs\">crs</a></li>\n"
-    "    </ul>\n"
-    "    <table>\n"
-    "      <thead>\n"
-    "        <tr>\n"
-    "          <th>Date</th>\n"
-    "          <th>From</th>\n"
-    "          <th>To</th>\n"
-    "          <th>Sub</th>\n"
-    "          <th>Info</th>\n"
-    "        </tr>\n"
-    "      </thead>\n"
-    "      <tbody>\n"
+    "    <div>\n"
+    "      <ul class=\"nav\">\n"
+    "        <li id=\"today\"><a id=\"today-link\" href=\"today\">today?</a></li>\n"
+    "        <li><a href=\"crs\">crs</a></li>\n"
+    "      </ul>\n"
+    "      <table>\n"
+    "        <thead>\n"
+    "          <tr>\n"
+    "            <th>Date</th>\n"
+    "            <th>From</th>\n"
+    "            <th>To</th>\n"
+    "            <th>Sub</th>\n"
+    "            <th>Info</th>\n"
+    "          </tr>\n"
+    "        </thead>\n"
+    "        <tbody>\n"
   );
 }
 
@@ -137,13 +138,137 @@ void gen_root_tail(FILE *fp) {
     fp,
     "      </tbody>\n"
     "    </table>\n"
+    "  </div>\n"
+    "  <script src=\"trans.js\"></script>\n"
   );
 
   gen_tail(fp);
 }
 
+void fprint_place(FILE *fp, Json *json) {
+  if (json) {
+    if (json_type(json) == Json_String) {
+      char *place = json_string2string(json);
+
+      if (VALID_CRS(place)) {
+        fprintf(fp, "%s [%s]", crs(place), place);
+      }
+
+      else {
+        fprintf(fp, "%s", place);
+      }
+
+      return;
+    }
+  }
+
+  fprintf(stderr, "fprint_place: error\n");
+
+  fclose(fp);
+
+  exit(EXIT_FAILURE);
+}
+
+void gen_root_row_array_elem(FILE *fp, Json *elem) {
+  if (json_type(elem) != Json_Object) {
+    fprintf(
+      stderr,
+      "gen_root_row_array_elem: expected %s got %s\n",
+      json_type_string(Json_Object),
+      json_type_string(json_type(elem))
+    );
+
+    fclose(fp);
+
+    exit(EXIT_FAILURE);
+  }
+
+  fprintf(
+    fp,
+    "            <td>"
+  );
+
+  fprint_place(fp, object_get(elem, "from"));
+
+  fprintf(
+    fp,
+    "</td>\n"
+    "            <td>"
+  );
+
+  fprint_place(fp, object_get(elem, "to"));
+
+  fprintf(
+    fp,
+    "</td>\n"
+  );
+}
+
+void gen_root_row_array(FILE *fp, char *date, Json *array) {
+  fprintf(
+    fp,
+    "          <tr>\n"
+    "            <td rowspan=\"%zu\"><a href=\"%s\">%s</a></td>\n",
+    length(array), date, date
+  );
+
+  struct Iterable it;
+
+  if (!iterable(&it, array)) {
+    fprintf(stderr, "gen_root_row_array: failed to init iterator\n");
+
+    fclose(fp);
+
+    exit(EXIT_FAILURE);
+  }
+
+  Json *elem = json_iterate(&it);
+
+  gen_root_row_array_elem(fp, elem);
+
+  fprintf(
+    fp,
+    "          </tr>\n"
+  );
+
+  for (elem = json_iterate(&it); elem; elem = json_iterate(&it)) {
+    fprintf(
+      fp,
+      "          <tr>\n"
+    );
+
+    gen_root_row_array_elem(fp, elem);
+
+    fprintf(
+      fp,
+      "          </tr>\n"
+    );
+  }
+}
+
 void gen_root_row(FILE *fp, char *date, Json *data) {
-  fprintf(stderr, "%p, %p, %p\n", fp, date, data);
+  switch (json_type(data)) {
+    case Json_Array:
+      gen_root_row_array(fp, date, data);
+
+      break;
+
+    case Json_Object:
+      break;
+
+    default:
+      fprintf(
+        stderr,
+        "gen_root_row: expected %s or %s got %s\n",
+        json_type_string(Json_Array),
+        json_type_string(Json_Object),
+        json_type_string(json_type(data))
+      );
+
+      fclose(fp);
+
+      exit(EXIT_FAILURE);
+  }
 }
 
 void gen_root_rows(FILE *fp) {
