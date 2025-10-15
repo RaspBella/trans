@@ -41,5 +41,9 @@ bool iterable(struct Iterable *it, Json *j);
 Json *json_iterate(struct Iterable *it);
 char *key_iterate(struct Iterable *it);
 
+size_t length(Json *j);
+
+char *json_string2string(Json *s);
+
 bool load(const char *file);
 bool dump(const char *file, int indent);

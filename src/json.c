@@ -524,6 +524,31 @@ char *key_iterate(struct Iterable *it) {
   return NULL;
 }
 
+size_t length(Json *j) {
+  switch (j->type) {
+    case Json_Null:
+      return 0;
+
+    case Json_String:
+      return strlen(j->string);
+
+    case Json_Array:
+      return j->array.count;
+
+    case Json_Object:
+      return j->object.count;
+
+    default:
+      return 0;
+  }
+}
+
+char *json_string2string(Json *s) {
+  if (s->type == Json_String) return s->string;
+
+  return NULL;
+}
+
 bool load(const char *file) {
   FILE *fp = fopen(file, "r");
   struct stat st;

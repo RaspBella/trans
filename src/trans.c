@@ -1,6 +1,7 @@
 #include "parse.h"
 #include "utils.h"
 #include "json.h"
+#include "crs.h"
 
 #include "bestline.h"
 
@@ -210,7 +211,7 @@ int main(int argc, char **argv) {
 
   program = pop(argc, argv);
 
-  if (!strcmp(basename(program), "trana-add")) {
+  if (!strcmp(basename(program), "trans-add")) {
     add(argc, argv, ADD_CMD);
   }
 
