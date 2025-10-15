@@ -262,62 +262,62 @@ void gen_root_row_array_elem(FILE *fp, char *date, Json *elem) {
       );
 
       char *from = property2string(elem, "from");
-    
+
       if (!from) {
         fclose(fp);
-    
+
         exit(EXIT_FAILURE);
       }
-    
+
       fprint_place(fp, from);
-    
+
       fprintf(
         fp,
         "</td>\n"
         "                    <td>"
       );
-    
+
       char *to = property2string(elem, "to");
-    
+
       if (!to) {
         fclose(fp);
-    
+
         exit(EXIT_FAILURE);
       }
-    
+
       fprint_place(fp, to);
-    
+
       fprintf(
         fp,
         "</td>\n"
       );
 
       char *text = property2string(elem, "text");
-    
+
       if (!text) {
         fclose(fp);
-    
+
         exit(EXIT_FAILURE);
       }
-    
+
       Json *link = object_get(elem, "link");
-    
+
       if (link) {
         char *link = property2string(elem, "link");
-    
+
         if (!link) {
           fclose(fp);
-    
+
           exit(EXIT_FAILURE);
         }
-    
+
         fprintf(
           fp,
           "                    <td><a href=\"%s/%s->%s\">%s</td>\n",
           date, from, to, text
         );
       }
-    
+
       else {
         fprintf(
           fp,
@@ -325,7 +325,7 @@ void gen_root_row_array_elem(FILE *fp, char *date, Json *elem) {
           text
         );
       }
-      
+
       fprintf(
         fp,
         "                  </tr>\n"
@@ -499,62 +499,62 @@ void gen_root_row_object(FILE *fp, char *date, Json *object) {
       );
 
       char *from = property2string(elem, "from");
-    
+
       if (!from) {
         fclose(fp);
-    
+
         exit(EXIT_FAILURE);
       }
-    
+
       fprint_place(fp, from);
-    
+
       fprintf(
         fp,
         "</td>\n"
         "                    <td>"
       );
-    
+
       char *to = property2string(elem, "to");
-    
+
       if (!to) {
         fclose(fp);
-    
+
         exit(EXIT_FAILURE);
       }
-    
+
       fprint_place(fp, to);
-    
+
       fprintf(
         fp,
         "</td>\n"
       );
 
       char *text = property2string(elem, "text");
-    
+
       if (!text) {
         fclose(fp);
-    
+
         exit(EXIT_FAILURE);
       }
-    
+
       Json *link = object_get(elem, "link");
-    
+
       if (link) {
         char *link = property2string(elem, "link");
-    
+
         if (!link) {
           fclose(fp);
-    
+
           exit(EXIT_FAILURE);
         }
-    
+
         fprintf(
           fp,
           "                    <td><a href=\"%s/%s->%s\">%s</td>\n",
           date, from, to, text
         );
       }
-    
+
       else {
         fprintf(
           fp,
@@ -562,7 +562,7 @@ void gen_root_row_object(FILE *fp, char *date, Json *object) {
           text
         );
       }
-      
+
       fprintf(
         fp,
         "                  </tr>\n"
