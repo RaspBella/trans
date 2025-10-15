@@ -138,23 +138,29 @@ void gen_root_tail(FILE *fp) {
   gen_tail(fp);
 }
 
+void gen_root_row(FILE *fp, char *date, Json *data) {
+  fprintf(stderr, "%p, %p, %p\n", fp, date, data);
+}
+
 void gen_root_rows(FILE *fp) {
-  struct Iterable date_it;
-  struct Iterable data_it;
+  struct Iterable its[2];
 
-  if (!iterable(&date_it, root)) return;
-  if (!iterable(&data_it, root)) return;
+  if (!iterable(&its[0], root) || !iterable(&its[1], root)) {
+    fprintf(stderr, "gen_root_rows: Failed to init iterable(s)\n");
 
-  char *date = key_iterate(&date_it);
-  Json *data = json_iterate(&data_it);
+    fclose(fp);
+
+    exit(EXIT_FAILURE);
+  }
+
+  char *date = key_iterate(&its[0]);
+  Json *data = json_iterate(&its[1]);
 
   do {
-    fprintf(stderr, "date: \"%s\"\ndata: ", date);
-    fprintj(stderr, data, indent);
-    fprintf(stderr, "\n");
+    gen_root_row(fp, date, data);
 
-    date = key_iterate(&date_it);
-    data = json_iterate(&data_it);
+    date = key_iterate(&its[0]);
+    data = json_iterate(&its[1]);
   } while (date && data);
 }
 
