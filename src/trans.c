@@ -28,10 +28,10 @@ int indent;
 void cleanup(void) {
   if (root) {
     if (!output) {
-      if (!dump(input, indent)) {
+if (!dump(input, indent)) {
         fprintf(stderr, "Error writing file: `%s`\n", input);
 
-        exit(EXIT_FAILURE);
+exit(EXIT_FAILURE);
       }
     }
 
@@ -73,13 +73,13 @@ void add(int argc, char **argv, enum mode mode) {
   exit(EXIT_SUCCESS);
 }
 
-void gen_head(FILE *fp) {
+void gen_head(FILE *fp, char *title) {
   fprintf(
     fp,
     "<!DOCTYPE html>\n"
     "<html lang=\"en\">\n"
     "  <head>\n"
-    "    <title>transportation - RaspBella</title>\n"
+    "    <title>%s - RaspBella</title>\n"
     "    <link rel=\"stylesheet\" href=\"/main.css\">\n"
     "    <meta charset=\"UTF-8\">\n"
     "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
@@ -97,12 +97,13 @@ void gen_head(FILE *fp) {
     "      <li><a href=\"/linux\">linux</a></li>\n"
     "      <li><a href=\"/media\">media</a></li>\n"
     "      <li><a class=\"active\" href=\"/trans\">transportation</a></li>\n"
-    "    </ul>\n"
+    "    </ul>\n",
+    title
   );
 }
 
 void gen_root_head(FILE *fp) {
-  gen_head(fp);
+  gen_head(fp, "transportation");
 
   fprintf(
     fp,
@@ -128,9 +129,9 @@ void gen_root_head(FILE *fp) {
 void gen_root_tail(FILE *fp) {
   fprintf(
     fp,
-    "      </tbody>\n"
-    "    </table>\n"
-    "  </div>\n"
+    "        </tbody>\n"
+    "      </table>\n"
+    "    </div>\n"
     "  </body>\n"
     "  <script src=\"trans.js\"></script>\n"
     "</html>"
@@ -168,7 +169,7 @@ char *property2string(Json *json, char *property) {
 
 void fprint_place(FILE *fp, char *place) {
   if (strlen(place) == 3 && VALID_CRS(place)) {
-    fprintf(fp, "%s [%s]", crs(place), place);
+    fprintf(fp, "%s(%s)", crs(place), place);
   }
 
   else {
@@ -682,6 +683,285 @@ void gen_root(FILE *fp) {
   gen_root_tail(fp);
 }
 
+void gen_yyyy_mm_dd_head(FILE *fp) {
+  fprintf(
+    fp,
+    "</h2>\n"
+    "      <table>\n"
+    "        <thead>\n"
+    "          <tr>\n"
+    "            <th>From</th>\n"
+    "            <th>To</th>\n"
+    "            <th>Sub</th>\n"
+    "            <th>Info</th>\n"
+    "          </tr>\n"
+    "        </thead>\n"
+    "        <tbody>\n"
+  );
+}
+
+void gen_yyyy_mm_dd_tail(FILE *fp) {
+  fprintf(
+    fp,
+    "        </tbody>\n"
+    "      </table>\n"
+    "    </div>\n"
+    "  </body>\n"
+    "</html>"
+  );
+}
+
+void gen_yyyy_mm_dd(FILE *fp, char *date, Json *data) {
+  const char *iso = "yyyy-mm-dd";
+  const char *template = "yyyy-mm-dd - transportation";
+
+  char title[strlen(template) + 1];
+
+  memcpy(title, date, strlen(iso));
+  memcpy(title + strlen(iso), template + strlen(iso), strlen(template + strlen(iso)));
+
+  title[strlen(template)] = 0;
+
+  gen_head(fp, title);
+
+  fprintf(
+    fp,
+    "    <div>\n"
+    "      <h1>%s</h1>\n",
+    date
+  );
+
+  switch (json_type(data)) {
+    case Json_Array:
+      break;
+
+    case Json_Object:
+      fprintf(fp, "      <h2>");
+
+      char *from = property2string(data, "from");
+
+      if (!from) {
+        fclose(fp);
+
+        exit(EXIT_FAILURE);
+      }
+
+      fprint_place(fp, from);
+
+      fprintf(fp, "->");
+
+      char *to = property2string(data, "to");
+
+      if (!to) {
+        fclose(fp);
+
+        exit(EXIT_FAILURE);
+      }
+
+      fprint_place(fp, to);
+
+      gen_yyyy_mm_dd_head(fp);
+        
+      fprintf(
+        fp,
+        "          <tr>\n"
+        "            <td>"
+      );
+
+      fprint_place(fp, from);
+
+      fprintf(
+        fp,
+        "</td>\n"
+        "            <td>"
+      );
+
+      fprint_place(fp, to);
+
+      fprintf(
+        fp,
+        "</td>\n"
+      );
+
+      Json *sub = object_get(data, "sub");
+
+      if (sub) {
+        fprintf(
+          fp,
+          "            <td>\n"
+          "              <table>\n"
+          "                <thead>\n"
+          "                  <tr>\n"
+          "                    <td>From</td>\n"
+          "                    <td>To</td>\n"
+          "                    <td>Info</td>\n"
+          "                  </tr>\n"
+          "                </thead>\n"
+          "                <tbody>\n"
+        );
+
+        struct Iterable it;
+
+        if (!iterable(&it, sub)) {
+          fprintf(stderr, "%s: failed to init iterator\n", __func__);
+
+          fclose(fp);
+
+          exit(EXIT_FAILURE);
+        }
+
+        for (Json *elem = json_iterate(&it); elem; elem = json_iterate(&it)) {
+          fprintf(
+            fp,
+            "                  <tr>\n"
+            "                    <td>"
+          );
+
+          char *from = property2string(elem, "from");
+
+          if (!from) {
+            fclose(fp);
+
+            exit(EXIT_FAILURE);
+          }
+
+          fprint_place(fp, from);
+
+          fprintf(
+            fp,
+            "</td>\n"
+            "                    <td>"
+          );
+
+          char *to = property2string(elem, "to");
+
+          if (!to) {
+            fclose(fp);
+
+            exit(EXIT_FAILURE);
+          }
+
+          fprint_place(fp, to);
+
+          fprintf(
+            fp,
+            "</td>\n"
+          );
+
+          char *text = property2string(elem, "text");
+
+          if (!text) {
+            fclose(fp);
+
+            exit(EXIT_FAILURE);
+          }
+
+          Json *link = object_get(elem, "link");
+
+          if (link) {
+            char *link = property2string(elem, "link");
+
+            if (!link) {
+              fclose(fp);
+
+              exit(EXIT_FAILURE);
+            }
+
+            fprintf(
+              fp,
+              "                    <td><a href=\"%s/%s->%s\">%s</td>\n",
+              date, from, to, text
+            );
+          }
+
+          else {
+            fprintf(
+              fp,
+              "                    <td>%s</td>\n",
+              text
+            );
+          }
+
+          fprintf(
+            fp,
+            "                  </tr>\n"
+          );
+        }
+
+        fprintf(
+          fp,
+          "                </tbody>\n"
+          "              </table>\n"
+          "            </td>\n"
+        );
+      }
+
+      else {
+        fprintf(
+          fp,
+          "            <td>N/A</td>\n"
+        );
+      }
+
+      char *text = property2string(data, "text");
+
+      if (!text) {
+        fclose(fp);
+
+        exit(EXIT_FAILURE);
+      }
+
+      Json *link = object_get(data, "link");
+
+      if (link) {
+        char *link = property2string(data, "link");
+
+        if (!link) {
+          fclose(fp);
+
+          exit(EXIT_FAILURE);
+        }
+
+        fprintf(
+          fp,
+          "            <td><a href=\"%s/%s->%s\">%s</td>\n",
+          date, from, to, text
+        );
+      }
+
+      else {
+        fprintf(
+          fp,
+          "            <td>%s</td>\n",
+          text
+        );
+      }
+
+      fprintf(
+        fp,
+        "          </tr>\n"
+      );
+
+      gen_yyyy_mm_dd_tail(fp);
+
+      break;
+
+    default:
+      fprintf(
+        stderr,
+        "%s: expected %s or %s got %s\n",
+        __func__,
+        json_type_string(Json_Array),
+        json_type_string(Json_Object),
+        json_type_string(json_type(data))
+      );
+
+      fclose(fp);
+
+      exit(EXIT_FAILURE);
+  }
+}
+
 void gen(int argc, char **argv, enum mode mode) {
   if (argc < 2) {
     usage(program, mode);
@@ -701,7 +981,7 @@ void gen(int argc, char **argv, enum mode mode) {
   struct stat sb;
 
   if (stat(output, &sb)) {
-    mkdir(output, S_IRWXU);
+    mkdir(output, S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH);
   }
 
   else {
@@ -720,9 +1000,58 @@ void gen(int argc, char **argv, enum mode mode) {
   memcpy(file, output, strlen(output));
   memcpy(file + strlen(output), slash_index, strlen(slash_index));
 
+  // file = "path/index.html"
   FILE *fp = fopen(file, "w");
 
   gen_root(fp);
+
+  struct Iterable its[2];
+
+  if (!iterable(&its[0], root) || !iterable(&its[1], root)) {
+    fprintf(stderr, "%s: Failed to init iterable(s)\n", __func__);
+
+    fclose(fp);
+
+    exit(EXIT_FAILURE);
+  }
+
+  char *date = key_iterate(&its[0]);
+  Json *data = json_iterate(&its[1]);
+
+  do {
+    memcpy(file + strlen(output) + 1, date, strlen(date));
+
+    file[strlen(output) + 1 + strlen(date)] = 0;
+
+    // file = "path/date"
+
+    struct stat sb;
+
+    if (stat(file, &sb)) {
+      mkdir(file, S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH);
+    }
+
+    else {
+      if (!S_ISDIR(sb.st_mode)) {
+        fprintf(stderr, "error: `%s` not a dir\n", file);
+
+        exit(EXIT_FAILURE);
+      }
+    }
+ 
+    memcpy(file + strlen(output) + 1 + strlen(date), slash_index, strlen(slash_index));
+
+    file[strlen(output) + 1 + strlen(date) + strlen(slash_index)] = 0;
+
+    // file = "path/date/index.html"
+
+    fp = freopen(file, "w", fp);
+
+    gen_yyyy_mm_dd(fp, date, data);
+
+    date = key_iterate(&its[0]);
+    data = json_iterate(&its[1]);
+  } while (date && data);
 
   fclose(fp);
   free(file);
