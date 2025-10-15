@@ -169,7 +169,7 @@ void gen_root(FILE *fp) {
 
   gen_root_rows(fp);
 
-  gen_root_head(fp);
+  gen_root_tail(fp);
 }
 
 void gen(int argc, char **argv, enum mode mode) {
