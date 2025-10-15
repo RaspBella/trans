@@ -109,7 +109,7 @@ void gen_tail(FILE *fp) {
   );
 }
 
-void gen_root(FILE *fp) {
+void gen_root_head(FILE *fp) {
   gen_head(fp);
 
   fprintf(
@@ -126,7 +126,19 @@ void gen_root(FILE *fp) {
     "      </thead>\n"
     "      <tbody>\n"
   );
+}
 
+void gen_root_tail(FILE *fp) {
+  fprintf(
+    fp,
+    "      </tbody>\n"
+    "    </table>\n"
+  );
+
+  gen_tail(fp);
+}
+
+void gen_root_rows(FILE *fp) {
   struct Iterable date_it;
   struct Iterable data_it;
 
@@ -144,14 +156,14 @@ void gen_root(FILE *fp) {
     date = key_iterate(&date_it);
     data = json_iterate(&data_it);
   } while (date && data);
+}
 
-  fprintf(
-    fp,
-    "      </tbody>\n"
-    "    </table>\n"
-  );
+void gen_root(FILE *fp) {
+  gen_root_head(fp);
 
-  gen_tail(fp);
+  gen_root_rows(fp);
+
+  gen_root_head(fp);
 }
 
 void gen(int argc, char **argv, enum mode mode) {
@@ -187,8 +199,10 @@ void gen(int argc, char **argv, enum mode mode) {
   size_t len = strlen(output) + strlen("/yyyy-mm-dd/abc->xyz/index.html");
   char *file = calloc(len + 1, sizeof(char));
 
+  const char *slash_index = "/index.html";
+
   memcpy(file, output, strlen(output));
-  memcpy(file + strlen(output), "/index.html", strlen("/index.html"));
+  memcpy(file + strlen(output), slash_index, strlen(slash_index));
 
   FILE *fp = fopen(file, "w");
 
