@@ -28,10 +28,10 @@ int indent;
 void cleanup(void) {
   if (root) {
     if (!output) {
-if (!dump(input, indent)) {
+      if (!dump(input, indent)) {
         fprintf(stderr, "Error writing file: `%s`\n", input);
 
-exit(EXIT_FAILURE);
+        exit(EXIT_FAILURE);
       }
     }
 
@@ -198,8 +198,9 @@ void gen_root_row_array_elem(FILE *fp, char *date, Json *elem) {
   );
 
   char *from = property2string(elem, "from");
+  char *to = property2string(elem, "to");
 
-  if (!from) {
+  if (!from || !to) {
     fclose(fp);
 
     exit(EXIT_FAILURE);
@@ -212,14 +213,6 @@ void gen_root_row_array_elem(FILE *fp, char *date, Json *elem) {
     "</td>\n"
     "            <td>"
   );
-
-  char *to = property2string(elem, "to");
-
-  if (!to) {
-    fclose(fp);
-
-    exit(EXIT_FAILURE);
-  }
 
   fprint_place(fp, to);
 
@@ -263,8 +256,9 @@ void gen_root_row_array_elem(FILE *fp, char *date, Json *elem) {
       );
 
       char *from = property2string(elem, "from");
+      char *to = property2string(elem, "to");
 
-      if (!from) {
+      if (!from || !to) {
         fclose(fp);
 
         exit(EXIT_FAILURE);
@@ -277,14 +271,6 @@ void gen_root_row_array_elem(FILE *fp, char *date, Json *elem) {
         "</td>\n"
         "                    <td>"
       );
-
-      char *to = property2string(elem, "to");
-
-      if (!to) {
-        fclose(fp);
-
-        exit(EXIT_FAILURE);
-      }
 
       fprint_place(fp, to);
 
@@ -301,9 +287,7 @@ void gen_root_row_array_elem(FILE *fp, char *date, Json *elem) {
         exit(EXIT_FAILURE);
       }
 
-      Json *link = object_get(elem, "link");
-
-      if (link) {
+      if (object_get(elem, "link")) {
         char *link = property2string(elem, "link");
 
         if (!link) {
@@ -356,9 +340,7 @@ void gen_root_row_array_elem(FILE *fp, char *date, Json *elem) {
     exit(EXIT_FAILURE);
   }
 
-  Json *link = object_get(elem, "link");
-
-  if (link) {
+  if (object_get(elem, "link")) {
     char *link = property2string(elem, "link");
 
     if (!link) {
@@ -435,8 +417,9 @@ void gen_root_row_object(FILE *fp, char *date, Json *object) {
   );
 
   char *from = property2string(object, "from");
+  char *to = property2string(object, "to");
 
-  if (!from) {
+  if (!from || !to) {
     fclose(fp);
 
     exit(EXIT_FAILURE);
@@ -449,14 +432,6 @@ void gen_root_row_object(FILE *fp, char *date, Json *object) {
     "</td>\n"
     "            <td>"
   );
-
-  char *to = property2string(object, "to");
-
-  if (!to) {
-    fclose(fp);
-
-    exit(EXIT_FAILURE);
-  }
 
   fprint_place(fp, to);
 
@@ -500,8 +475,9 @@ void gen_root_row_object(FILE *fp, char *date, Json *object) {
       );
 
       char *from = property2string(elem, "from");
+      char *to = property2string(elem, "to");
 
-      if (!from) {
+      if (!from || !to) {
         fclose(fp);
 
         exit(EXIT_FAILURE);
@@ -514,14 +490,6 @@ void gen_root_row_object(FILE *fp, char *date, Json *object) {
         "</td>\n"
         "                    <td>"
       );
-
-      char *to = property2string(elem, "to");
-
-      if (!to) {
-        fclose(fp);
-
-        exit(EXIT_FAILURE);
-      }
 
       fprint_place(fp, to);
 
@@ -538,9 +506,7 @@ void gen_root_row_object(FILE *fp, char *date, Json *object) {
         exit(EXIT_FAILURE);
       }
 
-      Json *link = object_get(elem, "link");
-
-      if (link) {
+      if (object_get(elem, "link")) {
         char *link = property2string(elem, "link");
 
         if (!link) {
@@ -593,9 +559,7 @@ void gen_root_row_object(FILE *fp, char *date, Json *object) {
     exit(EXIT_FAILURE);
   }
 
-  Json *link = object_get(object, "link");
-
-  if (link) {
+  if (object_get(object, "link")) {
     char *link = property2string(object, "link");
 
     if (!link) {
@@ -710,7 +674,7 @@ void gen_yyyy_mm_dd_tail(FILE *fp) {
   );
 }
 
-void gen_yyyy_mm_dd_row(FILE *fp, char *date, Json *object) {
+void gen_yyyy_mm_dd_row(FILE *fp, Json *object) {
   char *from = property2string(object, "from");
   char *to = property2string(object, "to");
 
@@ -776,8 +740,9 @@ void gen_yyyy_mm_dd_row(FILE *fp, char *date, Json *object) {
       );
 
       char *from = property2string(elem, "from");
+      char *to = property2string(elem, "to");
 
-      if (!from) {
+      if (!from || !to) {
         fclose(fp);
 
         exit(EXIT_FAILURE);
@@ -790,14 +755,6 @@ void gen_yyyy_mm_dd_row(FILE *fp, char *date, Json *object) {
         "</td>\n"
         "                    <td>"
       );
-
-      char *to = property2string(elem, "to");
-
-      if (!to) {
-        fclose(fp);
-
-        exit(EXIT_FAILURE);
-      }
 
       fprint_place(fp, to);
 
@@ -814,9 +771,7 @@ void gen_yyyy_mm_dd_row(FILE *fp, char *date, Json *object) {
         exit(EXIT_FAILURE);
       }
 
-      Json *link = object_get(elem, "link");
-
-      if (link) {
+      if (object_get(elem, "link")) {
         char *link = property2string(elem, "link");
 
         if (!link) {
@@ -827,8 +782,8 @@ void gen_yyyy_mm_dd_row(FILE *fp, char *date, Json *object) {
 
         fprintf(
           fp,
-          "                    <td><a href=\"%s/%s->%s\">%s</td>\n",
-          date, from, to, text
+          "                    <td><a href=\"%s->%s\">%s</td>\n",
+          from, to, text
         );
       }
 
@@ -869,9 +824,7 @@ void gen_yyyy_mm_dd_row(FILE *fp, char *date, Json *object) {
     exit(EXIT_FAILURE);
   }
 
-  Json *link = object_get(object, "link");
-
-  if (link) {
+  if (object_get(object, "link")) {
     char *link = property2string(object, "link");
 
     if (!link) {
@@ -882,8 +835,8 @@ void gen_yyyy_mm_dd_row(FILE *fp, char *date, Json *object) {
 
     fprintf(
       fp,
-      "            <td><a href=\"%s/%s->%s\">%s</td>\n",
-      date, from, to, text
+      "            <td><a href=%s->%s\">%s</td>\n",
+      from, to, text
     );
   }
 
@@ -908,7 +861,12 @@ void gen_yyyy_mm_dd(FILE *fp, char *date, Json *data) {
   char title[strlen(template) + 1];
 
   memcpy(title, date, strlen(iso));
-  memcpy(title + strlen(iso), template + strlen(iso), strlen(template + strlen(iso)));
+
+  memcpy(
+    title + strlen(iso),
+    template + strlen(iso),
+    strlen(template + strlen(iso))
+  );
 
   title[strlen(template)] = 0;
 
@@ -936,13 +894,13 @@ void gen_yyyy_mm_dd(FILE *fp, char *date, Json *data) {
       }
 
       for (Json *elem = json_iterate(&it); elem; elem = json_iterate(&it)) {
-        gen_yyyy_mm_dd_row(fp, date, elem);
+        gen_yyyy_mm_dd_row(fp, elem);
       }
 
       break;
 
     case Json_Object:
-      gen_yyyy_mm_dd_row(fp, date, data);
+      gen_yyyy_mm_dd_row(fp, data);
 
       break;
 
@@ -962,6 +920,154 @@ void gen_yyyy_mm_dd(FILE *fp, char *date, Json *data) {
   }
 
   gen_yyyy_mm_dd_tail(fp);
+}
+
+void gen_link(FILE *fp, char *link) {
+  fprintf(
+    fp,
+    "<meta http-equiv=\"Refresh\" content=\"0; %s\" />",
+    link
+  );
+}
+
+void file_root(char *file, char *output, const char *slash_index) {
+  memcpy(file, output, strlen(output));
+
+  memcpy(
+    file + strlen(output),
+    slash_index,
+    strlen(slash_index)
+  );
+}
+
+void file_date(char *file, char *output, char *date) {
+  memcpy(
+    file + strlen(output) + 1,
+    date,
+    strlen(date)
+  );
+
+  file[strlen(output) + 1 + strlen(date)] = 0;
+}
+
+void file_date_index(char *file, char *output, char *date, const char *slash_index) {
+  memcpy(
+    file + strlen(output) + 1 + strlen(date),
+    slash_index,
+    strlen(slash_index)
+  );
+
+  file[strlen(output) + 1 + strlen(date) + strlen(slash_index)] = 0;
+}
+
+void file_data_abc_xyz(char *file, char *output, char *date, char *from, const char *arrow, char *to) {
+  memcpy(
+    file + strlen(output) + 1 + strlen(date) + 1,
+    from,
+    strlen(from)
+  );
+
+  memcpy(
+    file + strlen(output) + 1 + strlen(date) + 1 + strlen(from),
+    arrow,
+    strlen(arrow)
+  );
+
+  memcpy(
+    file + strlen(output) + 1 + strlen(date) + 1 + strlen(from) + strlen(arrow),
+    to,
+    strlen(to)
+  );
+
+  file[strlen(output) + 1 + strlen(date) + 1 + strlen(from) + strlen(arrow) + strlen(to)] = 0;
+}
+
+void file_data_abc_xyz_index(char *file, char *output, char *date, char *from, const char *arrow, char *to, const char *slash_index) {
+  memcpy(
+    file + strlen(output) + 1 + strlen(date) + 1 + strlen(from) + strlen(arrow) + strlen(to),
+    slash_index,
+    strlen(slash_index)
+  );
+}
+
+void gen_links(FILE **fp, char *file, Json *json, char *output, char *date, const char *arrow, const char *slash_index) {
+  switch (json_type(json)) {
+    case Json_Array:
+      struct Iterable it;
+
+      if (!iterable(&it, json)) {
+        fprintf(stderr, "%s: failed to init iterator\n", __func__);
+
+        fclose(*fp);
+
+        exit(EXIT_FAILURE);
+      }
+
+      for (Json *elem = json_iterate(&it); elem; elem = json_iterate(&it)) {
+        gen_links(fp, file, elem, output, date, arrow, slash_index);
+      }
+
+      break;
+
+    case Json_Object:
+      if (object_get(json, "link")) {
+        char *link = property2string(json, "link");
+
+        char *from = property2string(json, "from");
+        char *to = property2string(json, "to");
+
+        if (!from || !to) {
+          fclose(*fp);
+
+          exit(EXIT_FAILURE);
+        }
+
+        file_data_abc_xyz(file, output, date, from, arrow, to);
+        // file = "path/date/abc->xzy"
+
+        struct stat sb;
+
+        if (stat(file, &sb)) {
+          mkdir(file, S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH);
+        }
+
+        else {
+          if (!S_ISDIR(sb.st_mode)) {
+            fprintf(stderr, "error: `%s` not a dir\n", file);
+
+            exit(EXIT_FAILURE);
+          }
+        }
+
+        file_data_abc_xyz_index(file, output, date, from, arrow, to, slash_index);
+        // file = "path/date/abc->xzy/index.html"
+        *fp = freopen(file, "w", *fp);
+
+        gen_link(*fp, link);
+      }
+
+      Json *sub = object_get(json, "sub");
+
+      if (sub) {
+        gen_links(fp, file, sub, output, date, arrow, slash_index);
+      }
+
+      break;
+
+    default:
+      fprintf(
+        stderr,
+        "%s: expected %s or %s got %s\n",
+        __func__,
+        json_type_string(Json_Array),
+        json_type_string(Json_Object),
+        json_type_string(json_type(json))
+      );
+
+      fclose(*fp);
+
+      exit(EXIT_FAILURE);
+  }
 }
 
 void gen(int argc, char **argv, enum mode mode) {
@@ -998,10 +1104,9 @@ void gen(int argc, char **argv, enum mode mode) {
   char *file = calloc(len + 1, sizeof(char));
 
   const char *slash_index = "/index.html";
+  const char *arrow = "->";
 
-  memcpy(file, output, strlen(output));
-  memcpy(file + strlen(output), slash_index, strlen(slash_index));
-
+  file_root(file, output, slash_index);
   // file = "path/index.html"
   FILE *fp = fopen(file, "w");
 
@@ -1021,10 +1126,7 @@ void gen(int argc, char **argv, enum mode mode) {
   Json *data = json_iterate(&its[1]);
 
   do {
-    memcpy(file + strlen(output) + 1, date, strlen(date));
-
-    file[strlen(output) + 1 + strlen(date)] = 0;
-
+    file_date(file, output, date);
     // file = "path/date"
 
     struct stat sb;
@@ -1041,15 +1143,13 @@ void gen(int argc, char **argv, enum mode mode) {
       }
     }
  
-    memcpy(file + strlen(output) + 1 + strlen(date), slash_index, strlen(slash_index));
-
-    file[strlen(output) + 1 + strlen(date) + strlen(slash_index)] = 0;
-
+    file_date_index(file, output, date, slash_index);
     // file = "path/date/index.html"
-
     fp = freopen(file, "w", fp);
 
     gen_yyyy_mm_dd(fp, date, data);
+
+    gen_links(&fp, file, data, output, date, arrow, slash_index);
 
     date = key_iterate(&its[0]);
     data = json_iterate(&its[1]);
