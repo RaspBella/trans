@@ -50,13 +50,13 @@
         code.value = "";
       }
 
-      code.addEventListener("keydown", function (e) {
+      code.addEventListener("keydown", (e) => {
         if (e.code === "Enter") {
           submit_code();
         }
       });
  
-      name.addEventListener("keydown", function (e) {
+      name.addEventListener("keydown", (e) => {
         if (e.code === "Enter") {
           submit_name();
         }

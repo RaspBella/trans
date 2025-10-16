@@ -11,8 +11,24 @@ fetch("data.json")
       today.remove();
     }
 
+    function parse_query(input, data) {
+      let res = data;
+
+      return res;
+    }
+
+    query.addEventListener("keydown", (e) => {
+      if (e.code === "Enter") {
+        let res = parse_query(query.value, data);
+
+        console.log(res);
+      }
+    });
+
     submit_query.addEventListener("click", () => {
-      console.log(query.textContent);
+      let res = parse_query(query.value, data);
+
+      console.log(res);
     });
   })
   .catch((error) => console.log("Error loading JSON file", error));
