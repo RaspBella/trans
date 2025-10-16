@@ -5,12 +5,22 @@ o=$(c:.c=.o)
 d=$(c:.c=.d)
 
 BIN=trans
-LINKS=$(BIN)-add $(BIN)-gen
+LINKS=trans-gen trans-add
 
-.PHONY: all clean
+DATA_FILE=../docs/data.json
+OUT_DIR=../docs
 
-all: ../docs/crs.mjs $(LINKS)
-	./trans-gen ../docs/data.json ../docs
+.PHONY: all clean gen add wasm
+
+all: wasm gen
+
+gen: $(BIN)-gen
+	./$< $(DATA_FILE) $(OUT_DIR)
+
+add: $(BIN)-add
+	./$< $(DATA_FILE)
+
+wasm: ../docs/crs.mjs
 
 $(BIN)-%: $(BIN)
 	ln -sf $< $@
