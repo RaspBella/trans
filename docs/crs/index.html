@@ -6,15 +6,19 @@
   </head>
   <body>
     <div class="container">
-      <label>CRS<label>
+      <label>CRS</label>
       <input type="text" id="code" minlength="3" maxlength="3"/>
+      <button onclick="submit_code()">Submit CRS</button>
+      <br><br>
       <label>Name</label>
       <input type="text" id="name"/>
+      <button onclick="submit_name()">Submit Name</button>
     </div>
     <script type="module" src="crs.js"></script>
     <script>
       const code = document.getElementById("code");
       const name = document.getElementById("name");
+      const button = document.getElementById("button");
 
       function submit_code() {
         if (/^[a-zA-Z]{3}$/.test(code.value)) {
@@ -45,9 +49,6 @@
 
         code.value = "";
       }
-
-      code.addEventListener("change", submit_code);
-      name.addEventListener("change", submit_name);
 
       code.addEventListener("keydown", function (e) {
         if (e.code === "Enter") {
