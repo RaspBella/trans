@@ -7,7 +7,10 @@ d=$(c:.c=.d)
 BIN=trans
 LINKS=$(BIN)-add $(BIN)-gen
 
-all: ../docs/crs.mjs $(LINKS) gen
+.PHONY: all clean
+
+all: ../docs/crs.mjs $(LINKS)
+	./trans-gen ../docs/data.json ../docs
 
 $(BIN)-%: $(BIN)
 	ln -sf $< $@
@@ -23,12 +26,6 @@ bestline.o: bestline.c
 
 -include $(d)
 
-gen: crs.py libcrs.so
-	python gen.py
-
-add: question.py crs.py libcrs.so
-	python add.py
-
 ../docs/crs.mjs: crs.c
 	emcc $< -o $@ \
 		-s WASM=1 \
@@ -38,8 +35,5 @@ add: question.py crs.py libcrs.so
 		-s EXPORTED_RUNTIME_METHODS='["lengthBytesUTF8", "stringToUTF8", "UTF8ToString"]' \
 		-O3
 
-libcrs.so: crs.c
-	cc ${CFLAGS} -shared $< -o $@
-
 clean:
-	rm -rf libcrs.so __pycache__ ../docs/crs.mjs ../docs/crs.wasm ../docs/index.html ../docs/????-??-?? $(o) $(d) $(BIN) $(LINKS)
+	rm -rf ../docs/crs.mjs ../docs/crs.wasm ../docs/index.html ../docs/????-??-?? $(o) $(d) $(BIN) $(LINKS)
