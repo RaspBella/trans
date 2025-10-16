@@ -3,14 +3,16 @@ fetch("data.json")
   .then((data) => {
     const date = new Date().toISOString().substring(0, 10);
 
-    const today = document.getElementById("today");
-
     if (Object.hasOwn(data, date)) {
-      document.getElementById("today-link").text = "today!";
+      today_link.text = "today!";
     }
 
     else {
       today.remove();
     }
+
+    submit_query.addEventListener("click", () => {
+      console.log(query.textContent);
+    });
   })
   .catch((error) => console.log("Error loading JSON file", error));
