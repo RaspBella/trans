@@ -12,23 +12,31 @@ fetch("data.json")
     }
 
     function parse_query(input, data) {
-      let res = data;
+      let tokens = input.split(/[\s]+/).filter((str) => str != "");
 
-      return res;
+      if (tokens.length > 0) {
+        alert(`tokens: ${JSON.stringify(tokens)}`);
+
+        let res = data;
+
+        return res;
+      }
+
+      return data
     }
 
     query.addEventListener("keydown", (e) => {
       if (e.code === "Enter") {
         let res = parse_query(query.value, data);
 
-        console.log(res);
+        alert(`res: ${JSON.stringify(res)}`);
       }
     });
 
     submit_query.addEventListener("click", () => {
       let res = parse_query(query.value, data);
 
-      console.log(res);
+      alert(`res: ${JSON.stringify(res)}`);
     });
   })
   .catch((error) => console.log("Error loading JSON file", error));
