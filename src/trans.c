@@ -840,7 +840,7 @@ void gen_yyyy_mm_dd_row(FILE *fp, Json *object) {
 
     fprintf(
       fp,
-      "            <td><a href=%s->%s\">%s</td>\n",
+      "            <td><a href=\"%s->%s\">%s</td>\n",
       from, to, text
     );
   }
