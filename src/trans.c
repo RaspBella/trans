@@ -111,6 +111,8 @@ void gen_root_head(FILE *fp) {
     "      <ul class=\"nav\">\n"
     "        <li id=\"today\"><a id=\"today-link\" href=\"today\">today?</a></li>\n"
     "        <li><a href=\"crs\">crs</a></li>\n"
+    "        <li><a href=\"tww\">tww</a><li>\n"
+    "        <li><input type=\"text\" placeholder=\"db query...\"></li>\n"
     "      </ul>\n"
     "      <table>\n"
     "        <thead>\n"
