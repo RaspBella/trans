@@ -1,4 +1,4 @@
-name: Build with Make and Python and Deploy to GitHub Pages
+name: Build with Makefile and Deploy to GitHub Pages
 
 on:
   push:
