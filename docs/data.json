@@ -359,6 +359,38 @@
       }
     ]
   },
+  "2025-06-05": {
+    "from": "Glasgow Buchanan Bus Station",
+    "to": "Inverness Bus Station",
+    "text": "Inverness Bus for NHS 2025"
+  },
+  "2025-06-06": {
+    "from": "Inverness Bus Station",
+    "to": "Wick Bus Terminal",
+    "text": "X99 Thurso Bus for NHS 2025"
+  },
+  "2025-06-09": {
+    "from": "Wick Bus Terminal",
+    "to": "Bathgate",
+    "text": "Leave NHS 2025",
+    "sub": [
+      {
+        "from": "Wick Bus Terminal",
+        "to": "Inverness Bus Station",
+        "text": "X99 Inverness Bus"
+      },
+      {
+        "from": "Inverness Bus Station",
+        "to": "Edinburgh, West End",
+        "text": "Edinburgh Bus"
+      },
+      {
+        "from": "Edinburgh, West End",
+        "to": "Bathgate",
+        "text": "X18 Whitburn Bus"
+      }
+    ]
+  },
   "2025-06-14": {
     "from": "GLC",
     "to": "MIA",
