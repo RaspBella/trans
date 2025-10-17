@@ -123,9 +123,9 @@ static Token __lex(void) {
           return (Token){
             .type = Token_CRS,
             .value.crs = {
-              [0] = this.input[this.pos - 3],
-              [1] = this.input[this.pos + 1 - 3],
-              [2] = this.input[this.pos + 2 - 3],
+              [0] = toupper(this.input[this.pos - 3]),
+              [1] = toupper(this.input[this.pos + 1 - 3]),
+              [2] = toupper(this.input[this.pos + 2 - 3]),
               [3] = 0
             }
           };
