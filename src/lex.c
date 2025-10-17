@@ -8,6 +8,12 @@
 #include <string.h>
 #include <ctype.h>
 
+#define a_z(c) (c >= 'a' && c <= 'z')
+
+#define A_Z(c) (c >= 'A' && c <= 'Z')
+
+#define a_z_A_Z(c) (a_z(c) || A_Z(c))
+
 static Lexer this;
 
 static void skip_whitespace(void) {
@@ -111,7 +117,7 @@ static Token __lex(void) {
         }
 
       default:
-        if (VALID_CRS((this.input + this.pos))) {
+        if (strlen(this.input + this.pos) >= 3 && !a_z_A_Z(this.input[this.pos + 3]) && CASE_I_VALID_CRS(this.input + this.pos)) {
           this.pos += 3;
 
           return (Token){

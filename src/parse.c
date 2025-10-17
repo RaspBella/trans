@@ -59,11 +59,7 @@ static bool statement_exit(void) {
   return false;
 }
 
-static bool statement_select(char *date) {
-  if (!eat('[')) {
-    return false;
-  }
-
+static bool statement_date(char *date) {
   Token year = this.token;
 
   if (!eat(Token_Num)) {
@@ -87,10 +83,6 @@ static bool statement_select(char *date) {
   Token day = this.token;
 
   if (!eat(Token_Num)) {
-    return false;
-  }
-
-  if (!eat(']')) {
     return false;
   }
 
@@ -124,10 +116,10 @@ static bool statement_print(void) {
     return true;
   }
 
-  else if (this.token.type == '[') {
+  else if (this.token.type == Token_Num) {
     char date[DATE_SIZE] = { 0 };
 
-    if (!statement_select(date)) {
+    if (!statement_date(date)) {
       return false;
     }
 
@@ -135,7 +127,7 @@ static bool statement_print(void) {
       return false;
     }
 
-    printf("[%s] = ", date);
+    printf("%s = ", date);
 
     Json *value = object_get(root, date);
 
@@ -229,10 +221,10 @@ static bool statement(void) {
           return false;
       }
 
-    case '[':
+    case Token_Num:
       char date[DATE_SIZE] = { 0 };
 
-      if (!statement_select(date)) {
+      if (!statement_date(date)) {
         return false;
       }
 
