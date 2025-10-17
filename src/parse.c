@@ -2,11 +2,11 @@
 #include "lex.h"
 #include "token.h"
 #include "keyword.h"
-#include "journey.h"
 #include "utils.h"
 #include "json.h"
 
 #include <stdbool.h>
+#include <string.h>
 #include <stdio.h>
 
 #define DATE_SIZE 11
@@ -147,7 +147,7 @@ static bool statement_print(void) {
   return false;
 }
 
-static Journey *statement_obj(bool can_have_sub) {
+Json *statement_object(bool can_have_sub) {
   Token from = this.token;
 
   if (!eat(Token_CRS)) {
@@ -183,15 +183,15 @@ static Journey *statement_obj(bool can_have_sub) {
     }
   }
 
-  JourneyArray sub = { 0 };
+  Json *sub = new_json(Json_Array, NULL);
 
   if (can_have_sub) {
     if (eat('[')) {
 get_next:
-      Journey *new = statement_obj(false);
+      Json *new = statement_object(false);
 
       if (new) {
-        da_append(&sub, new);
+        array_append(sub, new);
 
         if (eat(',')) {
           goto get_next;
@@ -203,8 +203,28 @@ get_next:
       }
     }
   }
+
+  Json *object = new_json(Json_Object, NULL);
+
+  object_set(object, "from", new_json(Json_String, strdup(from.value.crs)), false);
+
+  object_set(object, "to", new_json(Json_String, strdup(to.value.crs)), false);
+
+  object_set(object, "text", new_json(Json_String, text.value.str), false);
+
+  if (link.value.str) {
+    object_set(object, "link", new_json(Json_String, link.value.str), false);
+  }
+
+  if (length(sub) > 0) {
+    object_set(object, "sub", sub, false);
+  }
+
+  else {
+    free_json(sub);
+  }
  
-  return new_journey(from.value.crs, to.value.crs, text.value.str, link.value.str, sub);
+  return object;
 }
 
 static bool statement(void) {
@@ -236,25 +256,25 @@ static bool statement(void) {
       
       this.token = lex();
 
-      Journey *new = statement_obj(true);
+      Json *object = statement_object(true);
 
-      if (!new) {
+      if (!object) {
         return false;
       }
 
       if (op.type == '=') {
         printf("set %s to ", date);
-        print_journey(new);
+        fprintj(stdout, object, this.indent);
         putchar('\n');
 
-        object_set(root, date, journey_to_json(new), true);
+        object_set(root, date, object, true);
 
         object_sort(root);
       }
 
       else if (op.type == Token_Append) {
         printf("append ");
-        print_journey(new);
+        fprintj(stdout, object, this.indent);
         printf(" to %s\n", date);
 
         Json *json = object_get(root, date);
@@ -264,18 +284,18 @@ static bool statement(void) {
 
           switch (type) {
             case Json_Array:
-              array_append(json, journey_to_json(new));
+              array_append(json, object);
 
               break;
 
             case Json_Object:
-              Json *a = new_json(Json_Array, NULL);
+              Json *array = new_json(Json_Array, NULL);
 
-              array_append(a, json);
+              array_append(array, json);
 
-              array_append(a, journey_to_json(new));
+              array_append(array, object);
 
-              object_set(root, date, a, false);
+              object_set(root, date, array, false);
 
               break;
 
@@ -291,20 +311,18 @@ static bool statement(void) {
 
               free_json(json);
 
-              free_journey(new);
+              free_json(object);
 
               return false;
           }
         }
 
         else{
-          object_set(root, date, journey_to_json(new), true);
+          object_set(root, date, object, false);
 
           object_sort(root);
         }
       }
-
-      free_journey(new);
 
       return true;
 
