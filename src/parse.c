@@ -147,10 +147,24 @@ static bool statement_print(void) {
   return false;
 }
 
-Json *statement_object(bool can_have_sub) {
-  Token from = this.token;
+Json *statement_location(void) {
+  Token location = this.token;
 
-  if (!eat(Token_CRS)) {
+  if (eat(Token_Str)) {
+    return new_json(Json_String, location.value.str);
+  }
+
+  else if (eat(Token_CRS)) {
+    return new_json(Json_String, strdup(location.value.crs));
+  }
+
+  return NULL;
+}
+
+Json *statement_object(bool can_have_sub) {
+  Json *from = statement_location();
+
+  if (!from) {
     return NULL;
   }
 
@@ -158,9 +172,9 @@ Json *statement_object(bool can_have_sub) {
     return NULL;
   }
 
-  Token to = this.token;
+  Json *to = statement_location();
 
-  if (!eat(Token_CRS)) {
+  if (!to) {
     return NULL;
   }
 
@@ -206,9 +220,9 @@ get_next:
 
   Json *object = new_json(Json_Object, NULL);
 
-  object_set(object, "from", new_json(Json_String, strdup(from.value.crs)), false);
+  object_set(object, "from", from, false);
 
-  object_set(object, "to", new_json(Json_String, strdup(to.value.crs)), false);
+  object_set(object, "to", to, false);
 
   object_set(object, "text", new_json(Json_String, text.value.str), false);
 
