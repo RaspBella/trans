@@ -174,7 +174,23 @@ char *property2string(Json *json, char *property) {
 
 void fprint_place(FILE *fp, char *place) {
   if (strlen(place) == 3 && VALID_CRS(place)) {
-    fprintf(fp, "%s(%s)", crs(place), place);
+    const char *str = crs(place);
+
+    if (str) {
+      char *has_sep = strchr(str, *SEP);
+
+      if (has_sep) {
+        fprintf(fp, "%.*s(%s)", (int)(has_sep - str), str, place);
+      }
+
+      else {
+        fprintf(fp, "%s(%s)", crs(place), place);
+      }
+    }
+
+    else {
+      fprintf(fp, "UNKNOWN(%s)", place);
+    }
   }
 
   else {

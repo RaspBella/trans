@@ -10,5 +10,7 @@
 
 #define CASE_I_VALID_CRS(code) (VALID_CRS((code)) || LOWERCASE_VALID_CRS((code)))
 
+#define SEP "\n"
+
 const char *crs(const char *code);
 const char *src(const char *name);
