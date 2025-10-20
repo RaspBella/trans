@@ -1,3 +1,5 @@
+#define _GNU_SOURCE
+
 #include <assert.h>
 #include <string.h>
 
@@ -27,16 +29,34 @@ const char *src(const char *name) {
   for (int i = 0; i < 26; i++) {
     for (int j = 0; j < 26; j++) {
       for (int k = 0; k < 26; k++) {
-        if (db[i][j][k]) {
-          if (!strcasecmp(db[i][j][k], name)) {
-            code[0] = i + 'A';
-            code[1] = j + 'A';
-            code[2] = k + 'A';
+        const char *entry = db[i][j][k];
+
+        if (entry) {
+          char *p = strchrnul(entry, *SEP);
+
+          if (*p) {
+            if (!strncasecmp(entry, name, p - name)) {
+              code[0] = i + 'A';
+              code[1] = j + 'A';
+              code[2] = k + 'A';
+
+              return code;
+            }
+          }
+
+          else {
+            if (!strcasecmp(entry, name)) {
+              code[0] = i + 'A';
+              code[1] = j + 'A';
+              code[2] = k + 'A';
+
+              return code;
+            }
           }
         }
       }
     }
   }
 
-  return code;
+  return NULL;
 }
