@@ -35,7 +35,7 @@ const char *src(const char *name) {
           char *p = strchrnul(entry, *SEP);
 
           if (*p) {
-            if (!strncasecmp(entry, name, p - name)) {
+            if (!strncasecmp(entry, name, p - name - 1)) {
               code[0] = i + 'A';
               code[1] = j + 'A';
               code[2] = k + 'A';
