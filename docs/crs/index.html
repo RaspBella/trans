@@ -46,12 +46,22 @@
       }
 
       function submit_name() {
-        const result = src(name.value);
+        let result = src(name.value);
 
         if (result && result != "") {
           code.value = result;
 
-          name.value = crs(code.value);
+          result = crs(result);
+
+          let has_sep = result.indexOf(SEP);
+
+          if (has_sep === -1) {
+            name.value = result;
+          }
+
+          else {
+            name.value = result.slice(0, has_sep);
+          }
 
           return;
         }
