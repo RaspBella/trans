@@ -1,11 +1,11 @@
 CFLAGS=-Wall -Wextra -Werror -ggdb
 
-c=$(wildcard *.c)
-o=$(c:.c=.o)
-d=$(c:.c=.d)
+srcs=$(filter-out stations.c, $(wildcard *.c))
+objs=$(srcs:.c=.o)
+deps=$(srcs:.c=.d)
 
 BIN=trans
-LINKS=trans-gen trans-add
+LINKS=$(BIN)-gen $(BIN)-add
 
 DATA_FILE=../docs/data.json
 OUT_DIR=../docs
@@ -25,7 +25,7 @@ wasm: ../docs/crs.mjs
 $(BIN)-%: $(BIN)
 	ln -sf $< $@
 
-$(BIN): $(o)
+$(BIN): $(objs)
 	cc ${CFLAGS} -o $@ $^
 
 %.o: %.c
@@ -34,7 +34,7 @@ $(BIN): $(o)
 bestline.o: bestline.c
 	cc -MMD -c -o $@ $<
 
--include $(d)
+-include $(deps)
 
 ../docs/crs.mjs: crs.c
 	emcc $< -o $@ \
@@ -46,4 +46,4 @@ bestline.o: bestline.c
 		-O3
 
 clean:
-	rm -rf ../docs/crs.mjs ../docs/crs.wasm ../docs/index.html ../docs/????-??-?? $(o) $(d) $(BIN) $(LINKS)
+	rm -rf ../docs/crs.mjs ../docs/crs.wasm ../docs/index.html ../docs/????-??-?? $(objs) $(deps) $(BIN) $(LINKS)
