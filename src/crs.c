@@ -3,6 +3,8 @@
 
 #include "crs.h"
 
+#define SEP "\n"
+
 #define CTOI(c) c - 'A'
 #define INDEX_DB(code) db[CTOI(code[0])][CTOI(code[1])][CTOI(code[2])]
 #define STATION(name, code) INDEX_DB(code) = name
