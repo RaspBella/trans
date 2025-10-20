@@ -16,6 +16,7 @@
     </div>
     <script type="module" src="crs.js"></script>
     <script>
+      const SEP = "\n";
       const code = document.getElementById("code");
       const name = document.getElementById("name");
       const button = document.getElementById("button");
@@ -27,7 +28,15 @@
           if (result) {
             code.value = code.value.toUpperCase();
 
-            name.value = result;
+            let has_sep = result.indexOf(SEP);
+
+            if (has_sep === -1) {
+              name.value = result;
+            }
+
+            else {
+              name.value = result.slice(0, has_sep);
+            }
 
             return;
           }
