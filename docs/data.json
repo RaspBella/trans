@@ -707,5 +707,67 @@
         "link": "https://www.realtimetrains.co.uk/service/gb-nr:Y68503/2025-12-08/detailed"
       }
     ]
+  },
+  "2026-01-01": {
+    "from": "EDB",
+    "to": "CRE",
+    "text": "Go to Crewe for WSMW 2026",
+    "sub": [
+      {
+        "from": "EDB",
+        "to": "YRK",
+        "text": "CrossCountry",
+        "link": "https://www.realtimetrains.co.uk/service/gb-nr:C75098/2026-01-01/detailed"
+      },
+      {
+        "from": "YRK",
+        "to": "DON",
+        "text": "LNER",
+        "link": "https://www.realtimetrains.co.uk/service/gb-nr:Y12007/2026-01-01/detailed"
+      },
+      {
+        "from": "DON",
+        "to": "SPT",
+        "text": "TPE",
+        "link": "https://www.realtimetrains.co.uk/service/gb-nr:C43608/2026-01-01/detailed"
+      },
+      {
+        "from": "SPT",
+        "to": "CRE",
+        "text": "Northern",
+        "link": "https://www.realtimetrains.co.uk/service/gb-nr:L08713/2026-01-01/detailed"
+      }
+    ]
+  },
+  "2026-01-06": {
+    "from": "CRE",
+    "to": "EDB",
+    "text": "Go home?",
+    "sub": [
+      {
+        "from": "CRE",
+        "to": "MAN",
+        "text": "Northern",
+        "link": "https://www.realtimetrains.co.uk/service/gb-nr:L08909/2026-01-01/detailed"
+      },
+      {
+        "from": "MAN",
+        "to": "MCV",
+        "text": "TPE",
+        "link": "https://www.realtimetrains.co.uk/service/gb-nr:L36834/2026-01-01/detailed"
+      },
+      {
+        "from": "MCV",
+        "to": "YRK",
+        "text": "TPE?",
+        "link": "https://timetables.trainsplit.com/times.aspx?uid=L36840&date=20260106"
+      },
+      {
+        "from": "YRK",
+        "to": "EDB",
+        "text": "LNER",
+        "link": "https://www.realtimetrains.co.uk/service/gb-nr:C41060/2026-01-01/detailed"
+      }
+    ]
   }
 }
