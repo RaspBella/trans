@@ -742,7 +742,7 @@
   "2026-01-06": {
     "from": "CRE",
     "to": "EDB",
-    "text": "Go home?",
+    "text": "Go home",
     "sub": [
       {
         "from": "CRE",
@@ -759,8 +759,8 @@
       {
         "from": "MCV",
         "to": "YRK",
-        "text": "TPE?",
-        "link": "https://timetables.trainsplit.com/times.aspx?uid=L36840&date=20260106"
+        "text": "TPE",
+        "link": "https://www.realtimetrains.co.uk/service/gb-nr:L36840/2026-01-06/detailed"
       },
       {
         "from": "YRK",
