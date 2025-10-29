@@ -769,5 +769,48 @@
         "link": "https://www.realtimetrains.co.uk/service/gb-nr:C41060/2026-01-01/detailed"
       }
     ]
+  },
+  "2026-01-17": {
+    "from": "BHG",
+    "to": "MIA",
+    "text": "Go Manchester Favourites II 2026",
+    "sub": [
+      {
+        "from": "BHG",
+        "to": "HYM",
+        "text": "ScotRail",
+        "link": "https://www.realtimetrains.co.uk/service/gb-nr:W74362/2026-01-17/detailed"
+      },
+      {
+        "from": "HYM",
+        "to": "MIA",
+        "text": "TPE",
+        "link": "https://www.realtimetrains.co.uk/service/gb-nr:C73798/2026-01-17/detailed"
+      }
+    ]
+  },
+  "2026-01-19": {
+    "from": "CRE",
+    "to": "BHG",
+    "text": "Leave Manchester Favourites II 2026",
+    "sub": [
+      {
+        "from": "CRE",
+        "to": "GLC",
+        "text": "Avanti West Coast",
+        "link": "https://www.realtimetrains.co.uk/service/gb-nr:L02283/2026-01-19/detailed"
+      },
+      {
+        "from": "GLC",
+        "to": "GLQ",
+        "text": "Walk"
+      },
+      {
+        "from": "GLQ",
+        "to": "BHG",
+        "text": "ScotRail",
+        "link": "https://www.realtimetrains.co.uk/service/gb-nr:Y41028/2026-01-19/detailed"
+      }
+    ]
   }
 }
