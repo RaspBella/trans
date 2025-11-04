@@ -1094,7 +1094,7 @@ void gen_links(FILE **fp, char *file, Json *json, char *output, char *date, cons
   }
 }
 
-void buf_station_index(char *buf, char *output, char code[4], const char *slash_index) {
+void gen_station_page(char *buf, char *output, char code[4], const char *slash_index) {
   memcpy(
     buf,
     output,
@@ -1109,18 +1109,46 @@ void buf_station_index(char *buf, char *output, char code[4], const char *slash_
     3
   );
 
+  buf[strlen(output) + 1 + 3] = 0;
+
+  // buf = "path/code"
+
+  struct stat sb;
+
+  if (stat(buf, &sb)) {
+    mkdir(buf, S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH);
+  }
+
+  else {
+    if (!S_ISDIR(sb.st_mode)) {
+      fprintf(stderr, "error: `%s` not a dir\n", buf);
+
+      exit(EXIT_FAILURE);
+    }
+  }
+
   memcpy(
-    buf + strlen(output) + 1 + 3,
+    buf + strlen(output) + 4,
     slash_index,
     strlen(slash_index)
   );
 
-  buf[strlen(output) + 1 + 3 + strlen(slash_index)] = 0;
-}
+  buf[strlen(output) + 4 + strlen(slash_index)] = 0;
 
-void gen_station_page(char *buf, char *output, char code[4], const char *slash_index) {
-  buf_station_index(buf, output, code, slash_index);
-  // buf = "path/code/index.html"
+  FILE *fp = fopen(buf, "w");
+
+  if (!fp) {
+    fprintf(
+      stderr,
+      "%s: Couldn't open file: `%s`\n",
+      __func__,
+      buf
+    );
+
+    exit(EXIT_FAILURE);
+  }
+
+  fclose(fp);
 }
 
 void gen_station_pages(char *buf, char *output, const char *slash_index) {
