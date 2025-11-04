@@ -1120,16 +1120,7 @@ void buf_station_index(char *buf, char *output, char code[4], const char *slash_
 
 void gen_station_page(char *buf, char *output, char code[4], const char *slash_index) {
   buf_station_index(buf, output, code, slash_index);
-
-  fprintf(
-    stderr,
-    "%s:\n"
-    "\tcode = %s\n"
-    "\tbuf = %s\n",
-    __func__,
-    code,
-    buf
-  );
+  // buf = "path/code/index.html"
 }
 
 void gen_station_pages(char *buf, char *output, const char *slash_index) {
@@ -1145,13 +1136,6 @@ void gen_station_pages(char *buf, char *output, const char *slash_index) {
   }
 
   for (struct dirent *i = readdir(dir); i != NULL; i = readdir(dir)) {
-    fprintf(
-      stderr,
-      "%s: d_name = %s\n",
-      __func__,
-      i->d_name
-    );
-
     if (strlen(i->d_name) == 3) {
       gen_station_page(buf, output, i->d_name, slash_index);
     }
