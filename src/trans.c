@@ -11,10 +11,13 @@
 #include <stdbool.h>
 #include <libgen.h>
 #include <sys/stat.h>
+#include <dirent.h>
 
 #define pop(argc, argv) *argv++; argc--;
 
 #define INDENT 2
+
+#define IMAGES_DIR "../images"
 
 char *program;
 
@@ -1091,7 +1094,40 @@ void gen_links(FILE **fp, char *file, Json *json, char *output, char *date, cons
   }
 }
 
+void gen_station_page(char *code) {
+  fprintf(stderr, "%s: code = %s\n", __func__, code);
+}
+
+void gen_station_pages(void) {
+  DIR *dir = opendir(IMAGES_DIR);
+
+  if (!dir) {
+    fprintf(
+      stderr,
+      "Failed to open dir: " IMAGES_DIR
+    );
+
+    exit(EXIT_FAILURE);
+  }
+
+  for (struct dirent *i = readdir(dir); i != NULL; i = readdir(dir)) {
+    fprintf(
+      stderr,
+      "d_name = %s\n",
+      i->d_name
+    );
+
+    if (strlen(i->d_name) == 3) {
+      gen_station_page(i->d_name);
+    }
+  }
+
+  closedir(dir);
+}
+
 void gen(int argc, char **argv, enum mode mode) {
+  gen_station_pages();
+
   if (argc < 2) {
     usage(program, mode);
 
