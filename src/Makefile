@@ -1,4 +1,4 @@
-CFLAGS=-Wall -Wextra -Werror -ggdb
+CFLAGS=-Wall -Wextra -ggdb
 
 srcs=$(filter-out stations.c, $(wildcard *.c))
 objs=$(srcs:.c=.o)
@@ -30,9 +30,6 @@ $(BIN): $(objs)
 
 %.o: %.c
 	cc ${CFLAGS} -MMD -c -o $@ $<
-
-bestline.o: bestline.c
-	cc -MMD -c -o $@ $<
 
 -include $(deps)
 
