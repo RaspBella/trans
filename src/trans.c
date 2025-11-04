@@ -1113,7 +1113,8 @@ void gen_station_pages(void) {
   for (struct dirent *i = readdir(dir); i != NULL; i = readdir(dir)) {
     fprintf(
       stderr,
-      "d_name = %s\n",
+      "%s: d_name = %s\n",
+      __func__,
       i->d_name
     );
 
