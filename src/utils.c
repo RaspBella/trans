@@ -1,7 +1,31 @@
 #include "utils.h"
 
+#include <stdlib.h>
 #include <stdio.h>
 #include <libgen.h>
+#include <sys/stat.h>
+
+void make_dir(const char *dir) {
+  static struct stat sb;
+
+  if (stat(dir, &sb)) {
+    mkdir(
+      dir,
+      S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH
+    );
+  }
+
+  else if (!S_ISDIR(sb.st_mode)) {
+    fprintf(
+      stderr,
+      "%s: error: `%s` not a dir\n",
+      __func__,
+      dir
+    );
+
+    exit(EXIT_FAILURE);
+  }
+}
 
 void add_usage(void) {
   fprintf(

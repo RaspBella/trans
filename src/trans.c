@@ -10,7 +10,6 @@
 #include <string.h>
 #include <stdbool.h>
 #include <libgen.h>
-#include <sys/stat.h>
 #include <dirent.h>
 
 #define pop(argc, argv) *argv++; argc--;
@@ -1010,23 +1009,7 @@ void gen_links(FILE **fp, char *buf, Json *json, char *output, char *date) {
 
         // buf = "path/yyyy-mm-dd/...->..."
 
-        struct stat sb;
-
-        if (stat(buf, &sb)) {
-          mkdir(buf, S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH);
-        }
-
-        else {
-          if (!S_ISDIR(sb.st_mode)) {
-            fprintf(
-              stderr,
-              "error: `%s` not a dir\n",
-              buf
-            );
-
-            exit(EXIT_FAILURE);
-          }
-        }
+        make_dir(buf);
 
         memcpy(
           buf + strlen(output) + strlen("/yyyy-mm-dd/...->..."),
@@ -1066,23 +1049,7 @@ void gen_links(FILE **fp, char *buf, Json *json, char *output, char *date) {
 }
 
 void gen_station_page(char *buf, char *output, char code[4]) {
-  struct stat sb;
-
-  if (stat(buf, &sb)) {
-    mkdir(buf, S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH);
-  }
-
-  else {
-    if (!S_ISDIR(sb.st_mode)) {
-      fprintf(
-        stderr,
-        "error: `%s` not a dir\n",
-        buf
-      );
-
-      exit(EXIT_FAILURE);
-    }
-  }
+  make_dir(buf);
 
   memcpy(
     buf + strlen(output) + strlen("/..."),
@@ -1164,23 +1131,7 @@ void gen(int argc, char **argv, enum mode mode) {
     exit(EXIT_FAILURE);
   }
 
-  struct stat sb;
-
-  if (stat(output, &sb)) {
-    mkdir(output, S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH);
-  }
-
-  else {
-    if (!S_ISDIR(sb.st_mode)) {
-      fprintf(
-        stderr,
-        "error: `%s` not a dir\n",
-        output
-      );
-
-      exit(EXIT_FAILURE);
-    }
-  }
+  make_dir(output);
 
   size_t len = strlen(output) + strlen("/yyyy-mm-dd/abc->xyz/index.html");
   char *buf = calloc(len + 1, sizeof(char));
@@ -1225,24 +1176,8 @@ void gen(int argc, char **argv, enum mode mode) {
 
     // buf = "path/date"
 
-    struct stat sb;
+    make_dir(buf);
 
-    if (stat(buf, &sb)) {
-      mkdir(buf, S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH);
-    }
-
-    else {
-      if (!S_ISDIR(sb.st_mode)) {
-        fprintf(
-          stderr,
-          "error: `%s` not a dir\n",
-          buf
-        );
-
-        exit(EXIT_FAILURE);
-      }
-    }
- 
     memcpy(
       buf + strlen(output) + 1 + strlen(date),
       "/index.html",
