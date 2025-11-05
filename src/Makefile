@@ -31,6 +31,9 @@ $(BIN): $(objs)
 %.o: %.c
 	cc ${CFLAGS} -MMD -c -o $@ $<
 
+gen.o: gen.c
+	cc ${CFLAGS} -MMD -c -o $@ $< -Wno-gnu-folding-constant
+
 -include $(deps)
 
 ../docs/crs.mjs: crs.c
