@@ -981,7 +981,7 @@ void gen_station_page(char *buf, char *output, char code[4]) {
       if (strlen(i->d_name) > 2) {
         fprintf(
           fp,
-          "    <img src=\"%s\">\n",
+          "    <img src=\"%s\" width=\"100em\" height=\"100em\">\n",
           i->d_name
         );
 
