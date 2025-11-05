@@ -955,10 +955,86 @@ void gen_station_page(char *buf, char *output, char code[4]) {
 
   fprintf(
     fp,
-    "    <h1>%s(%s)</h1>\n"
-    "  </body>\n"
-    "</html>",
+    "    <h1>%s(%s)</h1>\n",
     name, code
+  );
+
+  char path[strlen(IMAGES_DIR "/...") + 1] = { 0 };
+
+  memcpy(
+    path,
+    IMAGES_DIR "/",
+    strlen(IMAGES_DIR "/")
+  );
+
+  memcpy(
+    path + strlen(IMAGES_DIR "/"),
+    code,
+    3
+  );
+
+  DIR *dir = opendir(path);
+
+  if (dir) {
+    for (struct dirent *i = readdir(dir); i != NULL; i = readdir(dir)) {
+      if (strlen(i->d_name) > 2) {
+        fprintf(
+          fp,
+          "    <img src=\"%s\">\n",
+          i->d_name
+        );
+
+        char *command = calloc(strlen("cp " IMAGES_DIR "/.../") + strlen(i->d_name) + 1 + strlen(output) + strlen("/...") + 1, sizeof(char));
+
+        memcpy(
+          command,
+          "cp " IMAGES_DIR "/",
+          strlen("cp " IMAGES_DIR "/")
+        );
+
+        memcpy(
+          command + strlen("cp " IMAGES_DIR "/"),
+          code,
+          3
+        );
+
+        command[strlen("cp " IMAGES_DIR "/...")] = '/';
+
+        memcpy(
+          command + strlen("cp " IMAGES_DIR "/.../"),
+          i->d_name,
+          strlen(i->d_name)
+        );
+
+        command[strlen("cp " IMAGES_DIR "/.../") + strlen(i->d_name)] = ' ';
+
+        memcpy(
+          command + strlen("cp " IMAGES_DIR "/.../") + strlen(i->d_name) + 1,
+          output,
+          strlen(output)
+        );
+
+        command[strlen("cp " IMAGES_DIR "/.../") + strlen(i->d_name) + 1 + strlen(output)] = '/';
+
+        memcpy(
+          command + strlen("cp " IMAGES_DIR "/.../") + strlen(i->d_name) + 1 + strlen(output) + 1,
+          code,
+          strlen(code)
+        );
+
+        system(command);
+
+        free(command);
+      }
+    }
+
+    closedir(dir);
+  }
+
+  fprintf(
+    fp,
+    "  </body>\n"
+    "</html>"
   );
 
   free(title);
