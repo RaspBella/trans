@@ -954,67 +954,7 @@ void gen_link(FILE *fp, char *link) {
   );
 }
 
-void buf_root(char *buf, char *output, const char *slash_index) {
-  memcpy(buf, output, strlen(output));
-
-  memcpy(
-    buf + strlen(output),
-    slash_index,
-    strlen(slash_index)
-  );
-}
-
-void buf_date(char *buf, char *output, char *date) {
-  memcpy(
-    buf + strlen(output) + 1,
-    date,
-    strlen(date)
-  );
-
-  buf[strlen(output) + 1 + strlen(date)] = 0;
-}
-
-void buf_date_index(char *buf, char *output, char *date, const char *slash_index) {
-  memcpy(
-    buf + strlen(output) + 1 + strlen(date),
-    slash_index,
-    strlen(slash_index)
-  );
-
-  buf[strlen(output) + 1 + strlen(date) + strlen(slash_index)] = 0;
-}
-
-void buf_data_abc_xyz(char *buf, char *output, char *date, char *from, const char *arrow, char *to) {
-  memcpy(
-    buf + strlen(output) + 1 + strlen(date) + 1,
-    from,
-    strlen(from)
-  );
-
-  memcpy(
-    buf + strlen(output) + 1 + strlen(date) + 1 + strlen(from),
-    arrow,
-    strlen(arrow)
-  );
-
-  memcpy(
-    buf + strlen(output) + 1 + strlen(date) + 1 + strlen(from) + strlen(arrow),
-    to,
-    strlen(to)
-  );
-
-  buf[strlen(output) + 1 + strlen(date) + 1 + strlen(from) + strlen(arrow) + strlen(to)] = 0;
-}
-
-void buf_data_abc_xyz_index(char *buf, char *output, char *date, char *from, const char *arrow, char *to, const char *slash_index) {
-  memcpy(
-    buf + strlen(output) + 1 + strlen(date) + 1 + strlen(from) + strlen(arrow) + strlen(to),
-    slash_index,
-    strlen(slash_index)
-  );
-}
-
-void gen_links(FILE **fp, char *file, Json *json, char *output, char *date, const char *arrow, const char *slash_index) {
+void gen_links(FILE **fp, char *buf, Json *json, char *output, char *date) {
   switch (json_type(json)) {
     case Json_Array:
       struct Iterable it;
@@ -1028,7 +968,7 @@ void gen_links(FILE **fp, char *file, Json *json, char *output, char *date, cons
       }
 
       for (Json *elem = json_iterate(&it); elem; elem = json_iterate(&it)) {
-        gen_links(fp, file, elem, output, date, arrow, slash_index);
+        gen_links(fp, buf, elem, output, date);
       }
 
       break;
@@ -1046,26 +986,51 @@ void gen_links(FILE **fp, char *file, Json *json, char *output, char *date, cons
           exit(EXIT_FAILURE);
         }
 
-        buf_data_abc_xyz(file, output, date, from, arrow, to);
-        // file = "path/date/abc->xzy"
+        memcpy(
+          buf + strlen(output) + strlen("/yyyy-mm-dd/"),
+          from,
+          3
+        );
+
+        memcpy(
+          buf + strlen(output) + strlen("/yyyy-mm-dd/..."),
+          "->",
+          2
+        );
+
+        memcpy(
+          buf + strlen(output) + strlen("/yyyy-mm-dd/...->"),
+          to,
+          3
+        );
+
+        buf[strlen(output) + strlen("/yyyy-mm-dd/...->...")] = 0;
+
+        // buf = "path/yyyy-mm-dd/...->..."
 
         struct stat sb;
 
-        if (stat(file, &sb)) {
-          mkdir(file, S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH);
+        if (stat(buf, &sb)) {
+          mkdir(buf, S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH);
         }
 
         else {
           if (!S_ISDIR(sb.st_mode)) {
-            fprintf(stderr, "error: `%s` not a dir\n", file);
+            fprintf(stderr, "error: `%s` not a dir\n", buf);
 
             exit(EXIT_FAILURE);
           }
         }
 
-        buf_data_abc_xyz_index(file, output, date, from, arrow, to, slash_index);
-        // file = "path/date/abc->xzy/index.html"
-        *fp = freopen(file, "w", *fp);
+        memcpy(
+          buf + strlen(output) + strlen("/yyyy-mm-dd/...->..."),
+          "/index.html",
+          strlen("/index.html")
+        );
+
+        // buf = "path/yyyy-mm-dd/...->.../index.html"
+
+        *fp = freopen(buf, "w", *fp);
 
         gen_link(*fp, link);
       }
@@ -1073,7 +1038,7 @@ void gen_links(FILE **fp, char *file, Json *json, char *output, char *date, cons
       Json *sub = object_get(json, "sub");
 
       if (sub) {
-        gen_links(fp, file, sub, output, date, arrow, slash_index);
+        gen_links(fp, buf, sub, output, date);
       }
 
       break;
@@ -1094,25 +1059,7 @@ void gen_links(FILE **fp, char *file, Json *json, char *output, char *date, cons
   }
 }
 
-void gen_station_page(char *buf, char *output, char code[4], const char *slash_index) {
-  memcpy(
-    buf,
-    output,
-    strlen(output)
-  );
-
-  buf[strlen(output)] = '/';
-
-  memcpy(
-    buf + strlen(output) + 1,
-    code,
-    3
-  );
-
-  buf[strlen(output) + 1 + 3] = 0;
-
-  // buf = "path/code"
-
+void gen_station_page(char *buf, char *output, char code[4]) {
   struct stat sb;
 
   if (stat(buf, &sb)) {
@@ -1128,12 +1075,12 @@ void gen_station_page(char *buf, char *output, char code[4], const char *slash_i
   }
 
   memcpy(
-    buf + strlen(output) + 4,
-    slash_index,
-    strlen(slash_index)
+    buf + strlen(output) + strlen("/..."),
+    "/index.html",
+    strlen("/index.html")
   );
 
-  buf[strlen(output) + 4 + strlen(slash_index)] = 0;
+  buf[strlen(output) + strlen("/.../index.html")] = 0;
 
   FILE *fp = fopen(buf, "w");
 
@@ -1149,9 +1096,11 @@ void gen_station_page(char *buf, char *output, char code[4], const char *slash_i
   }
 
   fclose(fp);
+
+  fprintf(stderr, "%s: crs(%s) = %s\n", __func__, code, crs(code));
 }
 
-void gen_station_pages(char *buf, char *output, const char *slash_index) {
+void gen_station_pages(char *buf, char *output) {
   DIR *dir = opendir(IMAGES_DIR);
 
   if (!dir) {
@@ -1165,7 +1114,15 @@ void gen_station_pages(char *buf, char *output, const char *slash_index) {
 
   for (struct dirent *i = readdir(dir); i != NULL; i = readdir(dir)) {
     if (strlen(i->d_name) == 3) {
-      gen_station_page(buf, output, i->d_name, slash_index);
+      memcpy(
+        buf + strlen(output) + 1,
+        i->d_name,
+        3
+      );
+
+      buf[strlen(output) + strlen("/...")] = 0;
+
+      gen_station_page(buf, output, i->d_name);
     }
   }
 
@@ -1205,11 +1162,20 @@ void gen(int argc, char **argv, enum mode mode) {
   size_t len = strlen(output) + strlen("/yyyy-mm-dd/abc->xyz/index.html");
   char *buf = calloc(len + 1, sizeof(char));
 
-  const char *slash_index = "/index.html";
-  const char *arrow = "->";
+  memcpy(
+    buf,
+    output,
+    strlen(output)
+  );
 
-  buf_root(buf, output, slash_index);
+  memcpy(
+    buf + strlen(output),
+    "/index.html",
+    strlen("/index.html")
+  );
+ 
   // buf = "path/index.html"
+
   FILE *fp = fopen(buf, "w");
 
   gen_root(fp);
@@ -1228,7 +1194,14 @@ void gen(int argc, char **argv, enum mode mode) {
   Json *data = json_iterate(&its[1]);
 
   do {
-    buf_date(buf, output, date);
+    memcpy(
+      buf + strlen(output) + 1,
+      date,
+      strlen(date)
+    );
+
+    buf[strlen(output) + strlen("/yyyy-mm-dd")] = 0;
+
     // buf = "path/date"
 
     struct stat sb;
@@ -1245,19 +1218,27 @@ void gen(int argc, char **argv, enum mode mode) {
       }
     }
  
-    buf_date_index(buf, output, date, slash_index);
+    memcpy(
+      buf + strlen(output) + 1 + strlen(date),
+      "/index.html",
+      strlen("/index.html")
+    );
+
+    buf[strlen(output) + strlen("/yyyy-mm-dd/index.html")] = 0;
+
     // buf = "path/date/index.html"
+
     fp = freopen(buf, "w", fp);
 
     gen_yyyy_mm_dd(fp, date, data);
 
-    gen_links(&fp, buf, data, output, date, arrow, slash_index);
+    gen_links(&fp, buf, data, output, date);
 
     date = key_iterate(&its[0]);
     data = json_iterate(&its[1]);
   } while (date && data);
 
-  gen_station_pages(buf, output, slash_index);
+  gen_station_pages(buf, output);
 
   fclose(fp);
   free(buf);
