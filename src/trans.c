@@ -1198,7 +1198,7 @@ void gen(int argc, char **argv, enum mode mode) {
     fprintf(
       stderr,
       "%s: error reading file: `%s`\n",
-      __func__ input
+      __func__, input
     );
 
     exit(EXIT_FAILURE);
