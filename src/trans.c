@@ -15,6 +15,8 @@
 
 #define pop(argc, argv) *argv++; argc--;
 
+#define IT_ERR() fprintf(stderr, "%s: failed to init iterator\n", __func__); exit(EXIT_FAILURE);
+
 #define INDENT 2
 
 #define IMAGES_DIR "../images"
@@ -279,15 +281,9 @@ void gen_root_row_array_elem(FILE *fp, char *date, Json *elem) {
     struct Iterable it;
 
     if (!iterable(&it, sub)) {
-      fprintf(
-        stderr,
-        "%s: failed to init iterator\n",
-        __func__
-      );
-
       fclose(fp);
 
-      exit(EXIT_FAILURE);
+      IT_ERR();
     }
 
     for (Json *elem = json_iterate(&it); elem; elem = json_iterate(&it)) {
@@ -418,15 +414,9 @@ void gen_root_row_array(FILE *fp, char *date, Json *array) {
   struct Iterable it;
 
   if (!iterable(&it, array)) {
-    fprintf(
-      stderr,
-      "%s: failed to init iterator\n",
-      __func__
-    );
-
     fclose(fp);
 
-    exit(EXIT_FAILURE);
+    IT_ERR();
   }
 
   Json *elem = json_iterate(&it);
@@ -506,15 +496,9 @@ void gen_root_row_object(FILE *fp, char *date, Json *object) {
     struct Iterable it;
 
     if (!iterable(&it, sub)) {
-      fprintf(
-        stderr,
-        "%s: failed to init iterator\n",
-        __func__
-      );
-
       fclose(fp);
 
-      exit(EXIT_FAILURE);
+      IT_ERR();
     }
 
     for (Json *elem = json_iterate(&it); elem; elem = json_iterate(&it)) {
@@ -671,15 +655,9 @@ void gen_root_rows(FILE *fp) {
   struct Iterable its[2];
 
   if (!iterable(&its[0], root) || !iterable(&its[1], root)) {
-    fprintf(
-      stderr,
-      "%s: Failed to init iterable(s)\n",
-      __func__
-    );
-
     fclose(fp);
 
-    exit(EXIT_FAILURE);
+    IT_ERR();
   }
 
   char *date = key_iterate(&its[0]);
@@ -779,15 +757,9 @@ void gen_yyyy_mm_dd_row(FILE *fp, Json *object) {
     struct Iterable it;
 
     if (!iterable(&it, sub)) {
-      fprintf(
-        stderr,
-        "%s: failed to init iterator\n",
-        __func__
-      );
-
       fclose(fp);
 
-      exit(EXIT_FAILURE);
+      IT_ERR();
     }
 
     for (Json *elem = json_iterate(&it); elem; elem = json_iterate(&it)) {
@@ -944,15 +916,9 @@ void gen_yyyy_mm_dd(FILE *fp, char *date, Json *data) {
       struct Iterable it;
 
       if (!iterable(&it, data)) {
-        fprintf(
-          stderr,
-          "%s: Failed to init iterable\n",
-          __func__
-        );
-
         fclose(fp);
 
-        exit(EXIT_FAILURE);
+        IT_ERR();
       }
 
       for (Json *elem = json_iterate(&it); elem; elem = json_iterate(&it)) {
@@ -998,15 +964,9 @@ void gen_links(FILE **fp, char *buf, Json *json, char *output, char *date) {
       struct Iterable it;
 
       if (!iterable(&it, json)) {
-        fprintf(
-          stderr,
-          "%s: failed to init iterator\n",
-          __func__
-        );
-
         fclose(*fp);
 
-        exit(EXIT_FAILURE);
+        IT_ERR();
       }
 
       for (Json *elem = json_iterate(&it); elem; elem = json_iterate(&it)) {
@@ -1246,15 +1206,9 @@ void gen(int argc, char **argv, enum mode mode) {
   struct Iterable its[2];
 
   if (!iterable(&its[0], root) || !iterable(&its[1], root)) {
-    fprintf(
-      stderr,
-      "%s: Failed to init iterable(s)\n",
-      __func__
-    );
-
     fclose(fp);
 
-    exit(EXIT_FAILURE);
+    IT_ERR();
   }
 
   char *date = key_iterate(&its[0]);
