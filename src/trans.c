@@ -32,7 +32,12 @@ void cleanup(void) {
   if (root) {
     if (!output) {
       if (!dump(input, indent)) {
-        fprintf(stderr, "Error writing file: `%s`\n", input);
+        fprintf(
+          stderr,
+          "%s: error writing file: `%s`\n",
+          __func__,
+          input
+        );
 
         exit(EXIT_FAILURE);
       }
@@ -56,7 +61,12 @@ void add(int argc, char **argv, enum mode mode) {
   input = pop(argc, argv);
 
   if (!load(input)) {
-    fprintf(stderr, "Error reading file: `%s`\n", input);
+    fprintf(
+      stderr,
+      "%s: error reading file: `%s`\n",
+      __func__,
+      input
+    );
 
     exit(EXIT_FAILURE);
   }
