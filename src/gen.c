@@ -870,8 +870,6 @@ void gen_links(FILE **fp, char *buf, Json *json, char *output, char *date) {
 
         buf[strlen(output) + strlen("/yyyy-mm-dd/...->...")] = 0;
 
-        // buf = "path/yyyy-mm-dd/...->..."
-
         make_dir(buf);
 
         memcpy(
@@ -879,8 +877,6 @@ void gen_links(FILE **fp, char *buf, Json *json, char *output, char *date) {
           "/index.html",
           strlen("/index.html")
         );
-
-        // buf = "path/yyyy-mm-dd/...->.../index.html"
 
         *fp = freopen(buf, "w", *fp);
 
@@ -1036,8 +1032,6 @@ void gen(int argc, char **argv, enum mode mode) {
     strlen("/index.html")
   );
  
-  // buf = "path/index.html"
-
   FILE *fp = fopen(buf, "w");
 
   gen_root(fp);
@@ -1062,8 +1056,6 @@ void gen(int argc, char **argv, enum mode mode) {
 
     buf[strlen(output) + strlen("/yyyy-mm-dd")] = 0;
 
-    // buf = "path/date"
-
     make_dir(buf);
 
     memcpy(
@@ -1073,8 +1065,6 @@ void gen(int argc, char **argv, enum mode mode) {
     );
 
     buf[strlen(output) + strlen("/yyyy-mm-dd/index.html")] = 0;
-
-    // buf = "path/date/index.html"
 
     fp = freopen(buf, "w", fp);
 
