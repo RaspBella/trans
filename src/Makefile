@@ -1,3 +1,4 @@
+CC=clang
 CFLAGS=-Wall -Wextra -ggdb
 
 srcs=$(filter-out stations.c, $(wildcard *.c))
@@ -26,10 +27,10 @@ $(BIN)-%: $(BIN)
 	ln -sf $< $@
 
 $(BIN): $(objs)
-	cc ${CFLAGS} -o $@ $^
+	${CC} ${CFLAGS} -o $@ $^
 
 %.o: %.c
-	cc ${CFLAGS} -MMD -c -o $@ $<
+	${CC} ${CFLAGS} -MMD -c -o $@ $<
 
 -include $(deps)
 
