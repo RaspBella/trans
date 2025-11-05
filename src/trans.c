@@ -8,12 +8,7 @@
 
 #define INDENT 2
 
-char *program;
-
-char *input;
-char *output;
-
-char *line;
+char *program, *input, *output, *line;
 
 int indent;
 
