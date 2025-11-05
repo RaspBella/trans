@@ -43,4 +43,4 @@ $(BIN): $(objs)
 		-O3
 
 clean:
-	rm -rf ../docs/crs.mjs ../docs/crs.wasm ../docs/index.html ../docs/????-??-?? $(objs) $(deps) $(BIN) $(LINKS)
+	rm -rf ../docs/crs.mjs ../docs/crs.wasm ../docs/index.html ../docs/????-??-?? ../docs/[A-Z][A-Z][A-Z] $(objs) $(deps) $(BIN) $(LINKS)
