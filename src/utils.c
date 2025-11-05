@@ -1,9 +1,10 @@
-#include "utils.h"
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <libgen.h>
 #include <sys/stat.h>
+
+#include "utils.h"
+#include "crs.h"
 
 void make_dir(const char *dir) {
   static struct stat sb;
@@ -24,6 +25,61 @@ void make_dir(const char *dir) {
     );
 
     exit(EXIT_FAILURE);
+  }
+}
+
+char *property2string(Json *json, char *property) {
+  Json *value = object_get(json, property);
+
+  if (!value) {
+    fprintf(
+      stderr,
+      "%s: couldn't access `%s` property\n",
+      __func__,
+      property
+    );
+
+    return NULL;
+  }
+
+  if (json_type(value) != Json_String) {
+    fprintf(
+      stderr,
+      "%s: expected %s got %s\n",
+      __func__,
+      json_type_string(Json_String),
+      json_type_string(json_type(value))
+    );
+
+    return NULL;
+  }
+
+  return json_string2string(value);
+}
+
+void fprint_place(FILE *fp, char *place) {
+  if (strlen(place) == 3 && VALID_CRS(place)) {
+    const char *str = crs(place);
+
+    if (str) {
+      char *has_sep = strchr(str, *SEP);
+
+      if (has_sep) {
+        fprintf(fp, "%.*s(%s)", (int)(has_sep - str), str, place);
+      }
+
+      else {
+        fprintf(fp, "%s(%s)", crs(place), place);
+      }
+    }
+
+    else {
+      fprintf(fp, "UNKNOWN(%s)", place);
+    }
+  }
+
+  else {
+    fprintf(fp, "%s", place);
   }
 }
 
