@@ -75,7 +75,11 @@ void add(int argc, char **argv, enum mode mode) {
     bool ret = parse(line, .indent = indent);
 
     if (!ret) {
-      fprintf(stderr, "Couldn't parse: `%s`\n", line);
+      fprintf(
+        stderr,
+        "couldn't parse: `%s`\n",
+        line
+      );
     }
 
     free(line);
@@ -275,7 +279,11 @@ void gen_root_row_array_elem(FILE *fp, char *date, Json *elem) {
     struct Iterable it;
 
     if (!iterable(&it, sub)) {
-      fprintf(stderr, "%s: failed to init iterator\n", __func__);
+      fprintf(
+        stderr,
+        "%s: failed to init iterator\n",
+        __func__
+      );
 
       fclose(fp);
 
@@ -410,7 +418,11 @@ void gen_root_row_array(FILE *fp, char *date, Json *array) {
   struct Iterable it;
 
   if (!iterable(&it, array)) {
-    fprintf(stderr, "%s: failed to init iterator\n", __func__);
+    fprintf(
+      stderr,
+      "%s: failed to init iterator\n",
+      __func__
+    );
 
     fclose(fp);
 
@@ -494,7 +506,11 @@ void gen_root_row_object(FILE *fp, char *date, Json *object) {
     struct Iterable it;
 
     if (!iterable(&it, sub)) {
-      fprintf(stderr, "%s: failed to init iterator\n", __func__);
+      fprintf(
+        stderr,
+        "%s: failed to init iterator\n",
+        __func__
+      );
 
       fclose(fp);
 
@@ -655,7 +671,11 @@ void gen_root_rows(FILE *fp) {
   struct Iterable its[2];
 
   if (!iterable(&its[0], root) || !iterable(&its[1], root)) {
-    fprintf(stderr, "%s: Failed to init iterable(s)\n", __func__);
+    fprintf(
+      stderr,
+      "%s: Failed to init iterable(s)\n",
+      __func__
+    );
 
     fclose(fp);
 
@@ -759,7 +779,11 @@ void gen_yyyy_mm_dd_row(FILE *fp, Json *object) {
     struct Iterable it;
 
     if (!iterable(&it, sub)) {
-      fprintf(stderr, "%s: failed to init iterator\n", __func__);
+      fprintf(
+        stderr,
+        "%s: failed to init iterator\n",
+        __func__
+      );
 
       fclose(fp);
 
@@ -920,7 +944,11 @@ void gen_yyyy_mm_dd(FILE *fp, char *date, Json *data) {
       struct Iterable it;
 
       if (!iterable(&it, data)) {
-        fprintf(stderr, "%s: Failed to init iterable\n", __func__);
+        fprintf(
+          stderr,
+          "%s: Failed to init iterable\n",
+          __func__
+        );
 
         fclose(fp);
 
@@ -970,7 +998,11 @@ void gen_links(FILE **fp, char *buf, Json *json, char *output, char *date) {
       struct Iterable it;
 
       if (!iterable(&it, json)) {
-        fprintf(stderr, "%s: failed to init iterator\n", __func__);
+        fprintf(
+          stderr,
+          "%s: failed to init iterator\n",
+          __func__
+        );
 
         fclose(*fp);
 
@@ -1026,7 +1058,11 @@ void gen_links(FILE **fp, char *buf, Json *json, char *output, char *date) {
 
         else {
           if (!S_ISDIR(sb.st_mode)) {
-            fprintf(stderr, "error: `%s` not a dir\n", buf);
+            fprintf(
+              stderr,
+              "error: `%s` not a dir\n",
+              buf
+            );
 
             exit(EXIT_FAILURE);
           }
@@ -1078,7 +1114,11 @@ void gen_station_page(char *buf, char *output, char code[4]) {
 
   else {
     if (!S_ISDIR(sb.st_mode)) {
-      fprintf(stderr, "error: `%s` not a dir\n", buf);
+      fprintf(
+        stderr,
+        "error: `%s` not a dir\n",
+        buf
+      );
 
       exit(EXIT_FAILURE);
     }
@@ -1107,7 +1147,11 @@ void gen_station_page(char *buf, char *output, char code[4]) {
 
   fclose(fp);
 
-  fprintf(stderr, "%s: crs(%s) = %s\n", __func__, code, crs(code));
+  fprintf(
+    stderr,
+    "%s: crs(%s) = %s\n",
+    __func__, code, crs(code)
+  );
 }
 
 void gen_station_pages(char *buf, char *output) {
@@ -1116,7 +1160,8 @@ void gen_station_pages(char *buf, char *output) {
   if (!dir) {
     fprintf(
       stderr,
-      "Failed to open dir: " IMAGES_DIR
+      "%s: failed to open dir: " IMAGES_DIR,
+      __func__
     );
 
     exit(EXIT_FAILURE);
@@ -1150,7 +1195,11 @@ void gen(int argc, char **argv, enum mode mode) {
   output = pop(argc, argv);
   
   if (!load(input)) {
-    fprintf(stderr, "Error reading file: `%s`\n", input);
+    fprintf(
+      stderr,
+      "%s: error reading file: `%s`\n",
+      __func__ input
+    );
 
     exit(EXIT_FAILURE);
   }
@@ -1163,7 +1212,11 @@ void gen(int argc, char **argv, enum mode mode) {
 
   else {
     if (!S_ISDIR(sb.st_mode)) {
-      fprintf(stderr, "error: `%s` not a dir\n", output);
+      fprintf(
+        stderr,
+        "error: `%s` not a dir\n",
+        output
+      );
 
       exit(EXIT_FAILURE);
     }
@@ -1193,7 +1246,11 @@ void gen(int argc, char **argv, enum mode mode) {
   struct Iterable its[2];
 
   if (!iterable(&its[0], root) || !iterable(&its[1], root)) {
-    fprintf(stderr, "%s: Failed to init iterable(s)\n", __func__);
+    fprintf(
+      stderr,
+      "%s: Failed to init iterable(s)\n",
+      __func__
+    );
 
     fclose(fp);
 
@@ -1222,7 +1279,11 @@ void gen(int argc, char **argv, enum mode mode) {
 
     else {
       if (!S_ISDIR(sb.st_mode)) {
-        fprintf(stderr, "error: `%s` not a dir\n", buf);
+        fprintf(
+          stderr,
+          "error: `%s` not a dir\n",
+          buf
+        );
 
         exit(EXIT_FAILURE);
       }
@@ -1258,7 +1319,10 @@ void gen(int argc, char **argv, enum mode mode) {
 
 int main(int argc, char **argv) {
   if (atexit(cleanup)) {
-    fprintf(stderr, "atexit: Failed to register function: cleanup\n");
+    fprintf(
+      stderr,
+      "atexit: Failed to register function: cleanup\n"
+    );
 
     exit(EXIT_FAILURE);
   }
