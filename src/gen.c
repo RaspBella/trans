@@ -935,13 +935,38 @@ void gen_station_page(char *buf, char *output, char code[4]) {
     exit(EXIT_FAILURE);
   }
 
-  fclose(fp);
+  const char *name = crs(code);
+
+  char *title = calloc(strlen(name) + strlen("(...)") + 1, sizeof(char));
+
+  memcpy(
+    title,
+    name,
+    strlen(name)
+  );
+
+  title[strlen(name)] = '(';
+
+  memcpy(
+    title + strlen(name) + 1,
+    code,
+    3
+  );
+
+  title[strlen(name) + 4] = ')';
+
+  gen_head(fp, title);
 
   fprintf(
-    stderr,
-    "%s: crs(%s) = %s\n",
-    __func__, code, crs(code)
+    fp,
+    "    <h1>%s(%s)</h1>\n"
+    "  </body>\n"
+    "</html>",
+    name, code
   );
+
+  free(title);
+  fclose(fp);
 }
 
 void gen_station_pages(char *buf, char *output) {
