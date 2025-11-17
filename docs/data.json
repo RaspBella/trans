@@ -678,6 +678,16 @@
     "text": "Lumo",
     "link": "https://www.realtimetrains.co.uk/service/gb-nr:W28171/2025-11-10/detailed"
   },
+  "2025-11-14": {
+    "from": "Edinburgh Airport",
+    "to": "Belfast City Airport",
+    "text": "Go to Belfast Autumn 2025"
+  },
+  "2025-11-16": {
+    "from": "Belfast City Airport",
+    "to": "Edinburgh Airport",
+    "text": "Leave Belfast Autumn 2025"
+  },
   "2025-12-05": {
     "from": "GLC",
     "to": "CRE",
