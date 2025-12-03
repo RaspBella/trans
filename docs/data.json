@@ -902,5 +902,29 @@
         "link": "https://www.realtimetrains.co.uk/service/gb-nr:W01960/2026-02-21/detailed"
       }
     ]
+  },
+  "2026-02-23": {
+    "from": "CRE",
+    "to": "BHG",
+    "text": "Leave Crewe Winter 2026",
+    "sub": [
+      {
+        "from": "CRE",
+        "to": "GLC",
+        "text": "Avanti West Coast",
+        "link": "https://www.realtimetrains.co.uk/service/gb-nr:L02283/2026-02-23/detailed"
+      },
+      {
+        "from": "GLC",
+        "to": "GLQ",
+        "text": "Walk"
+      },
+      {
+        "from": "GLQ",
+        "to": "BHG",
+        "text": "ScotRail",
+        "link": "https://www.realtimetrains.co.uk/service/gb-nr:Y41028/2026-02-23/detailed"
+      }
+    ]
   }
 }
