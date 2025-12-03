@@ -688,80 +688,6 @@
     "to": "Edinburgh Airport",
     "text": "Leave Belfast Autumn 2025"
   },
-  "2025-11-28": [
-    {
-      "from": "EDB",
-      "to": "CRE",
-      "text": "Avanti West Coast",
-      "link": "https://www.realtimetrains.co.uk/service/gb-nr:W10455/2025-11-28/detailed"
-    },
-    {
-      "from": "CRE",
-      "to": "Lutterworth",
-      "text": "Go Leicestershire Autumn 2025",
-      "sub": [
-        {
-          "from": "CRE",
-          "to": "RUG",
-          "text": "LNWR/WMT",
-          "link": "https://www.realtimetrains.co.uk/service/gb-nr:L33412/2025-11-28/detailed"
-        },
-        {
-          "from": "RUG",
-          "to": "Lutterworth",
-          "text": "X84 Lutterworth bus"
-        }
-      ]
-    }
-  ],
-  "2025-11-30": {
-    "from": "Lutterworth",
-    "to": "CRE",
-    "text": "Leave Leicestershire Autumn 2025",
-    "sub": [
-      {
-        "from": "Lutterworth",
-        "to": "RUG",
-        "text": "Car because bus services are dead"
-      },
-      {
-        "from": "RUG",
-        "to": "BHM",
-        "text": "LNWR/WMT",
-        "link": "https://www.realtimetrains.co.uk/service/gb-nr:L33605/2025-11-30/detailed"
-      },
-      {
-        "from": "BHM",
-        "to": "CRE",
-        "text": "Avanti West Coast",
-        "link": "https://www.realtimetrains.co.uk/service/gb-nr:W10445/2025-11-30/detailed"
-      }
-    ]
-  },
-  "2025-12-01": {
-    "from": "CRE",
-    "to": "BHG",
-    "text": "Leave Crewe",
-    "sub": [
-      {
-        "from": "CRE",
-        "to": "GLC",
-        "text": "Avanti West Coast",
-        "link": "https://www.realtimetrains.co.uk/service/gb-nr:W09860/2025-12-01/detailed"
-      },
-      {
-        "from": "GLC",
-        "to": "GLQ",
-        "text": "Walk"
-      },
-      {
-        "from": "GLQ",
-        "to": "BHG",
-        "text": "Scotrail",
-        "link": "https://www.realtimetrains.co.uk/service/gb-nr:Y68503/2025-12-01/detailed"
-      }
-    ]
-  },
   "2025-12-05": {
     "from": "GLC",
     "to": "CRE",
@@ -894,6 +820,31 @@
         "to": "BHG",
         "text": "ScotRail",
         "link": "https://www.realtimetrains.co.uk/service/gb-nr:Y41028/2026-01-19/detailed"
+      }
+    ]
+  },
+  "2026-01-30": {
+    "from": "BHG",
+    "to": "CRE",
+    "text": "Go Manchester SQ1 Day 2026",
+    "sub": [
+      {
+        "from": "BHG",
+        "to": "EDB",
+        "text": "ScotRail",
+        "link": "https://www.realtimetrains.co.uk/service/gb-nr:W73101/2026-01-30/detailed"
+      },
+      {
+        "from": "EDB",
+        "to": "MIA",
+        "text": "TPE",
+        "link": "https://www.realtimetrains.co.uk/service/gb-nr:C73804/2026-01-30/detailed"
+      },
+      {
+        "from": "MIA",
+        "to": "CRE",
+        "text": "Northern",
+        "link": "https://www.realtimetrains.co.uk/service/gb-nr:L09051/2026-01-30/detailed"
       }
     ]
   }
