@@ -883,5 +883,24 @@
     "to": "EDB",
     "text": "CrossCountry",
     "link": "https://www.realtimetrains.co.uk/service/gb-nr:C74922/2026-02-15/detailed"
+  },
+  "2026-02-21": {
+    "from": "FKG",
+    "to": "CRE",
+    "text": "Go to Crewe Winter 2026 from Falkirk Open 2026",
+    "sub": [
+      {
+        "from": "FKG",
+        "to": "HYM",
+        "text": "ScotRail",
+        "link": "https://www.realtimetrains.co.uk/service/gb-nr:W73692/2026-02-21/detailed"
+      },
+      {
+        "from": "HYM",
+        "to": "CRE",
+        "text": "Avanti West Coast",
+        "link": "https://www.realtimetrains.co.uk/service/gb-nr:W01960/2026-02-21/detailed"
+      }
+    ]
   }
 }
