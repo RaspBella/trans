@@ -694,6 +694,20 @@
     "text": "Avanti West Coast",
     "link": "https://www.realtimetrains.co.uk/service/gb-nr:W09812/2025-12-05/detailed"
   },
+  "2025-12-06": [
+    {
+      "from": "CRE",
+      "to": "MIA",
+      "text": "Northern",
+      "link": "https://www.realtimetrains.co.uk/service/gb-nr:Y00837/2025-12-06/detailed"
+    },
+    {
+      "from": "MIA",
+      "to": "CRE",
+      "text": "Northern",
+      "link": "https://www.realtimetrains.co.uk/service/gb-nr:Y03126/2025-12-06/detailed"
+    }
+  ],
   "2025-12-08": {
     "from": "CRE",
     "to": "BHG",
