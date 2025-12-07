@@ -732,6 +732,50 @@
       }
     ]
   },
+  "2025-12-12": {
+    "from": "EDB",
+    "to": "WFJ",
+    "text": "CS",
+    "link": "https://www.realtimetrains.co.uk/service/gb-nr:C01482/2025-12-12/detailed"
+  },
+  "2025-12-13": {
+    "from": "WFJ",
+    "to": "CPM",
+    "text": "Go to Wiltshire Winter 2025",
+    "sub": [
+      {
+        "from": "WFJ",
+        "to": "EUS",
+        "text": "WMT/LNWR",
+        "link": "https://www.realtimetrains.co.uk/service/gb-nr:L33504/2025-12-13/detailed"
+      },
+      {
+        "from": "EUS",
+        "to": "PAD",
+        "text": "London Tube"
+      },
+      {
+        "from": "PAD",
+        "to": "CPM",
+        "text": "GWR",
+        "link": "https://www.realtimetrains.co.uk/service/gb-nr:G04789/2025-12-13/detailed"
+      }
+    ]
+  },
+  "2025-12-14": [
+    {
+      "from": "CPM",
+      "to": "PAD",
+      "text": "GWR",
+      "link": "https://www.realtimetrains.co.uk/service/gb-nr:P29660/2025-12-14/detailed"
+    },
+    {
+      "from": "EUS",
+      "to": "GLC",
+      "text": "CS",
+      "link": "https://www.realtimetrains.co.uk/service/gb-nr:L11886/2025-12-14/detailed"
+    }
+  ],
   "2026-01-01": {
     "from": "EDB",
     "to": "CRE",
