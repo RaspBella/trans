@@ -810,36 +810,12 @@
   "2026-01-02": {
     "from": "CRE",
     "to": "WSM",
-    "text": "Anytime via Hereford",
-    "sub": [
-      {
-        "from": "CRE",
-        "to": "NWP",
-        "text": "TFW"
-      },
-      {
-        "from": "NWP",
-        "to": "WSM",
-        "text": "GWR"
-      }
-    ]
+    "text": "Anytime via Hereford"
   },
   "2026-01-04": {
     "from": "WSM",
     "to": "CRE",
-    "text": "Anytime via Hereford",
-    "sub": [
-      {
-        "from": "WSM",
-        "to": "NWP",
-        "text": "GWR"
-      },
-      {
-        "from": "NWP",
-        "to": "CRE",
-        "text": "TFW"
-      }
-    ]
+    "text": "Anytime via Hereford"
   },
   "2026-01-06": {
     "from": "CRE",
