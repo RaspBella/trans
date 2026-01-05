@@ -826,13 +826,13 @@
         "from": "CRE",
         "to": "MAN",
         "text": "Northern",
-        "link": "https://www.realtimetrains.co.uk/service/gb-nr:L08909/2026-01-01/detailed"
+        "link": "https://www.realtimetrains.co.uk/service/gb-nr:L08909/2026-01-06/detailed"
       },
       {
         "from": "MAN",
         "to": "MCV",
         "text": "TPE",
-        "link": "https://www.realtimetrains.co.uk/service/gb-nr:L36834/2026-01-01/detailed"
+        "link": "https://www.realtimetrains.co.uk/service/gb-nr:L37181/2026-01-06/detailed"
       },
       {
         "from": "MCV",
@@ -844,7 +844,7 @@
         "from": "YRK",
         "to": "EDB",
         "text": "LNER",
-        "link": "https://www.realtimetrains.co.uk/service/gb-nr:C41060/2026-01-01/detailed"
+        "link": "https://www.realtimetrains.co.uk/service/gb-nr:C41060/2026-01-06/detailed"
       }
     ]
   },
