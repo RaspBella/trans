@@ -1025,6 +1025,12 @@
       }
     ]
   },
+  "2026-03-27": {
+    "from": "GLC",
+    "to": "CRE",
+    "text": "Avanti West Coast",
+    "link": "https://www.realtimetrains.co.uk/service/gb-nr:W02480/2026-03-27/detailed"
+  },
   "2026-03-28": {
     "from": "BON",
     "to": "BHG",
