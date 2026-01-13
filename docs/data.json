@@ -940,18 +940,6 @@
       }
     ]
   },
-  "2026-02-13": {
-    "from": "EDB",
-    "to": "CNM",
-    "text": "CrossCountry",
-    "link": "https://www.realtimetrains.co.uk/service/gb-nr:C75088/2026-02-13/detailed"
-  },
-  "2026-02-15": {
-    "from": "CNM",
-    "to": "EDB",
-    "text": "CrossCountry",
-    "link": "https://www.realtimetrains.co.uk/service/gb-nr:C74922/2026-02-15/detailed"
-  },
   "2026-02-21": {
     "from": "FKG",
     "to": "CRE",
