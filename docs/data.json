@@ -1037,5 +1037,24 @@
         "link": "https://www.realtimetrains.co.uk/service/gb-nr:Y41046/2026-03-28/detailed"
       }
     ]
+  },
+  "2026-05-27": {
+    "from": "EDB",
+    "to": "WSM",
+    "text": "Go to Weston :3c",
+    "sub": [
+      {
+        "from": "EDB",
+        "to": "BRI",
+        "text": "CrossCountry",
+        "link": "https://www.realtimetrains.co.uk/service/gb-nr:C75088/2026-05-15/detailed"
+      },
+      {
+        "from": "BRI",
+        "to": "WSM",
+        "text": "GWR",
+        "link": "https://www.realtimetrains.co.uk/service/gb-nr:P22990/2026-05-15/detailed"
+      }
+    ]
   }
 }
