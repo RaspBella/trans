@@ -35,6 +35,7 @@ void gen_head(FILE *fp, char *title) {
     "      <li><a href=\"/media\">media</a></li>\n"
     "      <li><a class=\"active\" href=\"/trans\">transportation</a></li>\n"
     "      <li><a href=\"/blog\">blog</a></li>\n"
+    "      <li><a href=\"/calendar\">calendar</a></li>\n"
     "    </ul>\n",
     title
   );
