@@ -1038,6 +1038,31 @@
       }
     ]
   },
+  "2026-04-10": {
+    "from": "EDB",
+    "to": "LDS",
+    "text": "Go to Leeds Spring 2026",
+    "sub": [
+      {
+        "from": "EDB",
+        "to": "NCL",
+        "text": "TPE",
+        "link": "https://www.realtimetrains.co.uk/service/gb-nr:L37277/2026-04-10/detailed"
+      },
+      {
+        "from": "NCL",
+        "to": "LDS",
+        "text": "XC",
+        "link": "https://www.realtimetrains.co.uk/service/gb-nr:C75098/2026-04-10/detailed"
+      }
+    ]
+  },
+  "2026-04-12": {
+    "from": "LDS",
+    "to": "EDB",
+    "text": "XC",
+    "link": "https://www.realtimetrains.co.uk/service/gb-nr:C75313/2026-04-12/detailed"
+  },
   "2026-05-15": {
     "from": "EDB",
     "to": "WSM",
