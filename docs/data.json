@@ -1052,7 +1052,7 @@
       {
         "from": "NCL",
         "to": "LDS",
-        "text": "XC",
+        "text": "CrossCountry",
         "link": "https://www.realtimetrains.co.uk/service/gb-nr:C75098/2026-04-10/detailed"
       }
     ]
@@ -1060,7 +1060,7 @@
   "2026-04-12": {
     "from": "LDS",
     "to": "EDB",
-    "text": "XC",
+    "text": "CrossCountry",
     "link": "https://www.realtimetrains.co.uk/service/gb-nr:C75313/2026-04-12/detailed"
   },
   "2026-05-15": {
