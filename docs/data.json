@@ -796,7 +796,7 @@
       {
         "from": "DON",
         "to": "SPT",
-        "text": "TPE",
+        "text": "TransPenine Express",
         "link": "https://www.realtimetrains.co.uk/service/gb-nr:C43608/2026-01-01/detailed"
       },
       {
@@ -831,13 +831,13 @@
       {
         "from": "MAN",
         "to": "MCV",
-        "text": "TPE",
+        "text": "TransPenine Express",
         "link": "https://www.realtimetrains.co.uk/service/gb-nr:L37181/2026-01-06/detailed"
       },
       {
         "from": "MCV",
         "to": "YRK",
-        "text": "TPE",
+        "text": "TransPenine Express",
         "link": "https://www.realtimetrains.co.uk/service/gb-nr:L36840/2026-01-06/detailed"
       },
       {
@@ -862,7 +862,7 @@
       {
         "from": "HYM",
         "to": "MIA",
-        "text": "TPE",
+        "text": "TransPenine Express",
         "link": "https://www.realtimetrains.co.uk/service/gb-nr:C73798/2026-01-17/detailed"
       }
     ]
@@ -905,7 +905,7 @@
       {
         "from": "EDB",
         "to": "MIA",
-        "text": "TPE",
+        "text": "TransPenine Express",
         "link": "https://www.realtimetrains.co.uk/service/gb-nr:C73804/2026-01-30/detailed"
       },
       {
@@ -1027,7 +1027,7 @@
       {
         "from": "BON",
         "to": "EDB",
-        "text": "TPE",
+        "text": "TransPenine Express",
         "link": "https://www.realtimetrains.co.uk/service/gb-nr:C74115/2026-03-28/detailed"
       },
       {
@@ -1046,7 +1046,7 @@
       {
         "from": "EDB",
         "to": "NCL",
-        "text": "TPE",
+        "text": "TransPenine Express",
         "link": "https://www.realtimetrains.co.uk/service/gb-nr:L37277/2026-04-10/detailed"
       },
       {
