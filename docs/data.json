@@ -1063,6 +1063,25 @@
     "text": "CrossCountry",
     "link": "https://www.realtimetrains.co.uk/service/gb-nr:C75313/2026-04-12/detailed"
   },
+  "2026-04-17": {
+    "from": "EDB",
+    "to": "MAN",
+    "text": "Manchester via York as WCML has engineering works",
+    "sub": [
+      {
+        "from": "EDB",
+        "to": "YRK",
+        "text": "CrossCountry",
+        "link": "https://www.realtimetrains.co.uk/service/gb-nr:C75084/2026-04-17/detailed"
+      },
+      {
+        "from": "YRK",
+        "to": "MAN",
+        "text": "TransPenine Express",
+        "link": "https://www.realtimetrains.co.uk/service/gb-nr:L36958/2026-04-17/detailed"
+      }
+    ]
+  },
   "2026-05-15": {
     "from": "EDB",
     "to": "WSM",
