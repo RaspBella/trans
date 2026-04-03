@@ -1184,5 +1184,11 @@
         "link": "https://www.realtimetrains.co.uk/service/gb-nr:P22990/2026-05-15/detailed"
       }
     ]
+  },
+  "2026-05-18": {
+    "from": "BRI",
+    "to": "EDB",
+    "text": "CrossCountry",
+    "link": "https://www.realtimetrains.co.uk/service/gb-nr:G01064/2026-05-18/detailed"
   }
 }
