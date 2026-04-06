@@ -1,16 +1,21 @@
 #pragma once
 
-#define C_IS_UPPER(c) ((c) >= 'A' && (c) <= 'Z')
+#define STATION(code, name) code,
 
-#define C_IS_LOWER(c) ((c) >= 'a' && (c) <= 'z')
+enum {
+#include "stations.def"
+  CRS_COUNT
+};
 
-#define VALID_CRS(code) (C_IS_UPPER(((code)[0])) && C_IS_UPPER(((code)[1])) && C_IS_UPPER(((code)[2])))
+#undef STATION
 
-#define LOWERCASE_VALID_CRS(code) (C_IS_LOWER(((code)[0])) && C_IS_LOWER(((code)[1])) && C_IS_LOWER(((code)[2])))
+#define STATION(CODE, NAME) { .name = NAME, #CODE },
 
-#define CASE_I_VALID_CRS(code) (VALID_CRS((code)) || LOWERCASE_VALID_CRS((code)))
+struct {
+  const char *name;
+  const char code[4];
+} crs[CRS_COUNT] = {
+#include "stations.def"
+};
 
-#define SEP "\n"
-
-const char *crs(const char *code);
-const char *src(const char *name);
+#undef STATION

@@ -1,47 +1,17 @@
-CC=clang
-CFLAGS=-Wall -Wextra -ggdb
+CFLAGS=-Wall -Wextra -MMD
+O_DIR=../docs
 
-srcs=$(filter-out stations.c, $(wildcard *.c))
-objs=$(srcs:.c=.o)
-deps=$(srcs:.c=.d)
+DEPS=$(wildcard *.d)
 
-BIN=trans
-LINKS=$(BIN)-gen $(BIN)-add
+.PHONY: default clean wasm
 
-DATA_FILE=../docs/data.json
-OUT_DIR=../docs
+default: gen wasm
+	./gen
 
-.PHONY: all clean gen add wasm
+gen: gen.c
+	cc $(CFLAGS) $< -o $@
 
-all: wasm gen
-
-gen: $(BIN)-gen
-	./$< $(DATA_FILE) $(OUT_DIR)
-
-add: $(BIN)-add
-	./$< $(DATA_FILE)
-
-wasm: ../docs/crs.mjs
-
-$(BIN)-%: $(BIN)
-	ln -sf $< $@
-
-$(BIN): $(objs)
-	${CC} ${CFLAGS} -o $@ $^
-
-%.o: %.c
-	${CC} ${CFLAGS} -MMD -c -o $@ $<
-
--include $(deps)
-
-../docs/crs.mjs: crs.c
-	emcc $< -o $@ \
-		-s WASM=1 \
-		-s MODULARIZE=1 \
-		-s EXPORT_ES6=1 \
-		-s EXPORTED_FUNCTIONS='["_malloc", "_free", "_crs", "_src"]' \
-		-s EXPORTED_RUNTIME_METHODS='["lengthBytesUTF8", "stringToUTF8", "UTF8ToString"]' \
-		-O3
+-include $(DEPS)
 
 clean:
-	rm -rf ../docs/crs.mjs ../docs/crs.wasm ../docs/index.html ../docs/????-??-?? ../docs/[A-Z][A-Z][A-Z] $(objs) $(deps) $(BIN) $(LINKS)
+	rm -rf gen $(O_DIR)/index.html $(O_DIR)/????-??-?? $(O_DIR)/[A-Z][A-Z][A-Z] $(DEPS) $(O_DIR)/data.json
