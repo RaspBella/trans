@@ -95,7 +95,7 @@
 
 #define PAGE_FMT \
   "    <div>\n" \
-  "      <h1>" ISO_FMT "</h1>\n" \
+  "      <h1><u>" ISO_FMT "</u></h1>\n" \
   "      <h2>%s</h2>\n" \
   "      <table>\n" \
   "        <thead>\n" \
