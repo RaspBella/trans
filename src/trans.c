@@ -3,13 +3,13 @@
     .on = date(.year = 2026, .month = 4, .day = 10),
     .count = 2,
     service(
-      .info = "TPE",
+      .info = TP,
       .id = "L37277",
       .from = EDB,
       .to = NCL
     ),
     service(
-      .info = "XC",
+      .info = XC,
       .id = "C75098",
       .from = NCL,
       .to = LDS
@@ -20,7 +20,7 @@
     .on = date(.year = 2026, .month = 4, .day = 12),
     .count = 1,
     service(
-      .info = "XC",
+      .info = XC,
       .id = "C75313",
       .from = LDS,
       .to = EDB
@@ -31,13 +31,13 @@
     .on = date(.year = 2026, .month = 4, .day = 17),
     .count = 2,
     service(
-      .info = "XC",
+      .info = XC,
       .id = "C75084",
       .from = EDB,
       .to = YRK
     ),
     service(
-      .info = "TPE",
+      .info = TP,
       .id = "L36958",
       .from = YRK,
       .to = MAN

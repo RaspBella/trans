@@ -1,6 +1,7 @@
 #pragma once
 
 #include "crs.h"
+#include "op.h"
 
 struct service {
   const char *info;
@@ -18,7 +19,7 @@ struct service {
 
 #define WEEKDAY_WYSI_FROM_CRE \
   service( \
-    .info = "AWC", \
+    .info = VT, \
     .id = "L02283", \
     .from = CRE, \
     .to = GLC \
