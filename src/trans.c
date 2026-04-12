@@ -26,3 +26,26 @@
       .to = EDB
     )
   ),
+  route(
+    .info = "Travel to Crewe (Via York and Manchester)(As the WCML has engineering works) for Liverpool Spring 2026",
+    .on = date(.year = 2026, .month = 4, .day = 17),
+    .count = 2,
+    service(
+      .info = "XC",
+      .id = "C75084",
+      .from = EDB,
+      .to = YRK
+    ),
+    service(
+      .info = "TPE",
+      .id = "L36958",
+      .from = YRK,
+      .to = MAN
+    )
+  ),
+  route(
+    .info = "Travel home from Crewe Via Glasgow",
+    .on = date(.year = 2026, .month = 4, .day = 20),
+    .count = 1,
+    WEEKDAY_WYSI_FROM_CRE
+  ),
