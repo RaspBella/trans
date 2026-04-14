@@ -73,3 +73,31 @@
     .count = 1,
     COMMON_CRE_TO_GLC
   ),
+  route(
+    .info = "Travel to Weston-super-Mare for Weston-super-Mare Spring 2026",
+    .on = date(.year = 2026, .month = 5, .day = 15),
+    .count = 2,
+    service(
+      .info = XC,
+      .id = "C75088",
+      .from = EDB,
+      .to = BRI
+    ),
+    service(
+      .info = GW,
+      .id = "P22990",
+      .from = BRI,
+      .to = WSM
+    )
+  ),
+  route(
+    .info = "Travel home from Weston-super-Mare Via Bristol",
+    .on = date(.year = 2026, .month = 5, .day = 18),
+    .count = 1,
+    service(
+      .info = XC,
+      .id = "G01064",
+      .from = BRI,
+      .to = EDB
+    )
+  ),
