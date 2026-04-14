@@ -1,6 +1,6 @@
 #pragma once
 
-#define STATION(code, name) code,
+#define STATION(CODE, NAME) CODE,
 
 enum {
 #include "stations.def"

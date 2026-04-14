@@ -5,7 +5,7 @@ DEPS=$(wildcard *.d)
 
 .PHONY: default clean
 
-default: gen wasm
+default: gen
 	./gen
 
 gen: gen.c
