@@ -10,13 +10,13 @@ enum {
 #undef STATION
 
 #define STATION(CODE, NAME) { \
-  .name = NAME, \
-  .code = #CODE \
+  .code = #CODE, \
+  .name = NAME \
 },
 
 struct {
-  const char *name;
   const char code[4];
+  const char *name;
 } crs[CRS_COUNT] = {
 #include "stations.def"
 };
