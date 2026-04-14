@@ -49,3 +49,20 @@
     .count = 1,
     WEEKDAY_WYSI_FROM_CRE
   ),
+  route(
+    .info = "Travel to Crewe Via Glasgow for Manchester CL First 2026",
+    .on = date(.year = 2026, .month = 4, .day = 24),
+    .count = 1,
+    service(
+      .info = VT,
+      .id = "W02480",
+      .from = GLC,
+      .to = CRE
+    )
+  ),
+  route(
+    .info = "Travel home from Crewe Via Glasgow",
+    .on = date(.year = 2026, .month = 4, .day = 27),
+    .count = 1,
+    WEEKDAY_WYSI_FROM_CRE
+  ),
