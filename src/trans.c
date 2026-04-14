@@ -47,22 +47,29 @@
     .info = "Travel home from Crewe Via Glasgow",
     .on = date(.year = 2026, .month = 4, .day = 20),
     .count = 1,
-    WEEKDAY_WYSI_FROM_CRE
+    COMMON_CRE_TO_GLC
   ),
   route(
     .info = "Travel to Crewe Via Glasgow for Manchester CL First 2026",
     .on = date(.year = 2026, .month = 4, .day = 24),
     .count = 1,
-    service(
-      .info = VT,
-      .id = "W02480",
-      .from = GLC,
-      .to = CRE
-    )
+    COMMON_GLC_TO_CRE
   ),
   route(
     .info = "Travel home from Crewe Via Glasgow",
     .on = date(.year = 2026, .month = 4, .day = 27),
     .count = 1,
-    WEEKDAY_WYSI_FROM_CRE
+    COMMON_CRE_TO_GLC
+  ),
+  route(
+    .info = "Travel to Crewe Via Glasgow for Manchester Megaminx Day 2026",
+    .on = date(.year = 2026, .month = 5, .day = 8),
+    .count = 1,
+    COMMON_GLC_TO_CRE
+  ),
+  route(
+    .info = "Travel home from Crewe Via Glasgow",
+    .on = date(.year = 2026, .month = 5, .day = 11),
+    .count = 1,
+    COMMON_CRE_TO_GLC
   ),
