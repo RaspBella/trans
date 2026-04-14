@@ -67,8 +67,8 @@
 #define ROOT_TR_FMT \
   "          <tr>\n" \
   "            <td><a href=\"" ISO_FMT "\">" ISO_FMT "</a></td>\n" \
-  "            <td>%s(%s)</td>\n" \
-  "            <td>%s(%s)</td>\n" \
+  "            <td>" STATION_FMT "</td>\n" \
+  "            <td>" STATION_FMT "</td>\n" \
   "            <td>\n" \
   "              <table>\n" \
   "                <thead>\n" \
@@ -88,8 +88,8 @@
 
 #define ROOT_SERVICES_TR_FMT \
   "                  <tr>\n" \
-  "                    <td>%s(%s)</td>\n" \
-  "                    <td>%s(%s)</td>\n" \
+  "                    <td>" STATION_FMT "</td>\n" \
+  "                    <td>" STATION_FMT "</td>\n" \
   "                    <td><a href=\"https://realtimetrains.co.uk/service/gb-nr:%s/" ISO_FMT "/detailed\">%s</a></td>\n" \
   "                  </tr>\n"
 
@@ -113,10 +113,13 @@
 
 #define PAGE_TR_FMT \
   "        <tr>\n" \
-  "          <td>%s(%s)</td>\n" \
-  "          <td>%s(%s)</td>\n" \
+  "          <td>" STATION_FMT "</td>\n" \
+  "          <td>" STATION_FMT "</td>\n" \
   "          <td><a href=\"https://realtimetrains.co.uk/service/gb-nr:%s/" ISO_FMT "/detailed\">%s</a></td>\n" \
   "        </tr>\n"
+
+#define STATION_FMT "%s (%s)"
+#define STATION_ARG(STATION) STATION.name, STATION.code
 
 #define ISO_FMT "%04d-%02d-%02d"
 #define ISO_ARG(DATE) DATE.year, DATE.month, DATE.day
@@ -161,8 +164,8 @@ char *root_services(struct route route) {
       NULL,
       0,
       ROOT_SERVICES_TR_FMT,
-      crs[from].name, crs[from].code,
-      crs[to].name, crs[to].code,
+      STATION_ARG(crs[from]),
+      STATION_ARG(crs[to]),
       route.services[i].id,
       ISO_ARG(route.on),
       route.services[i].info
@@ -179,8 +182,8 @@ char *root_services(struct route route) {
       string + written,
       len - written,
       ROOT_SERVICES_TR_FMT,
-      crs[from].name, crs[from].code,
-      crs[to].name, crs[to].code,
+      STATION_ARG(crs[from]),
+      STATION_ARG(crs[to]),
       route.services[i].id,
       ISO_ARG(route.on),
       route.services[i].info
@@ -208,8 +211,8 @@ char *root_tbody(int count, struct route *routes) {
       ROOT_TR_FMT,
       ISO_ARG(routes[i].on),
       ISO_ARG(routes[i].on),
-      crs[from].name, crs[from].code,
-      crs[to].name, crs[to].code,
+      STATION_ARG(crs[from]),
+      STATION_ARG(crs[to]),
       pointers[i],
       routes[i].info
     );
@@ -227,8 +230,8 @@ char *root_tbody(int count, struct route *routes) {
       ROOT_TR_FMT,
       ISO_ARG(routes[i].on),
       ISO_ARG(routes[i].on),
-      crs[from].name, crs[from].code,
-      crs[to].name, crs[to].code,
+      STATION_ARG(crs[from]),
+      STATION_ARG(crs[to]),
       pointers[i],
       routes[i].info
     );
@@ -283,8 +286,8 @@ char *page_tbody(struct route route) {
       NULL,
       0,
       PAGE_TR_FMT,
-      crs[from].name, crs[from].code,
-      crs[to].name, crs[to].code,
+      STATION_ARG(crs[from]),
+      STATION_ARG(crs[to]),
       route.services[i].id,
       ISO_ARG(route.on),
       route.services[i].info
@@ -301,8 +304,8 @@ char *page_tbody(struct route route) {
       string + written,
       len - written,
       PAGE_TR_FMT,
-      crs[from].name, crs[from].code,
-      crs[to].name, crs[to].code,
+      STATION_ARG(crs[from]),
+      STATION_ARG(crs[to]),
       route.services[i].id,
       ISO_ARG(route.on),
       route.services[i].info
