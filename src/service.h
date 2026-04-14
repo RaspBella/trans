@@ -30,5 +30,5 @@ struct service {
     .info = VT, \
     .id = "W02480", \
     .from = GLC, \
-    .to = GLC \
+    .to = CRE \
   )
