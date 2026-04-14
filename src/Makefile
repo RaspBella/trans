@@ -3,7 +3,7 @@ O_DIR=../docs
 
 DEPS=$(wildcard *.d)
 
-.PHONY: default clean wasm
+.PHONY: default clean
 
 default: gen wasm
 	./gen
