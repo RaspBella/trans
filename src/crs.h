@@ -9,7 +9,10 @@ enum {
 
 #undef STATION
 
-#define STATION(CODE, NAME) { .name = NAME, #CODE },
+#define STATION(CODE, NAME) { \
+  .name = NAME, \
+  .code = #CODE \
+},
 
 struct {
   const char *name;
