@@ -2,6 +2,8 @@
 *.d
 
 src/gen
+src/crs
+src/crs_lit.h
 
 docs/index.html
 docs/????-??-??
