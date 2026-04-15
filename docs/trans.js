@@ -1,3 +1,12 @@
+const params = new URLSearchParams(location.search);
+
+if (params.has("code") && params.has("date")) {
+  const code = params.get("code");
+  const date = params.get("date");
+
+  location.href = `https://realtimetrains.co.uk/service/gb-nr:${code}/${date}/detailed`
+}
+
 fetch("data.json")
   .then((response) => response.json())
   .then((data) => {
