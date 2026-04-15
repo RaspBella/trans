@@ -75,7 +75,7 @@
   "                  <tr>\n" \
   "                    <td>From</td>\n" \
   "                    <td>To</td>\n" \
-  "                    <td>RTT</td>\n" \
+  "                    <td>Link</td>\n" \
   "                  </tr>\n" \
   "                </thead>\n" \
   "                <tbody>\n" \
@@ -90,7 +90,7 @@
   "                  <tr>\n" \
   "                    <td>" STATION_FMT "</td>\n" \
   "                    <td>" STATION_FMT "</td>\n" \
-  "                    <td><a href=\"https://realtimetrains.co.uk/service/gb-nr:%s/" ISO_FMT "/detailed\">%s</a></td>\n" \
+  "                    <td>" LINK_FMT "</td>\n" \
   "                  </tr>\n"
 
 #define PAGE_FMT \
@@ -102,7 +102,7 @@
   "          <tr>\n" \
   "            <th>From</th>\n" \
   "            <th>To</th>\n" \
-  "            <th>RTT</th>\n" \
+  "            <th>Link</th>\n" \
   "          <tr>\n" \
   "        </thead>\n" \
   "        <tbody>\n" \
@@ -115,8 +115,10 @@
   "        <tr>\n" \
   "          <td>" STATION_FMT "</td>\n" \
   "          <td>" STATION_FMT "</td>\n" \
-  "          <td><a href=\"https://realtimetrains.co.uk/service/gb-nr:%s/" ISO_FMT "/detailed\">%s</a></td>\n" \
+  "          <td>" LINK_FMT "</td>\n" \
   "        </tr>\n"
+
+#define LINK_FMT "<a href=\"/trans/?code=%s&date=" ISO_FMT "\">%s</a>"
 
 #define STATION_FMT "%s (%s)"
 #define STATION_ARG(STATION) STATION.name, STATION.code
