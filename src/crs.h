@@ -1,6 +1,8 @@
 #pragma once
 
-#define STATION(CODE, NAME) CODE,
+#define ENUM(CODE) E_##CODE
+
+#define STATION(CODE, NAME) ENUM(CODE),
 
 enum {
 #include "stations.def"
@@ -22,3 +24,5 @@ struct {
 };
 
 #undef STATION
+
+#include "crs_lit.h"
