@@ -21,14 +21,14 @@ struct service {
   service( \
     .info = VT, \
     .id = "L02283", \
-    .from = E_CRE, \
-    .to = E_GLC \
+    .from = CRE, \
+    .to = GLC \
   )
 
 #define COMMON_GLC_TO_CRE \
   service( \
     .info = VT, \
     .id = "W02480", \
-    .from = E_GLC, \
-    .to = E_CRE \
+    .from = GLC, \
+    .to = CRE \
   )

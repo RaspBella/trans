@@ -24,7 +24,7 @@ int main(void) {
   for (int i = 0; i < ARRAY_LEN(crs); ++i) {
     fprintf(
       fp,
-      "#define %.3s \"%s\"\n",
+      "#define __%.3s__ \"%s\"\n",
       crs[i].code,
       crs[i].name
     );
