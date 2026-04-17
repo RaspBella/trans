@@ -1,0 +1,3 @@
+[submodule "src/trainer"]
+	path = src/trainer
+	url = https://github.com/RaspBella/trainer
