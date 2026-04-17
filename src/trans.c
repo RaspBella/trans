@@ -29,7 +29,7 @@
   route(
     .info = "Travel to "___CRE___" (Via "___YRK___" and "___MAN___")(As the WCML has engineering works) for Liverpool Spring 2026",
     .on = date(.year = 2026, .month = 4, .day = 17),
-    .count = 2,
+    .count = 3,
     service(
       .info = XC,
       .id = "C75084",
@@ -41,6 +41,12 @@
       .id = "L36958",
       .from = YRK,
       .to = MAN
+    ),
+    service(
+      .info = NT,
+      .id = "L09175",
+      .from = MAN,
+      .to = CRE
     )
   ),
   route(
