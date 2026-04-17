@@ -1,5 +1,5 @@
   route(
-    .info = "Travel to "__LDS__" for Leeds Spring 2026",
+    .info = "Travel to "___LDS___" for Leeds Spring 2026",
     .on = date(.year = 2026, .month = 4, .day = 10),
     .count = 2,
     service(
@@ -16,7 +16,7 @@
     )
   ),
   route(
-    .info = "Travel home from "__LDS__,
+    .info = "Travel home from "___LDS___,
     .on = date(.year = 2026, .month = 4, .day = 12),
     .count = 1,
     service(
@@ -27,7 +27,7 @@
     )
   ),
   route(
-    .info = "Travel to "__CRE__" (Via "__YRK__" and "__MAN__")(As the WCML has engineering works) for Liverpool Spring 2026",
+    .info = "Travel to "___CRE___" (Via "___YRK___" and "___MAN___")(As the WCML has engineering works) for Liverpool Spring 2026",
     .on = date(.year = 2026, .month = 4, .day = 17),
     .count = 2,
     service(
@@ -44,37 +44,37 @@
     )
   ),
   route(
-    .info = "Travel home from "__CRE__" Via "__GLC__,
+    .info = "Travel home from "___CRE___" Via "___GLC___,
     .on = date(.year = 2026, .month = 4, .day = 20),
     .count = 1,
     COMMON_CRE_TO_GLC
   ),
   route(
-    .info = "Travel to "__CRE__" Via "__GLC__" for Manchester CL First 2026",
+    .info = "Travel to "___CRE___" Via "___GLC___" for Manchester CL First 2026",
     .on = date(.year = 2026, .month = 4, .day = 24),
     .count = 1,
     COMMON_GLC_TO_CRE
   ),
   route(
-    .info = "Travel home from "__CRE__" Via "__GLC__,
+    .info = "Travel home from "___CRE___" Via "___GLC___,
     .on = date(.year = 2026, .month = 4, .day = 27),
     .count = 1,
     COMMON_CRE_TO_GLC
   ),
   route(
-    .info = "Travel to "__CRE__" Via "__GLC__" for Manchester Megaminx__Day__2026",
+    .info = "Travel to "___CRE___" Via "___GLC___" for Manchester Megaminx___Day___2026",
     .on = date(.year = 2026, .month = 5, .day = 8),
     .count = 1,
     COMMON_GLC_TO_CRE
   ),
   route(
-    .info = "Travel home from "__CRE__" Via "__GLC__,
+    .info = "Travel home from "___CRE___" Via "___GLC___,
     .on = date(.year = 2026, .month = 5, .day = 11),
     .count = 1,
     COMMON_CRE_TO_GLC
   ),
   route(
-    .info = "Travel to "__WSM__" for "__WSM__" Spring 2026",
+    .info = "Travel to "___WSM___" for "___WSM___" Spring 2026",
     .on = date(.year = 2026, .month = 5, .day = 15),
     .count = 2,
     service(
@@ -91,7 +91,7 @@
     )
   ),
   route(
-    .info = "Travel home from "__WSM__" Via "__BRI__,
+    .info = "Travel home from "___WSM___" Via "___BRI___,
     .on = date(.year = 2026, .month = 5, .day = 18),
     .count = 1,
     service(
