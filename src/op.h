@@ -5,3 +5,4 @@
 #define GW "Great Western Railway"
 #define NT "Northern"
 #define TP "TransPennine Express"
+#define LM "West Midlands Trains"

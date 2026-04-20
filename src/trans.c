@@ -47,6 +47,44 @@
     )
   ),
   route(
+    .info = "Trains for Day 1 of Liverpool Spring 2026, <U>Direct services back were cancelled, Heavily delayed service to and from Wigan</u>",
+    .on = date(.year = 2026, .month = 4, .day = 18),
+    service(
+      .info = LM,
+      .id = "W05233",
+      .from = CRE,
+      .to = LIV
+    ),
+    service(
+      .info = TP,
+      .id = "C73844",
+      .from = LIV,
+      .to = WGN
+    ),
+    service(
+      .info = VT,
+      .id = "W02479",
+      .from = WGN,
+      .to = CRE
+    )
+  ),
+  route(
+    .info = "Trains for Day 2 of Liverpool Spring 2026",
+    .on = date(.year = 2026, .month = 4, .day = 19),
+    service(
+      .info = LM,
+      .id = "W05236",
+      .from = CRE,
+      .to = LIV
+    ),
+    service(
+      .info = VT,
+      .id = "W02768",
+      .from = LIV,
+      .to = CRE
+    )
+  ),
+  route(
     .info = "Travel home from "___CRE___" Via "___GLC___,
     .on = date(.year = 2026, .month = 4, .day = 20),
     COMMON_CRE_TO_GLC
