@@ -16,19 +16,3 @@ struct service {
   FROM, \
   TO \
 }
-
-#define COMMON_CRE_TO_GLC \
-  service( \
-    .info = VT, \
-    .id = "L02283", \
-    .from = CRE, \
-    .to = GLC \
-  )
-
-#define COMMON_GLC_TO_CRE \
-  service( \
-    .info = VT, \
-    .id = "W02480", \
-    .from = GLC, \
-    .to = CRE \
-  )

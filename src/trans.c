@@ -87,7 +87,12 @@
   route(
     .info = "Travel home from "___CRE___" Via "___GLC___,
     .on = date(.year = 2026, .month = 4, .day = 20),
-    COMMON_CRE_TO_GLC,
+    service(
+      .info = VT,
+      .id = "L02283",
+      .from = CRE,
+      .to = GLC
+    ),
     service(
       .info = SR,
       .id = "Y41028",
@@ -98,22 +103,42 @@
   route(
     .info = "Travel to "___CRE___" Via "___GLC___" for Manchester CL First 2026",
     .on = date(.year = 2026, .month = 4, .day = 24),
-    COMMON_GLC_TO_CRE
+    service(
+      .info = VT,
+      .id = "W02480",
+      .from = GLC,
+      .to = CRE
+    )
   ),
   route(
     .info = "Travel home from "___CRE___" Via "___GLC___,
     .on = date(.year = 2026, .month = 4, .day = 27),
-    COMMON_CRE_TO_GLC
+    service(
+      .info = VT,
+      .id = "L02283",
+      .from = CRE,
+      .to = GLC
+    )
   ),
   route(
     .info = "Travel to "___CRE___" Via "___GLC___" for Manchester Megaminx Day 2026",
     .on = date(.year = 2026, .month = 5, .day = 8),
-    COMMON_GLC_TO_CRE
+    service(
+      .info = VT,
+      .id = "W02480",
+      .from = GLC,
+      .to = CRE
+    )
   ),
   route(
     .info = "Travel home from "___CRE___" Via "___GLC___,
     .on = date(.year = 2026, .month = 5, .day = 11),
-    COMMON_CRE_TO_GLC
+    service(
+      .info = VT,
+      .id = "L02283",
+      .from = CRE,
+      .to = GLC
+    )
   ),
   route(
     .info = "Travel to "___WSM___" for "___WSM___" Spring 2026",
@@ -139,5 +164,37 @@
       .id = "G01064",
       .from = BRI,
       .to = EDB
+    )
+  ),
+  route(
+    .info = "Travel to "___CRE___" for Crewe May 2026",
+    .on = date(.year = 2026, .month = 5, .day = 29),
+    service(
+      .info = VT,
+      .id = "W34268",
+      .from = EDB,
+      .to = CRE
+    )
+  ),
+  route(
+    .info = "",
+    .on = date(.year = 2026, .month = 6, .day = 1),
+    service(
+      .info = VT,
+      .id = "W34206",
+      .from = CRE,
+      .to = GLC
+    ),
+    service(
+      .info = SR,
+      .id = "L87904",
+      .from = GLQ,
+      .to = HYM
+    ),
+    service(
+      .info = SR,
+      .id = "W69664",
+      .from = HYM,
+      .to = BTS
     )
   ),
