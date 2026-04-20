@@ -177,7 +177,7 @@
     )
   ),
   route(
-    .info = "",
+    .info = "Travel from "___CRE___" to Burger Island, "___BTS___,
     .on = date(.year = 2026, .month = 6, .day = 1),
     service(
       .info = VT,
