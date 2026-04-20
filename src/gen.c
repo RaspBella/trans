@@ -4,6 +4,7 @@
 #include <sys/stat.h>
 #include <errno.h>
 #include "route.h"
+#include "utils.h"
 
 #define ME "RaspBella"
 
@@ -125,8 +126,6 @@
 
 #define ISO_FMT "%04d-%02d-%02d"
 #define ISO_ARG(DATE) DATE.year, DATE.month, DATE.day
-
-#define ARRAY_LEN(xs) sizeof(xs)/sizeof((xs)[0])
 
 char *root(char *tbody) {
   int len = snprintf(

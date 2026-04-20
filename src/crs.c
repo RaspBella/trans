@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <assert.h>
 
-#define ARRAY_LEN(xs) sizeof(xs)/sizeof((xs)[0])
+#include "utils.h"
 
 #define STATION(CODE, NAME) { \
   .code = #CODE, \

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "utils.h"
+
 #define STATION(CODE, NAME) CODE,
 
 enum {
