@@ -1,6 +1,7 @@
 #pragma once
 
 #include "service.h"
+#include "utils.h"
 
 struct date {
   int year;
@@ -15,13 +16,11 @@ struct route {
   struct service *services;
 };
 
-#define route(INFO, ON, COUNT, ...) (struct route){ \
+#define route(INFO, ON, ...) (struct route){ \
   INFO, \
   ON, \
-  COUNT, \
-  .services = (struct service[]){ \
-    __VA_ARGS__ \
-  } \
+  .count = ARRAY_LEN(((struct service[]){__VA_ARGS__})), \
+  .services = (struct service[]){__VA_ARGS__} \
 }
 
 #define date(YEAR, MONTH, DAY) (struct date){ \
