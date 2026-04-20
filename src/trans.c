@@ -87,7 +87,13 @@
   route(
     .info = "Travel home from "___CRE___" Via "___GLC___,
     .on = date(.year = 2026, .month = 4, .day = 20),
-    COMMON_CRE_TO_GLC
+    COMMON_CRE_TO_GLC,
+    service(
+      .info = SR,
+      .id = "Y41028",
+      .from = GLQ,
+      .to = BHG
+    )
   ),
   route(
     .info = "Travel to "___CRE___" Via "___GLC___" for Manchester CL First 2026",

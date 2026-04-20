@@ -4,5 +4,6 @@
 #define XC "Cross Country"
 #define GW "Great Western Railway"
 #define NT "Northern"
+#define SR "ScotRail"
 #define TP "TransPennine Express"
 #define LM "West Midlands Trains"
