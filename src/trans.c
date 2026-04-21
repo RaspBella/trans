@@ -101,13 +101,19 @@
     )
   ),
   route(
-    .info = ___BHG___" to "___EDB___,
+    .info = ___BHG___" to "___EDB___" return",
     .on = date(.year = 2026, .month = 4, .day = 21),
     service(
       .info = SR,
       .id = "W73121",
       .from = BHG,
       .to = EDB
+    ),
+    service(
+      .info = SR,
+      .id = "Y41036",
+      .from = EDB,
+      .to = BHG
     )
   ),
   route(
