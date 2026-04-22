@@ -2,7 +2,7 @@
 *.d
 
 src/gen
-src/crs
+src/gen_crs_lit
 src/crs_lit.h
 
 docs/index.html
