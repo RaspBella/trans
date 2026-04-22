@@ -6,6 +6,9 @@
 #include "route.h"
 #include "utils.h"
 
+#include "crs.h"
+#include "op.h"
+
 #define ME "RaspBella"
 
 #define OUTPUT_DIR "../docs"
@@ -122,7 +125,7 @@
 #define LINK_FMT "<a href=\"/trans/?code=%s&date=" ISO_FMT "\">%s</a>"
 
 #define STATION_FMT "%s (%s)"
-#define STATION_ARG(STATION) STATION.name, STATION.code
+#define STATION_ARG(CODE) CODE, crs(CODE) ? *crs(CODE) : "NULL"
 
 #define ISO_FMT "%04d-%02d-%02d"
 #define ISO_ARG(DATE) DATE.year, DATE.month, DATE.day
@@ -158,15 +161,12 @@ char *root_services(struct route route) {
   int written = 0;
 
   for (int i = 0; i < route.count; ++i) {
-    int from = route.services[i].from;
-    int to = route.services[i].to;
-
     len += snprintf(
       NULL,
       0,
       ROOT_SERVICES_TR_FMT,
-      STATION_ARG(crs[from]),
-      STATION_ARG(crs[to]),
+      STATION_ARG(route.services[i].from),
+      STATION_ARG(route.services[i].to),
       route.services[i].id,
       ISO_ARG(route.on),
       route.services[i].info
@@ -176,15 +176,12 @@ char *root_services(struct route route) {
   char *string = calloc(len + 1, sizeof(char));
 
   for (int i = 0; i < route.count; ++i) {
-    int from = route.services[i].from;
-    int to = route.services[i].to;
-
     written += snprintf(
       string + written,
       len - written,
       ROOT_SERVICES_TR_FMT,
-      STATION_ARG(crs[from]),
-      STATION_ARG(crs[to]),
+      STATION_ARG(route.services[i].from),
+      STATION_ARG(route.services[i].to),
       route.services[i].id,
       ISO_ARG(route.on),
       route.services[i].info
@@ -203,17 +200,14 @@ char *root_tbody(int count, struct route *routes) {
   for (int i = 0; i < count; ++i) {
     pointers[i] = root_services(routes[i]);
 
-    int from = routes[i].services[0].from;
-    int to = routes[i].services[routes[i].count - 1].to;
-
     len += snprintf(
       NULL,
       0,
       ROOT_TR_FMT,
       ISO_ARG(routes[i].on),
       ISO_ARG(routes[i].on),
-      STATION_ARG(crs[from]),
-      STATION_ARG(crs[to]),
+      STATION_ARG(routes[i].services[0].from),
+      STATION_ARG(routes[i].services[routes[i].count - 1].to),
       pointers[i],
       routes[i].info
     );
@@ -222,17 +216,14 @@ char *root_tbody(int count, struct route *routes) {
   char *string = calloc(len + 1, sizeof(char));
 
   for (int i = 0; i < count; ++i) {
-    int from = routes[i].services[0].from;
-    int to = routes[i].services[routes[i].count - 1].to;
-
     written += snprintf(
       string + written,
       len - written,
       ROOT_TR_FMT,
       ISO_ARG(routes[i].on),
       ISO_ARG(routes[i].on),
-      STATION_ARG(crs[from]),
-      STATION_ARG(crs[to]),
+      STATION_ARG(routes[i].services[0].from),
+      STATION_ARG(routes[i].services[routes[i].count - 1].to),
       pointers[i],
       routes[i].info
     );
@@ -280,15 +271,12 @@ char *page_tbody(struct route route) {
   int written = 0;
 
   for (int i = 0; i < route.count; ++i) {
-    int from = route.services[i].from;
-    int to = route.services[i].to;
-
     len += snprintf(
       NULL,
       0,
       PAGE_TR_FMT,
-      STATION_ARG(crs[from]),
-      STATION_ARG(crs[to]),
+      STATION_ARG(route.services[i].from),
+      STATION_ARG(route.services[i].to),
       route.services[i].id,
       ISO_ARG(route.on),
       route.services[i].info
@@ -298,15 +286,12 @@ char *page_tbody(struct route route) {
   char *string = calloc(len + 1, sizeof(char));
 
   for (int i = 0; i < route.count; ++i) {
-    int from = route.services[i].from;
-    int to = route.services[i].to;
-
     written += snprintf(
       string + written,
       len - written,
       PAGE_TR_FMT,
-      STATION_ARG(crs[from]),
-      STATION_ARG(crs[to]),
+      STATION_ARG(route.services[i].from),
+      STATION_ARG(route.services[i].to),
       route.services[i].id,
       ISO_ARG(route.on),
       route.services[i].info
@@ -318,7 +303,7 @@ char *page_tbody(struct route route) {
 
 int main(void) {
   struct route routes[] = {
-#include "trans.c"
+#include "trans.def"
   };
 
   FILE *fp = fopen(OUTPUT_DIR INDEX, "w");
@@ -416,8 +401,8 @@ int main(void) {
         "\"to\":\"%s\"}",
         routes[i].services[j].info,
         routes[i].services[j].id,
-        crs[routes[i].services[j].from].code,
-        crs[routes[i].services[j].to].code
+        routes[i].services[j].from,
+        routes[i].services[j].to
       );
 
       if (j < (routes[i].count - 1)) {

@@ -1,13 +1,10 @@
 #pragma once
 
-#include "crs.h"
-#include "op.h"
-
 struct service {
   const char *info;
   const char *id;
-  int from;
-  int to;
+  char from[4];
+  char to[4];
 };
 
 #define service(INFO, ID, FROM, TO) { \

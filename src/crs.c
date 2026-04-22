@@ -1,34 +1,36 @@
 #include <stdlib.h>
-#include <stdio.h>
 #include <assert.h>
 
-#include "utils.h"
+char **crs_db[26][26][26];
 
-#define STATION(CODE, NAME) { \
-  .code = #CODE, \
-  .name = NAME \
-},
+#define X(CODE, ...) \
+  crs_db[(int)((#CODE)[0]-'A')][(int)((#CODE)[1]-'A')][(int)((#CODE)[2]-'A')] = (char*[]){ \
+    __VA_ARGS__, \
+    NULL \
+  };
 
-struct {
-  const char code[4];
-  const char *name;
-} crs[] = {
-#include "stations.def"
-};
+__attribute__((constructor))
+static void init_crs(void) {
+#include "crs.def"
+}
 
-int main(void) {
-  FILE *fp = fopen("crs_lit.h", "w");
+#undef X
 
-  assert(fp != NULL);
+#define CTOI(C) \
+  C >= 'A' && C <= 'Z' ? C - 'A' : \
+  C >= 'a' && C <= 'z' ? C - 'a' : \
+  -1
 
-  for (int i = 0; i < ARRAY_LEN(crs); ++i) {
-    fprintf(
-      fp,
-      "#define ___%.3s___ \"%s\"\n",
-      crs[i].code,
-      crs[i].name
-    );
+char **crs(char code[4]) {
+  int index[3] = {
+    [0] = CTOI(code[0]),
+    [1] = CTOI(code[1]),
+    [2] = CTOI(code[2])
+  };
+
+  if (index[0] >= 0 && index[1] >= 0 && index[2] >= 0) {
+    return crs_db[index[0]][index[1]][index[2]];
   }
 
-  fclose(fp);
+  return NULL;
 }

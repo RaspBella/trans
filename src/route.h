@@ -21,7 +21,7 @@ struct route {
   ON, \
   .count = ARRAY_LEN(((struct service[]){__VA_ARGS__})), \
   .services = (struct service[]){__VA_ARGS__} \
-}
+},
 
 #define date(YEAR, MONTH, DAY) (struct date){ \
   YEAR, \

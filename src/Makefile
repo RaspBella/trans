@@ -1,20 +1,31 @@
 CFLAGS=-Wall -Wextra -MMD
 O_DIR=../docs
 
+SRCS=$(wildcard *.c)
+OBJS=$(SRCS:.c=.o)
 DEPS=$(wildcard *.d)
+BINS=gen_crs_lit gen
 
 .PHONY: default clean
 
 default: gen
 	./gen
 
-crs_lit.h: crs
-	./crs
+gen: gen.o crs.o
+	cc $(CFLAGS) $^ -o gen
 
-gen: gen.c crs_lit.h
+gen.c: crs_lit.h
+
+gen_crs_lit: gen_crs_lit.o
 	cc $(CFLAGS) $< -o $@
+
+crs_lit.h: gen_crs_lit
+	./gen_crs_lit
 
 -include $(DEPS)
 
 clean:
-	rm -rf crs crs_lit.h gen $(O_DIR)/index.html $(O_DIR)/????-??-?? $(O_DIR)/[A-Z][A-Z][A-Z] $(DEPS) $(O_DIR)/data.json
+	rm -f $(BINS)
+	rm -f $(OBJS) $(DEPS) crs_lit.h
+	rm -f $(O_DIR)/index.html $(O_DIR)/data.json
+	rm -rf $(O_DIR)/????-??-?? $(O_DIR)/[A-Z][A-Z][A-Z]
