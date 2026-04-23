@@ -124,6 +124,12 @@ route(
     .id = "W73107",
     .from = "BHG",
     .to = "EDB"
+  ),
+  service(
+    .info = SR,
+    .id = "Y41058",
+    .from = "EDB",
+    .to = "BHG"
   )
 )
 route(
