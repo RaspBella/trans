@@ -117,6 +117,16 @@ route(
   )
 )
 route(
+  .info = BHG" to "EDB" return",
+  .on = date(.year = 2026, .month = 4, .day = 23),
+  service(
+    .info = SR,
+    .id = "W73107",
+    .from = "BHG",
+    .to = "EDB"
+  )
+)
+route(
   .info = "Travel to "CRE" Via "GLC" for Manchester CL First 2026",
   .on = date(.year = 2026, .month = 4, .day = 24),
   service(
