@@ -1,9 +1,10 @@
 *.o
 *.d
 
-src/gen
-src/gen_crs_lit
-src/crs_lit.h
+src/gen/crs
+src/gen/html/pages
+src/crs.c
+src/crs.h
 
 docs/index.html
 docs/????-??-??
