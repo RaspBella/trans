@@ -149,6 +149,16 @@ route(
   )
 )
 route(
+  .info = "Go Manchester CL First via "SPT,
+  .on = date(.year = 2026, .month = 4, .day = 25),
+  service(
+    .info = VT,
+    .id = "W02544",
+    .from = "CRE",
+    .to = "SPT"
+  )
+)
+route(
   .info = "Travel home from "CRE" Via "GLC,
   .on = date(.year = 2026, .month = 4, .day = 27),
   service(
