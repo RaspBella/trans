@@ -3,13 +3,40 @@
 #include "../../route.h"
 #include "../../crs.h"
 
-void yyyy_mm_dd(FILE *fp, char *title, struct route route) {
+void yyyy_mm_dd(FILE *fp, char *title, struct route route, const char *prev, const char *next) {
   OPEN_INDEX(fp, title);
 
   fprintf(
     fp,
     "    <div>\n"
-    "      <h1><u>%s</u></h1>\n"
+    "      <div id=\"heading\">\n"
+  );
+
+  if (prev) {
+    fprintf(
+      fp,
+      "        <h1><a href=\"%s\">prev</a></h1>\n",
+      prev
+    );
+  }
+
+  fprintf(
+    fp,
+    "        <h1><u>%s</u></h1>\n",
+    route.iso
+  );
+
+  if (next) {
+    fprintf(
+      fp,
+      "        <h1><a href=\"%s\">next</a></h1>\n",
+      next
+    );
+  }
+
+  fprintf(
+    fp,
+    "      </div>\n"
     "      <h2>%s</h2>\n"
     "      <table>\n"
     "        <thead>\n"
@@ -20,7 +47,6 @@ void yyyy_mm_dd(FILE *fp, char *title, struct route route) {
     "          <tr>\n"
     "        </thead>\n"
     "        <tbody>\n",
-    route.iso,
     route.info
   );
 

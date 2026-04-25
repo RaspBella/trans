@@ -62,7 +62,7 @@ int main(void) {
 
     assert(ret == sizeof(title) - 1);
 
-    yyyy_mm_dd(fp, title, routes[i]);
+    yyyy_mm_dd(fp, title, routes[i], i > 0 ? routes[i - 1].iso : NULL, i < count - 1 ? routes[i + 1].iso : NULL);
   }
 
   fp = freopen(OUTDIR "/data.json", "w", fp);
