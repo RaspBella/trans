@@ -1,6 +1,6 @@
 route(
   .info = "Travel to "LDS" for Leeds Spring 2026",
-  .on = date(.year = 2026, .month = 4, .day = 10),
+  .iso = "2026-04-10",
   service(
     .info = TP,
     .id = "L37277",
@@ -16,7 +16,7 @@ route(
 )
 route(
   .info = "Travel home from "LDS,
-  .on = date(.year = 2026, .month = 4, .day = 12),
+  .iso = "2026-04-12",
   service(
     .info = XC,
     .id = "C75313",
@@ -26,7 +26,7 @@ route(
 )
 route(
   .info = "Travel to "CRE" (Via "YRK" and "MAN")(As the WCML has engineering works) for Liverpool Spring 2026",
-  .on = date(.year = 2026, .month = 4, .day = 17),
+  .iso = "2026-04-17",
   service(
     .info = XC,
     .id = "C75084",
@@ -48,7 +48,7 @@ route(
 )
 route(
   .info = "Trains for Day 1 of Liverpool Spring 2026, <U>Direct services back were cancelled, Heavily delayed service to and from Wigan</u>",
-  .on = date(.year = 2026, .month = 4, .day = 18),
+  .iso = "2026-04-18",
   service(
     .info = LM,
     .id = "W05233",
@@ -70,7 +70,7 @@ route(
 )
 route(
   .info = "Trains for Day 2 of Liverpool Spring 2026",
-  .on = date(.year = 2026, .month = 4, .day = 19),
+  .iso = "2026-04-19",
   service(
     .info = LM,
     .id = "W05236",
@@ -86,7 +86,7 @@ route(
 )
 route(
   .info = "Travel home from "CRE" Via "GLC,
-  .on = date(.year = 2026, .month = 4, .day = 20),
+  .iso = "2026-04-20",
   service(
     .info = VT,
     .id = "L02283",
@@ -102,7 +102,7 @@ route(
 )
 route(
   .info = BHG" to "EDB" return",
-  .on = date(.year = 2026, .month = 4, .day = 21),
+  .iso = "2026-04-21",
   service(
     .info = SR,
     .id = "W73121",
@@ -118,7 +118,7 @@ route(
 )
 route(
   .info = BHG" to "EDB" return",
-  .on = date(.year = 2026, .month = 4, .day = 23),
+  .iso = "2026-04-23",
   service(
     .info = SR,
     .id = "W73107",
@@ -134,7 +134,7 @@ route(
 )
 route(
   .info = "Travel to "CRE" Via "GLC" for Manchester CL First 2026",
-  .on = date(.year = 2026, .month = 4, .day = 24),
+  .iso = "2026-04-24",
   service(
     .info = SR,
     .id = "W73123",
@@ -150,7 +150,7 @@ route(
 )
 route(
   .info = "Go Manchester CL First via "SPT,
-  .on = date(.year = 2026, .month = 4, .day = 25),
+  .iso = "2026-04-25",
   service(
     .info = VT,
     .id = "W02544",
@@ -166,7 +166,7 @@ route(
 )
 route(
   .info = "Travel home from "CRE" Via "GLC,
-  .on = date(.year = 2026, .month = 4, .day = 27),
+  .iso = "2026-04-27",
   service(
     .info = VT,
     .id = "L02283",
@@ -176,7 +176,7 @@ route(
 )
 route(
   .info = "Travel to "CRE" Via "GLC" for Manchester Megaminx Day 2026",
-  .on = date(.year = 2026, .month = 5, .day = 8),
+  .iso = "2026-05-08",
   service(
     .info = VT,
     .id = "W02480",
@@ -186,7 +186,7 @@ route(
 )
 route(
   .info = "Travel home from "CRE" Via "GLC,
-  .on = date(.year = 2026, .month = 5, .day = 11),
+  .iso = "2026-05-11",
   service(
     .info = VT,
     .id = "L02283",
@@ -196,7 +196,7 @@ route(
 )
 route(
   .info = "Travel to "WSM" for "WSM" Spring 2026",
-  .on = date(.year = 2026, .month = 5, .day = 15),
+  .iso = "2026-05-15",
   service(
     .info = XC,
     .id = "C75088",
@@ -212,7 +212,7 @@ route(
 )
 route(
   .info = "Travel home from "WSM" Via "BRI,
-  .on = date(.year = 2026, .month = 5, .day = 18),
+  .iso = "2026-05-18",
   service(
     .info = XC,
     .id = "G01064",
@@ -222,7 +222,7 @@ route(
 )
 route(
   .info = "Travel to "CRE" for Crewe May 2026",
-  .on = date(.year = 2026, .month = 5, .day = 29),
+  .iso = "2026-05-29",
   service(
     .info = VT,
     .id = "W34268",
@@ -232,7 +232,7 @@ route(
 )
 route(
   .info = "Travel from "CRE" to Burger Island, "BTS,
-  .on = date(.year = 2026, .month = 6, .day = 1),
+  .iso = "2026-06-01",
   service(
     .info = VT,
     .id = "W34206",

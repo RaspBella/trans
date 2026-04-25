@@ -9,7 +9,7 @@ void yyyy_mm_dd(FILE *fp, char *title, struct route route) {
   fprintf(
     fp,
     "    <div>\n"
-    "      <h1><u>" ISO_FMT "</u></h1>\n"
+    "      <h1><u>%s</u></h1>\n"
     "      <h2>%s</h2>\n"
     "      <table>\n"
     "        <thead>\n"
@@ -20,7 +20,7 @@ void yyyy_mm_dd(FILE *fp, char *title, struct route route) {
     "          <tr>\n"
     "        </thead>\n"
     "        <tbody>\n",
-    ISO_ARG(route.on),
+    route.iso,
     route.info
   );
 
@@ -34,7 +34,7 @@ void yyyy_mm_dd(FILE *fp, char *title, struct route route) {
       "        </tr>\n",
       STATION_ARG(route.services[i].from),
       STATION_ARG(route.services[i].to),
-      LINK_ARG(route.services[i].id, route.on, route.services[i].info)
+      LINK_ARG(route.services[i].id, route.iso, route.services[i].info)
     );
   }
 

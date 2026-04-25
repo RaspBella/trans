@@ -33,8 +33,8 @@ int main(void) {
     int ret = snprintf(
       filename + sizeof(OUTDIR),
       11,
-      ISO_FMT,
-      ISO_ARG(routes[i].on)
+      "%s",
+      routes[i].iso
     );
 
     assert(ret == 10);
@@ -56,8 +56,8 @@ int main(void) {
     ret = snprintf(
       title,
       sizeof(title),
-      ISO_FMT " - transportation - RaspBella",
-      ISO_ARG(routes[i].on)
+      "%s - transportation - RaspBella",
+      routes[i].iso
     );
 
     assert(ret == sizeof(title) - 1);
@@ -74,10 +74,10 @@ int main(void) {
   for (int i = 0; i < count; ++i) {
     fprintf(
       fp,
-      "\"" ISO_FMT "\":{"
+      "\"%s\":{"
       "\"info\":\"%s\","
       "\"services\":[",
-      ISO_ARG(routes[i].on),
+      routes[i].iso,
       routes[i].info
     );
 

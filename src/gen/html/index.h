@@ -1,14 +1,11 @@
 #pragma once
 
-#define ISO_FMT "%04d-%02d-%02d"
-#define ISO_ARG(DATE) DATE.year, DATE.month, DATE.day
-
 #define STATION_FMT "%s (%3s)"
 #define STATION_ARG(CODE) *crs[CODE[0]-'A'][CODE[1]-'A'][CODE[2]-'A'], CODE
 
-#define RTT_FMT "https://realtimetrains.co.uk/service/gb-nr:%s/" ISO_FMT "/detailed"
+#define RTT_FMT "https://realtimetrains.co.uk/service/gb-nr:%s/%s/detailed"
 #define LINK_FMT "<a href=\"" RTT_FMT "\">%s</a>"
-#define LINK_ARG(ID, DATE, INFO) ID, ISO_ARG(DATE), INFO
+#define LINK_ARG(ID, ISO, INFO) ID, ISO, INFO
 
 #define OPEN_INDEX(FP, TITLE) fprintf(FP, "<!DOCTYPE html>\n" \
   "<html lang=\"en\">\n" \

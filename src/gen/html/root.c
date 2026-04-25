@@ -7,7 +7,7 @@ static void root_route(FILE *fp, struct route route) {
   fprintf(
     fp,
     "          <tr>\n"
-    "            <td><a href=\"" ISO_FMT "\">" ISO_FMT "</a></td>\n"
+    "            <td><a href=\"%s\">%s</a></td>\n"
     "            <td>" STATION_FMT "</td>\n"
     "            <td>" STATION_FMT "</td>\n"
     "            <td>\n"
@@ -20,7 +20,7 @@ static void root_route(FILE *fp, struct route route) {
     "                  </tr>\n"
     "                </thead>\n"
     "                <tbody>\n",
-    ISO_ARG(route.on), ISO_ARG(route.on),
+    route.iso, route.iso,
     STATION_ARG(route.services[0].from),
     STATION_ARG(route.services[route.count - 1].to)
   );
@@ -35,7 +35,7 @@ static void root_route(FILE *fp, struct route route) {
       "                  </tr>\n",
       STATION_ARG(route.services[i].from),
       STATION_ARG(route.services[i].to),
-      LINK_ARG(route.services[i].id, route.on, route.services[i].info)
+      LINK_ARG(route.services[i].id, route.iso, route.services[i].info)
     );
   }
 
