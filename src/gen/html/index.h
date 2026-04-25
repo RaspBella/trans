@@ -6,7 +6,8 @@
 #define STATION_FMT "%s (%3s)"
 #define STATION_ARG(CODE) *crs[CODE[0]-'A'][CODE[1]-'A'][CODE[2]-'A'], CODE
 
-#define LINK_FMT "<a href=\"/trans/?code=%s&date=" ISO_FMT "\">%s</a>"
+#define RTT_FMT "https://realtimetrains.co.uk/service/gb-nr:%s/" ISO_FMT "/detailed"
+#define LINK_FMT "<a href=\"" RTT_FMT "\">%s</a>"
 #define LINK_ARG(ID, DATE, INFO) ID, ISO_ARG(DATE), INFO
 
 #define OPEN_INDEX(FP, TITLE) fprintf(FP, "<!DOCTYPE html>\n" \
