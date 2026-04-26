@@ -24,4 +24,4 @@ clean:
 	rm -f $(OBJS) $(DEPS)
 	rm -f $(GENC)
 	rm -f $(O_DIR)/index.html $(O_DIR)/data.json
-	rm -rf $(O_DIR)/????-??-?? $(O_DIR)/[A-Z][A-Z][A-Z]
+	rm -rf $(O_DIR)/????-??-?? $(O_DIR)/[A-Z][A-Z][A-Z]/index.html
