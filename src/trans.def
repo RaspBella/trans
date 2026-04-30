@@ -149,7 +149,7 @@ route(
   )
 )
 route(
-  .info = "Go Manchester CL First via "SPT,
+  .info = "Go Manchester CL First Via "SPT,
   .iso = "2026-04-25",
   service(
     .info = VT,
@@ -266,5 +266,25 @@ route(
     .id = "W69664",
     .from = "HYM",
     .to = "BTS"
+  )
+)
+route(
+  .info = "Travel to "SVG" Via "EDB" and "LON" for Stevenage July 2026",
+  .iso = "2026-07-10",
+  service(
+    .info = VT,
+    .id = "W33933",
+    .from = "EDB",
+    .to = "EUS"
+  )
+)
+route(
+  .info = "Travel home from London Via "EUS" and "EDB,
+  .iso = "2026-07-21",
+  service(
+    .info = VT,
+    .id = "W34144",
+    .from = "EUS",
+    .to = "EDB"
   )
 )
