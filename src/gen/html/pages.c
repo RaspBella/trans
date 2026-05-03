@@ -40,7 +40,7 @@ int main(void) {
     assert(ret == 10);
 
     if (mkdir(filename, 0755) != 0) {
-      assert(errno = EEXIST);
+      assert(errno == EEXIST);
     }
 
     filename[sizeof(OUTDIR) + 10] = '/';
