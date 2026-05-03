@@ -243,6 +243,22 @@ route(
   )
 )
 route(
+  .info = "Travel to "SHF" Via "WRG" for Sheffield Spring 2026",
+  .iso = "2026-05-22",
+  service(
+    .info = VT,
+    .id = "W34265",
+    .from = "EDB",
+    .to = "WBQ"
+  ),
+  service(
+    .info = EM,
+    .id = "C04363",
+    .from = "WAC",
+    .to = "SHF"
+  )
+)
+route(
   .info = "Travel to "CRE" for Crewe May 2026",
   .iso = "2026-05-29",
   service(
