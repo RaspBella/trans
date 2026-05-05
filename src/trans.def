@@ -197,6 +197,16 @@ route(
   )
 )
 route(
+  .info = BHG" to "EDB" return",
+  .iso = "2026-05-05",
+  service(
+    .info = SR,
+    .id = "Y41017",
+    .from = "BHG",
+    .to = "EDB"
+  )
+)
+route(
   .info = "Travel to "CRE" Via "GLC" for Manchester Megaminx Day 2026",
   .iso = "2026-05-08",
   service(
