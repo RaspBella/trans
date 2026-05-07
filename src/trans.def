@@ -220,6 +220,12 @@ route(
     .id = "Y40928",
     .from = "EDB",
     .to = "BHG"
+  ),
+  service(
+    .info = SR,
+    .id = "Y41002",
+    .from = "BHG",
+    .to = "EDB"
   )
 )
 route(
