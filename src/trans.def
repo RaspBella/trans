@@ -246,6 +246,12 @@ route(
     .id = "L08685",
     .from = "CRE",
     .to = "SPT"
+  ),
+  service(
+    .info = VT,
+    .id = "L02166",
+    .from = "SPT",
+    .to = "CRE"
   )
 )
 route(
