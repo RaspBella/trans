@@ -149,7 +149,7 @@ route(
   )
 )
 route(
-  .info = "Go Manchester CL First Via "SPT,
+  .info = "Manchester CL First Via "SPT,
   .iso = "2026-04-25",
   service(
     .info = VT,
@@ -236,6 +236,16 @@ route(
     .id = "W02480",
     .from = "GLC",
     .to = "CRE"
+  )
+)
+route(
+  .info = "Manchester Megaminx day Via "SPT,
+  .iso = "2026-05-09",
+  service(
+    .info = NT,
+    .id = "L08685",
+    .from = "CRE",
+    .to = "SPT"
   )
 )
 route(
