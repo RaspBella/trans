@@ -313,6 +313,22 @@ route(
   )
 )
 route(
+  .info = "Travel from "SHF" to "MAN" for Manchester CL Second 2026, then go to "CRE" for rest",
+  .iso = "2026-05-25",
+  service(
+    .info = EM,
+    .id = "C04439",
+    .from = "SHF",
+    .to = "MAN"
+  ),
+  service(
+    .info = NT,
+    .id = "L89649",
+    .from = "SPT",
+    .to = "CRE"
+  )
+)
+route(
   .info = "Travel to "CRE" for Crewe May 2026",
   .iso = "2026-05-29",
   service(
