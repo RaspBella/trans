@@ -290,6 +290,12 @@ route(
   .info = "Travel home from "WSM" Via "BRI,
   .iso = "2026-05-18",
   service(
+    .info = GW,
+    .id = "G14897",
+    .from = "WSM",
+    .to = "BRI"
+  ),
+  service(
     .info = XC,
     .id = "G01064",
     .from = "BRI",
