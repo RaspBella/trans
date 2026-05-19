@@ -396,3 +396,25 @@ route(
     .to = "EDB"
   )
 )
+route(
+  .info = "Travel to "LLE" for South Wales Summer 2026",
+  .iso = "2026-07-31",
+  service(
+    .info = SR,
+    .id = "W83689",
+    .from = "BHG",
+    .to = "HYM"
+  ),
+  service(
+    .info = VT,
+    .id = "W34265",
+    .from = "HYM",
+    .to = "CRE"
+  ),
+  service(
+    .info = AW,
+    .id = "G38873",
+    .from = "CRE",
+    .to = "LLE"
+  )
+)
