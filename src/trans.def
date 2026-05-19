@@ -418,3 +418,19 @@ route(
     .to = "LLE"
   )
 )
+route(
+  .info = "Travel home from "LLE" Via "MAN" and "EDB,
+  .iso = "2026-08-03",
+  service(
+    .info = AW,
+    .id = "G38947",
+    .from = "LLE",
+    .to = "MAN"
+  ),
+  service(
+    .info = TP,
+    .id = "W85182",
+    .from = "MAN",
+    .to = "EDB"
+  )
+)
