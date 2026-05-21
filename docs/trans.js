@@ -1,32 +1,15 @@
-const params = new URLSearchParams(location.search);
-const TODAY = new Date().toISOString().substring(0, 10);
-const head = "https://realtimetrains.co.uk/service/gb-nr:";
-
-if (params.has("code")) {
-  const code = params.get("code");
-
-  if (params.has("date")) {
-    const date = params.get("date");
-
-    location.href = `${head}${code}/${date}/detailed`
-  } else {
-    const date = TODAY;
-
-    location.href = `${head}${code}/${date}/detailed`
-  }
-}
-
 fetch("data.json")
   .then((response) => response.json())
   .then((data) => {
-    const date = TODAY;
+    const today = new Date().toISOString().substring(0, 10);
 
-    if (Object.hasOwn(data, date)) {
-      today_link.text = "today!";
+    if (Object.hasOwn(data, today)) {
+      today_link.text = `today == "${today}"`;
+      today_link.href = today;
     }
 
     else {
-      today.remove();
+      today_link.text = "!today"
     }
 
     function parse_query(input, data) {
