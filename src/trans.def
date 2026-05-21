@@ -303,6 +303,16 @@ route(
   )
 )
 route(
+  .info = BHG" to "EDB" return",
+  .iso = "2026-05-21",
+  service(
+    .info = SR,
+    .id = "W69962",
+    .from = "BHG",
+    .to = "EDB"
+  )
+)
+route(
   .info = "Travel to "SHF" Via "WRG" for Sheffield Spring 2026",
   .iso = "2026-05-22",
   service(
