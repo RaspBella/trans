@@ -19,17 +19,7 @@
   "    <link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/favicon/favicon-16x16.png\">\n" \
   "    <link rel=\"manifest\" href=\"/favicon/site.webmanifest\">\n" \
   "  </head>\n" \
-  "  <body>\n" \
-  "    <ul class=\"nav\">\n" \
-  "      <li><a href=\"/\">home</a></li>\n" \
-  "      <li><a href=\"/RaspBella\">about</a></li>\n" \
-  "      <li><a href=\"/cubing\">cubing</a></li>\n" \
-  "      <li><a href=\"/linux\">linux</a></li>\n" \
-  "      <li><a href=\"/media\">media</a></li>\n" \
-  "      <li><a class=\"active\" href=\"/trans\">trans</a></li>\n" \
-  "      <li><a href=\"/blog\">blog</a></li>\n" \
-  "      <li><a href=\"/calendar\">calendar</a></li>\n" \
-  "    </ul>\n", \
+  "  <body>\n", \
   TITLE \
 )
 
