@@ -32,7 +32,7 @@ Promise.all([
 
         document.body.appendChild(header);
 
-        countdown(5, `/trans/${date}`);
+        countdown(5, `/${date}`);
       }
 
       else {
@@ -42,7 +42,7 @@ Promise.all([
 
         document.body.appendChild(header);
 
-        countdown(5, "/trans");
+        countdown(5, "/");
       }
     })
     .catch((error) => console.log("Error loading JSON file", error));
