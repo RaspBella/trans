@@ -10,12 +10,13 @@ void yyyy_mm_dd(FILE *fp, char *title, struct route route, const char *prev, con
     fp,
     "    <div>\n"
     "      <div id=\"heading\">\n"
+    "        <h1><a href=\"/\">home</h1>\n"
   );
 
   if (prev) {
     fprintf(
       fp,
-      "        <h1><a href=\"/trans/%s\">prev</a></h1>\n",
+      "        <h1><a href=\"/%s\">prev</a></h1>\n",
       prev
     );
   }
@@ -29,7 +30,7 @@ void yyyy_mm_dd(FILE *fp, char *title, struct route route, const char *prev, con
   if (next) {
     fprintf(
       fp,
-      "        <h1><a href=\"/trans/%s\">next</a></h1>\n",
+      "        <h1><a href=\"/%s\">next</a></h1>\n",
       next
     );
   }
