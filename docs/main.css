@@ -1,3 +1,12 @@
+body {
+  background-color: #b00b69;
+}
+
+a {
+  background-color: purple;
+  color: black;
+}
+
 table, th, td {
   border: 0.1em solid;
 }
