@@ -345,6 +345,12 @@ route(
   ),
   service(
     .info = NT,
+    .id = "L89711",
+    .from = "LVM",
+    .to = "SPT"
+  ),
+  service(
+    .info = NT,
     .id = "L89649",
     .from = "SPT",
     .to = "CRE"
