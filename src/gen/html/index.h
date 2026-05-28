@@ -3,9 +3,13 @@
 #define STATION_FMT "%s (%3s)"
 #define STATION_ARG(CODE) *crs[CODE[0]-'A'][CODE[1]-'A'][CODE[2]-'A'], CODE
 
-#define RTT_FMT "https://realtimetrains.co.uk/service/gb-nr:%s/%s/detailed"
-#define LINK_FMT "<a href=\"" RTT_FMT "\">%s</a>"
-#define LINK_ARG(ID, ISO, INFO) ID, ISO, INFO
+#define LINK_FMT(BASE_FMT) "<a href=\"" BASE_FMT "\">%s</a>"
+
+#define RTT_FMT LINK_FMT("https://realtimetrains.co.uk/service/gb-nr:%s/%s/detailed")
+#define RTT_ARG(NR, ISO) NR.id, ISO, NR.op
+
+#define BT_FMT LINK_FMT("https://bustimes.org/journeys/%d")
+#define BT_ARG(BUS) BUS.id, BUS.n
 
 #define OPEN_INDEX(FP, TITLE) fprintf(FP, "<!DOCTYPE html>\n" \
   "<html lang=\"en\">\n" \

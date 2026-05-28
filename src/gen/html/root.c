@@ -10,8 +10,8 @@ static void root_route(FILE *fp, struct route route) {
         fp,
         "          <tr>\n"
         "            <td><a href=\"%s\">%s</a></td>\n"
-        "            <td>" STATION_FMT "</td>\n"
-        "            <td>" STATION_FMT "</td>\n"
+        "            <td>"STATION_FMT"</td>\n"
+        "            <td>"STATION_FMT"</td>\n"
         "            <td>\n"
         "              <table>\n"
         "                <thead>\n"
@@ -28,6 +28,30 @@ static void root_route(FILE *fp, struct route route) {
       );
 
       break;
+
+    case SERVICE_BUS:
+      fprintf(
+        fp,
+        "          <tr>\n"
+        "            <td><a href=\"%s\">%s</a></td>\n"
+        "            <td>%s</td>\n"
+        "            <td>%s</td>\n"
+        "            <td>\n"
+        "              <table>\n"
+        "                <thead>\n"
+        "                  <tr>\n"
+        "                    <td>From</td>\n"
+        "                    <td>To</td>\n"
+        "                    <td>Link</td>\n"
+        "                  </tr>\n"
+        "                </thead>\n"
+        "                <tbody>\n",
+        route.iso, route.iso,
+        route.services[0].as.bus.from,
+        route.services[0].as.bus.to
+      );
+
+      break;
   }
 
   for (int i = 0; i < route.count; ++i) {
@@ -36,13 +60,28 @@ static void root_route(FILE *fp, struct route route) {
         fprintf(
           fp,
           "                  <tr>\n"
-          "                    <td>" STATION_FMT "</td>\n"
-          "                    <td>" STATION_FMT "</td>\n"
-          "                    <td>" LINK_FMT "</td>\n"
+          "                    <td>"STATION_FMT"</td>\n"
+          "                    <td>"STATION_FMT"</td>\n"
+          "                    <td>"RTT_FMT"</td>\n"
           "                  </tr>\n",
           STATION_ARG(route.services[i].as.nr.from),
           STATION_ARG(route.services[i].as.nr.to),
-          LINK_ARG(route.services[i].as.nr.id, route.iso, route.services[i].as.nr.op)
+          RTT_ARG(route.services[i].as.nr, route.iso)
+        );
+
+        break;
+
+      case SERVICE_BUS:
+        fprintf(
+          fp,
+          "                  <tr>\n"
+          "                    <td>%s</td>\n"
+          "                    <td>%s</td>\n"
+          "                    <td>"BT_FMT"</td>\n"
+          "                  </tr>\n",
+          route.services[i].as.bus.from,
+          route.services[i].as.bus.to,
+          BT_ARG(route.services[i].as.bus)
         );
 
         break;

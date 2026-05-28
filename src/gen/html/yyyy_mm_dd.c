@@ -57,13 +57,28 @@ void yyyy_mm_dd(FILE *fp, char *title, struct route route, const char *prev, con
         fprintf(
           fp,
           "        <tr>\n"
-          "          <td>" STATION_FMT "</td>\n"
-          "          <td>" STATION_FMT "</td>\n"
-          "          <td>" LINK_FMT "</td>\n"
+          "          <td>"STATION_FMT"</td>\n"
+          "          <td>"STATION_FMT"</td>\n"
+          "          <td>"RTT_FMT"</td>\n"
           "        </tr>\n",
           STATION_ARG(route.services[i].as.nr.from),
           STATION_ARG(route.services[i].as.nr.to),
-          LINK_ARG(route.services[i].as.nr.id, route.iso, route.services[i].as.nr.op)
+          RTT_ARG(route.services[i].as.nr, route.iso)
+        );
+
+        break;
+
+      case SERVICE_BUS:
+        fprintf(
+          fp,
+          "        <tr>\n"
+          "          <td>%s</td>\n"
+          "          <td>%s</td>\n"
+          "          <td>"BT_FMT"</td>\n"
+          "        </tr>\n",
+          route.services[i].as.bus.from,
+          route.services[i].as.bus.to,
+          BT_ARG(route.services[i].as.bus)
         );
 
         break;

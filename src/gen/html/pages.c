@@ -98,6 +98,24 @@ int main(void) {
           );
     
           break;
+
+        case SERVICE_BUS:
+          fprintf(
+            fp,
+            "{\"bus\":{"
+            "\"id\":\"%d\","
+            "\"number\":\"%s\","
+            "\"op\":\"%s\","
+            "\"from\":\"%s\","
+            "\"to\":\"%s\"}}",
+            routes[i].services[j].as.bus.id,
+            routes[i].services[j].as.bus.n,
+            routes[i].services[j].as.bus.op,
+            routes[i].services[j].as.bus.from,
+            routes[i].services[j].as.bus.to
+          );
+
+          break;
       }
 
       if (j < (routes[i].count - 1)) {
