@@ -4,39 +4,49 @@
 #include "../../crs.h"
 
 static void root_route(FILE *fp, struct route route) {
-  fprintf(
-    fp,
-    "          <tr>\n"
-    "            <td><a href=\"%s\">%s</a></td>\n"
-    "            <td>" STATION_FMT "</td>\n"
-    "            <td>" STATION_FMT "</td>\n"
-    "            <td>\n"
-    "              <table>\n"
-    "                <thead>\n"
-    "                  <tr>\n"
-    "                    <td>From</td>\n"
-    "                    <td>To</td>\n"
-    "                    <td>Link</td>\n"
-    "                  </tr>\n"
-    "                </thead>\n"
-    "                <tbody>\n",
-    route.iso, route.iso,
-    STATION_ARG(route.services[0].from),
-    STATION_ARG(route.services[route.count - 1].to)
-  );
+  switch (route.services[0].type) {
+    case SERVICE_NR:
+      fprintf(
+        fp,
+        "          <tr>\n"
+        "            <td><a href=\"%s\">%s</a></td>\n"
+        "            <td>" STATION_FMT "</td>\n"
+        "            <td>" STATION_FMT "</td>\n"
+        "            <td>\n"
+        "              <table>\n"
+        "                <thead>\n"
+        "                  <tr>\n"
+        "                    <td>From</td>\n"
+        "                    <td>To</td>\n"
+        "                    <td>Link</td>\n"
+        "                  </tr>\n"
+        "                </thead>\n"
+        "                <tbody>\n",
+        route.iso, route.iso,
+        STATION_ARG(route.services[0].as.nr.from),
+        STATION_ARG(route.services[route.count - 1].as.nr.to)
+      );
+
+      break;
+  }
 
   for (int i = 0; i < route.count; ++i) {
-    fprintf(
-      fp,
-      "                  <tr>\n"
-      "                    <td>" STATION_FMT "</td>\n"
-      "                    <td>" STATION_FMT "</td>\n"
-      "                    <td>" LINK_FMT "</td>\n"
-      "                  </tr>\n",
-      STATION_ARG(route.services[i].from),
-      STATION_ARG(route.services[i].to),
-      LINK_ARG(route.services[i].id, route.iso, route.services[i].info)
-    );
+    switch (route.services[i].type) {
+      case SERVICE_NR:
+        fprintf(
+          fp,
+          "                  <tr>\n"
+          "                    <td>" STATION_FMT "</td>\n"
+          "                    <td>" STATION_FMT "</td>\n"
+          "                    <td>" LINK_FMT "</td>\n"
+          "                  </tr>\n",
+          STATION_ARG(route.services[i].as.nr.from),
+          STATION_ARG(route.services[i].as.nr.to),
+          LINK_ARG(route.services[i].as.nr.id, route.iso, route.services[i].as.nr.op)
+        );
+
+        break;
+    }
   }
 
   fprintf(

@@ -1,15 +1,15 @@
 route(
   .info = "Travel to "LDS" for Leeds Spring 2026",
   .iso = "2026-04-10",
-  service(
-    .info = TP,
+  nr(
     .id = "L37277",
+    .op = TP,
     .from = "EDB",
     .to = "NCL"
   ),
-  service(
-    .info = XC,
+  nr(
     .id = "C75098",
+    .op = XC,
     .from = "NCL",
     .to = "LDS"
   )
@@ -17,9 +17,9 @@ route(
 route(
   .info = "Travel home from "LDS,
   .iso = "2026-04-12",
-  service(
-    .info = XC,
+  nr(
     .id = "C75313",
+    .op = XC,
     .from = "LDS",
     .to = "EDB"
   )
@@ -27,21 +27,21 @@ route(
 route(
   .info = "Travel to "CRE" (Via "YRK" and "MAN")(As the WCML has engineering works) for Liverpool Spring 2026",
   .iso = "2026-04-17",
-  service(
-    .info = XC,
+  nr(
     .id = "C75084",
+    .op = XC,
     .from = "EDB",
     .to = "YRK"
   ),
-  service(
-    .info = TP,
+  nr(
     .id = "L36958",
+    .op = TP,
     .from = "YRK",
     .to = "MAN"
   ),
-  service(
-    .info = NT,
+  nr(
     .id = "L09175",
+    .op = NT,
     .from = "MAN",
     .to = "CRE"
   )
@@ -49,21 +49,21 @@ route(
 route(
   .info = "Trains for Day 1 of Liverpool Spring 2026, <U>Direct services back were cancelled, Heavily delayed service to and from Wigan</u>",
   .iso = "2026-04-18",
-  service(
-    .info = LM,
+  nr(
     .id = "W05233",
+    .op = LM,
     .from = "CRE",
     .to = "LIV"
   ),
-  service(
-    .info = TP,
+  nr(
     .id = "C73844",
+    .op = TP,
     .from = "LIV",
     .to = "WGN"
   ),
-  service(
-    .info = VT,
+  nr(
     .id = "W02479",
+    .op = VT,
     .from = "WGN",
     .to = "CRE"
   )
@@ -71,15 +71,15 @@ route(
 route(
   .info = "Trains for Day 2 of Liverpool Spring 2026",
   .iso = "2026-04-19",
-  service(
-    .info = LM,
+  nr(
     .id = "W05236",
+    .op = LM,
     .from = "CRE",
     .to = "LIV"
   ),
-  service(
-    .info = VT,
+  nr(
     .id = "W02768",
+    .op = VT,
     .from = "LIV",
     .to = "CRE"
   )
@@ -87,15 +87,15 @@ route(
 route(
   .info = "Travel home from "CRE" Via "GLC,
   .iso = "2026-04-20",
-  service(
-    .info = VT,
+  nr(
     .id = "L02283",
+    .op = VT,
     .from = "CRE",
     .to = "GLC"
   ),
-  service(
-    .info = SR,
+  nr(
     .id = "Y41028",
+    .op = SR,
     .from = "GLQ",
     .to = "BHG"
   )
@@ -103,15 +103,15 @@ route(
 route(
   .info = BHG" to "EDB" return",
   .iso = "2026-04-21",
-  service(
-    .info = SR,
+  nr(
     .id = "W73121",
+    .op = SR,
     .from = "BHG",
     .to = "EDB"
   ),
-  service(
-    .info = SR,
+  nr(
     .id = "Y41036",
+    .op = SR,
     .from = "EDB",
     .to = "BHG"
   )
@@ -119,15 +119,15 @@ route(
 route(
   .info = BHG" to "EDB" return",
   .iso = "2026-04-23",
-  service(
-    .info = SR,
+  nr(
     .id = "W73107",
+    .op = SR,
     .from = "BHG",
     .to = "EDB"
   ),
-  service(
-    .info = SR,
+  nr(
     .id = "Y41058",
+    .op = SR,
     .from = "EDB",
     .to = "BHG"
   )
@@ -135,15 +135,15 @@ route(
 route(
   .info = "Travel to "CRE" Via "GLC" for Manchester CL First 2026",
   .iso = "2026-04-24",
-  service(
-    .info = SR,
+  nr(
     .id = "W73123",
+    .op = SR,
     .from = "BHG",
     .to = "GLQ"
   ),
-  service(
-    .info = VT,
+  nr(
     .id = "W02480",
+    .op = VT,
     .from = "GLC",
     .to = "CRE"
   )
@@ -151,15 +151,15 @@ route(
 route(
   .info = "Manchester CL First Via "SPT,
   .iso = "2026-04-25",
-  service(
-    .info = VT,
+  nr(
     .id = "W02544",
+    .op = VT,
     .from = "CRE",
     .to = "SPT"
   ),
-  service(
-    .info = NT,
+  nr(
     .id = "L11184",
+    .op = NT,
     .from = "SPT",
     .to = "CRE"
   )
@@ -167,15 +167,15 @@ route(
 route(
   .info = "Travel home from "CRE" Via "GLC,
   .iso = "2026-04-27",
-  service(
-    .info = VT,
+  nr(
     .id = "L02283",
+    .op = VT,
     .from = "CRE",
     .to = "GLC"
   ),
-  service(
-    .info = SR,
+  nr(
     .id = "Y41028",
+    .op = SR,
     .from = "GLQ",
     .to = "BHG"
   )
@@ -183,15 +183,15 @@ route(
 route(
   .info = BHG" to "EDB" return",
   .iso = "2026-04-30",
-  service(
-    .info = SR,
+  nr(
     .id = "Y41028",
+    .op = SR,
     .from = "BHG",
     .to = "EDB"
   ),
-  service(
-    .info = SR,
+  nr(
     .id = "Y41036",
+    .op = SR,
     .from = "EDB",
     .to = "BHG"
   )
@@ -199,15 +199,15 @@ route(
 route(
   .info = BHG" to "EDB" return",
   .iso = "2026-05-05",
-  service(
-    .info = SR,
+  nr(
     .id = "Y41017",
+    .op = SR,
     .from = "BHG",
     .to = "EDB"
   ),
-  service(
-    .info = SR,
+  nr(
     .id = "Y41036",
+    .op = SR,
     .from = "EDB",
     .to = "BHG"
   )
@@ -215,15 +215,15 @@ route(
 route(
   .info = EDB" to "BHG" return",
   .iso = "2026-05-07",
-  service(
-    .info = SR,
+  nr(
     .id = "Y40928",
+    .op = SR,
     .from = "EDB",
     .to = "BHG"
   ),
-  service(
-    .info = SR,
+  nr(
     .id = "Y41002",
+    .op = SR,
     .from = "BHG",
     .to = "EDB"
   )
@@ -231,9 +231,9 @@ route(
 route(
   .info = "Travel to "CRE" Via "GLC" for Manchester Megaminx Day 2026",
   .iso = "2026-05-08",
-  service(
-    .info = VT,
+  nr(
     .id = "W02480",
+    .op = VT,
     .from = "GLC",
     .to = "CRE"
   )
@@ -241,15 +241,15 @@ route(
 route(
   .info = "Manchester Megaminx day Via "SPT,
   .iso = "2026-05-09",
-  service(
-    .info = NT,
+  nr(
     .id = "L08685",
+    .op = NT,
     .from = "CRE",
     .to = "SPT"
   ),
-  service(
-    .info = VT,
+  nr(
     .id = "L02166",
+    .op = VT,
     .from = "SPT",
     .to = "CRE"
   )
@@ -257,15 +257,15 @@ route(
 route(
   .info = "Travel home from "CRE" Via "GLC,
   .iso = "2026-05-11",
-  service(
-    .info = VT,
+  nr(
     .id = "L02283",
+    .op = VT,
     .from = "CRE",
     .to = "GLC"
   ),
-  service(
-    .info = SR,
+  nr(
     .id = "Y41031",
+    .op = SR,
     .from = "GLQ",
     .to = "BHG"
   )
@@ -273,15 +273,15 @@ route(
 route(
   .info = "Travel to "WSM" for "WSM" Spring 2026",
   .iso = "2026-05-15",
-  service(
-    .info = XC,
+  nr(
     .id = "C75088",
+    .op = XC,
     .from = "EDB",
     .to = "BRI"
   ),
-  service(
-    .info = GW,
+  nr(
     .id = "P22990",
+    .op = GW,
     .from = "BRI",
     .to = "WSM"
   )
@@ -289,15 +289,15 @@ route(
 route(
   .info = "Travel home from "WSM" Via "BRI,
   .iso = "2026-05-18",
-  service(
-    .info = GW,
+  nr(
     .id = "G14897",
+    .op = GW,
     .from = "WSM",
     .to = "BRI"
   ),
-  service(
-    .info = XC,
+  nr(
     .id = "G01064",
+    .op = XC,
     .from = "BRI",
     .to = "EDB"
   )
@@ -305,15 +305,15 @@ route(
 route(
   .info = BHG" to "EDB" return",
   .iso = "2026-05-21",
-  service(
-    .info = SR,
+  nr(
     .id = "W69962",
+    .op = SR,
     .from = "BHG",
     .to = "EDB"
   ),
-  service(
-    .info = SR,
+  nr(
     .id = "W69009",
+    .op = SR,
     .from = "EDB",
     .to = "BHG"
   )
@@ -321,15 +321,15 @@ route(
 route(
   .info = "Travel to "SHF" Via "WRG" for Sheffield Spring 2026",
   .iso = "2026-05-22",
-  service(
-    .info = VT,
+  nr(
     .id = "W34265",
+    .op = VT,
     .from = "EDB",
     .to = "WBQ"
   ),
-  service(
-    .info = EM,
+  nr(
     .id = "C04363",
+    .op = EM,
     .from = "WAC",
     .to = "SHF"
   )
@@ -337,21 +337,21 @@ route(
 route(
   .info = "Travel from "SHF" to "MAN" for Manchester CL Second 2026, then go to "CRE" for rest",
   .iso = "2026-05-25",
-  service(
-    .info = EM,
+  nr(
     .id = "C04439",
+    .op = EM,
     .from = "SHF",
     .to = "MAN"
   ),
-  service(
-    .info = NT,
+  nr(
     .id = "L89711",
+    .op = NT,
     .from = "LVM",
     .to = "SPT"
   ),
-  service(
-    .info = NT,
+  nr(
     .id = "L89649",
+    .op = NT,
     .from = "SPT",
     .to = "CRE"
   )
@@ -359,15 +359,15 @@ route(
 route(
   .info = "Travel home from "CRE" Via "GLC,
   .iso = "2026-05-26",
-  service(
-    .info = VT,
+  nr(
     .id = "W34206",
+    .op = VT,
     .from = "CRE",
     .to = "GLC"
   ),
-  service(
-    .info = SR,
+  nr(
     .id = "W69015",
+    .op = SR,
     .from = "GLQ",
     .to = "BHG"
   )
@@ -375,9 +375,9 @@ route(
 route(
   .info = "Travel to "CRE" for Crewe May 2026",
   .iso = "2026-05-29",
-  service(
-    .info = VT,
+  nr(
     .id = "W34268",
+    .op = VT,
     .from = "EDB",
     .to = "CRE"
   )
@@ -385,21 +385,21 @@ route(
 route(
   .info = "Travel from "CRE" to Burger Island, "BTS,
   .iso = "2026-06-01",
-  service(
-    .info = VT,
+  nr(
     .id = "W34206",
+    .op = VT,
     .from = "CRE",
     .to = "GLC"
   ),
-  service(
-    .info = SR,
+  nr(
     .id = "L87904",
+    .op = SR,
     .from = "GLQ",
     .to = "HYM"
   ),
-  service(
-    .info = SR,
+  nr(
     .id = "W69664",
+    .op = SR,
     .from = "HYM",
     .to = "BTS"
   )
@@ -407,9 +407,9 @@ route(
 route(
   .info = "Travel to "CRE" Via "GLC" for Manchester CL Third 2026",
   .iso = "2026-06-12",
-  service(
-    .info = VT,
+  nr(
     .id = "W34195",
+    .op = VT,
     .from = "GLC",
     .to = "CRE"
   )
@@ -417,9 +417,9 @@ route(
 route(
   .info = "Travel to "CRE" Via "GLC" for Manchester CL Final 2026",
   .iso = "2026-07-03",
-  service(
-    .info = VT,
+  nr(
     .id = "W34195",
+    .op = VT,
     .from = "GLC",
     .to = "CRE"
   )
@@ -427,9 +427,9 @@ route(
 route(
   .info = "Travel to "SVG" Via "EDB" and "LON" for Stevenage July 2026",
   .iso = "2026-07-10",
-  service(
-    .info = VT,
+  nr(
     .id = "W33933",
+    .op = VT,
     .from = "EDB",
     .to = "EUS"
   )
@@ -437,9 +437,9 @@ route(
 route(
   .info = "Travel home from London Via "EUS" and "EDB,
   .iso = "2026-07-21",
-  service(
-    .info = VT,
+  nr(
     .id = "W34144",
+    .op = VT,
     .from = "EUS",
     .to = "EDB"
   )
@@ -447,21 +447,21 @@ route(
 route(
   .info = "Travel to "LLE" for South Wales Summer 2026",
   .iso = "2026-07-31",
-  service(
-    .info = SR,
+  nr(
     .id = "W83689",
+    .op = SR,
     .from = "BHG",
     .to = "HYM"
   ),
-  service(
-    .info = VT,
+  nr(
     .id = "W34265",
+    .op = VT,
     .from = "HYM",
     .to = "CRE"
   ),
-  service(
-    .info = AW,
+  nr(
     .id = "G38873",
+    .op = AW,
     .from = "CRE",
     .to = "LLE"
   )
@@ -469,15 +469,15 @@ route(
 route(
   .info = "Travel home from "LLE" Via "MAN" and "EDB,
   .iso = "2026-08-03",
-  service(
-    .info = AW,
+  nr(
     .id = "G38947",
+    .op = AW,
     .from = "LLE",
     .to = "MAN"
   ),
-  service(
-    .info = TP,
+  nr(
     .id = "W85182",
+    .op = TP,
     .from = "MAN",
     .to = "EDB"
   )

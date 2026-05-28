@@ -52,17 +52,22 @@ void yyyy_mm_dd(FILE *fp, char *title, struct route route, const char *prev, con
   );
 
   for (int i = 0; i < route.count; ++i) {
-    fprintf(
-      fp,
-      "        <tr>\n"
-      "          <td>" STATION_FMT "</td>\n"
-      "          <td>" STATION_FMT "</td>\n"
-      "          <td>" LINK_FMT "</td>\n"
-      "        </tr>\n",
-      STATION_ARG(route.services[i].from),
-      STATION_ARG(route.services[i].to),
-      LINK_ARG(route.services[i].id, route.iso, route.services[i].info)
-    );
+    switch (route.services[i].type) {
+      case SERVICE_NR:
+        fprintf(
+          fp,
+          "        <tr>\n"
+          "          <td>" STATION_FMT "</td>\n"
+          "          <td>" STATION_FMT "</td>\n"
+          "          <td>" LINK_FMT "</td>\n"
+          "        </tr>\n",
+          STATION_ARG(route.services[i].as.nr.from),
+          STATION_ARG(route.services[i].as.nr.to),
+          LINK_ARG(route.services[i].as.nr.id, route.iso, route.services[i].as.nr.op)
+        );
+
+        break;
+    }
   }
 
   fprintf(

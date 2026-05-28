@@ -82,17 +82,23 @@ int main(void) {
     );
 
     for (int j = 0; j < routes[i].count; ++j) {
-      fprintf(
-        fp,
-        "{\"info\":\"%s\","
-        "\"id\":\"%s\","
-        "\"from\":\"%s\","
-        "\"to\":\"%s\"}",
-        routes[i].services[j].info,
-        routes[i].services[j].id,
-        routes[i].services[j].from,
-        routes[i].services[j].to
-      );
+      switch (routes[i].services[j].type) {
+        case SERVICE_NR:
+          fprintf(
+            fp,
+            "{\"nr\":{"
+            "\"id\":\"%s\","
+            "\"op\":\"%s\","
+            "\"from\":\"%s\","
+            "\"to\":\"%s\"}}",
+            routes[i].services[j].as.nr.id,
+            routes[i].services[j].as.nr.op,
+            routes[i].services[j].as.nr.from,
+            routes[i].services[j].as.nr.to
+          );
+    
+          break;
+      }
 
       if (j < (routes[i].count - 1)) {
         fprintf(fp, ",");
