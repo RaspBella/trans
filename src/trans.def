@@ -357,7 +357,7 @@ route(
   )
 )
 route(
-  .info = "Travel home from "CRE" Via "GLC,
+  .info = "Travel home from "CRE" Via "GLC" then go to BG",
   .iso = "2026-05-26",
   nr(
     .id = "W34206",
@@ -370,11 +370,32 @@ route(
     .op = SR,
     .from = "GLQ",
     .to = "BHG"
+  ),
+  bus(
+    .id = 888230979,
+    .n = "X18",
+    .op = "Lothian Country",
+    .from = "Bathgate",
+    .to = "Edinburgh"
+  ),
+  bus(
+    .id = 888473724,
+    .n = "X18",
+    .op = "Lothian Country",
+    .from = "Edinburgh",
+    .to = "Bathgate"
   )
 )
 route(
   .info = "Travel to "CRE" for Crewe May 2026",
   .iso = "2026-05-29",
+  bus(
+    .id = NOTRACKING,
+    .n = "X18",
+    .op = "Lothian Country",
+    .from = "Bathgate",
+    .to = "Edinburgh"
+  ),
   nr(
     .id = "W34268",
     .op = VT,
