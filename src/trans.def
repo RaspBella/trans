@@ -387,14 +387,21 @@ route(
   )
 )
 route(
-  .info = "Travel to "CRE" for Crewe May 2026",
+  .info = "Travel to "CRE" for Crewe May 2026,,, both buses were very delayed and busy and it was a blunder to switch to the X38",
   .iso = "2026-05-29",
   bus(
     .id = NOTRACKING,
     .n = "X18",
     .op = "Lothian Country",
     .from = "Bathgate",
-    .to = "Edinburgh"
+    .to = "Corstorphine"
+  ),
+  bus(
+    .id = NOTRACKING,
+    .n = "X38",
+    .op = "Midland Bluebird",
+    .from = "Corstorphine",
+    .to = "Princes Street West"
   ),
   nr(
     .id = "W34268",
