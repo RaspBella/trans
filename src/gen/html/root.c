@@ -10,21 +10,9 @@ static void root_route(FILE *fp, struct route route) {
         fp,
         "          <tr>\n"
         "            <td><a href=\"%s\">%s</a></td>\n"
-        "            <td>"STATION_FMT"</td>\n"
-        "            <td>"STATION_FMT"</td>\n"
-        "            <td>\n"
-        "              <table>\n"
-        "                <thead>\n"
-        "                  <tr>\n"
-        "                    <td>From</td>\n"
-        "                    <td>To</td>\n"
-        "                    <td>Link</td>\n"
-        "                  </tr>\n"
-        "                </thead>\n"
-        "                <tbody>\n",
+        "            <td>"STATION_FMT"</td>\n",
         route.iso, route.iso,
-        STATION_ARG(route.services[0].as.nr.from),
-        STATION_ARG(route.services[route.count - 1].as.nr.to)
+        STATION_ARG(route.services[0].as.nr.from)
       );
 
       break;
@@ -34,7 +22,37 @@ static void root_route(FILE *fp, struct route route) {
         fp,
         "          <tr>\n"
         "            <td><a href=\"%s\">%s</a></td>\n"
-        "            <td>%s</td>\n"
+        "            <td>%s</td>\n",
+        route.iso, route.iso,
+        route.services[0].as.bus.from
+      );
+
+      break;
+  }
+
+  switch (route.services[route.count - 1].type) {
+    case SERVICE_NR:
+      fprintf(
+        fp,
+        "            <td>"STATION_FMT"</td>\n"
+        "            <td>\n"
+        "              <table>\n"
+        "                <thead>\n"
+        "                  <tr>\n"
+        "                    <td>From</td>\n"
+        "                    <td>To</td>\n"
+        "                    <td>Link</td>\n"
+        "                  </tr>\n"
+        "                </thead>\n"
+        "                <tbody>\n",
+        STATION_ARG(route.services[route.count - 1].as.nr.to)
+      );
+
+      break;
+
+    case SERVICE_BUS:
+      fprintf(
+        fp,
         "            <td>%s</td>\n"
         "            <td>\n"
         "              <table>\n"
@@ -46,9 +64,7 @@ static void root_route(FILE *fp, struct route route) {
         "                  </tr>\n"
         "                </thead>\n"
         "                <tbody>\n",
-        route.iso, route.iso,
-        route.services[0].as.bus.from,
-        route.services[0].as.bus.to
+        route.services[route.count - 1].as.bus.to
       );
 
       break;
