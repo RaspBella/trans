@@ -36,6 +36,8 @@ struct bus {
   } \
 }
 
+#define NOTRACKING -1
+
 enum service_type {
   SERVICE_NR = 1,
   SERVICE_BUS
