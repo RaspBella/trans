@@ -41,7 +41,7 @@ static void root_route(FILE *fp, struct route route) {
         "                  <tr>\n"
         "                    <td>From</td>\n"
         "                    <td>To</td>\n"
-        "                    <td>Link</td>\n"
+        "                    <td>Service</td>\n"
         "                  </tr>\n"
         "                </thead>\n"
         "                <tbody>\n",
@@ -60,7 +60,7 @@ static void root_route(FILE *fp, struct route route) {
         "                  <tr>\n"
         "                    <td>From</td>\n"
         "                    <td>To</td>\n"
-        "                    <td>Link</td>\n"
+        "                    <td>Service</td>\n"
         "                  </tr>\n"
         "                </thead>\n"
         "                <tbody>\n",

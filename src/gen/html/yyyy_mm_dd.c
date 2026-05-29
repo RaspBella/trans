@@ -44,7 +44,7 @@ void yyyy_mm_dd(FILE *fp, char *title, struct route route, const char *prev, con
     "          <tr>\n"
     "            <th>From</th>\n"
     "            <th>To</th>\n"
-    "            <th>Link</th>\n"
+    "            <th>Service</th>\n"
     "          <tr>\n"
     "        </thead>\n"
     "        <tbody>\n",
