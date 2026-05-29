@@ -357,7 +357,7 @@ route(
   )
 )
 route(
-  .info = "Travel home from "CRE" Via "GLC" then go to BG",
+  .info = "Travel home from "CRE" Via "GLC" then go to BG after trying to teach Maya 3x3",
   .iso = "2026-05-26",
   nr(
     .id = "W34206",
@@ -377,6 +377,20 @@ route(
     .op = "Lothian Country",
     .from = "Bathgate",
     .to = "Edinburgh"
+  ),
+  bus(
+    .id = NOTRACKING,
+    .n = "14",
+    .op = "Lothian",
+    .from = "Leith Street",
+    .to = "Greendykes"
+  ),
+  bus(
+    .id = NOTRACKING,
+    .n = "14",
+    .op = "Lothian",
+    .from = "Greendykes",
+    .to = "South Bridge"
   ),
   bus(
     .id = 888473724,
