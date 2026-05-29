@@ -92,13 +92,29 @@ static void root_route(FILE *fp, struct route route) {
           fp,
           "                  <tr>\n"
           "                    <td>%s</td>\n"
-          "                    <td>%s</td>\n"
-          "                    <td>"BT_FMT"</td>\n"
-          "                  </tr>\n",
+          "                    <td>%s</td>\n",
           route.services[i].as.bus.from,
-          route.services[i].as.bus.to,
-          BT_ARG(route.services[i].as.bus)
+          route.services[i].as.bus.to
         );
+
+        if (route.services[i].as.bus.id == NOTRACKING) {
+          fprintf(
+            fp,
+            "                    <td>%s</td>\n"
+            "                  </tr>\n",
+            route.services[i].as.bus.n
+          );
+        }
+
+        else {
+          fprintf(
+            fp,
+            "                    <td>"BT_FMT"</td>\n"
+            "                  </tr>\n",
+            BT_ARG(route.services[i].as.bus)
+          );
+        }
+
 
         break;
     }
