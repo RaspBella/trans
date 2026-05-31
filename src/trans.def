@@ -457,6 +457,22 @@ route(
   )
 )
 route(
+  .info = "Travel from "CRE" to "AYR,
+  .iso = "2026-06-15",
+  nr(
+    .id = "W34206",
+    .op = VT,
+    .from = "CRE",
+    .to = "GLC"
+  ),
+  nr(
+    .id = "L87376",
+    .op = SR,
+    .from = "GLC",
+    .to = "AYR"
+  )
+)
+route(
   .info = "Travel to "CRE" Via "GLC" for Manchester CL Final 2026",
   .iso = "2026-07-03",
   nr(
