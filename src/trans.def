@@ -483,6 +483,22 @@ route(
   )
 )
 route(
+  .info = "Travel from "CRE" to "HLC,
+  .iso = "2026-07-06",
+  nr(
+    .id = "W34206",
+    .op = VT,
+    .from = "CRE",
+    .to = "GLC"
+  ),
+  nr(
+    .id = "W68956",
+    .op = SR,
+    .from = "GLQ",
+    .to = "HLC"
+  )
+)
+route(
   .info = "Travel to "SVG" Via "EDB" and "LON" for Stevenage July 2026",
   .iso = "2026-07-10",
   nr(
