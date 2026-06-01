@@ -444,6 +444,13 @@ route(
     .op = SR,
     .from = "HYM",
     .to = "BTS"
+  ),
+  bus(
+    .id = NOTRACKING,
+    .n = "7",
+    .op = "Stagecoach East Scotland",
+    .from = "Burntisland",
+    .to = "Dunfermline"
   )
 )
 route(
