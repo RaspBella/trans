@@ -451,6 +451,13 @@ route(
     .op = "Stagecoach East Scotland",
     .from = "Burntisland",
     .to = "Dunfermline"
+  ),
+  bus(
+    .id = 890059064,
+    .n = "X51",
+    .op = "Stagecoach East Scotland",
+    .from = "Dunfermline",
+    .to = "Livingston"
   )
 )
 route(
