@@ -9,7 +9,18 @@ fetch("data.json")
     }
 
     else {
-      today_link.text = "!today"
+      const next = Object.keys(data)
+        .filter((day) => day > today)
+        .sort();
+
+      if (next.length > 0) {
+        today_link.text = `next == "${next[0]}"`;
+        today_link.href = next[0];
+      }
+
+      else {
+        today_link.text = "no upcoming journeys";
+      }
     }
 
     function parse_query(input, data) {
