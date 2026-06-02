@@ -490,6 +490,13 @@ route(
     .op = "Lothian",
     .from = "Foot of the walk",
     .to = "Leith Street"
+  ),
+  bus(
+    .id = NOTRACKING,
+    .n = "X18",
+    .op = "Lothian Country",
+    .from = "Edinburgh"_
+    .to = "Bathgate"
   )
 )
 route(
