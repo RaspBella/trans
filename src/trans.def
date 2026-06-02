@@ -483,6 +483,13 @@ route(
     .op = "Lothian",
     .from = "Princes Street",
     .to = "Duke Street"
+  ),
+  bus(
+    .id = 890553870,
+    .n = "16",
+    .op = "Lothian",
+    .from = "Foot of the walk",
+    .to = "Leith Street"
   )
 )
 route(
