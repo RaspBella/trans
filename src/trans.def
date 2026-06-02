@@ -466,7 +466,7 @@ route(
     .from = "Livingston",
     .to = "Bathgate"
   )
-)
+),
 route(
   .info = "Duncan Place trip",
   .iso = "2026-06-02",
