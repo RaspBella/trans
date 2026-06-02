@@ -466,7 +466,7 @@ route(
     .from = "Livingston",
     .to = "Bathgate"
   )
-),
+)
 route(
   .info = "Duncan Place trip",
   .iso = "2026-06-02",
@@ -476,8 +476,15 @@ route(
     .op = "Lothian Country",
     .from = "Bathgate",
     .to = "Edinburgh"
+  ),
+  bus(
+    .id = 890469502,
+    .n = "34",
+    .op = "Lothian",
+    .from = "Princes Street",
+    .to = "Duke Street"
   )
-),
+)
 route(
   .info = "Travel to "CRE" Via "GLC" for Manchester CL Third 2026",
   .iso = "2026-06-12",
