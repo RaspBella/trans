@@ -381,14 +381,14 @@ route(
   bus(
     .id = NOTRACKING,
     .n = "14",
-    .op = "Lothian",
+    .op = "Lothian City",
     .from = "Leith Street",
     .to = "Greendykes"
   ),
   bus(
     .id = NOTRACKING,
     .n = "14",
-    .op = "Lothian",
+    .op = "Lothian City",
     .from = "Greendykes",
     .to = "South Bridge"
   ),
@@ -480,14 +480,14 @@ route(
   bus(
     .id = 890469502,
     .n = "34",
-    .op = "Lothian",
+    .op = "Lothian City",
     .from = "Princes Street",
     .to = "Duke Street"
   ),
   bus(
     .id = 890553870,
     .n = "16",
-    .op = "Lothian",
+    .op = "Lothian City",
     .from = "Foot of the walk",
     .to = "Leith Street"
   ),
