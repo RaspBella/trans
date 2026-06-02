@@ -492,7 +492,7 @@ route(
     .to = "Leith Street"
   ),
   bus(
-    .id = NOTRACKING,
+    .id = 890583890,
     .n = "X18",
     .op = "Lothian Country",
     .from = "Edinburgh"_
