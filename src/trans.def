@@ -500,6 +500,17 @@ route(
   )
 )
 route(
+  .info = "Edinburgh gaming (lunch, movie, vada)",
+  .iso = "2026-06-02",
+  bus(
+    .id = 891183385,
+    .n = "X18",
+    .op = "Lothian Country",
+    .from = "Bathgate",
+    .to = "Edinburgh"
+  )
+)
+route(
   .info = "Travel to "CRE" Via "GLC" for Manchester CL Third 2026",
   .iso = "2026-06-12",
   nr(
