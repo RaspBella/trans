@@ -518,6 +518,16 @@ route(
   )
 )
 route(
+  .info = "Livingston gaming",
+  .iso = "2026-06-05",
+  bus(
+    .id = "74",
+    .n = "Lothian Country",
+    .from = "Bathgate",
+    .to = "Livingston"
+  )
+)
+route(
   .info = "Travel to "CRE" Via "GLC" for Manchester CL Third 2026",
   .iso = "2026-06-12",
   nr(
