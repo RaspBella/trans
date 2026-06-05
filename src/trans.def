@@ -521,8 +521,9 @@ route(
   .info = "Livingston gaming",
   .iso = "2026-06-05",
   bus(
-    .id = "74",
-    .n = "Lothian Country",
+    .id = NOTRACKING,
+    .n = "74",
+    .op = "Lothian Country",
     .from = "Bathgate",
     .to = "Livingston"
   )
