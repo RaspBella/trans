@@ -590,6 +590,13 @@ route(
     .op = "Stagecoast East Scotland",
     .from = "Ferrytoll",
     .to = "Ratho Station Road"
+  ),
+  bus(
+    .id = NOTRACKING,
+    .n = "X18",
+    .op = "Lothian Country",
+    .from = "Ratho Station Road",
+    .to = "Bathgate"
   )
 )
 route(
