@@ -554,6 +554,24 @@ route(
   )
 )
 route(
+  .info = "Edinburgh Zoo trip :3",
+  .iso = "2026-06-07",
+  bus(
+    .id = NOTRACKING,
+    .n = "X18",
+    .op = "Lothian Country",
+    .from = "Bathgate",
+    .to = "Edinburgh Zoo"
+  ),
+  bus(
+    .id = NOTRACKING,
+    .n = "900",
+    .op = "City Link",
+    .from = "Edinburgh Zoo",
+    .to = "Edinburgh Bus Station"
+  )
+)
+route(
   .info = "Travel to "CRE" Via "GLC" for Manchester CL Third 2026",
   .iso = "2026-06-12",
   nr(
