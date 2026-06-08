@@ -626,6 +626,22 @@ route(
   )
 )
 route(
+  .info = "Travel to "WKF" Via "BWK" for Wakefield Summer 2026",
+  .iso = "2026-06-19",
+  nr(
+    .id = "W85790",
+    .op = TP,
+    .from = "EDB",
+    .to = "BWK"
+  ),
+  nr(
+    .id = "W29909",
+    .op = XC,
+    .from = "BWK",
+    .to = "WKF"
+  )
+)
+route(
   .info = "Travel to "CRE" Via "GLC" for Manchester CL Final 2026",
   .iso = "2026-07-03",
   nr(
