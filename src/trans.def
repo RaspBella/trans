@@ -642,6 +642,34 @@ route(
   )
 )
 route(
+  .info = "Travel home from "WKF" Via "LDS", "YRK", "NCL", and "EDB,
+  .iso = "2026-06-22",
+  nr(
+    .id = "G89902",
+    .op = NT,
+    .from = "WKF",
+    .to = "LDS"
+  ),
+  nr(
+    .id = "G16356",
+    .op = TP,
+    .from = "LDS",
+    .to = "YRK"
+  ),
+  nr(
+    .id = "G80203",
+    .op = GR,
+    .from = "YRK",
+    .to = "NCL"
+  ),
+  nr(
+    .id = "W85816",
+    .op = TP,
+    .from = "NCL",
+    .to = "EDB"
+  )
+)
+route(
   .info = "Travel to "CRE" Via "GLC" for Manchester CL Final 2026",
   .iso = "2026-07-03",
   nr(
