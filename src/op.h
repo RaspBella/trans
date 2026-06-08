@@ -9,3 +9,4 @@
 #define TP "TransPennine Express"
 #define AW "Transport for Wales"
 #define LM "West Midlands Trains"
+#define GR "London North Eastern Railway"
