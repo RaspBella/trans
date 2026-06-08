@@ -709,3 +709,23 @@ route(
     .to = "EDB"
   )
 )
+route(
+  .info = "Travel to "BRI" for Bristol August 2026",
+  .iso = "2026-08-07",
+  nr(
+    .id = "W29873",
+    .op = XC,
+    .from = "EDB",
+    .to = "BRI"
+  )
+)
+route(
+  .info = "Travel home from "BRI" Via "EDB,
+  .iso = "2026-08-10",
+  nr(
+    .id = "G00869",
+    .op = XC,
+    .from = "BRI",
+    .to = "EDB"
+  )
+)
