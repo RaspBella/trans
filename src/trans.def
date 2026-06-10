@@ -624,6 +624,20 @@ route(
     .op = "Lothian Country",
     .from = "Bathgate",
     .to = "Edinburgh"
+  ),
+  bus(
+    .id = 894136139,
+    .n = "26",
+    .op = "Lothian",
+    .from = "Shandwick Place",
+    .to = "Kirk Loan"
+  ),
+  bus(
+    .id = 894150104,
+    .n = "X18",
+    .op = "Lothian Country",
+    .from = "Drum Brae South",
+    .to = "Bathgate"
   )
 )
 route(
