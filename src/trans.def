@@ -641,6 +641,24 @@ route(
   )
 )
 route(
+  .info = "Vada and hangout",
+  .iso = "2026-06-11",
+  bus(
+    .id = NOTRACKING,
+    .n = "X18",
+    .op = "Lothian Country",
+    .from = "Bathgate",
+    .to = "Edinburgh"
+  ),
+  bus(
+    .id = NOTRACKING,
+    .n = "X18",
+    .op = "Lothian Country",
+    .from = "Edinburgh"
+    .to = "Bathgate",
+  )
+)
+route(
   .info = "Travel to "CRE" Via "GLC" for Manchester CL Third 2026",
   .iso = "2026-06-12",
   nr(
