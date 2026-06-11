@@ -654,8 +654,8 @@ route(
     .id = NOTRACKING,
     .n = "X18",
     .op = "Lothian Country",
-    .from = "Edinburgh"
-    .to = "Bathgate",
+    .from = "Edinburgh",
+    .to = "Bathgate"
   )
 )
 route(
