@@ -673,6 +673,13 @@ route(
     .n = "31",
     .op = "Lothian",
     .from = "Haymarket",
+    .to = "Princes Street"
+  ),
+  bus(
+    .id = 894874619,
+    .n = "37",
+    .op = "Lothian",
+    .from = "Princes Street",
     .to = "August_21"
   ),
   nr(
