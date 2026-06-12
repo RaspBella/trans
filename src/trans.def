@@ -682,6 +682,13 @@ route(
     .from = "Princes Street",
     .to = "August_21"
   ),
+  bus(
+    .id = NOTRACKING,
+    .n = "37",
+    .op = "Lothian",
+    .from = "August_21",
+    .to = "Princes Street"
+  ),
   nr(
     .id = "W34195",
     .op = VT,
