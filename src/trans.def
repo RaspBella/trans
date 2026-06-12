@@ -666,7 +666,14 @@ route(
     .n = "X18",
     .op = "Lothian Country",
     .from = "Bathgate",
-    .to = "Edinburgh"
+    .to = "Haymarket"
+  ),
+  bus(
+    .id = 894861137,
+    .n = "31",
+    .op = "Lothian",
+    .from = "Haymarket",
+    .to = "August_21"
   ),
   nr(
     .id = "W34195",
