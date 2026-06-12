@@ -661,6 +661,13 @@ route(
 route(
   .info = "Travel to "CRE" Via "GLC" for Manchester CL Third 2026",
   .iso = "2026-06-12",
+  bus(
+    .id = 894823626,
+    .n = "X18",
+    .op = "Lothian Country",
+    .from = "Bathgate",
+    .to = "Edinburgh"
+  ),
   nr(
     .id = "W34195",
     .op = VT,
