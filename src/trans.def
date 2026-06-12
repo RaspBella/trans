@@ -689,6 +689,13 @@ route(
     .from = "August_21",
     .to = "Princes Street"
   ),
+  bus(
+    .id = NOTRACKING,
+    .n = "900",
+    .op = "City Link",
+    .from = "Princes Street",
+    .to = "Glasgow"
+  ),
   nr(
     .id = "W34195",
     .op = VT,
