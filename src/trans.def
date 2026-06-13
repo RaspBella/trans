@@ -704,6 +704,16 @@ route(
   )
 )
 route(
+  .info = "Travel from "CRE" to Manchester CL Third 2026 Via "LVM,
+  .iso = "2026-06-13",
+  nr(
+    .id = "L89073",
+    .op = NT,
+    .from = "CRE",
+    .to = "LVM"
+  )
+)
+route(
   .info = "Travel from "CRE" to "AYR,
   .iso = "2026-06-15",
   nr(
