@@ -711,6 +711,12 @@ route(
     .op = NT,
     .from = "CRE",
     .to = "LVM"
+  ),
+  nr(
+    .id = "G90283",
+    .op = NT,
+    .from = "LVM",
+    .to = "SPT"
   )
 )
 route(
