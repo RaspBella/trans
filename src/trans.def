@@ -739,6 +739,33 @@ route(
     .op = SR,
     .from = "GLC",
     .to = "AYR"
+  ),
+  bus(
+    .id = 896093027,
+    .n = "9",
+    .op = "Stagecoach West Scotland",
+    .from = "Wellington Square",
+    .to = "Greenan Way"
+  ),
+  bus(
+    .id = 896123826,
+    .n = "97",
+    .op = "Stagecoach West Scotland",
+    .from = "Alisa View",
+    .to = "Ayr Bus Station"
+  ),
+  bus(
+    .id = 896149896,
+    .n = "X77",
+    .op = "Stagecoach West Scotland",
+    .from = "Ayr",
+    .to = "Glasgow"
+  ),
+  nr(
+    .id = "W68957",
+    .op = SR,
+    .from = "GLQ",
+    .to = "BHG"
   )
 )
 route(
