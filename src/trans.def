@@ -787,6 +787,17 @@ route(
   )
 )
 route(
+  .info = "Bus for Lapslop (make Lillith's laptop woke and Linux)",
+  .iso = "2026-06-17",
+  bus(
+    .id = 897007250,
+    .n = "X18",
+    .op = "Lothian Country",
+    .from = "Bathgate",
+    .to = "Edinburgh"
+  )
+)
+route(
   .info = "Travel to "WKF" Via "BWK" for Wakefield Summer 2026",
   .iso = "2026-06-19",
   nr(
