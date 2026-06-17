@@ -802,6 +802,13 @@ route(
     .op = "Lothian",
     .from = "Lothian Road",
     .to = "Oxgangs Cresent"
+  ),
+  bus(
+    .id = NOTRACKING,
+    .n = "16",
+    .op = "Lothian",
+    .from = "Braidburn Valley",
+    .to = "Lothian Road"
   )
 )
 route(
