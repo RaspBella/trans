@@ -809,7 +809,14 @@ route(
     .op = "Lothian",
     .from = "Braidburn Valley",
     .to = "Lothian Road"
-  )
+  ),
+  bus(
+    .id = NOTRACKING,
+    .n = "X18",
+    .op = "Lothian Country",
+    .from = "Edinburgh",
+    .to = "Bathgate"
+  (
 )
 route(
   .info = "Travel to "WKF" Via "BWK" for Wakefield Summer 2026",
