@@ -819,6 +819,16 @@ route(
   )
 )
 route(
+  .info = BHG" to "EDB" return",
+  .iso = "2026-06-18",
+  nr(
+    .id = "W68979",
+    .op = SR,
+    .from = "BHG",
+    .to = "EDB"
+  )
+)
+route(
   .info = "Travel to "WKF" Via "BWK" for Wakefield Summer 2026",
   .iso = "2026-06-19",
   nr(
