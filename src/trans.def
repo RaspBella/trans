@@ -838,6 +838,12 @@ route(
   .info = "Travel to "WKF" Via "BWK" for Wakefield Summer 2026",
   .iso = "2026-06-19",
   nr(
+    .id = "C15048",
+    .op = SR,
+    .from = "BHG",
+    .to = "EDB"
+  ),
+  nr(
     .id = "W85790",
     .op = TP,
     .from = "EDB",
