@@ -900,6 +900,13 @@ route(
     .op = "Lothian Country",
     .from = "Bathgate",
     .to = "Edinburgh"
+  ),
+  bus(
+    .id = NOTRACKING,
+    .n = "124",
+    .op = "East Coast",
+    .from = "Calton Terrace Brae",
+    .to = "Princes Street Scot Monument"
   )
 )
 route(
