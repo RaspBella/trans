@@ -892,6 +892,17 @@ route(
   )
 )
 route(
+  .info = "Bus Shenanigans",
+  .iso = "2026-06-25",
+  bus(
+    .id = NOTRACKING,
+    .n = "X18",
+    .op = "Lothian Country",
+    .from = "Bathgate",
+    .to = "Edinburgh"
+  )
+)
+route(
   .info = "Travel to "CRE" Via "GLC" for Manchester CL Final 2026",
   .iso = "2026-07-03",
   nr(
