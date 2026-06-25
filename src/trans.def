@@ -907,6 +907,13 @@ route(
     .op = "East Coast",
     .from = "Calton Terrace Brae",
     .to = "Princes Street Scot Monument"
+  ),
+  bus(
+    .id = 900790832,
+    .n = "X18",
+    .op = "Lothian Country",
+    .from = "Edinburgh",
+    .to = "Bathgate"
   )
 )
 route(
