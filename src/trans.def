@@ -925,6 +925,13 @@ route(
     .op = "Lothian Country",
     .from = "Bathgate",
     .to = "Livingston"
+  ),
+  bus(
+    .id = 901174697,
+    .n = "X51",
+    .op = "Stagecoach East Scotland",
+    .from = "Livingston",
+    .to = "Dunfermline"
   )
 )
 route(
