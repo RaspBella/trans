@@ -566,7 +566,7 @@ route(
   bus(
     .id = NOTRACKING,
     .n = "900",
-    .op = "City Link",
+    .op = "Scottish City Link",
     .from = "Edinburgh Zoo",
     .to = "Edinburgh Bus Station"
   ),
@@ -692,7 +692,7 @@ route(
   bus(
     .id = NOTRACKING,
     .n = "900",
-    .op = "City Link",
+    .op = "Scottish City Link",
     .from = "Princes Street",
     .to = "Glasgow"
   ),
