@@ -964,6 +964,7 @@ route(
     .op = "Stagecoach East Scotland",
     .from = "Dunfermline",
     .to = "Glasgow"
+  )
 )
 route(
   .info = "Travel to "CRE" Via "GLC" for Manchester CL Final 2026",
