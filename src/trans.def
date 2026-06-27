@@ -949,7 +949,7 @@ route(
   )
 )
 route(
-  .info = "Continuation of prior day",
+  .info = "Continuation of prior day, and then Glasgow comp :3",
   .iso = "2026-06-27",
   bus(
     .id = 901310583,
@@ -957,7 +957,13 @@ route(
     .op = "Stagecoach East Scotland",
     .from = "Newbridge",
     .to = "Dunfermline"
-  )
+  ),
+  bus(
+    .id = 901341589,
+    .n = "X24",
+    .op = "Stagecoach East Scotland",
+    .from = "Dunfermline",
+    .to = "Glasgow"
 )
 route(
   .info = "Travel to "CRE" Via "GLC" for Manchester CL Final 2026",
