@@ -964,6 +964,13 @@ route(
     .op = "Stagecoach East Scotland",
     .from = "Dunfermline",
     .to = "Glasgow"
+  ),
+  bus(
+    .id = NOTRACKING,
+    .n = "X27",
+    .op = "Stagecoach East Scotland",
+    .from = "Glasgow",
+    .to = "Dunfermline"
   )
 )
 route(
