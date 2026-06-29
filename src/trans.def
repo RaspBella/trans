@@ -993,13 +993,20 @@ route(
 )
 route(
   .info = "Glasgow comp day 3",
-  .iso = "2026-06-28",
+  .iso = "2026-06-29",
   bus(
     .id = 902040275,
     .n = "X24",
     .op = "Stagecoach East Scotland",
     .from = "Dunfermline",
     .to = "Glasgow"
+  ),
+  bus(
+    .id = 902470677,
+    .n = "X24",
+    .op = "Stagecoach East Scotland",
+    .from = "Glasgow",
+    .to = "Dunfermline"
   )
 )
 route(
