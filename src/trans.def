@@ -1025,6 +1025,13 @@ route(
     .op = "Scottish City Link",
     .from = "Glasgow",
     .to = "Edinburgh"
+  ),
+  bus(
+    .id = 902924057,
+    .n = "X55",
+    .op = "Stagecoast East Scotland",
+    .from = "Edinburgh",
+    .to = "Dunfermline"
   )
 )
 route(
