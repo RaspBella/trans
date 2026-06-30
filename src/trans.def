@@ -1018,6 +1018,13 @@ route(
     .op = "Stagecoach East Scotland",
     .from = "Dunfermline",
     .to = "Glasgow"
+  ),
+  bus(
+    .id = 902845728,
+    .n = "900",
+    .op = "Scottish City Link",
+    .from = "Glasgow",
+    .to = "Edinburgh"
   )
 )
 route(
