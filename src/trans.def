@@ -949,7 +949,7 @@ route(
   )
 )
 route(
-  .info = "Continuation of prior day, and then Glasgow comp :3",
+  .info = "Continuation of prior day, and then Farewell Strathclyde :3",
   .iso = "2026-06-27",
   bus(
     .id = 901310583,
@@ -974,7 +974,7 @@ route(
   )
 )
 route(
-  .info = "Glasgow comp day 2",
+  .info = "Farewell Strathclyde day 2",
   .iso = "2026-06-28",
   bus(
     .id = NOTRACKING,
@@ -992,7 +992,7 @@ route(
   )
 )
 route(
-  .info = "Glasgow comp day 3",
+  .info = "Farewell Strathclyde day 3",
   .iso = "2026-06-29",
   bus(
     .id = 902040275,
@@ -1007,6 +1007,17 @@ route(
     .op = "Stagecoach East Scotland",
     .from = "Glasgow",
     .to = "Dunfermline"
+  )
+)
+route(
+  .info = "Farewell Strathclyde day 4",
+  .iso = "2026-06-30",
+  bus(
+    .id = 902518682,
+    .n = "X24",
+    .op = "Stagecoach East Scotland",
+    .from = "Dunfermline",
+    .to = "Glasgow"
   )
 )
 route(
