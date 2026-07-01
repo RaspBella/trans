@@ -1050,6 +1050,13 @@ route(
     .op = "Lothian Country",
     .from = "Newbridge",
     .to = "Tesco Distro"
+  ),
+  bus(
+    .id = NOTRACKING,
+    .n = "X28",
+    .op = "Lothian Country",
+    .from = "Tesco Distro",
+    .to = "Bathgate"
   )
 )
 route(
