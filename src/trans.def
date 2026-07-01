@@ -1122,7 +1122,7 @@ route(
   nr(
     .id = "C00369",
     .op = ES,
-    .from = "SPT",
+    .from = "STP",
     .to = "AMS"
   )
 )
@@ -1133,7 +1133,7 @@ route(
     .id = "C00365",
     .op = ES,
     .from = "AMS",
-    .to = "SPT"
+    .to = "STP"
   )
 )
 route(
