@@ -1117,6 +1117,26 @@ route(
   )
 )
 route(
+  .info = "Travel for Euro's",
+  .iso = "2026-07-13",
+  nr(
+    .id = "C00369",
+    .op = ES,
+    .from = "SPT",
+    .to = "AMS"
+  )
+)
+route(
+  .info = "Leave Euro's",
+  .iso = "2026-07-20",
+  nr(
+    .id = "C00365",
+    .op = ES,
+    .from = "AMS",
+    .to = "SPT"
+  )
+)
+route(
   .info = "Travel home from London Via "EUS" and "EDB,
   .iso = "2026-07-21",
   nr(
