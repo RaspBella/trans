@@ -415,7 +415,7 @@ route(
     .n = "X38",
     .op = "Midland Bluebird",
     .from = "Corstorphine",
-    .to = "Princes Street West"
+    .to = "Princes Street"
   ),
   nr(
     .id = "W34268",
@@ -628,7 +628,7 @@ route(
   bus(
     .id = 894136139,
     .n = "26",
-    .op = "Lothian",
+    .op = "Lothian City",
     .from = "Shandwick Place",
     .to = "Kirk Loan"
   ),
@@ -671,21 +671,21 @@ route(
   bus(
     .id = 894861137,
     .n = "31",
-    .op = "Lothian",
+    .op = "Lothian City",
     .from = "Haymarket",
     .to = "Princes Street"
   ),
   bus(
     .id = 894874619,
     .n = "37",
-    .op = "Lothian",
+    .op = "Lothian City",
     .from = "Princes Street",
     .to = "August_21"
   ),
   bus(
     .id = NOTRACKING,
     .n = "37",
-    .op = "Lothian",
+    .op = "Lothian City",
     .from = "August_21",
     .to = "Princes Street"
   ),
@@ -799,14 +799,14 @@ route(
   bus(
     .id = 897034133,
     .n = "16",
-    .op = "Lothian",
+    .op = "Lothian City",
     .from = "Lothian Road",
     .to = "Oxgangs Cresent"
   ),
   bus(
     .id = NOTRACKING,
     .n = "16",
-    .op = "Lothian",
+    .op = "Lothian City",
     .from = "Braidburn Valley",
     .to = "Lothian Road"
   ),
@@ -906,7 +906,7 @@ route(
     .n = "124",
     .op = "East Coast",
     .from = "Calton Terrace Brae",
-    .to = "Princes Street Scot Monument"
+    .to = "Princes Street"
   ),
   bus(
     .id = 900790832,
@@ -1064,6 +1064,13 @@ route(
     .op = "Lothian Country",
     .from = "Bathgate",
     .to = "Edinburgh"
+  ),
+  bus(
+    .id = NOTRACKING,
+    .n = "31",
+    .op = "Lothian City",
+    .from = "St Patrick Square",
+    .to = "Princes Street"
   ),
   bus(
     .id = 903337272,
