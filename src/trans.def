@@ -1042,7 +1042,14 @@ route(
     .n = "X51",
     .op = "Stagecoach East Scotland",
     .from = "Dunfermline",
-    .to = "Livingston"
+    .to = "Newbridge"
+  ),
+  bus(
+    .id = NOTRACKING,
+    .n = "X18",
+    .op = "Lothian Country",
+    .from = "Newbridge",
+    .to = "Tesco Distro"
   )
 )
 route(
