@@ -1035,6 +1035,17 @@ route(
   )
 )
 route(
+  .info = "August_21 with gamer(s)",
+  .iso = "2026-07-01",
+  bus(
+    .id = 903073638,
+    .n = "X51",
+    .op = "Stagecoach East Scotland",
+    .from = "Dunfermline",
+    .to = "Livingston"
+  )
+)
+route(
   .info = "Travel to "CRE" Via "GLC" for Manchester CL Final 2026",
   .iso = "2026-07-03",
   nr(
