@@ -1081,6 +1081,16 @@ route(
   )
 )
 route(
+  .info = "Cooking and Vada :3",
+  .iso = "2026-07-02",
+  nr(
+    .id = "W69953",
+    .op = SR,
+    .from = "BHG",
+    .to = "EDB"
+  )
+)
+route(
   .info = "Travel to "CRE" Via "GLC" for Manchester CL Final 2026",
   .iso = "2026-07-03",
   nr(
