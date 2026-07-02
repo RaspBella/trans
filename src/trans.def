@@ -1157,6 +1157,22 @@ route(
   )
 )
 route(
+  .info = "Newcastle comp :3",
+  .iso = "2026-07-25",
+  nr(
+    .id = "W83681",
+    .op = SR,
+    .from = "BHG",
+    .to = "EDB"
+  ),
+  nr(
+    .id = "G25715",
+    .op = LD,
+    .from = "EDB",
+    .to = "NCL"
+  )
+)
+route(
   .info = "Travel to "LLE" for South Wales Summer 2026",
   .iso = "2026-07-31",
   nr(
