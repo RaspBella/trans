@@ -6,8 +6,8 @@
 #define ES "Eurostar"
 #define GW "Great Western Railway"
 #define GR "London North Eastern Railway"
-#define LD "Lumo (East Coast)
-#define LF "Lumo (West Coast)
+#define LD "Lumo (East Coast)"
+#define LF "Lumo (West Coast)"
 #define NT "Northern"
 #define SR "ScotRail"
 #define TP "TransPennine Express"
