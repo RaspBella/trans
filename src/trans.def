@@ -1190,7 +1190,7 @@ route(
   )
 )
 route(
-  .info = "Newcastle comp :3",
+  .info = "Newcastle comp day 1",
   .iso = "2026-07-25",
   nr(
     .id = "W83681",
@@ -1203,6 +1203,16 @@ route(
     .op = LD,
     .from = "EDB",
     .to = "NCL"
+  )
+)
+route(
+  .info = "Newcastle comp day 2",
+  .iso = "2026-07-26",
+  nr(
+    .id = "G15954",
+    .op = TP,
+    .from = "NCL",
+    .to = "EDB"
   )
 )
 route(
