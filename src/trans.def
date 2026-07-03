@@ -1089,6 +1089,27 @@ route(
     .from = "BHG",
     .to = "EDB"
   ),
+  bus(
+    .id = 903662398,
+    .n = "37",
+    .op = "Lothian",
+    .from = "Princes Street",
+    .to = "North Werber Park"
+  ),
+  bus(
+    .id = NOTRACKING,
+    .n = "37",
+    .op = "Lothian",
+    .from = "North Werber Park",
+    .to = "Charles Wilson Avenue"
+  ),
+  bus(
+    .id = 903857644,
+    .n = "37",
+    .op = "Lothian",
+    .from = "Original Rosslyn Hotel",
+    .to = "Princes Street"
+  ),
   nr(
     .id = "W69035",
     .op = SR,
