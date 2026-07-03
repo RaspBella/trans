@@ -1081,7 +1081,7 @@ route(
   )
 )
 route(
-  .info = "Cooking and Vada :3",
+  .info = "Cooking, Roslin Glen, and post Vada hangout :3",
   .iso = "2026-07-02",
   nr(
     .id = "W69953",
@@ -1099,6 +1099,12 @@ route(
 route(
   .info = "Travel to "CRE" Via "GLC" for Manchester CL Final 2026",
   .iso = "2026-07-03",
+  nr(
+    .id = "W69966",
+    .op = SR,
+    .from = "BHG",
+    .to = "GLQ"
+  ),
   nr(
     .id = "W34195",
     .op = VT,
