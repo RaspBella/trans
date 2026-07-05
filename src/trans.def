@@ -1166,7 +1166,7 @@ route(
   )
 )
 route(
-  .info = "Travel to "SVG" Via "EDB" and "LON" for Stevenage July 2026",
+  .info = "Travel to "LON" Via "EDB" for Stevenage July 2026",
   .iso = "2026-07-10",
   nr(
     .id = "W33933",
@@ -1196,7 +1196,7 @@ route(
   )
 )
 route(
-  .info = "Travel home from London Via "EUS" and "EDB,
+  .info = "Travel home Via "EUS" and "EDB,
   .iso = "2026-07-21",
   nr(
     .id = "W34144",
