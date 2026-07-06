@@ -1184,6 +1184,13 @@ route(
     .op = "FlixBus",
     .from = "Glasgow",
     .to = "Livingston Deer Park"
+  ),
+  bus(
+    .id = 905365705,
+    .n = "X27",
+    .op = "Lothian Country",
+    .from = "Knightsridge",
+    .to = "Bathgate"
   )
 )
 route(
