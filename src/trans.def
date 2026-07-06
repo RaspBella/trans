@@ -1177,6 +1177,13 @@ route(
     .op = "Scottish City Link",
     .from = "Balloch",
     .to = "Glasgow"
+  ),
+  bus(
+    .id = NOTRACKING,
+    .n = "UK090",
+    .op = "FlixBus",
+    .from = "Glasgow",
+    .to = "Livingston Deer Park"
   )
 )
 route(
