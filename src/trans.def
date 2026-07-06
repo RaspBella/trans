@@ -1163,6 +1163,13 @@ route(
     .op = SR,
     .from = "GLQ",
     .to = "HLC"
+  ),
+  bus(
+    .id = 905328730,
+    .n = "306",
+    .op = "McColls Travel",
+    .from = "Helensburgh",
+    .to = "Balloch"
   )
 )
 route(
