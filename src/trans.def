@@ -1170,6 +1170,13 @@ route(
     .op = "McColls Travel",
     .from = "Helensburgh",
     .to = "Balloch"
+  ),
+  bus(
+    .id = 905197548,
+    .n = "915",
+    .op = "Scottish City Link",
+    .from = "Balloch",
+    .to = "Glasgow"
   )
 )
 route(
