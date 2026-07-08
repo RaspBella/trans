@@ -1335,3 +1335,47 @@ route(
     .to = "EDB"
   )
 )
+route(
+  .info = "Travel to UKC BLD+FMC 2026 Via "KDG,
+  .iso = "2026-08-14",
+  nr(
+    .id = "W83679",
+    .op = SR,
+    .from = "BHG",
+    .to = "HYM"
+  ),
+  nr(
+    .id = "W84896",
+    .op = TP,
+    .from = "HYM",
+    .to = "MAN"
+  ),
+  nr(
+    .id = "L89590",
+    .op = NT,
+    .from = "MAN",
+    .to = "KDG"
+  ),
+  nr(
+    .id = "W70551",
+    .op = LM,
+    .from = "KDG",
+    .to = "STA"
+  ),
+  nr(
+    .id = "C16951",
+    .op = LM,
+    .from = "STA",
+    .to = "BHM"
+  )
+)
+route(
+  .info = "Leave UKC FMC 2026",
+  .iso = "2026-08-16",
+  nr(
+    .id = "G01078",
+    .op = XC,
+    .from = "BHM",
+    .to = "EDB"
+  )
+)
