@@ -1252,6 +1252,12 @@ route(
     .op = TL,
     .from = "STP",
     .to = "SVG"
+  ),
+  nr(
+    .id = "C92992",
+    .op = TL,
+    .from = "SVG",
+    .to = "FPK"
   )
 )
 route(
