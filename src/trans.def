@@ -1279,9 +1279,15 @@ route(
   ),
   nr(
     .id = "C82516",
-    .op = TL,
+    .op = "RTT says "GN" but "TL,
     .from = "FPK",
     .to = "SVG"
+  ),
+  nr(
+    .id = "C92926",
+    .op = "RTT says "TL" but "GN,
+    .from = "SVG",
+    .to = "FPK"
   )
 )
 route(
