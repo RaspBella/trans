@@ -1268,6 +1268,23 @@ route(
   )
 )
 route(
+  .info = "Travel to Stevenage from "FPK,
+  .iso = "2026-07-12",
+  bus(
+    .id = NOTRACKING,
+    .n = "4",
+    .op = "Metroline Travel",
+    .from = "St Mary's Church",
+    .to = "Finsbury Park"
+  ),
+  nr(
+    .id = "C82516",
+    .op = GN,
+    .from = "FPK",
+    .to = "SVG"
+  )
+)
+route(
   .info = "Travel for Euro's",
   .iso = "2026-07-13",
   nr(

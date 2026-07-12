@@ -4,6 +4,7 @@
 #define XC "Cross Country"
 #define EM "East Midlands"
 #define ES "Eurostar"
+#define GN "Great Northern"
 #define GW "Great Western Railway"
 #define GR "London North Eastern Railway"
 #define LD "Lumo (East Coast)"
