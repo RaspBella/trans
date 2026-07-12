@@ -1288,6 +1288,13 @@ route(
     .op = "RTT says "TL" but "GN,
     .from = "SVG",
     .to = "FPK"
+  ),
+  bus(
+    .id = 908099210,
+    .n = "4",
+    .op = "Metroline Travel",
+    .from = "City & Islington College",
+    .to = "St Mary's Church"
   )
 )
 route(
