@@ -1300,6 +1300,13 @@ route(
 route(
   .info = "Travel for Euro's",
   .iso = "2026-07-13",
+  bus(
+    .id = NOTRACKING,
+    .n = "30",
+    .op = "Metroline Travel",
+    .from = "St Mary's Church",
+    .to = "St Pancras"
+  ),
   nr(
     .id = "C00369",
     .op = ES,
