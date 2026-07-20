@@ -1322,6 +1322,13 @@ route(
     .op = ES,
     .from = "AMS",
     .to = "STP"
+  ),
+  bus(
+    .id = NOTRACKING,
+    .n = "30",
+    .op = "Metroline Travel",
+    .from = "British Library",
+    .to = "St Mary's Church"
   )
 )
 route(
