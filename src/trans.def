@@ -1353,6 +1353,20 @@ route(
     .op = "Borders",
     .from = "August_21",
     .to = "South Bridge"
+  ),
+  bus(
+    .id = NOTRACKING,
+    .n = "UK090",
+    .op = "FlixBus",
+    .from = "Edinburgh",
+    .to = "Newbridge"
+  ),
+  bus(
+    .id = NOTRACKING,
+    .n = "X18",
+    .op = "Lothian Country",
+    .from = "Newbridge",
+    .to = "Bathgate"
   )
 )
 route(
