@@ -1334,6 +1334,13 @@ route(
 route(
   .info = "Travel home Via "EUS" and "EDB,
   .iso = "2026-07-21",
+  bus(
+    .id = 911734904,
+    .n = "30",
+    .op = "Metroline Travel",
+    .from = "St Mary's Church",
+    .to = "Euston"
+  ),
   nr(
     .id = "W34144",
     .op = VT,
