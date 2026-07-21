@@ -1346,6 +1346,13 @@ route(
     .op = VT,
     .from = "EUS",
     .to = "EDB"
+  ),
+  bus(
+    .id = 911993000,
+    .n = "X62",
+    .op = "Borders",
+    .from = "August_21",
+    .to = "South Bridge"
   )
 )
 route(
