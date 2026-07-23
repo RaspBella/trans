@@ -1410,6 +1410,13 @@ route(
     .op = "Lothian Country",
     .from = "Armadale Asda",
     .to = "Whitburn"
+  ),
+  bus(
+    .id = 913125609,
+    .n = "X18",
+    .op = "Lothian Country",
+    .from = "Whitburn",
+    .to = "Bathgate"
   )
 )
 route(
