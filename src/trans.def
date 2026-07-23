@@ -1397,6 +1397,12 @@ route(
     .op = SR,
     .from = "HYM",
     .to = "EDP"
+  ),
+  nr(
+    .id = "C15056",
+    .op = SR,
+    .from = "EDP",
+    .to = "BHG"
   )
 )
 route(
