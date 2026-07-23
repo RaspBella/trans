@@ -1370,6 +1370,16 @@ route(
   )
 )
 route(
+  .info = "Burger+Whitburn antics from lunch to party :3",
+  .iso = "2026-07-23",
+  nr(
+    .id = "W68988",
+    .op = SR,
+    .from = "BHG",
+    .to = "EDB"
+  )
+)
+route(
   .info = "Newcastle comp day 1",
   .iso = "2026-07-25",
   nr(
