@@ -1384,6 +1384,13 @@ route(
     .op = "Lothian City",
     .from = "South Bridge",
     .to = "Cameratiks"
+  ),
+  bus(
+    .id = NOTRACKING,
+    .n = "11",
+    .op = "Lothian City",
+    .from = "Cameratiks",
+    .to = "Usherhall"
   )
 )
 route(
