@@ -1402,7 +1402,14 @@ route(
     .id = "C15056",
     .op = SR,
     .from = "EDP",
-    .to = "BHG"
+    .to = "ARM"
+  ),
+  bus(
+    .id = NOTRACKING,
+    .n = "X18",
+    .op = "Lothian Country",
+    .from = "Armadale Asda",
+    .to = "Whitburn"
   )
 )
 route(
