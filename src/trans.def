@@ -1572,3 +1572,25 @@ route(
     .to = "EDB"
   )
 )
+route(
+  .info = "Travel to " POP "for York Summer 2026",
+  .iso = "2026-08-21",
+  nr(
+    .id = "W85790",
+    .op = TP,
+    .from = "EDB",
+    .to = "NCL"
+  ),
+  nr(
+    .id = "C24969",
+    .op = TP,
+    .from = "NCL",
+    .to = "YRK"
+  ),
+  nr(
+    .id = "G85585",
+    .op = NT,
+    .from = "YRK",
+    .to = "POP"
+  )
+)
