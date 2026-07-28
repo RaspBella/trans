@@ -1478,7 +1478,14 @@ route(
     .n = "X18",
     .op = "Lothian Country",
     .from = "Bathgate",
-    .to = "West End"
+    .to = "Drum Brae South"
+  ),
+  bus(
+    .id = 915121337,
+    .n = "31",
+    .op = "Lothian City",
+    .from = "Drum Brae South",
+    .to = "South Bridge"
   )
 )
 route(
