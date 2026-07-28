@@ -1471,6 +1471,17 @@ route(
   )
 )
 route(
+  .info = "BG Via West End due to continued road closure",
+  .iso = "2026-07-28",
+  bus(
+    .id = NOTRACKING,
+    .n = "X18",
+    .op = "Lothian Country",
+    .from = "Bathgate",
+    .to = "West End"
+  )
+)
+route(
   .info = "Travel to "LLE" for South Wales Summer 2026",
   .iso = "2026-07-31",
   nr(
