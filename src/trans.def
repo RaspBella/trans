@@ -1486,6 +1486,13 @@ route(
     .op = "Lothian City",
     .from = "Drum Brae South",
     .to = "South Bridge"
+  ),
+  bus(
+    .id = NOTRACKING,
+    .n = "900",
+    .op = "Scottish City Link",
+    .from = "Edinburgh",
+    .to = "Ratho Station"
   )
 )
 route(
