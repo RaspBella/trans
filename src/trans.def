@@ -1507,6 +1507,17 @@ route(
   )
 )
 route(
+  .info = "Silli continues before eepy :p",
+  .iso = "2026-07-30",
+  bus(
+    .id = NOTRACKING,
+    .n = "UK090",
+    .op = "FlixBus",
+    .from = "Haymarket",
+    .to = "Livingston Deer Park"
+  )
+)
+route(
   .info = "Travel to "LLE" for South Wales Summer 2026",
   .iso = "2026-07-31",
   nr(
