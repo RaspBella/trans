@@ -1503,7 +1503,7 @@ route(
     .n = "X18",
     .op = "Lothian Country",
     .from = "Bathgate",
-    .to = "West End"
+    .to = "Haymarket"
   )
 )
 route(
