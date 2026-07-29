@@ -1496,6 +1496,17 @@ route(
   )
 )
 route(
+  .info = "Edinburgh silli night :3",
+  .iso = "2026-07-29",
+  bus(
+    .id = 915655983,
+    .n = "X18",
+    .op = "Lothian Country",
+    .from = "Bathgate",
+    .to = "West End"
+  )
+)
+route(
   .info = "Travel to "LLE" for South Wales Summer 2026",
   .iso = "2026-07-31",
   nr(
