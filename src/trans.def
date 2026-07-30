@@ -1648,3 +1648,25 @@ route(
     .to = "POP"
   )
 )
+route(
+  .info = "Leave York Summer 2026",
+  .iso = "2026-08-23",
+  nr(
+    .id = "C32255",
+    .op = NT,
+    .from = "POP",
+    .to = "YRK"
+  ),
+  nr(
+    .id = "G15914",
+    .op = TP,
+    .from = "YRK",
+    .to = "NCL"
+  ),
+  nr(
+    .id = "G15981",
+    .op = TP,
+    .from = "NCL",
+    .to = "EDB"
+  )
+)
