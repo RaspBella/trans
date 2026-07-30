@@ -1535,6 +1535,13 @@ route(
     .op = "Lothian City",
     .from = "Edinburgh Park",
     .to = "Cramond"
+  ),
+  bus(
+    .id = NOTRACKING,
+    .n = "32",
+    .op = "Lothian City",
+    .from = "Cramond",
+    .to = "Edinburgh Park"
   )
 )
 route(
