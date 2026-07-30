@@ -1507,7 +1507,7 @@ route(
   )
 )
 route(
-  .info = "Silli continues before eepy :p",
+  .info = "Silli continues before eepy :p then beach antics :3",
   .iso = "2026-07-30",
   bus(
     .id = NOTRACKING,
@@ -1522,6 +1522,19 @@ route(
     .op = "Lothian Country",
     .from = "Knightsridge",
     .to = "Bathgate"
+  ),
+  nr(
+    .id = "W68989",
+    .op = SR,
+    .from = "BHG",
+    .to = "EDP"
+  ),
+  bus(
+    .id = NOTRACKING,
+    .n = "32",
+    .op = "Lothian City",
+    .from = "Edinburgh Park",
+    .to = "Cramond"
   )
 )
 route(
