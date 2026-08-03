@@ -1586,6 +1586,13 @@ route(
     .op = TP,
     .from = "MAN",
     .to = "EDB"
+  ),
+  bus(
+    .id = NOTRACKING,
+    .n = "29",
+    .op = "Lothian City",
+    .from = "August_21",
+    .to = "City Centre"
   )
 )
 route(
