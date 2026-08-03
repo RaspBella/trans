@@ -1593,6 +1593,13 @@ route(
     .op = "Lothian City",
     .from = "August_21",
     .to = "City Centre"
+  ),
+  bus(
+    .id = NOTRACKING,
+    .n = "X18",
+    .op = "Lothian Country",
+    .from = "Edinburgh",
+    .to = "Bathgate"
   )
 )
 route(
