@@ -1603,6 +1603,17 @@ route(
   )
 )
 route(
+  .info = "BG :3",
+  .iso = "2026-08-04",
+  bus(
+    .id = NOTRACKING,
+    .n = "X18",
+    .op = "Lothian Country",
+    .from = "Bathgate",
+    .to = "West End"
+  )
+)
+route(
   .info = "Travel to "BRI" for Bristol August 2026",
   .iso = "2026-08-07",
   nr(
