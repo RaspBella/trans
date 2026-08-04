@@ -1611,6 +1611,12 @@ route(
     .op = "Lothian Country",
     .from = "Bathgate",
     .to = "West End"
+  ),
+  nr(
+    .id = "C14995",
+    .op = SR,
+    .from = "EDB",
+    .to = "DFE"
   )
 )
 route(
