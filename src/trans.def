@@ -1752,3 +1752,35 @@ route(
     .to = "EDB"
   )
 )
+route(
+  .info = "Travel to Manchester September 2026 and then "CAR,
+  .iso = "2026-09-19",
+  nr(
+    .id = "W83681",
+    .op = SR,
+    .from = "BHG",
+    .to = "HYM"
+  ),
+  nr(
+    .id = "W84897",
+    .op = TP,
+    .from = "HYM",
+    .to = "MAN"
+  )
+)
+route(
+  .info = "Travel to Brampton Autumn 2026 and then travel home via "GLC,
+  .iso = "2026-09-20",
+  nr(
+    .id = "W85199",
+    .op = TP,
+    .from = "CAR",
+    .to = "GLC"
+  ),
+  nr(
+    .id = "W69105",
+    .op = SR,
+    .from = "GLQ",
+    .to = "BHG"
+  )
+)
