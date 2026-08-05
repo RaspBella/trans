@@ -1620,6 +1620,17 @@ route(
   )
 )
 route(
+  .info = "Leave Dunfermline :p",
+  .iso = "2026-08-05",
+  bus(
+    .id = 918509353,
+    .n = "X55",
+    .op = "Stagecoast East Scotland",
+    .from = "Dunfermline",
+    .to = "Ferrytoll"
+  )
+)
+route(
   .info = "Travel to "BRI" for Bristol August 2026",
   .iso = "2026-08-07",
   nr(
