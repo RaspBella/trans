@@ -1628,6 +1628,13 @@ route(
     .op = "Stagecoast East Scotland",
     .from = "Dunfermline",
     .to = "Ferrytoll"
+  ),
+  bus(
+    .id = 918515758,
+    .n = "747",
+    .op = "Stagecoast East Scotland",
+    .from = "Ferrytoll",
+    .to = "Ratho Station Road"
   )
 )
 route(
