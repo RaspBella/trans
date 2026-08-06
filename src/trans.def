@@ -1784,3 +1784,25 @@ route(
     .to = "BHG"
   )
 )
+route(
+  .info = "Travel to Weston-super-Mare Autumn 2026 Via "STA" and "BRI,
+  .iso = "2026-09-25",
+  nr(
+    .id = "W83689",
+    .op = SR,
+    .from = "BHG",
+    .to = "HYM"
+  ),
+  nr(
+    .id = "W34265",
+    .op = VT,
+    .from = "HYM",
+    .to = "STA"
+  ),
+  nr(
+    .id = "W29866",
+    .op = XC,
+    .from = "STA",
+    .to = "BRI"
+  )
+)
