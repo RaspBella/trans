@@ -1665,7 +1665,7 @@ route(
   )
 )
 route(
-  .info = "Travel to UKC BLD+FMC 2026 Via "KDG,
+  .info = "Travel for UKC BLD 2026 Via "KDG", "BHM", "COV,
   .iso = "2026-08-14",
   nr(
     .id = "W83679",
@@ -1696,6 +1696,12 @@ route(
     .op = LM,
     .from = "STA",
     .to = "BHM"
+  ),
+  nr(
+    .id = "Y80927",
+    .op = LM,
+    .from = "BHM",
+    .to = "COV"
   )
 )
 route(
