@@ -1659,7 +1659,14 @@ route(
     .n = "100",
     .op = "Lothian City",
     .from = "Waverley Bridge",
-    .to = "Maybury Road"
+    .to = "Western Corner"
+  ),
+  bus(
+    .id = NOTRACKING,
+    .n = "X18",
+    .op = "Lothian Country",
+    .from = "Western Corner",
+    .to = "Bathgate"
   )
 )
 route(
