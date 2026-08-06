@@ -1806,3 +1806,19 @@ route(
     .to = "BRI"
   )
 )
+route(
+  .info = "Leave Weston-super-Mare Autumn 2026 Via "BRI" and "EDB,
+  .iso = "2026-09-28",
+  nr(
+    .id = "G15369",
+    .op = GW,
+    .from = "WSM",
+    .to = "BRI"
+  ),
+  nr(
+    .id = "G66987",
+    .op = XC,
+    .from = "BRI",
+    .to = "EDB"
+  )
+)
