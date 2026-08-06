@@ -1653,6 +1653,13 @@ route(
     .op = "Lothian Country",
     .from = "Bathgate",
     .to = "Edinburgh"
+  ),
+  bus(
+    .id = NOTRACKING,
+    .n = "100",
+    .op = "Lothian City",
+    .from = "Waverley Bridge",
+    .to = "Maybury Road"
   )
 )
 route(
