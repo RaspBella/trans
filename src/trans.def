@@ -1688,6 +1688,13 @@ route(
 route(
   .info = "Travel home from "BRI" Via "EDB,
   .iso = "2026-08-10",
+  bus(
+    .id = 920568253,
+    .n = "8",
+    .op = "First Bristol, Bath & the West",
+    .from = "Queens Road",
+    .to = "Temple Meads"
+  ),
   nr(
     .id = "G00869",
     .op = XC,
