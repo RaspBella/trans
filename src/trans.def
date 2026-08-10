@@ -1759,7 +1759,7 @@ route(
   )
 )
 route(
-  .info = "Travel to "POP" for York Summer 2026",
+  .info = "Travel to "YRK" for York Summer 2026",
   .iso = "2026-08-21",
   nr(
     .id = "W85790",
