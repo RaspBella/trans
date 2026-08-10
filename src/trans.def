@@ -1772,17 +1772,17 @@ route(
     .op = TP,
     .from = "NCL",
     .to = "YRK"
-  ),
-  nr(
-    .id = "G85585",
-    .op = NT,
-    .from = "YRK",
-    .to = "POP"
   )
 )
 route(
-  .info = "Leave York Summer 2026",
+  .info = "York Summer 2026 Day 2 then leave York",
   .iso = "2026-08-23",
+  nr(
+    .id = "G85401",
+    .op = NT,
+    .from = "YRK",
+    .to = "POP"
+  ),
   nr(
     .id = "C32255",
     .op = NT,
