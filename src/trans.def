@@ -1700,6 +1700,12 @@ route(
     .op = XC,
     .from = "BRI",
     .to = "EDB"
+  ),
+  nr(
+    .id = "C15054",
+    .op = SR,
+    .from = "EDB",
+    .to = "BHG"
   )
 )
 route(
