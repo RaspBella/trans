@@ -1670,7 +1670,7 @@ route(
   )
 )
 route(
-  .info = "Travel to "BRI" for Bristol August 2026",
+  .info = "Travel to "BRI" for Bristol August 2026 with Xander :3",
   .iso = "2026-08-07",
   nr(
     .id = "W29873",
@@ -1686,7 +1686,7 @@ route(
   )
 )
 route(
-  .info = "Travel home from "BRI" Via "EDB,
+  .info = "Travel home from "BRI" Via "EDB" with Xander :3, also with Clair :3 from "EDB,
   .iso = "2026-08-10",
   bus(
     .id = 920568253,
