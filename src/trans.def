@@ -1732,6 +1732,13 @@ route(
     .op = SR,
     .from = "BHG",
     .to = "EDB"
+  ),
+  bus(
+    .id = NOTRACKING,
+    .n = "8",
+    .op = "Lothian City",
+    .from = "South Bridge",
+    .to = "August_21"
   )
 )
 route(
