@@ -1725,6 +1725,16 @@ route(
   )
 )
 route(
+  .info = "August_21 :3",
+  .iso = "2026-08-12",
+  nr(
+    .id = "W69015",
+    .op = SR,
+    .from = "BHG",
+    .to = "EDB"
+  )
+)
+route(
   .info = "Travel for UKC BLD 2026 Via "KDG", "BHM", "COV,
   .iso = "2026-08-14",
   nr(
