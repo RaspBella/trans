@@ -229,7 +229,7 @@ route(
   )
 )
 route(
-  .info = "Travel to "CRE" Via "GLC" for Manchester Megaminx Day 2026",
+  .info = "Travel to "CRE" Via "GLC" for Manchester Megaminx Day 2026 with Kirsty",
   .iso = "2026-05-08",
   nr(
     .id = "W02480",
