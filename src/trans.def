@@ -229,7 +229,7 @@ route(
   )
 )
 route(
-  .info = "Travel to "CRE" Via "GLC" for Manchester Megaminx Day 2026 with Kirsty",
+  .info = "Travel to "CRE" Via "GLC" for Manchester Megaminx Day 2026 with Kirsty :3",
   .iso = "2026-05-08",
   nr(
     .id = "W02480",
@@ -1910,5 +1910,37 @@ route(
     .op = XC,
     .from = "BRI",
     .to = "EDB"
+  )
+)
+route(
+  .info = "Go to "CRE" for "CRE" October 2026 with Kirsty :3",
+  .iso = "2026-10-09",
+  nr(
+    .id = "C00578",
+    .op = LF,
+    .from = "WFF",
+    .to = "CRE"
+  )
+)
+route(
+  .info = "Leave "CRE" for "DFE" with Kirsty :3 Via "GLC", "GLQ", "HYM,
+  .iso = "2026-10-12",
+  nr(
+    .id = "W34206",
+    .op = VT,
+    .from = "CRE",
+    .to = "GLC"
+  ),
+  nr(
+    .id = "L87904",
+    .op = SR,
+    .from = "GLQ",
+    .to = "HYM"
+  ),
+  nr(
+    .id = "W69664",
+    .op = SR,
+    .from = "HYM",
+    .to = "DFE"
   )
 )
