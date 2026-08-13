@@ -1919,7 +1919,45 @@ route(
   )
 )
 route(
-  .info = "Go to "CRE" for "CRE" October 2026 with Kirsty :3",
+  .info = "Go to "POO" Autumn 2026 Via "LON,
+  .iso = "2026-10-02",
+  nr(
+    .id = "W33933",
+    .op = VT,
+    .from = "EDB",
+    .to = "EUS"
+  ),
+  nr(
+    .id = "L80173",
+    .op = SW,
+    .from = "WAT",
+    .to = "POO"
+  )
+)
+route(
+  .info = "Leave "POO" Via "LON,
+  .iso = "2026-10-04",
+  nr(
+    .id = "Q06935",
+    .op = SW" Rail Replacement Bus",
+    .from = "POO",
+    .to = "SOA"
+  ),
+  nr(
+    .id = "Q06399",
+    .op = SW,
+    .from = "SOA",
+    .to = "WAT"
+  ),
+  nr(
+    .id = "W33375",
+    .op = "VT",
+    .from = "EUS",
+    .to = "EDB"
+  )
+)
+route(
+  .info = "Go to "CRE" October 2026 with Kirsty :3",
   .iso = "2026-10-09",
   nr(
     .id = "C00578",

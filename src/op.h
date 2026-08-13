@@ -11,6 +11,7 @@
 #define LF "Lumo (West Coast)"
 #define NT "Northern"
 #define SR "ScotRail"
+#define SW "South Western Railway"
 #define TL "Thameslink"
 #define TP "TransPennine Express"
 #define AW "Transport for Wales"
