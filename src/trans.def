@@ -1792,6 +1792,13 @@ route(
     .op = LM,
     .from = "BHM",
     .to = "COV"
+  ),
+  bus(
+    .id = NOTRACKING,
+    .n = "56",
+    .op = "Stagecoach Midlands",
+    .from = "Sainsburys (TS3)",
+    .to = "Newcomen Road"
   )
 )
 route(
