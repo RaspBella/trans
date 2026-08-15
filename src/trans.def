@@ -2005,3 +2005,13 @@ route(
     .to = "PLY"
   )
 )
+route(
+  .info = "Leave "PLY,
+  .iso = "2026-10-26",
+  nr(
+    .id = "G01064",
+    .op = XC,
+    .from = "PLY",
+    .to = "EDB"
+  )
+)
