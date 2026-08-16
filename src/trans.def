@@ -1809,6 +1809,13 @@ route(
     .op = XC,
     .from = "BHM",
     .to = "EDB"
+  ),
+  bus(
+    .id = 923495944,
+    .n = "X55",
+    .op = "Stagecoast East Scotland",
+    .from = "Edinburgh",
+    .to = "Dunfermline"
   )
 )
 route(
