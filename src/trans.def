@@ -1827,6 +1827,13 @@ route(
     .op = "Stagecoach East Scotland",
     .from = "Dunfermline",
     .to = "Newbridge"
+  ),
+  bus(
+    .id = NOTRACKING,
+    .n = "X18",
+    .op = "Lothian Country",
+    .from = "Newbridge",
+    .to = "Bathgate"
   )
 )
 route(
