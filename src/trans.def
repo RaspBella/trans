@@ -1909,6 +1909,28 @@ route(
   )
 )
 route(
+  .info = "Leave "BHM,
+  .iso = "2026-08-31",
+  nr(
+    .id = "W34046",
+    .op = VT,
+    .from = "BHM",
+    .to = "GLC"
+  ),
+  nr(
+    .id = "C15432",
+    .op = SR,
+    .from = "GLC",
+    .to = "PTK"
+  ),
+  nr(
+    .id = "W69025",
+    .op = SR,
+    .from = "PTK",
+    .to = "BHG"
+  )
+)
+route(
   .info = "Travel to Manchester September 2026 and then "CAR,
   .iso = "2026-09-19",
   nr(
