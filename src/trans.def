@@ -1881,6 +1881,34 @@ route(
   )
 )
 route(
+  .info = "Travel to "BHM" Via "CAR", "STA" for UKC :3",
+  .iso = "2026-08-27",
+  nr(
+    .id = "W83689",
+    .op = SR,
+    .from = "BHG",
+    .to = "HYM"
+  ),
+  nr(
+    .id = "W34265",
+    .op = VT,
+    .from = "HYM",
+    .to = "CAR"
+  ),
+  nr(
+    .id = "C01365",
+    .op = VT,
+    .from = "CAR",
+    .to = "STA"
+  ),
+  nr(
+    .id = "C16967",
+    .op = LM,
+    .from = "STA",
+    .to = "BHM"
+  )
+)
+route(
   .info = "Travel to Manchester September 2026 and then "CAR,
   .iso = "2026-09-19",
   nr(
