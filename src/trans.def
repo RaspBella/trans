@@ -1857,6 +1857,13 @@ route(
 route(
   .info = "Travel to "YRK" for York Summer 2026",
   .iso = "2026-08-21",
+  bus(
+    .id = 925463576,
+    .n = "X18",
+    .op = "Lothian Country",
+    .from = "Bathgate",
+    .to = "Edinburgh"
+  ),
   nr(
     .id = "W85790",
     .op = TP,
