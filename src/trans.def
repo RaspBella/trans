@@ -1878,6 +1878,13 @@ route(
     .from = "South Bridge",
     .to = "August_21"
   ),
+  bus(
+    .id = 925546006,
+    .n = "7",
+    .op = "Lothian City",
+    .from = "August_21",
+    .to = "South Bridge"
+  ),
   nr(
     .id = "W85790",
     .op = TP,
