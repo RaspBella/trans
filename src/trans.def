@@ -1871,6 +1871,13 @@ route(
     .from = "Haymarket",
     .to = "Princes Street"
   ),
+  bus(
+    .id = NOTRACKING,
+    .n = "3",
+    .op = "Lothian City",
+    .from = "South Bridge",
+    .to = "August_21"
+  ),
   nr(
     .id = "W85790",
     .op = TP,
