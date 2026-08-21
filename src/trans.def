@@ -1869,7 +1869,7 @@ route(
     .n = "31",
     .op = "Lothian City",
     .from = "Haymarket",
-    .to = "Newington Road"
+    .to = "Princes Street"
   ),
   nr(
     .id = "W85790",
