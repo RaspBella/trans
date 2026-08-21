@@ -1864,6 +1864,13 @@ route(
     .from = "Bathgate",
     .to = "Edinburgh"
   ),
+  bus(
+    .id = NOTRACKING,
+    .n = "31",
+    .op = "Lothian City",
+    .from = "Haymarket",
+    .to = "Newington Road"
+  ),
   nr(
     .id = "W85790",
     .op = TP,
