@@ -1899,6 +1899,16 @@ route(
   )
 )
 route(
+  .info = "York Summer 2026 Day 1",
+  .iso = "2026-08-22",
+  nr(
+    .id = "G85362",
+    .op = NT,
+    .from = "YRK",
+    .to = "POP"
+  )
+)
+route(
   .info = "York Summer 2026 Day 2 then leave York",
   .iso = "2026-08-23",
   nr(
