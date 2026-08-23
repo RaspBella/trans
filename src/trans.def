@@ -1940,6 +1940,13 @@ route(
     .op = TP,
     .from = "NCL",
     .to = "EDB"
+  ),
+  bus(
+    .id = 926560178,
+    .n = "X55",
+    .op = "Stagecoast East Scotland",
+    .from = "Edinburgh",
+    .to = "Dunfermline"
   )
 )
 route(
