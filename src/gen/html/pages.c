@@ -75,58 +75,67 @@ int main(void) {
     fprintf(
       fp,
       "\"%s\":{"
-      "\"info\":\"%s\","
-      "\"services\":[",
+      "\"info\":\"%s\"",
       routes[i].iso,
       routes[i].info
     );
 
-    for (int j = 0; j < routes[i].count; ++j) {
-      switch (routes[i].services[j].type) {
-        case SERVICE_NR:
-          fprintf(
-            fp,
-            "{\"nr\":{"
-            "\"id\":\"%s\","
-            "\"op\":\"%s\","
-            "\"from\":\"%s\","
-            "\"to\":\"%s\"}}",
-            routes[i].services[j].as.nr.id,
-            routes[i].services[j].as.nr.op,
-            routes[i].services[j].as.nr.from,
-            routes[i].services[j].as.nr.to
-          );
-    
-          break;
+    if (routes[i].count) {
+      fprintf(
+        fp,
+        ",\"services\":["
+      );
 
-        case SERVICE_BUS:
-          fprintf(
-            fp,
-            "{\"bus\":{"
-            "\"id\":\"%d\","
-            "\"number\":\"%s\","
-            "\"op\":\"%s\","
-            "\"from\":\"%s\","
-            "\"to\":\"%s\"}}",
-            routes[i].services[j].as.bus.id,
-            routes[i].services[j].as.bus.n,
-            routes[i].services[j].as.bus.op,
-            routes[i].services[j].as.bus.from,
-            routes[i].services[j].as.bus.to
-          );
+      for (int j = 0; j < routes[i].count; ++j) {
+        switch (routes[i].services[j].type) {
+          case SERVICE_NR:
+            fprintf(
+              fp,
+              "{\"nr\":{"
+              "\"id\":\"%s\","
+              "\"op\":\"%s\","
+              "\"from\":\"%s\","
+              "\"to\":\"%s\"}}",
+              routes[i].services[j].as.nr.id,
+              routes[i].services[j].as.nr.op,
+              routes[i].services[j].as.nr.from,
+              routes[i].services[j].as.nr.to
+            );
 
-          break;
+            break;
+
+          case SERVICE_BUS:
+            fprintf(
+              fp,
+              "{\"bus\":{"
+              "\"id\":\"%d\","
+              "\"number\":\"%s\","
+              "\"op\":\"%s\","
+              "\"from\":\"%s\","
+              "\"to\":\"%s\"}}",
+              routes[i].services[j].as.bus.id,
+              routes[i].services[j].as.bus.n,
+              routes[i].services[j].as.bus.op,
+              routes[i].services[j].as.bus.from,
+              routes[i].services[j].as.bus.to
+            );
+
+            break;
+        }
+
+        if (j < (routes[i].count - 1)) {
+          fprintf(fp, ",");
+        }
       }
 
-      if (j < (routes[i].count - 1)) {
-        fprintf(fp, ",");
-      }
+      fprintf(
+        fp,
+        "]"
+      );
+
     }
 
-    fprintf(
-      fp,
-      "]}"
-    );
+    fprintf(fp, "}");
 
     if (i < (count - 1)) {
       fprintf(fp, ",");

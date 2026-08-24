@@ -38,72 +38,82 @@ void yyyy_mm_dd(FILE *fp, char *title, struct route route, const char *prev, con
   fprintf(
     fp,
     "      </div>\n"
-    "      <h2>%s</h2>\n"
-    "      <table>\n"
-    "        <thead>\n"
-    "          <tr>\n"
-    "            <th>From</th>\n"
-    "            <th>To</th>\n"
-    "            <th>Service</th>\n"
-    "          <tr>\n"
-    "        </thead>\n"
-    "        <tbody>\n",
+    "      <h2>%s</h2>\n",
     route.info
   );
 
-  for (int i = 0; i < route.count; ++i) {
-    switch (route.services[i].type) {
-      case SERVICE_NR:
-        fprintf(
-          fp,
-          "        <tr>\n"
-          "          <td>"STATION_FMT"</td>\n"
-          "          <td>"STATION_FMT"</td>\n"
-          "          <td>"RTT_FMT"</td>\n"
-          "        </tr>\n",
-          STATION_ARG(route.services[i].as.nr.from),
-          STATION_ARG(route.services[i].as.nr.to),
-          RTT_ARG(route.services[i].as.nr, route.iso)
-        );
+  if (route.count) {
+    fprintf(
+      fp,
+      "      <table>\n"
+      "        <thead>\n"
+      "          <tr>\n"
+      "            <th>From</th>\n"
+      "            <th>To</th>\n"
+      "            <th>Service</th>\n"
+      "          <tr>\n"
+      "        </thead>\n"
+      "        <tbody>\n"
+    );
 
-        break;
-
-      case SERVICE_BUS:
-        fprintf(
-          fp,
-          "        <tr>\n"
-          "          <td>%s</td>\n"
-          "          <td>%s</td>\n",
-          route.services[i].as.bus.from,
-          route.services[i].as.bus.to
-        );
-
-        if (route.services[i].as.bus.id == NOTRACKING) {
+    for (int i = 0; i < route.count; ++i) {
+      switch (route.services[i].type) {
+        case SERVICE_NR:
           fprintf(
             fp,
+            "        <tr>\n"
+            "          <td>"STATION_FMT"</td>\n"
+            "          <td>"STATION_FMT"</td>\n"
+            "          <td>"RTT_FMT"</td>\n"
+            "        </tr>\n",
+            STATION_ARG(route.services[i].as.nr.from),
+            STATION_ARG(route.services[i].as.nr.to),
+            RTT_ARG(route.services[i].as.nr, route.iso)
+          );
+
+          break;
+
+        case SERVICE_BUS:
+          fprintf(
+            fp,
+            "        <tr>\n"
             "          <td>%s</td>\n"
-            "        </tr>\n",
-            route.services[i].as.bus.n
+            "          <td>%s</td>\n",
+            route.services[i].as.bus.from,
+            route.services[i].as.bus.to
           );
-        }
 
-        else {
-          fprintf(
-            fp,
-            "          <td>"BT_FMT"</td>\n"
-            "        </tr>\n",
-            BT_ARG(route.services[i].as.bus)
-          );
-        }
+          if (route.services[i].as.bus.id == NOTRACKING) {
+            fprintf(
+              fp,
+              "          <td>%s</td>\n"
+              "        </tr>\n",
+              route.services[i].as.bus.n
+            );
+          }
 
-        break;
+          else {
+            fprintf(
+              fp,
+              "          <td>"BT_FMT"</td>\n"
+              "        </tr>\n",
+              BT_ARG(route.services[i].as.bus)
+            );
+          }
+
+          break;
+      }
     }
+
+    fprintf(
+      fp,
+      "        </tbody>\n"
+      "      </table>\n"
+    );
   }
 
   fprintf(
     fp,
-    "        </tbody>\n"
-    "      </table>\n"
     "    </div>\n"
   );
 
