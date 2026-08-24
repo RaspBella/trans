@@ -2160,6 +2160,16 @@ route(
   )
 )
 route(
-  .info = "Edinburgh Megaminx Day 2026",
+  .info = "Edinburgh Megaminx Day 2026 and go London",
   .iso = "2026-11-14"
+)
+route(
+  .info = "Leave London",
+  .iso = "2026-11-16",
+  nr(
+    .id = "Y14756",
+    .op = LF,
+    .from = "EUS",
+    .to = "LOC"
+  )
 )
