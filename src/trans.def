@@ -1950,6 +1950,24 @@ route(
   )
 )
 route(
+  .info = "Leave Dunfermline",
+  .iso = "2026-08-24",
+  bus(
+    .id = NOTRACKING,
+    .n = "X51",
+    .op = "Stagecoach East Scotland",
+    .from = "Dunfermline",
+    .to = "Livingston"
+  ),
+  bus(
+    .id = NOTRACKING,
+    .n = "X18",
+    .op = "Lothian Country",
+    .from = "Newbridge",
+    .to = "Bathgate"
+  )
+)
+route(
   .info = "Travel to "BHM" Via "CAR", "STA" for UKC :3",
   .iso = "2026-08-27",
   nr(
