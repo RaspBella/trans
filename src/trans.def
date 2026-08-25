@@ -1968,6 +1968,17 @@ route(
   )
 )
 route(
+  .info = "BG",
+  .iso = "2026-08-25",
+  bus(
+    .id = 927331213,
+    .n = "X18",
+    .op = "Lothian Country",
+    .from = "Bathgate",
+    .to = "Edinburgh"
+  )
+)
+route(
   .info = "Travel to "BHM" Via "CAR", "STA" for UKC :3",
   .iso = "2026-08-27",
   nr(
