@@ -1982,7 +1982,7 @@ route(
     .n = "12",
     .op = "Lothian City",
     .from = "Drum Brae South",
-    .to = "Pottersrow"
+    .to = "Bristo Place"
   )
 )
 route(
