@@ -1975,7 +1975,14 @@ route(
     .n = "X18",
     .op = "Lothian Country",
     .from = "Bathgate",
-    .to = "Edinburgh"
+    .to = "Drum Brae South"
+  ),
+  bus(
+    .id = 927372658,
+    .n = "12",
+    .op = "Lothian City",
+    .from = "Drum Brae South",
+    .to = "South Bridge"
   )
 )
 route(
