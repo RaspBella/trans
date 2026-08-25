@@ -2018,6 +2018,50 @@ route(
   )
 )
 route(
+  .info = "Travel to "SOP" Autumn 2026",
+  .iso = "2026-09-11",
+  nr(
+    .id = "W83689",
+    .op = SR,
+    .from = "BHG",
+    .to = "HYM"
+  ),
+  nr(
+    .id = "W34265",
+    .op = VT,
+    .from = "HYM",
+    .to = "WGN"
+  ),
+  nr(
+    .id = "P28637",
+    .op = NT,
+    .from = "WGW",
+    .to = "SOP"
+  )
+)
+route(
+  .info = SOP" Autumn 2026 Day 2 and leaving "SOP,
+  .iso = "2026-09-13",
+  nr(
+    .id = "P24125",
+    .op = NT,
+    .from = "SOP",
+    .to = "WGW"
+  ),
+  nr(
+    .id = "W33290",
+    .op = VT,
+    .from = "WGN",
+    .to = "OXN"
+  ),
+  nr(
+    .id = "W85211",
+    .op = TP,
+    .from = "OXN",
+    .to = "EDB"
+  )
+)
+route(
   .info = "Travel to Manchester September 2026 and then "CAR,
   .iso = "2026-09-19",
   nr(
