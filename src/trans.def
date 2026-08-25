@@ -1983,6 +1983,13 @@ route(
     .op = "Lothian City",
     .from = "Drum Brae South",
     .to = "Bristo Place"
+  ),
+  bus(
+    .id = NOTRACKING,
+    .n = "X18",
+    .op = "Lothian Country",
+    .from = "Edinburgh",
+    .to = "Bathgate"
   )
 )
 route(
