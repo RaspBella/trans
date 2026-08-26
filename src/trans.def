@@ -1465,7 +1465,7 @@ route(
   bus(
     .id = 914668308,
     .n = "73",
-    .op = "Lothian Country",
+    .op = "lothian country",
     .from = "Livingston",
     .to = "Bathgate"
   )
@@ -1990,6 +1990,17 @@ route(
     .op = "Lothian Country",
     .from = "Edinburgh",
     .to = "Bathgate"
+  )
+)
+route(
+  .info = "Livingston shopping with cat(s) :3",
+  .iso = "2026-08-26",
+  bus(
+    .id = NOTRACKING,
+    .n = "73",
+    .op = "lothian country",
+    .from = "Bathgate",
+    .to = "Livingston"
   )
 )
 route(
