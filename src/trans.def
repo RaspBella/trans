@@ -2036,6 +2036,12 @@ route(
     .op = LM,
     .from = "STA",
     .to = "BHM"
+  ),
+  nr(
+    .id = "W75572",
+    .op = LM,
+    .from = "BHM",
+    .to = "UNI"
   )
 )
 route(
