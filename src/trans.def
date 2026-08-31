@@ -2048,6 +2048,12 @@ route(
   .info = "Leave "BHM,
   .iso = "2026-08-31",
   nr(
+    .id = "W00348",
+    .op = LM,
+    .from = "UNI",
+    .to = "BHM"
+  ),
+  nr(
     .id = "W34046",
     .op = VT,
     .from = "BHM",
