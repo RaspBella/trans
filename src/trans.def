@@ -2073,6 +2073,16 @@ route(
   )
 )
 route(
+  .info = "BG",
+  .iso = "2026-09-01",
+  nr(
+    .id = "W69005",
+    .op = SR,
+    .from = "BHG",
+    .to = "EDB"
+  )
+)
+route(
   .info = "Travel to "SOP" Autumn 2026",
   .iso = "2026-09-11",
   nr(
