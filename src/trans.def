@@ -2080,6 +2080,13 @@ route(
     .op = SR,
     .from = "BHG",
     .to = "EDB"
+  ),
+  bus(
+    .id = 930256618,
+    .n = "34",
+    .op = "Lothian City",
+    .from = "Princes Street",
+    .to = "Fountain Park"
   )
 )
 route(
