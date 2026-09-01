@@ -2087,6 +2087,12 @@ route(
     .op = "Lothian City",
     .from = "Princes Street",
     .to = "Fountain Park"
+  ),
+  nr(
+    .id = "W69033",
+    .op = SR,
+    .from = "EDB",
+    .to = "BHG"
   )
 )
 route(
