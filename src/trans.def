@@ -2091,7 +2091,7 @@ route(
   nr(
     .id = "W69033",
     .op = SR,
-    .from = "EDB",
+    .from = "HYM",
     .to = "BHG"
   )
 )
