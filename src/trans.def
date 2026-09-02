@@ -2096,6 +2096,17 @@ route(
   )
 )
 route(
+  .info = "GIC + Museum hangout",
+  .iso = "2026-09-02",
+  bus(
+    .id = 930395647,
+    .n = "X18",
+    .op = "Lothian Country",
+    .from = "Bathgate",
+    .to = "Edinburgh"
+  )
+)
+route(
   .info = "Travel to "SOP" Autumn 2026",
   .iso = "2026-09-11",
   nr(
