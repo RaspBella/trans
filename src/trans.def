@@ -2118,6 +2118,13 @@ route(
     .op = "Lothian City",
     .from = "GIC",
     .to = "August_21"
+  ),
+  bus(
+    .id = NOTRACKING,
+    .n = "31",
+    .op = "Lothian City",
+    .from = "August_21",
+    .to = "Museum"
   )
 )
 route(
