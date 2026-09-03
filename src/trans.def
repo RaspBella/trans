@@ -2103,7 +2103,7 @@ route(
     .n = "X18",
     .op = "Lothian Country",
     .from = "Bathgate",
-    .to = "Edinburgh"
+    .to = "Haymarket"
   ),
   bus(
     .id = 930438704,
@@ -2132,6 +2132,17 @@ route(
     .op = "Lothian Country",
     .from = "Edinburgh",
     .to = "Bathgate"
+  )
+)
+route(
+  .info = "Community Lunch and Vada :3",
+  .iso = "2026-09-03",
+  bus(
+    .id = 930980609,
+    .n = "X18",
+    .op = "Lothian Country",
+    .from = "Bathgate",
+    .to = "Edinburgh"
   )
 )
 route(
