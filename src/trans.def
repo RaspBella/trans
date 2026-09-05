@@ -2370,3 +2370,23 @@ route(
     .to = "LOC"
   )
 )
+route(
+  .info = "Travel to "NUN" Via "GRL" for Leicestershire Autumn 2026",
+  .iso = "2026-11-27",
+  nr(
+    .id = "Y14762",
+    .op = LF,
+    .from = "GRL",
+    .to = "NUN"
+  )
+)
+route(
+  .info = "Leave "NUN" Via "GRL,
+  .iso = "2026-11-30",
+  nr(
+    .id = "C00581",
+    .op = LF,
+    .from = "NUN",
+    .to = "GRL"
+  )
+)
