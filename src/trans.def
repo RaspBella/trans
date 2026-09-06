@@ -2153,6 +2153,17 @@ route(
   )
 )
 route(
+  .info = "Go to Fionnphort",
+  .iso = "2026-09-06",
+  bus(
+    .id = 932218829,
+    .n = "X18",
+    .op = "Lothian Country",
+    .from = "Bathgate",
+    .to = "Edinburgh"
+  )
+)
+route(
   .info = "Travel to "SOP" Autumn 2026",
   .iso = "2026-09-11",
   nr(
