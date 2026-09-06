@@ -2168,6 +2168,11 @@ route(
     .op = "Ember",
     .from = "Haymarket",
     .to = "Oban"
+  ),
+  ferry(
+    .op = "Caledonian MacBrayne, CM11, 15:55",
+    .from = "Oban",
+    .to = "Craignure"
   )
 )
 route(
