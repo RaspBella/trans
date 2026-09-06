@@ -102,6 +102,21 @@ void yyyy_mm_dd(FILE *fp, char *title, struct route route, const char *prev, con
           }
 
           break;
+
+        case SERVICE_FERRY:
+          fprintf(
+            fp,
+            "        <tr>\n"
+            "          <td>%s</td>\n"
+            "          <td>%s</td>\n"
+            "          <td>%s</td>\n"
+            "        </tr>\n",
+            route.services[i].as.ferry.from,
+            route.services[i].as.ferry.to,
+            route.services[i].as.ferry.op
+          );
+
+          break;
       }
     }
 

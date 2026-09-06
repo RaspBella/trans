@@ -121,6 +121,20 @@ int main(void) {
             );
 
             break;
+
+          case SERVICE_FERRY:
+            fprintf(
+              fp,
+              "{\"ferry\":{"
+              "\"op\":\"%s\","
+              "\"from\":\"%s\","
+              "\"to\":\"%s\"}}",
+              routes[i].services[j].as.ferry.op,
+              routes[i].services[j].as.ferry.from,
+              routes[i].services[j].as.ferry.to
+            );
+
+            break;
         }
 
         if (j < (routes[i].count - 1)) {

@@ -30,6 +30,15 @@ static void root_route(FILE *fp, struct route route) {
         );
 
         break;
+
+      case SERVICE_FERRY:
+        fprintf(
+          fp,
+          "            <td>%s</td>\n",
+          route.services[0].as.ferry.from
+        );
+
+        break;
     }
 
     switch (route.services[route.count - 1].type) {
@@ -67,6 +76,25 @@ static void root_route(FILE *fp, struct route route) {
           "                </thead>\n"
           "                <tbody>\n",
           route.services[route.count - 1].as.bus.to
+        );
+
+        break;
+
+      case SERVICE_FERRY:
+        fprintf(
+          fp,
+          "            <td>%s</td>\n"
+          "            <td>\n"
+          "              <table>\n"
+          "                <thead>\n"
+          "                  <tr>\n"
+          "                    <td>From</td>\n"
+          "                    <td>To</td>\n"
+          "                    <td>Service</td>\n"
+          "                  </tr>\n"
+          "                </thead>\n"
+          "                <tbody>\n",
+          route.services[route.count - 1].as.ferry.to
         );
 
         break;
@@ -116,6 +144,21 @@ static void root_route(FILE *fp, struct route route) {
               BT_ARG(route.services[i].as.bus)
             );
           }
+
+          break;
+
+        case SERVICE_FERRY:
+          fprintf(
+            fp,
+            "                  <tr>\n"
+            "                    <td>%s</td>\n"
+            "                    <td>%s</td>\n"
+            "                    <td>%s</td>\n"
+            "                  </tr>\n",
+            route.services[i].as.ferry.from,
+            route.services[i].as.ferry.to,
+            route.services[i].as.ferry.op
+          );
 
           break;
       }

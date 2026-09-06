@@ -32,7 +32,22 @@ struct bus {
     N, \
     OP, \
     FROM, \
-    TO, \
+    TO \
+  } \
+}
+
+struct ferry {
+  char *op;
+  char *from;
+  char *to;
+};
+
+#define ferry(OP, FROM, TO) { \
+  .type = SERVICE_FERRY, \
+  .as.ferry = { \
+    OP, \
+    FROM, \
+    TO \
   } \
 }
 
@@ -40,7 +55,8 @@ struct bus {
 
 enum service_type {
   SERVICE_NR = 1,
-  SERVICE_BUS
+  SERVICE_BUS,
+  SERVICE_FERRY
 };
 
 struct service {
@@ -48,5 +64,6 @@ struct service {
   union {
     struct nr nr;
     struct bus bus;
+    struct ferry ferry;
   } as;
 };
