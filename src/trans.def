@@ -2173,6 +2173,13 @@ route(
     .op = "Caledonian MacBrayne, CM11, 15:55",
     .from = "Oban",
     .to = "Craignure"
+  ),
+  bus(
+    .id = NOTRACKING,
+    .n = "496",
+    .op = "West Coast Motors",
+    .from = "Craignure",
+    .to = "Fionnphort"
   )
 )
 route(
