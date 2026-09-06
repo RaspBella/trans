@@ -2153,14 +2153,14 @@ route(
   )
 )
 route(
-  .info = "Go to Fionnphort",
+  .info = "Go to Fionnphort to see friends :3",
   .iso = "2026-09-06",
   bus(
     .id = 932218829,
     .n = "X18",
     .op = "Lothian Country",
     .from = "Bathgate",
-    .to = "Edinburgh"
+    .to = "Haymarket"
   )
 )
 route(
