@@ -2161,6 +2161,13 @@ route(
     .op = "Lothian Country",
     .from = "Bathgate",
     .to = "Haymarket"
+  ),
+  bus(
+    .id = 932239638,
+    .n = "E15",
+    .op = "Ember",
+    .from = "Haymarket",
+    .to = "Oban"
   )
 )
 route(
