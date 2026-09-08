@@ -2196,6 +2196,13 @@ route(
     .op = "Caledonian MacBrayne, CM11, 15:55",
     .from = "Craignure",
     .to = "Oban"
+  ),
+  bus(
+    .id = 933199722,
+    .n = "E15",
+    .op = "Ember",
+    .from = "Oban",
+    .to = "Haymarket"
   )
 )
 route(
