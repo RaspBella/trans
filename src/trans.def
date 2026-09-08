@@ -2193,7 +2193,7 @@ route(
     .to = "Craignure"
   ),
   ferry(
-    .op = "Caledonian MacBrayne, CM11, 15:55",
+    .op = "Caledonian MacBrayne, CM11, 11:05",
     .from = "Craignure",
     .to = "Oban"
   ),
