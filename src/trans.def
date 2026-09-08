@@ -2183,6 +2183,17 @@ route(
   )
 )
 route(
+  .info = "Leave Fionnphort to go to BG :3",
+  .iso = "2026-09-08",
+  bus(
+    .id = NOTRACKING,
+    .n = "96",
+    .op = "West Coast Motors",
+    .from = "Fionnphort",
+    .to = "Craignure"
+  )
+)
+route(
   .info = "Travel to "SOP" Autumn 2026",
   .iso = "2026-09-11",
   nr(
