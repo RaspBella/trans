@@ -2209,7 +2209,7 @@ route(
     .n = "31",
     .op = "Lothian City",
     .from = "Haymarket",
-    .to = "Princes Street"
+    .to = "South Bridge"
   )
 )
 route(
