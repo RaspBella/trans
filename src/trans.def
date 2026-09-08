@@ -2203,6 +2203,13 @@ route(
     .op = "Ember",
     .from = "Oban",
     .to = "Haymarket"
+  ),
+  bus(
+    .id = 933289087,
+    .n = "31",
+    .op = "Lothian City",
+    .from = "Haymarket",
+    .to = "Princes Street"
   )
 )
 route(
