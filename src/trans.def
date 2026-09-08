@@ -2191,6 +2191,11 @@ route(
     .op = "West Coast Motors",
     .from = "Fionnphort",
     .to = "Craignure"
+  ),
+  ferry(
+    .op = "Caledonian MacBrayne, CM11, 15:55",
+    .from = "Craignure",
+    .to = "Oban"
   )
 )
 route(
