@@ -2366,7 +2366,7 @@ route(
   ),
   nr(
     .id = "W33375",
-    .op = "VT",
+    .op = VT,
     .from = "EUS",
     .to = "EDB"
   )
