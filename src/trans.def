@@ -2235,6 +2235,13 @@ route(
     .op = "Lothian City",
     .from = "Haymarket",
     .to = "Waverley Steps"
+  ),
+  bus(
+    .id = 934164969,
+    .n = "X55",
+    .op = "Stagecoast East Scotland",
+    .from = "Edinburgh",
+    .to = "Dunfermline"
   )
 )
 route(
