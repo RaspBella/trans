@@ -2220,6 +2220,17 @@ route(
   )
 )
 route(
+  .info = "Cooking :3 and Vada :3",
+  .iso = "2026-09-10",
+  bus(
+    .id = 933960838,
+    .n = "X18",
+    .op = "Lothian Country",
+    .from = "Bathgate",
+    .to = "Haymarket"
+  )
+)
+route(
   .info = "Travel to "SOP" Autumn 2026",
   .iso = "2026-09-11",
   nr(
