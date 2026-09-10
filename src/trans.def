@@ -2249,6 +2249,13 @@ route(
     .op = "Stagecoast East Scotland",
     .from = "Dunfermline",
     .to = "Edinburgh"
+  ),
+  bus(
+    .id = 934340010,
+    .n = "X18",
+    .op = "Lothian Country",
+    .from = "Edinburgh",
+    .to = "Bathgate"
   )
 )
 route(
