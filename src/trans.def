@@ -2299,7 +2299,14 @@ route(
     .id = "W85211",
     .op = TP,
     .from = "PNR",
-    .to = "EDB"
+    .to = "HYM"
+  ),
+  bus(
+    .id = 935559389,
+    .n = "X55",
+    .op = "Stagecoast East Scotland",
+    .from = "Queensferry Street",
+    .to = "Dunfermline"
   )
 )
 route(
