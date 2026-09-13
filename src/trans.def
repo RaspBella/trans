@@ -2293,12 +2293,12 @@ route(
     .id = "W33290",
     .op = VT,
     .from = "WGN",
-    .to = "OXN"
+    .to = "PNR"
   ),
   nr(
     .id = "W85211",
     .op = TP,
-    .from = "OXN",
+    .from = "PNR",
     .to = "EDB"
   )
 )
