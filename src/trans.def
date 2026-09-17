@@ -2344,6 +2344,16 @@ route(
   )
 )
 route(
+  .info = "Community Lunch and Vada",
+  .iso = "2026-09-17",
+  nr(
+    .id = "W69015",
+    .op = SR,
+    .from = "BHG",
+    .to = "EDB"
+  )
+)
+route(
   .info = "Travel to Manchester September 2026 and then "CAR,
   .iso = "2026-09-19",
   nr(
