@@ -2367,6 +2367,13 @@ route(
     .n = "X28",
     .op = "Lothian Country",
     .from = "Bathgate",
+    .to = "Livingston"
+  ),
+  bus(
+    .id = NOTRACKING,
+    .n = "X28",
+    .op = "Lothian Country",
+    .from = "Livingston",
     .to = "Fountain Park"
   )
 )
