@@ -2360,6 +2360,17 @@ route(
   )
 )
 route(
+  .info = "Go Burger for Movie with Kitty :3 and Bunny :3",
+  .iso = "2026-09-18",
+  bus(
+    .id = NOTRACKING,
+    .n = "X28",
+    .op = "Lothian Country",
+    .from = "Bathgate",
+    .to = "Fountain Park"
+  )
+)
+route(
   .info = "Travel to Manchester September 2026 and then "CAR,
   .iso = "2026-09-19",
   nr(
