@@ -2405,6 +2405,13 @@ route(
     .op = "Bee Network",
     .from = "Piccadilly",
     .to = "Plymouth Grove"
+  ),
+  bus(
+    .id = 938263074,
+    .n = "192",
+    .op = "Bee Network",
+    .from = "Plymouth Grove",
+    .to = "Piccadilly"
   )
 )
 route(
