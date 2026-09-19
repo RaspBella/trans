@@ -2398,6 +2398,13 @@ route(
     .op = TP,
     .from = "HYM",
     .to = "MAN"
+  ),
+  bus(
+    .id = 938066429,
+    .n = "192",
+    .op = "Bee Network",
+    .from = "Piccadilly",
+    .to = "Plymouth Grove"
   )
 )
 route(
