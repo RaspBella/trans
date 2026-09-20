@@ -2430,6 +2430,12 @@ route(
   .info = "Travel to Brampton Autumn 2026 and then travel home via "GLC,
   .iso = "2026-09-20",
   nr(
+    .id = "C31811",
+    .op = NT,
+    .from = "CAR",
+    .to = "BMP"
+  ),
+  nr(
     .id = "W85199",
     .op = TP,
     .from = "CAR",
