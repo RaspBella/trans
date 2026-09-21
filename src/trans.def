@@ -2458,6 +2458,7 @@ route(
     .from = "Bathgate",
     .to = "Old Liston Road"
   )
+)
 route(
   .info = "Travel to Weston-super-Mare Autumn 2026 Via "STA" and "BRI,
   .iso = "2026-09-25",
