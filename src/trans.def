@@ -2449,6 +2449,16 @@ route(
   )
 )
 route(
+  .info = "Go watch movies with Kirsty :3 in Dunfermline",
+  .iso = "2026-09-21",
+  bus(
+    .id = 938971056,
+    .n = "X18",
+    .op = "Lothian Country",
+    .from = "Bathgate",
+    .to = "Old Liston Road"
+  )
+route(
   .info = "Travel to Weston-super-Mare Autumn 2026 Via "STA" and "BRI,
   .iso = "2026-09-25",
   nr(
