@@ -2472,8 +2472,8 @@ route(
   nr(
     .id = "W68736",
     .op = SR,
-    .from = "EDB",
-    .to = "DFE"
+    .from = "DFE",
+    .to = "EDB"
   ),
   bus(
     .id = NOTRACKING,
