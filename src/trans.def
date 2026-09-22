@@ -2467,6 +2467,16 @@ route(
   )
 )
 route(
+  .info = "Leave Dunfermline and Go to BG with Kirsty :3",
+  .iso = "2026-09-22",
+  nr(
+    .id = "W68736",
+    .op = SR,
+    .from = "EDB",
+    .to = "DFE"
+  )
+)
+route(
   .info = "Travel to Weston-super-Mare Autumn 2026 Via "STA" and "BRI,
   .iso = "2026-09-25",
   nr(
