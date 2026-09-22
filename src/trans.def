@@ -2474,6 +2474,13 @@ route(
     .op = SR,
     .from = "EDB",
     .to = "DFE"
+  ),
+  bus(
+    .id = NOTRACKING,
+    .n = "X18",
+    .op = "Lothian Country",
+    .from = "Haymarket",
+    .to = "Bathgate"
   )
 )
 route(
