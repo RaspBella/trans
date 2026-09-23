@@ -2506,6 +2506,13 @@ route(
     .op = "Lothian Country",
     .from = "Edinburgh",
     .to = "Bathgate"
+  ),
+  bus(
+    .id = 940041356,
+    .n = "X18",
+    .op = "Lothian Country",
+    .from = "Bathgate",
+    .to = "Edinburgh"
   )
 )
 route(
