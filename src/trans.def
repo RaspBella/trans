@@ -2499,6 +2499,13 @@ route(
     .op = "Lothian City",
     .from = "Lauriston Building",
     .to = "Museum Of Childhood"
+  ),
+  bus(
+    .id = NOTRACKING,
+    .n = "X18",
+    .op = "Lothian Country",
+    .from = "Edinburgh",
+    .to = "Bathgate"
   )
 )
 route(
