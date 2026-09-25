@@ -2560,6 +2560,12 @@ route(
     .op = XC,
     .from = "STA",
     .to = "BRI"
+  ),
+  nr(
+    .id = "G15541",
+    .op = GW,
+    .from = "BRI",
+    .to = "WSM"
   )
 )
 route(
