@@ -2607,6 +2607,13 @@ route(
     .op = "Lothian City",
     .from = "Haymarket",
     .to = "Waverley Steps"
+  ),
+  bus(
+    .id = NOTRACKING,
+    .n = "X18",
+    .op = "Lothian Country",
+    .from = "Edinburgh",
+    .to = "Bathgate"
   )
 )
 route(
