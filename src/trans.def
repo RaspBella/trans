@@ -2592,6 +2592,17 @@ route(
   )
 )
 route(
+  .info = "Go to BG :3",
+  .iso = "2026-09-29",
+  bus(
+    .id = NOTRACKING,
+    .n = "X18",
+    .op = "Lothian Country",
+    .from = "Bathgate",
+    .to = "Edinburgh"
+  )
+)
+route(
   .info = "Go to "POO" Autumn 2026 Via "LON,
   .iso = "2026-10-02",
   nr(
