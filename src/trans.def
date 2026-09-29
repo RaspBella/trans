@@ -2715,3 +2715,35 @@ route(
     .to = "GRL"
   )
 )
+route(
+  .info = "Go to Manchester Duals 2026 then go to "LAN,
+  .iso = "2026-12-19",
+  nr(
+    .id = "Y53419",
+    .op = SR,
+    .from = "BHG",
+    .to = "HYM"
+  ),
+  nr(
+    .id = "W12068",
+    .op = TP,
+    .from = "HYM",
+    .to = "MAN"
+  ),
+  nr(
+    .id = "W11566",
+    .op = TP,
+    .from = "MAN",
+    .to = "LAN"
+  )
+)
+route(
+  .info = "Go home from Lancashire December 2026 Via "EDB,
+  .iso = "2026-12-20",
+  nr(
+    .id = "G00004",
+    .op = TP,
+    .from = "LAN",
+    .to = "EDB"
+  )
+)
