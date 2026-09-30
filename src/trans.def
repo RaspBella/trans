@@ -2617,6 +2617,17 @@ route(
   )
 )
 route(
+  .info = "See movie with friends :3",
+  .iso = "2026-09-30",
+  bus(
+    .id = 943048387,
+    .n = "X18",
+    .op = "Lothian Country",
+    .from = "Bathgate",
+    .to = "Haymarket"
+  )
+)
+route(
   .info = "Go to "POO" Autumn 2026 Via "LON,
   .iso = "2026-10-02",
   nr(
