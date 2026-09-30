@@ -2625,6 +2625,13 @@ route(
     .op = "Lothian Country",
     .from = "Bathgate",
     .to = "Haymarket"
+  ),
+  bus(
+    .id = NOTRACKING,
+    .n = "X18",
+    .op = "Lothian Country",
+    .from = "Haymarket",
+    .to = "Bathgate"
   )
 )
 route(
