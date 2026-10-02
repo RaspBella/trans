@@ -2655,6 +2655,13 @@ route(
 route(
   .info = "Go to "POO" Autumn 2026 Via "LON,
   .iso = "2026-10-02",
+  bus(
+    .id = 943710584,
+    .n = "X18",
+    .op = "Lothian Country",
+    .from = "Bathgate",
+    .to = "Edinburgh"
+  ),
   nr(
     .id = "W33933",
     .op = VT,
