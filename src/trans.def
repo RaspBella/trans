@@ -2695,6 +2695,12 @@ route(
     .op = VT,
     .from = "EUS",
     .to = "EDB"
+  ),
+  nr(
+    .id = "C15095",
+    .op = SR,
+    .from = "HYM",
+    .to = "BHG"
   )
 )
 route(
