@@ -589,13 +589,13 @@ route(
     .n = "747",
     .op = "Stagecoast East Scotland",
     .from = "Ferrytoll",
-    .to = "Ratho Station Road"
+    .to = "Ratho Station"
   ),
   bus(
     .id = NOTRACKING,
     .n = "X18",
     .op = "Lothian Country",
-    .from = "Ratho Station Road",
+    .from = "Ratho Station",
     .to = "Bathgate"
   )
 )
@@ -1634,13 +1634,13 @@ route(
     .n = "747",
     .op = "Stagecoast East Scotland",
     .from = "Ferrytoll",
-    .to = "Ratho Station Road"
+    .to = "Ratho Station"
   ),
   bus(
     .id = NOTRACKING,
     .n = "X18",
     .op = "Lothian Country",
-    .from = "Ratho Station Road",
+    .from = "Ratho Station",
     .to = "Bathgate"
   )
 )
@@ -2726,6 +2726,13 @@ route(
     .op = "Stagecoast East Scotland",
     .from = "Dunfermline",
     .to = "Ferrytoll"
+  ),
+  bus(
+    .id = 945313563,
+    .n = "747",
+    .op = "Stagecoast East Scotland",
+    .from = "Ferrytoll",
+    .to = "Ratho Station"
   )
 )
 route(
