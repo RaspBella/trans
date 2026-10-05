@@ -2733,6 +2733,13 @@ route(
     .op = "Stagecoast East Scotland",
     .from = "Ferrytoll",
     .to = "Ratho Station"
+  ),
+  bus(
+    .id = NOTRACKING,
+    .n = "X18",
+    .op = "Lothian Country",
+    .from = "Ratho Station",
+    .to = "Bathgate"
   )
 )
 route(
