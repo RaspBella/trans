@@ -2772,6 +2772,13 @@ route(
     .op = "Lothian City",
     .from = "Kirkgate Centre",
     .to = "Starbank Road"
+  ),
+  bus(
+    .id = NOTRACKING,
+    .n = "17",
+    .op = "Lothian City",
+    .from = "Starbank Road",
+    .to = "Maybury Road"
   )
 )
 route(
