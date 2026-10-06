@@ -2750,7 +2750,14 @@ route(
     .n = "X18",
     .op = "Lothian Country",
     .from = "Bathgate",
-    .to = "Edinburgh"
+    .to = "George Street"
+  ),
+  bus(
+    .id = NOTRACKING,
+    .n = "1",
+    .op = "Lothian City",
+    .from = "Princes Street Scot Monument",
+    .to = "Academy Place"
   )
 )
 route(
