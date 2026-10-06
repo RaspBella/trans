@@ -2757,7 +2757,7 @@ route(
     .n = "1",
     .op = "Lothian City",
     .from = "Princes Street Scot Monument",
-    .to = "Academy Place"
+    .to = "Academy Park"
   )
 )
 route(
