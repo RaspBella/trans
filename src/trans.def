@@ -2789,6 +2789,24 @@ route(
   )
 )
 route(
+  .info = "Movie and hangsout and Vada",
+  .iso = "2026-10-08",
+  bus(
+    .id = NOTRACKING,
+    .n = "X18",
+    .op = "Lothian Country",
+    .from = "Bathgate",
+    .to = "Haymarket"
+  ),
+  bus(
+    .id = NOTRACKING,
+    .n = "35",
+    .op = "Lothian City",
+    .from = "Fountain Park",
+    .to = "Museum of Childhood"
+  )
+)
+route(
   .info = "Go to "CRE" October 2026 with Kirsty :3",
   .iso = "2026-10-09",
   nr(
