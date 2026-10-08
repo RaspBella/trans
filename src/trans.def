@@ -2789,7 +2789,7 @@ route(
   )
 )
 route(
-  .info = "Movie and hangsout and Vada",
+  .info = "Movie and hangout with Kirsty :3 and Evelyn :3 then Vada",
   .iso = "2026-10-08",
   bus(
     .id = NOTRACKING,
