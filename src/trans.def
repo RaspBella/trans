@@ -2817,6 +2817,12 @@ route(
   .info = "Go to "CRE" October 2026 with Kirsty :3",
   .iso = "2026-10-09",
   nr(
+    .id = "W69960",
+    .op = SR,
+    .from = "BHG",
+    .to = "CBS"
+  ),
+  nr(
     .id = "C00578",
     .op = LF,
     .from = "WFF",
