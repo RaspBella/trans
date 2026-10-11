@@ -2872,6 +2872,26 @@ route(
   )
 )
 route(
+  .info = "Travel for Cardiff November 2026",
+  .iso = "2026-11-06",
+  nr(
+    .id = "G01161",
+    .op = XC,
+    .from = "EDB",
+    .to = "CDF"
+  )
+)
+route(
+  .info = "Leave Cardiff",
+  .iso = "2026-11-09",
+  nr(
+    .id = "G01067",
+    .op = XC,
+    .from = "CDF",
+    .to = "EDB"
+  )
+)
+route(
   .info = "Edinburgh Megaminx Day 2026 and go London",
   .iso = "2026-11-14"
 )
