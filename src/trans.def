@@ -2836,6 +2836,12 @@ route(
     .id = "W34206",
     .op = VT,
     .from = "CRE",
+    .to = "WGN"
+  ),
+  nr(
+    .id = "W34254",
+    .op = VT,
+    .from = "WGN",
     .to = "GLC"
   ),
   nr(
