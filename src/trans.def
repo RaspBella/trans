@@ -2855,6 +2855,13 @@ route(
     .op = SR,
     .from = "HYM",
     .to = "DFE"
+  ),
+  bus(
+    .id = 948439325,
+    .n = "X55",
+    .op = "Stagecoast East Scotland",
+    .from = "Dunfermline",
+    .to = "Ferrytoll"
   )
 )
 route(
