@@ -2984,3 +2984,41 @@ route(
     .to = "EDB"
   )
 )
+route(
+  .info = "Travel for Manchester FTO Day One 2027",
+  .iso = "2026-12-31",
+  nr(
+    .id = "C15053",
+    .op = SR,
+    .from = "BHG",
+    .to = "GLQ"
+  ),
+  nr(
+    .id = "W12686",
+    .op = TP,
+    .from = "GLC",
+    .to = "MAN"
+  ),
+  nr(
+    .id = "L00129",
+    .op = AW,
+    .from = "MAN",
+    .to = "CRE"
+  )
+)
+route(
+  .info = "Travel from "CRE" to "DMF,
+  .iso = "2027-01-04",
+  nr(
+    .id = "G05826",
+    .op = VT,
+    .from = "CRE",
+    .to = "CAR"
+  ),
+  nr(
+    .id = "Y49238",
+    .op = SR,
+    .from = "CAR",
+    .to = "DMF"
+  )
+)
