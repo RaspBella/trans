@@ -2933,6 +2933,28 @@ route(
   )
 )
 route(
+  .info = "Go to "LDS" Via "CAR,
+  .iso = "2026-11-20",
+  nr(
+    .id = "W68902",
+    .op = SR,
+    .from = "BHG",
+    .to = "HYM"
+  ),
+  nr(
+    .id = "W33933",
+    .op = VT,
+    .from = "HYM",
+    .to = "CAR"
+  ),
+  nr(
+    .id = "C32571",
+    .op = NT,
+    .from = "CAR",
+    .to = "LDS"
+  )
+)
+route(
   .info = "Travel to "NUN" Via "GRL" for Leicestershire Autumn 2026",
   .iso = "2026-11-27",
   nr(
