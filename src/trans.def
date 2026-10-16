@@ -2912,6 +2912,13 @@ route(
     .op = "Stagecoach East Scotland",
     .from = "Lochend Road",
     .to = "Ferrytoll"
+  ),
+  bus(
+    .id = 950163989,
+    .n = "X55",
+    .op = "Stagecoach East Scotland",
+    .from = "Ferrytoll",
+    .to = "Dunfermline"
   )
 )
 route(
