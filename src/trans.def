@@ -2904,7 +2904,14 @@ route(
     .n = "X18",
     .op = "Lothian Country",
     .from = "Bathgate",
-    .to = "Ratho Station"
+    .to = "Lochend Road"
+  ),
+  bus(
+    .id = 950168242,
+    .n = "747",
+    .op = "Stagecoach East Scotland",
+    .from = "Lochend Road",
+    .to = "Ferrytoll"
   )
 )
 route(
