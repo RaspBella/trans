@@ -2936,7 +2936,7 @@ route(
   )
 )
 route(
-  .info = "Falkirk day 1",
+  .info = "Falkirk Autumn 2026 day 1",
   .iso = "2026-10-17",
   bus(
     .id = 950448233,
@@ -2944,6 +2944,13 @@ route(
     .op = "Stagecoach East Scotland",
     .from = "Dunfermline",
     .to = "Larbert Forth Valley Royal Hospital"
+  ),
+  bus(
+    .id = NOTRACKING,
+    .n = "38",
+    .op = "Midland Bluebird",
+    .from = "Larbert Forth Valley Royal Hospital",
+    .to = "Falkirk Asda"
   )
 )
 route(
