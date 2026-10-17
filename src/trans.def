@@ -2957,7 +2957,14 @@ route(
     .n = "2",
     .op = "Midland Bluebird",
     .from = "Melville Street",
-    .to = "Grangemouth Town Hall"
+    .to = "Charing Cross"
+  ),
+  bus(
+    .id = NOTRACKING,
+    .n = "3",
+    .op = "Midland Bluebird",
+    .from = "Charing Cross",
+    .to = "Melville Street"
   )
 )
 route(
