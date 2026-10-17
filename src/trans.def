@@ -2951,6 +2951,13 @@ route(
     .op = "Midland Bluebird",
     .from = "Larbert Forth Valley Royal Hospital",
     .to = "Falkirk Asda"
+  ),
+  bus(
+    .id = NOTRACKING,
+    .n = "2",
+    .op = "Midland Bluebird",
+    .from = "Melville Street",
+    .to = "Grangemouth Town Hall"
   )
 )
 route(
