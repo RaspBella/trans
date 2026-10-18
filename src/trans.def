@@ -3018,6 +3018,13 @@ route(
     .op = "Midland Bluebird",
     .from = "St Andrew's Church",
     .to = "Larbert Forth Valley Royal Hospital"
+  ),
+  bus(
+    .id = 951107647,
+    .n = "X24",
+    .op = "Stagecoach East Scotland",
+    .from = "Larbert Forth Valley Royal Hospital",
+    .to = "Dunfermline"
   )
 )
 route(
