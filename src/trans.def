@@ -2997,6 +2997,13 @@ route(
     .op = "Stagecoast East Scotland",
     .from = "Ferrytoll",
     .to = "Edinburgh Airport"
+  ),
+  bus(
+    .id = NOTRACKING,
+    .n = "E15",
+    .op = "Ember",
+    .from = "Edinburgh Airport",
+    .to = "Grangemouth"
   )
 )
 route(
