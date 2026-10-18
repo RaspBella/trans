@@ -2996,7 +2996,7 @@ route(
     .n = "747",
     .op = "Stagecoast East Scotland",
     .from = "Ferrytoll",
-    .to = "Ratho Station"
+    .to = "Edinburgh Airport"
   )
 )
 route(
