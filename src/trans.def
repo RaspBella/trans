@@ -3011,6 +3011,13 @@ route(
     .op = "Midland Bluebird",
     .from = "Charing Cross",
     .to = "Melville Street"
+  ),
+  bus(
+    .id = NOTRACKING,
+    .n = "38",
+    .op = "Midland Bluebird",
+    .from = "St Andrew's Church",
+    .to = "Larbert Forth Valley Royal Hospital"
   )
 )
 route(
