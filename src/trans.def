@@ -3004,6 +3004,13 @@ route(
     .op = "Ember",
     .from = "Edinburgh Airport",
     .to = "Grangemouth"
+  ),
+  bus(
+    .id = NOTRACKING,
+    .n = "4",
+    .op = "Midland Bluebird",
+    .from = "Charing Cross",
+    .to = "Melville Street"
   )
 )
 route(
