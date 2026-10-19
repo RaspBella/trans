@@ -3104,6 +3104,28 @@ route(
   )
 )
 route(
+  .info = "Leave "LDS" Via "YRK,
+  .iso = "2026-11-22",
+  nr(
+    .id = "P28421",
+    .op = NT,
+    .from = "LDS",
+    .to = "YRK"
+  ),
+  nr(
+    .id = "G80265",
+    .op = GR,
+    .from = "YRK",
+    .to = "EDB"
+  ),
+  nr(
+    .id = "W83838",
+    .op = SR,
+    .from = "EDB",
+    .to = "BHG"
+  )
+)
+route(
   .info = "Travel to "NUN" Via "GRL" for Leicestershire Autumn 2026",
   .iso = "2026-11-27",
   nr(
