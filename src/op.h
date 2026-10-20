@@ -1,6 +1,7 @@
 #pragma once
 
 #define VT "Avanti West Coast"
+#define CS "Caledonian Sleeper"
 #define XC "Cross Country"
 #define EM "East Midlands"
 #define ES "Eurostar"
