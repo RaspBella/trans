@@ -3185,6 +3185,10 @@ route(
   )
 )
 route(
+  .info = "Travel for Wiltshire December 2026 continued",
+  .iso = "2026-12-12"
+)
+route(
   .info = "Travel home from Wiltshire December 2026",
   .iso = "2026-12-13",
   nr(
