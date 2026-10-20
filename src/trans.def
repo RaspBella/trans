@@ -3175,6 +3175,26 @@ route(
   )
 )
 route(
+  .info = "Travel for Wiltshire December 2026",
+  .iso = "2026-12-11",
+  nr(
+    .id = "C04559",
+    .op = CS,
+    .from = "EDB",
+    .to = "EUS"
+  )
+)
+route(
+  .info = "Travel home from Wiltshire December 2026",
+  .iso = "2026-12-13",
+  nr(
+    .id = "C01091",
+    .op = CS,
+    .from = "EUS",
+    .to = "EDB"
+  )
+)
+route(
   .info = "Go to Manchester Duals 2026 then go to "LAN,
   .iso = "2026-12-19",
   nr(
