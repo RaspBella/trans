@@ -3095,7 +3095,7 @@ route(
     .id = "W29873",
     .op = XC,
     .from = "EDB",
-    .to = "PLY"
+    .to = "BRI"
   )
 )
 route(
