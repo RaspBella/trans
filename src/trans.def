@@ -3084,6 +3084,13 @@ route(
 route(
   .info = "Travel for "PLY" Autumn 2026",
   .iso = "2026-10-23",
+  bus(
+    .id = 953089387,
+    .n = "X18",
+    .op = "Lothian Country",
+    .from = "Bathgate",
+    .to = "Edinburgh"
+  ),
   nr(
     .id = "W29873",
     .op = XC,
