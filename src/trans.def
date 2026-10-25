@@ -3124,6 +3124,13 @@ route(
     .op = "Plymouth Citybus",
     .from = "Outland Road Church",
     .to = "YMCA"
+  ),
+  bus(
+    .id = 954170764,
+    .n = "61",
+    .op = "Plymouth Citybus",
+    .from = "YMCA",
+    .to = "City Centre"
   )
 )
 route(
