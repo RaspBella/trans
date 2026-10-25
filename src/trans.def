@@ -3105,14 +3105,25 @@ route(
   )
 )
 route(
-  .info = "Plymouth Autumn 2026",
+  .info = "Plymouth Autumn 2026 Day 1",
   .iso = "2026-10-24",
   bus(
     .id = 953875567,
     .n = "61",
     .op = "Plymouth Citybus",
-    .from = "Kitto Centre",
+    .from = "YMCA",
     .to = "City Centre"
+  )
+)
+route(
+  .info = "Plymouth Autumn 2026 Day 2",
+  .iso = "2026-10-25",
+  bus(
+    .id = 954028347,
+    .n = "61",
+    .op = "Plymouth Citybus",
+    .from = "Outland Road Church",
+    .to = "YMCA"
   )
 )
 route(
