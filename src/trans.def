@@ -3183,6 +3183,17 @@ route(
   )
 )
 route(
+  .info = "GIC and hangout maybe",
+  .iso = "2026-10-28",
+  bus(
+    .id = 955394470,
+    .n = "X18",
+    .op = "Lothian Country",
+    .from = "Bathgate",
+    .to = "Edinburgh"
+  )
+)
+route(
   .info = "Travel for Cardiff November 2026",
   .iso = "2026-11-06",
   nr(
