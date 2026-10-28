@@ -3198,6 +3198,13 @@ route(
     .op = "Lothian City",
     .from = "GIC",
     .to = "Surgeons Hall"
+  ),
+  bus(
+    .id = NOTRACKING,
+    .n = "X18",
+    .op = "Lothian Country",
+    .from = "Edinburgh",
+    .to = "Bathgate"
   )
 )
 route(
