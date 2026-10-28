@@ -3197,7 +3197,7 @@ route(
     .n = "47",
     .op = "Lothian City",
     .from = "GIC",
-    .to = "South Bridge"
+    .to = "Surgeons Hall"
   )
 )
 route(
