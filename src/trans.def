@@ -3232,7 +3232,7 @@ route(
     .id = "W68966",
     .op = SR,
     .from = "BHG",
-    .to = "EDB"
+    .to = "EDP"
   )
 )
 route(
