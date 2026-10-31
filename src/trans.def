@@ -3252,6 +3252,13 @@ route(
     .op = "Lothian City",
     .from = "Edinburgh College Brunstane",
     .to = "City Centre"
+  ),
+  bus(
+    .id = 957064592,
+    .n = "X55",
+    .op = "Stagecoach East Scotland",
+    .from = "Edinburgh",
+    .to = "Dunfermline"
   )
 )
 route(
