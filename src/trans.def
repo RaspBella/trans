@@ -3245,6 +3245,13 @@ route(
     .op = SR,
     .from = "EDB",
     .to = "BSU"
+  ),
+  bus(
+    .id = NOTRACKING,
+    .n = "44",
+    .op = "Lothian City",
+    .from = "Edinburgh College Brunstane",
+    .to = "City Centre"
   )
 )
 route(
