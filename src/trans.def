@@ -3270,6 +3270,13 @@ route(
     .op = "Stagecoach East Scotland",
     .from = "Dunfermline",
     .to = "Old Liston Road"
+  ),
+  bus(
+    .id = 957186493,
+    .n = "902",
+    .op = "Scottish City Link",
+    .from = "Old Liston Road",
+    .to = "Cardross Road Broxburn"
   )
 )
 route(
