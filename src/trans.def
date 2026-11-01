@@ -3277,6 +3277,13 @@ route(
     .op = "Scottish City Link",
     .from = "Old Liston Road",
     .to = "Cardross Road Broxburn"
+  ),
+  bus(
+    .id = NOTRACKING,
+    .n = "X18",
+    .op = "Lothian Country",
+    .from = "Uphall Cemetery",
+    .to = "Bathgate"
   )
 )
 route(
