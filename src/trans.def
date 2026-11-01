@@ -3262,6 +3262,17 @@ route(
   )
 )
 route(
+  .info = "Leaves Dunfermline",
+  .iso = "2026-11-01",
+  bus(
+    .id = 957186955,
+    .n = "X51",
+    .op = "Stagecoach East Scotland",
+    .from = "Dunfermline",
+    .to = "Old Liston Road"
+  )
+)
+route(
   .info = "Travel for Cardiff November 2026",
   .iso = "2026-11-06",
   nr(
