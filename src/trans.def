@@ -3305,7 +3305,7 @@ route(
   )
 )
 route(
-  .info = "Cooking and Vada and bonfire?",
+  .info = "Cooking Visit Lillith's work and Vada",
   .iso = "2026-11-05",
   bus(
     .id = NOTRACKING,
