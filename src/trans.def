@@ -3305,6 +3305,17 @@ route(
   )
 )
 route(
+  .info = "Cooking and Vada and bonfire?",
+  .iso = "2026-11-05",
+  bus(
+    .id = NOTRACKING,
+    .n = "X18",
+    .op = "Lothian Country",
+    .from = "Bathgate",
+    .to = "Edinburgh"
+  )
+)
+route(
   .info = "Travel for Cardiff November 2026",
   .iso = "2026-11-06",
   nr(
