@@ -3325,6 +3325,13 @@ route(
 route(
   .info = "Travel for Cardiff November 2026",
   .iso = "2026-11-06",
+  bus(
+    .id = 959457957,
+    .n = "X18",
+    .op = "Lothian Country",
+    .from = "Bathgate",
+    .to = "Edinburgh"
+  ),
   nr(
     .id = "G01161",
     .op = XC,
