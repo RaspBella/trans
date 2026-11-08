@@ -3362,6 +3362,16 @@ route(
   )
 )
 route(
+  .info = "Cardiff shenanigans :3",
+  .iso = "2026-11-08",
+  nr(
+    .id = "W43709",
+    .op = AW,
+    .from = "RIA",
+    .to = "BGN"
+  )
+)
+route(
   .info = "Leave Cardiff",
   .iso = "2026-11-09",
   nr(
