@@ -3375,6 +3375,12 @@ route(
     .op = AW,
     .from = "BGN",
     .to = "CDF"
+  ),
+  nr(
+    .id = "G38853",
+    .op = AW,
+    .from = "CDF",
+    .to = "BGN"
   )
 )
 route(
