@@ -3403,6 +3403,13 @@ route(
     .op = XC,
     .from = "CDF",
     .to = "EDB"
+  ),
+  bus(
+    .id = NOTRACKING,
+    .n = "X18",
+    .op = "Lothian Country",
+    .from = "Edinburgh",
+    .to = "Bathgate"
   )
 )
 route(
