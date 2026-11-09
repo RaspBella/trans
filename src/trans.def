@@ -3393,6 +3393,12 @@ route(
   .info = "Leave Cardiff",
   .iso = "2026-11-09",
   nr(
+    .id = "Y62088",
+    .op = AW,
+    .from = "RIA",
+    .to = "CDF"
+  ),
+  nr(
     .id = "G01067",
     .op = XC,
     .from = "CDF",
