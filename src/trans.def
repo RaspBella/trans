@@ -3413,6 +3413,17 @@ route(
   )
 )
 route(
+  .info = "GIC and BG",
+  .iso = "2026-11-10",
+  bus(
+    .id = 961158019,
+    .n = "X18",
+    .op = "Lothian Country",
+    .from = "Bathgate",
+    .to = "Edinburgh"
+  )
+)
+route(
   .info = "Edinburgh Megaminx Day 2026 and go London",
   .iso = "2026-11-14"
 )
