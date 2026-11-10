@@ -3420,7 +3420,14 @@ route(
     .n = "X18",
     .op = "Lothian Country",
     .from = "Bathgate",
-    .to = "Edinburgh"
+    .to = "Glebe Road"
+  ),
+  bus(
+    .id = NOTRACKING,
+    .n = "X18",
+    .op = "Lothian Country",
+    .from = "Station Road",
+    .to = "Shandwick Place"
   )
 )
 route(
