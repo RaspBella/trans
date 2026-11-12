@@ -3456,6 +3456,16 @@ route(
   )
 )
 route(
+  .info = "Community Lunch and Vada",
+  .iso = "2026-11-12",
+  nr(
+    .id = "C15049",
+    .op = SR,
+    .from = "BHG",
+    .to = "EDB"
+  )
+)
+route(
   .info = "Edinburgh Megaminx Day 2026 and go London",
   .iso = "2026-11-14"
 )
