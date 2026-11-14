@@ -3473,7 +3473,13 @@ route(
 )
 route(
   .info = "Edinburgh Megaminx Day 2026 and go London",
-  .iso = "2026-11-14"
+  .iso = "2026-11-14",
+  nr(
+    .id = "W68893",
+    .op = SR,
+    .from = "BHG",
+    .to = "EDB"
+  )
 )
 route(
   .info = "Leave London",
