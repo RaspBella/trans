@@ -3485,6 +3485,13 @@ route(
     .op = GR,
     .from = "EDB",
     .to = "KGX"
+  ),
+  bus(
+    .id = NOTRACKING,
+    .n = "30",
+    .op = "Metroline Travel",
+    .from = "King's Cross St Pancras",
+    .to = "St Mary's Church"
   )
 )
 route(
