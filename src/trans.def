@@ -3479,6 +3479,12 @@ route(
     .op = SR,
     .from = "BHG",
     .to = "EDB"
+  ),
+  nr(
+    .id = "G80098",
+    .op = GR,
+    .from = "EDB",
+    .to = "KGX"
   )
 )
 route(
