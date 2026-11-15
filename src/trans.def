@@ -3525,13 +3525,13 @@ route(
   )
 )
 route(
-  .info = "Leave London",
+  .info = "Go to Stirling",
   .iso = "2026-11-16",
   nr(
     .id = "Y14756",
     .op = LF,
     .from = "EUS",
-    .to = "LOC"
+    .to = "STG"
   )
 )
 route(
