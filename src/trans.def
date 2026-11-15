@@ -3515,6 +3515,13 @@ route(
     .op = TL,
     .from = "SVG",
     .to = "FPK"
+  ),
+  bus(
+    .id = NOTRACKING,
+    .n = "19",
+    .op = "Metroline Travel",
+    .from = "Finsbury Park",
+    .to = "St Mary's Church"
   )
 )
 route(
