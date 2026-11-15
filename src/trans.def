@@ -3509,6 +3509,12 @@ route(
     .op = TL " Replacement bus",
     .from = "FPK",
     .to = "SVG"
+  ),
+  nr(
+    .id = "W45774",
+    .op = TL,
+    .from = "SVG",
+    .to = "FPK"
   )
 )
 route(
