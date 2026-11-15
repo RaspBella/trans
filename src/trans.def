@@ -3492,6 +3492,12 @@ route(
     .op = "Metroline Travel",
     .from = "King's Cross St Pancras",
     .to = "St Mary's Church"
+  ),
+  nr(
+    .id = "X76594",
+    .op = TL " Replacement bus",
+    .from = "FPK",
+    .to = "SVG"
   )
 )
 route(
