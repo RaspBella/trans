@@ -3495,6 +3495,17 @@ route(
   )
 )
 route(
+  .info = "Stevenage November",
+  .iso = "2026-11-15",
+  bus(
+    .id = NOTRACKING,
+    .n = "19",
+    .op = "Metroline Travel",
+    .from = "St Mary's Church",
+    .to = "Finsbury Park"
+  )
+)
+route(
   .info = "Leave London",
   .iso = "2026-11-16",
   nr(
