@@ -3578,6 +3578,12 @@ route(
     .op = "Lothian City",
     .from = "Shandwick Place",
     .to = "Waverley Steps"
+  ),
+  bus(
+    .id = "C15054",
+    .op = SR,
+    .from = "EDB",
+    .to = "BHG"
   )
 )
 route(
