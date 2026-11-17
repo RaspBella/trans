@@ -3571,6 +3571,13 @@ route(
     .op = "Scottish City Link",
     .from = "Bathgate",
     .to = "Haymarket"
+  ),
+  bus(
+    .id = 964440655,
+    .n = "26",
+    .op = "Lothian City",
+    .from = "Shandwick Place",
+    .to = "Waverley Steps"
   )
 )
 route(
