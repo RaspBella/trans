@@ -3579,7 +3579,7 @@ route(
     .from = "Shandwick Place",
     .to = "Waverley Steps"
   ),
-  bus(
+  nr(
     .id = "C15054",
     .op = SR,
     .from = "EDB",
