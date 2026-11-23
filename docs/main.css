@@ -1,0 +1,42 @@
+body {
+  background-color: #b00b69;
+}
+
+a {
+  background-color: purple;
+  color: black;
+}
+
+a:hover {
+  background-color: cyan;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+ul li {
+  float: left;
+}
+
+ul li a {
+  display: block;
+  text-align: center;
+  padding: 1em .5em;
+  text-decoration: none;
+}
+
+table, th, td {
+  border: 0.1em solid;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 0.25em;
+}
