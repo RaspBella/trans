@@ -16,7 +16,6 @@ BIN=gen
 
 all: $(BIN) $(SHARED)
 	mkdir -p docs/db/{crs/{gb_nr,iata},routes}
-	@mkdir -p docs/{$(shell echo $(basename $(ROBJ)) | sed "s/ /,/g")}
 	@echo "MKDIR	docs/????-??-??"
 	./$<
 
@@ -33,6 +32,7 @@ $(BIN): $(OBJ)
 		-include inc/trans/trans.h \
 		-D'ROUTE(INFO, ...)=const struct route route_$(subst -,_,$*) = {.iso = "$*", INFO, .count = sizeof((struct trans[]){__VA_ARGS__})/sizeof((struct trans[]){__VA_ARGS__}[0]), .items = {__VA_ARGS__}};' \
 		-c $< -o $@
+	@mkdir docs/$(basename $@)
 	@echo "CC	$@"
 
 routes.o: src/routes.c $(ROBJ)
