@@ -1,0 +1,8 @@
+*.o
+*.so
+gen
+!inc/gen
+!src/gen
+docs/index.html
+docs/????-??-??
+docs/db
