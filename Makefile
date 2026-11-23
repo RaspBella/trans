@@ -43,11 +43,11 @@ routes.o: src/routes.c $(ROBJ)
 	@echo "CC	$@"
 
 %.o: src/crs/%.c
-	@echo -e '#include <stddef.h>\n#include <trans/crs.h>\n#define CRS(CODE, NAME) crs(#CODE, NAME),\nconst struct crs crs_$*[] = {\n#include "$<"\n};\nconst size_t crs_$*_count = sizeof(crs_$*)/sizeof(crs_$*[0]);' | $(CC) $(CFLAGS) -c -x c - -o $@
+	@printf '#include <stddef.h>\n#include <trans/crs.h>\n#define CRS(CODE, NAME) crs(#CODE, NAME),\nconst struct crs crs_$*[] = {\n#include "$<"\n};\nconst size_t crs_$*_count = sizeof(crs_$*)/sizeof(crs_$*[0]);' | $(CC) $(CFLAGS) -c -x c - -o $@
 	@echo "CC	$@"
 
 %.so: src/crs/%.c
-	@echo -e '#define CRS(CODE, NAME) char *crs_$*_##CODE = NAME;\n#include "$<"\n' | $(CC) $(CFLAGS) -shared -fPIC -x c - -o $@
+	@printf '#define CRS(CODE, NAME) char *crs_$*_##CODE = NAME;\n#include "$<"\n' | $(CC) $(CFLAGS) -shared -fPIC -x c - -o $@
 	@echo "CC	$@"
 
 clean:
