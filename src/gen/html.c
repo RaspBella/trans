@@ -75,7 +75,7 @@ void index_html(FILE *fp, size_t count, const struct route *routes[]) {
   );
 }
 
-static void bus_html(FILE *fp, char *from, char *to, struct trans_bus b) {
+static void bus_html(FILE *fp, const char *from, const char *to, struct trans_bus b) {
   fprintf(
     fp,
     "<td>%s</td>"
@@ -157,7 +157,7 @@ static void train_html(FILE *fp, const char *iso, const char *from, const char *
   dlclose(handle);
 }
 
-static void ferry_html(FILE *fp, char *from, char *to, const struct trans_ferry f) {
+static void ferry_html(FILE *fp, const char *from, const char *to, const struct trans_ferry f) {
   fprintf(
     fp,
     "<td>%s</td>"
@@ -169,7 +169,7 @@ static void ferry_html(FILE *fp, char *from, char *to, const struct trans_ferry 
   );
 }
 
-static void plane_html(FILE *fp, char *from, char *to, const struct trans_plane p) {
+static void plane_html(FILE *fp, const char *from, const char *to, const struct trans_plane p) {
   void *handle = dlopen("./iata.so", RTLD_LAZY);
 
   if (!handle) {

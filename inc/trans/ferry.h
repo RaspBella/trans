@@ -2,8 +2,8 @@
 #define TRANS_FERRY_H
 
 struct trans_ferry {
-  char *op;
-  char dep[6];
+  const char *op;
+  const char dep[6];
 };
 
 #define ferry(OP, DEP, FROM, TO) { \

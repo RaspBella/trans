@@ -8,7 +8,7 @@
 #define RTT_FMT_ARG(ID, ISO) ID, ISO
 
 struct trans_train {
-  char id[7];
+  const char id[7];
 };
 
 #define train(ID, FROM, TO) { \

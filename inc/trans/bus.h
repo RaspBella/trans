@@ -15,13 +15,13 @@ enum trans_bus_type {
 };
 
 struct trans_bus {
-  enum trans_bus_type type;
-  union {
-    struct {
-      char *op;
-      char *number;
+  const enum trans_bus_type type;
+  const union {
+    const struct {
+      const char *op;
+      const char *number;
     } no_bt;
-    unsigned bt;
+    const unsigned bt;
   } as;
 };
 

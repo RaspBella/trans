@@ -15,22 +15,22 @@ enum trans_type {
 };
 
 struct trans {
-  enum trans_type type;
-  char *from;
-  char *to;
-  union {
-    struct trans_bus bus;
-    struct trans_train train;
-    struct trans_ferry ferry;
-    struct trans_plane plane;
+  const enum trans_type type;
+  const char *from;
+  const char *to;
+  const union {
+    const struct trans_bus bus;
+    const struct trans_train train;
+    const struct trans_ferry ferry;
+    const struct trans_plane plane;
   } as;
 };
 
 struct route {
-  char iso[11];
-  char *info;
-  size_t count;
-  struct trans items[];
+  const char iso[11];
+  const char *info;
+  const size_t count;
+  const struct trans items[];
 };
 
 #endif /* TRANS_H */

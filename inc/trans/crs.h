@@ -2,8 +2,8 @@
 #define TRANS_CRS_H
 
 struct crs {
-  char *code;
-  char *name;
+  const char *code;
+  const char *name;
 };
 
 #define crs(CODE, NAME) { .code = CODE, .name = NAME }

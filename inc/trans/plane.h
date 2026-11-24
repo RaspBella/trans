@@ -2,7 +2,7 @@
 #define TRANS_PLANE_H
 
 struct trans_plane {
-  char *number;
+  const char *number;
 };
 
 #define plane(NUMBER, FROM, TO) { \

@@ -29,7 +29,7 @@ $(BIN): $(OBJ)
 %.o: src/routes/%.c
 	@$(CC) $(CFLAGS) \
 		-include inc/trans/trans.h \
-		-D'ROUTE(INFO, ...)=const struct route route_$(subst -,_,$*) = {.iso = "$*", INFO, .count = sizeof((struct trans[]){__VA_ARGS__})/sizeof((struct trans[]){__VA_ARGS__}[0]), .items = {__VA_ARGS__}};' \
+		-D'ROUTE(INFO, ...)=const struct route route_$(subst -,_,$*) = {.iso = "$*", INFO, .count = sizeof((struct trans[]){__VA_ARGS__})/sizeof((const struct trans[]){__VA_ARGS__}[0]), .items = {__VA_ARGS__}};' \
 		-c $< -o $@
 	@mkdir -p docs/$(basename $@)
 	@echo "CC	$@"
@@ -47,7 +47,7 @@ routes.o: src/routes.c $(ROBJ)
 	@echo "CC	$@"
 
 %.so: src/crs/%.c
-	@printf '#define CRS(CODE, NAME) char *crs_$*_##CODE = NAME;\n#include "$<"\n' | $(CC) $(CFLAGS) -shared -fPIC -x c - -o $@
+	@printf '#define CRS(CODE, NAME) const char *crs_$*_##CODE = NAME;\n#include "$<"\n' | $(CC) $(CFLAGS) -shared -fPIC -x c - -o $@
 	@echo "CC	$@"
 
 clean:
