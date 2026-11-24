@@ -15,8 +15,7 @@ BIN=gen
 .PHONY: all clean
 
 all: $(BIN) $(SHARED)
-	mkdir -p docs/db/{crs/{gb_nr,iata},routes}
-	@echo "MKDIR	docs/????-??-??"
+	@mkdor -p docs/db/routes
 	./$<
 
 $(BIN): $(OBJ)
@@ -32,7 +31,7 @@ $(BIN): $(OBJ)
 		-include inc/trans/trans.h \
 		-D'ROUTE(INFO, ...)=const struct route route_$(subst -,_,$*) = {.iso = "$*", INFO, .count = sizeof((struct trans[]){__VA_ARGS__})/sizeof((struct trans[]){__VA_ARGS__}[0]), .items = {__VA_ARGS__}};' \
 		-c $< -o $@
-	@mkdir docs/$(basename $@)
+	@mkdir -p docs/$(basename $@)
 	@echo "CC	$@"
 
 routes.o: src/routes.c $(ROBJ)
@@ -44,6 +43,7 @@ routes.o: src/routes.c $(ROBJ)
 
 %.o: src/crs/%.c
 	@printf '#include <stddef.h>\n#include <trans/crs.h>\n#define CRS(CODE, NAME) crs(#CODE, NAME),\nconst struct crs crs_$*[] = {\n#include "$<"\n};\nconst size_t crs_$*_count = sizeof(crs_$*)/sizeof(crs_$*[0]);' | $(CC) $(CFLAGS) -c -x c - -o $@
+	@mkdir -p docs/db/crs/$(basename $@)
 	@echo "CC	$@"
 
 %.so: src/crs/%.c
@@ -51,5 +51,5 @@ routes.o: src/routes.c $(ROBJ)
 	@echo "CC	$@"
 
 clean:
-	@rm -rf $(BIN) $(OBJ) $(SHARED) docs/{index.html,db,????-??-??}
+	@rm -rf $(BIN) $(OBJ) $(SHARED) docs/index.html docs/db docs/????-??-??
 	@echo clean
