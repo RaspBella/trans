@@ -75,7 +75,9 @@ int main(void) {
         write_route(filename, prev, routes[i], next, route_index_html);
       }
 
-      break;
+      else {
+        exit(EXIT_SUCCESS);
+      }
     }
   }
 
