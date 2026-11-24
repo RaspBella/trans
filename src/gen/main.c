@@ -70,7 +70,7 @@ int main(void) {
           : routes[i - 1]->iso;
 
         const char *next = i == route_count - 1 ? NULL
-          : routes[i - 1]->iso;
+          : routes[i + 1]->iso;
 
         write_route(filename, prev, routes[i], next, route_index_html);
       }
