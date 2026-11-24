@@ -15,7 +15,7 @@ BIN=gen
 .PHONY: all clean
 
 all: $(BIN) $(SHARED)
-	@mkdor -p docs/db/routes
+	@mkdir -p docs/db/routes
 	./$<
 
 $(BIN): $(OBJ)
