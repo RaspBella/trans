@@ -4,4 +4,5 @@ ROUTE(
   bt(BT_JOURNEY, 968106440, "Glasgow Buchanan Bus Station", "Dunfermline"),
   bt(BT_JOURNEY, 968138723, "Dunfermline", "Ferrytoll"),
   bt(BT_JOURNEY, 968149164, "Ferrytoll", "Ratho Station"),
+  bt(BT_JOURNEY, 968156085, "Ratho Station", "Bathgate"),
 )
